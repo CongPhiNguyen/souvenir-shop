@@ -1,0 +1,32 @@
+{
+  "name": "souvenir-shop",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon --inspect index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/UIT19522006/souvenir-shop.git"
+  },
+  "keywords": [
+    "souvernir",
+    "nodejs",
+    "expressjs",
+    "bootstrap"
+  ],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/UIT19522006/souvenir-shop/issues"
+  },
+  "homepage": "https://github.com/UIT19522006/souvenir-shop#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.13"
+  }
+}
