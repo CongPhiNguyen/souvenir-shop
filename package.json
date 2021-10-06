@@ -25,7 +25,8 @@
   "homepage": "https://github.com/UIT19522006/souvenir-shop#readme",
   "dependencies": {
     "express": "^4.17.1",
-    "express-handlebars": "^5.3.4"
+    "express-handlebars": "^5.3.4",
+    "mongoose": "^6.0.9"
   },
   "devDependencies": {
     "morgan": "^1.10.0",

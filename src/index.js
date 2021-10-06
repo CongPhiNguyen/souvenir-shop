@@ -3,9 +3,12 @@ const express = require('express');
 const morgan = require('morgan');
 const exphandlebars = require('express-handlebars');
 const route = require('./routes');
+const connectDB = require('./config/connectDb');
 const app = express();
 const port = 3000;
 
+// Connect mongoDb
+connectDB();
 
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.urlencoded({
