@@ -1,41 +1,34 @@
-const Account = require('../models/Users');
 const User = require('../models/Users')
 const { mutipleMongooseToObject } = require('../../util/mongoose');
 
+
 class AuthController {
     // [POST] /signin-with-password
-    signinWithPassword(req, res){
-        newUser = new User({
+    signinWithPassword(req, res) {
+        const newUser = new User({
             username: "phuoc",
             password: "pasword",
             email: "19522055@gm.uit.edu.vn",
+            create_at: Date.now(),
         })
         newUser.save()
-        .then(res => {
-            console.log("Thành công");
-        })
-        .catch(err => {
-            console.log("Thất bại");
-        })
-        res.send('home');
+            .then(res => {
+            })
+            .catch(err => {
+            })
+        res.redirect('home')
     }
 
     // [POST] /signup-with-password
-    signupWithPassword(req, res){
-        User.findOne({username: "lngthinphc"})
-        .then(result => {
-            console.log(result);
-        })
-        .catch(err => {
-            res.send(
-                JSON.stringify({
-                    status: 1,
-                    message: "fail"
-                })
-            )
-        })
-        // console.log(User);
-        res.send(mutipleMongooseToObject(User))
+    signupWithPassword(req, res, next) {
+
+        User.find({})
+            .then((courses) => {
+                res.json(courses);
+            })
+            .catch(next);
+
+        // res.render('home');
     }
 
     renderHome(req, res) {

@@ -6,10 +6,7 @@ const URI = `mongodb+srv://dbCouvenir:${PASSWORD}@cluster0.gq6lw.mongodb.net/myF
 
 module.exports = connectDB = async() => {
     try {
-        await mongoose.connect(URI, {
-            useNewUrlParser: true,
-            useUnifiedTopology: true,
-        });
+        await mongoose.connect(URI);
         console.log("Connecting to DB successfully!");
     }
     catch(error) {
