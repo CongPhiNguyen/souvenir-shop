@@ -1,0 +1,24 @@
+.navbar-expand-lg .navbar-collapse{
+    justify-content: right;
+}
+
+.navbar-brand{
+    color: black !important;
+    font-size: 1.4rem !important;
+    font-weight: bold   ;
+}
+
+.navbar-css{
+    background-color: #ffba00 !important;
+}
+
+.navbar-dark .navbar-nav .nav-link{
+    color: rgba(0, 0, 0, .55) !important;
+    font-size: 1rem !important;
+    margin-left: 15px !important;
+}
+
+.navbar-dark .navbar-nav .nav-link.active{
+    color: black !important;
+    font-weight: 600;
+}
