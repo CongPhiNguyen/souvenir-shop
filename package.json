@@ -24,10 +24,12 @@
   },
   "homepage": "https://github.com/UIT19522006/souvenir-shop#readme",
   "dependencies": {
+    "axios": "^0.23.0",
     "config": "^3.3.6",
     "express": "^4.17.1",
     "express-handlebars": "^5.3.4",
     "express-load": "^1.1.16",
+    "jsonwebtoken": "^8.5.1",
     "load": "^1.0.2",
     "mongoose": "^6.0.9"
   },
