@@ -1,3 +1,41 @@
 h1 {
     color: cyan;
 }
+
+.container {
+    width: 1200px;
+}
+
+.product-container {
+    min-width: 400px;
+}
+
+.product-image {
+
+}
+
+.product-image-1 {
+    width: 100%;
+}
+
+.product-info {
+    
+}
+
+.product-info .product-name {
+    width: 100%;
+}
+
+.product-info .product-place {
+    width: 100%;
+}
+.product-info .product-rating-average .product-rating-icon {
+    color: #ffce4b;
+}
+
+/* Reposive fix */
+@media (max-width: 576px) {
+    .product-image {
+        width: 400px;
+    }
+}
