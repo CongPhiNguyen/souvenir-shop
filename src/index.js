@@ -7,6 +7,21 @@ const connectDB = require('./config/connectDb');
 const app = express();
 const port = 3000;
 
+
+app.use(express.static('public'))
+const cookieParser = require('cookie-parser')
+const session = require('express-session')
+
+//middlewares
+app.use(cookieParser('secret'))
+app.use(session({cookie: {maxAge: null}}))
+
+//flash message middleware
+app.use((req, res, next)=>{
+  res.locals.message = req.session.message
+  delete req.session.message
+  next()
+})
 // Connect mongoDb
 connectDB();
 
