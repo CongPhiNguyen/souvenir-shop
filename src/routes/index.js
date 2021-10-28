@@ -3,6 +3,9 @@ const productRouter = require('./product')
 const home2Router = require('./home2')
 const home3Router = require('./home3')
 const authRouter = require('./auth')
+const loginRouter = require('./login')
+const signupRouter = require('./signup')
+
 
 function route(app) {
     app.use('/home', homeRouter);
@@ -11,6 +14,8 @@ function route(app) {
     app.use('/home3', home3Router);
     
     app.use('/', authRouter);
+    app.use('/login', loginRouter);
+    app.use('/signup', signupRouter);
 }
 
 module.exports = route;
