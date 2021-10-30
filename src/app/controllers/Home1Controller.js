@@ -3,7 +3,10 @@ const res = require("express/lib/response");
 class Home1Controller {
     // [GET] /home
     index(req, res){
-        res.render('home1');
+        const active = {
+            type: 'product',
+        }
+        res.render('home1', { active });
     }
 }
 
