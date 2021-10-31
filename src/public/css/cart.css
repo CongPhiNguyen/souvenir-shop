@@ -1,0 +1,144 @@
+
+body{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+div{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.info-to-delivery{
+    background-color: white;
+    padding: 50px;
+}
+
+
+.customize-radio{
+    border: 1px #ced4da solid;
+    border-radius: 2px;
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.customize-radio:hover {
+    border-color: #ffba00;
+}
+
+
+
+.title-radio{
+    
+    display: flex;
+    align-items: center;
+    align-content: center;
+    text-align: center;
+    width: 100%;
+    padding: 20px;
+}
+
+.radio-icon{
+    font-size: 2rem;
+    margin-right: 10px;
+    color: #a77c07;
+}
+
+.form-check-label{
+    width: 100%;
+}
+
+.input-radio-customize{
+    margin-left: 15px !important;
+}
+
+.form-check-input:checked{
+    background-color: #ffba00;
+    border-color: #ffba00;
+}
+
+
+
+.description-radio{
+    display: flex;
+    flex-direction: column;
+    align-content: flex-start;
+    align-items: flex-start;
+}
+
+.description-radio > p {
+    margin: 0;
+    padding: 0;
+}
+
+.btn-payment{
+    margin-top: 20px;
+    width: 100%;
+    background-color: #ffba00;
+    color: black;
+}
+
+.btn-payment > h6 {
+    padding: 0;
+    margin: 0;
+    font-size: 0.8rem;
+}
+
+.btn-payment > h5 {
+    padding: 0;
+    margin: 0;
+}
+
+.btn-payment:hover {
+    background-color: black;
+    color: white;
+}
+
+.list-product-to-delivery{
+    background-color: #f2f1f1;
+    
+}
+
+.customize-raise-reduce{
+    display: inline-block; 
+    border: 1px solid rgba(150, 148, 148, 0.623); 
+    width: auto;
+}
+
+.customize-raise-reduce > span {
+    padding-left: 10px;
+    padding-right: 10px;
+    font-size: .8rem;
+    cursor: pointer;
+}
+
+.customize-raise-reduce > input {
+    border-left: 1px solid rgba(150, 148, 148, 0.623) !important;
+    border-right: 1px solid rgba(150, 148, 148, 0.623) !important;
+    width: 40px; 
+    outline: none;
+    border:none;
+    text-align: center;
+    color:#ffba00;
+    font-weight: 700;
+}
+
+input[type=number] {
+    -moz-appearance: textfield;
+}
+  
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.customize-price-product{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items:flex-end;
+}
