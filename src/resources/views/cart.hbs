@@ -35,7 +35,8 @@
                             </div>
                         </div>
                         <div class="col-6">
-                            <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+                            <select name="province" class="form-select form-select-lg mb-3"
+                                aria-label=".form-select-lg example">
                                 <option selected>Chọn tỉnh / thành phố</option>
                                 <option value="1">One</option>
                                 <option value="2">Two</option>
@@ -128,16 +129,16 @@
                                                     href="#">Iphone 13 pro max - 1TB - 8GB Ram</a>
                                                 <p style="font-size: .8rem;">Địa danh: Hà Tiên</p>
                                                 <div class="customize-raise-reduce" style="">
-                                                    <span>
+                                                    <span onclick="reduceQuantity('luong_thien_phuoc')">
                                                         <i class="fas fa-minus"></i>
                                                     </span>
-                                                    <input  style="" value="1" type="number">
-                                                    <span>
+                                                    <input style="" value="1" type="number">
+                                                    <span onclick="raiseQuantity('luong_thien_phuoc')">
                                                         <i class="fas fa-plus"></i>
                                                     </span>
                                                 </div>
                                             </div>
-                                            <div  class="col-4 customize-price-product">
+                                            <div class="col-4 customize-price-product">
                                                 <div>
                                                     <button type="button" class="btn-close" aria-label="Close"></button>
                                                 </div>
@@ -164,13 +165,13 @@
                                                     <span>
                                                         <i class="fas fa-minus"></i>
                                                     </span>
-                                                    <input  style="" value="1" type="number">
+                                                    <input name="luong_thien_phuoc" style="" value="1" type="number">
                                                     <span>
                                                         <i class="fas fa-plus"></i>
                                                     </span>
                                                 </div>
                                             </div>
-                                            <div  class="col-4 customize-price-product">
+                                            <div class="col-4 customize-price-product">
                                                 <div>
                                                     <button type="button" class="btn-close" aria-label="Close"></button>
                                                 </div>
@@ -185,7 +186,7 @@
                             </div>
                         </div>
                     </div>
-                    <div style="background-color: white;" class="col-10 offset-1">
+                    <div style="background-color: white; margin-bottom: 30px" class="col-10 offset-1">
                         <div class="row">
                             <div style="margin-top: 40px" class="col-10 offset-1">
                                 <div class="input-group mb-3">
@@ -245,3 +246,41 @@
         </div>
     </div>
 </div>
+
+<script>
+    var listProvince;
+    const elementProvince = document.querySelector('select[name="province"]');
+
+    fetch('https://provinces.open-api.vn/api/?depth=2')
+        .then(response => response.json())
+        .then(data => {
+            listProvince = data;
+            console.log(listProvince);
+            const html = listProvince.map(value => (
+                `<option value=${value.codename}>${value.name}</option>`
+            ))
+            elementProvince.innerHTML = html.join('');
+        })
+        .catch(err => console.log("Lỗi"));
+
+
+    console.log(elementProvince)
+
+    var item = JSON.parse(localStorage.getItem('index'))
+    var element = document.querySelector('input[name="luong_thien_phuoc"]');
+
+    reduceQuantity = (slug) => {
+        element = document.querySelector(`input[name="${slug}"]`);
+        element.value = item.quantity--
+        console.log(element.value)
+        localStorage.setItem('index', JSON.stringify(item))
+    }
+
+    raiseQuantity = (slug) => {
+        element = document.querySelector(`input[name="${slug}"]`);
+        element.value = item.quantity++
+        console.log(item.quantity)
+        localStorage.setItem('index', JSON.stringify(item))
+    }
+
+</script>

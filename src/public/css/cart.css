@@ -61,7 +61,6 @@ div{
 }
 
 
-
 .description-radio{
     display: flex;
     flex-direction: column;
@@ -109,8 +108,8 @@ div{
 }
 
 .customize-raise-reduce > span {
-    padding-left: 10px;
-    padding-right: 10px;
+    padding-left: 5px;
+    padding-right: 5px;
     font-size: .8rem;
     cursor: pointer;
 }
@@ -118,7 +117,7 @@ div{
 .customize-raise-reduce > input {
     border-left: 1px solid rgba(150, 148, 148, 0.623) !important;
     border-right: 1px solid rgba(150, 148, 148, 0.623) !important;
-    width: 40px; 
+    width: 30px; 
     outline: none;
     border:none;
     text-align: center;
