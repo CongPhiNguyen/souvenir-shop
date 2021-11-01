@@ -65,7 +65,11 @@ body{
     background-color: white; 
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     border-radius: 6px;
+    animation: fadeIn ease-in 0.5s;
+    animation-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
+
+
 
 .nav-link:hover {
     opacity: 0.6;
@@ -79,7 +83,16 @@ body{
     z-index: 20;
     display: block;
     opacity: 1;
-    
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-5%);
+    } to {
+        transform: translateY(0);
+        opacity: 1;
+    }
 }
 
 #customize-scrollbar::-webkit-scrollbar-track {
