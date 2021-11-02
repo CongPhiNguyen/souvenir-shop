@@ -7,14 +7,13 @@ const signupRouter = require('./signup')
 const cartRouter = require('./cart')
 
 function route(app) {
-    app.use('/home', homeRouter);
     app.use('/product', productRouter);
     app.use('/cart', cartRouter);
     app.use('/home3', home3Router);
-    
-    app.use('/', authRouter);
+    //app.use('/', authRouter);
     app.use('/login', loginRouter);
     app.use('/signup', signupRouter);
+    app.use('/', homeRouter);
 }
 
 module.exports = route;

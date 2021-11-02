@@ -16,7 +16,7 @@
                         </div>
                         <div class="col-6">
                             <div class="form-floating mb-3 ">
-                                <input type="number" class="form-control is-invalid" id="floatingInput"
+                                <input type="number" class="form-control" id="floatingInput"
                                     placeholder="name@example.com">
                                 <label for="floatingInput">Số điện thoại</label>
                             </div>
@@ -44,11 +44,9 @@
                             </select>
                         </div>
                         <div class="col-6">
-                            <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+                            <select name="district" class="form-select form-select-lg mb-3"
+                                aria-label=".form-select-lg example">
                                 <option selected>Chọn quận / huyện</option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
                             </select>
                         </div>
                         <div class="col-12">
@@ -116,7 +114,7 @@
                             <div style="margin-top: 50px; margin-bottom: 50px" class="col-10 offset-1">
                                 <h3 style="text-align: center; color: #ffba00;">Giỏ hàng của bạn</h3>
                             </div>
-                            <div class="col-10 offset-1">
+                            <div class="col-10 offset-1 render-list-product-cart">
                                 <div style="margin-bottom: 30px" class="row">
                                     <div class="col-4">
                                         <img src="https://res.cloudinary.com/databaseimg/image/upload/v1635354535/yiynknhhmgjdfdd28ehl.jpg"
@@ -134,39 +132,6 @@
                                                     </span>
                                                     <input style="" value="1" type="number">
                                                     <span onclick="raiseQuantity('luong_thien_phuoc')">
-                                                        <i class="fas fa-plus"></i>
-                                                    </span>
-                                                </div>
-                                            </div>
-                                            <div class="col-4 customize-price-product">
-                                                <div>
-                                                    <button type="button" class="btn-close" aria-label="Close"></button>
-                                                </div>
-                                                <div>
-                                                    <div>269.000đ</div>
-                                                    <div style="text-decoration: line-through">299.000đ</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div style="margin-bottom: 30px" class="row">
-                                    <div class="col-4">
-                                        <img src="https://res.cloudinary.com/databaseimg/image/upload/v1635354535/yiynknhhmgjdfdd28ehl.jpg"
-                                            class="img-thumbnail" alt="...">
-                                    </div>
-                                    <div class="col-8">
-                                        <div class="row">
-                                            <div class="col-8">
-                                                <a style="text-decoration: none; color: black; font-weight: 600;"
-                                                    href="#">Iphone 13 pro max - 1TB - 8GB Ram</a>
-                                                <p style="font-size: .8rem;">Địa danh: Hà Tiên</p>
-                                                <div class="customize-raise-reduce" style="">
-                                                    <span>
-                                                        <i class="fas fa-minus"></i>
-                                                    </span>
-                                                    <input name="luong_thien_phuoc" style="" value="1" type="number">
-                                                    <span>
                                                         <i class="fas fa-plus"></i>
                                                     </span>
                                                 </div>
@@ -202,21 +167,23 @@
                                     <div style="display: flex; justify-content: space-between; margin:15px; margin-bottom: 5px"
                                         class="col">
                                         <h6 style="font-weight: 400;">Tạm tính</h6>
-                                        <h6>1.760.999đ</h6>
+                                        <h6 class="tam-tinh">1.760.999đ</h6>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div style=" display: flex; justify-content: space-between; margin:15px; margin-bottom: 5px"
                                         class="col">
                                         <h6 style="font-weight: 400;">Mã giảm giá</h6>
-                                        <h6 style="color: #ffba00; font-weight: 700;">0đ</h6>
+                                        <h6 class="ma-giam-gia" style="color: #ffba00; font-weight: 700;">0đ</h6>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div style="display: flex; justify-content: space-between; margin:15px; margin-bottom: 5px"
                                         class="col">
-                                        <h6 style="font-weight: 400;">Giảm giá khác</h6>
-                                        <h6 style="color: #ffba00; font-weight: 700;"> 1.760.999đ</h6>
+                                        <h6 style="font-weight: 400;">Giá gốc</h6>
+                                        <h6 class="gia-goc"
+                                            style="color: #ffba00; font-weight: 700;text-decoration: line-through">
+                                            1.760.999đ</h6>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -235,7 +202,8 @@
                                     <div style="display: flex; justify-content: space-between; margin:15px; margin-bottom: 5px"
                                         class="col">
                                         <h6 style="font-weight: 700;">TỔNG CỘNG</h6>
-                                        <h6 style="color: #ffba00; font-weight: 700; ">3.000.000đ</h6>
+                                        <h6 class="total-money" style="color: #ffba00; font-weight: 700; ">3.000.000đ
+                                        </h6>
                                     </div>
                                 </div>
                             </div>
@@ -250,37 +218,232 @@
 <script>
     var listProvince;
     const elementProvince = document.querySelector('select[name="province"]');
+    const elementDistrict = document.querySelector('select[name="district"]');
+    const elementRenderListProduct = document.querySelector('.render-list-product-cart');
+    var listCartProductScreen = JSON.parse(localStorage.getItem('listCart'))
+    const tamTinh = document.querySelector('.tam-tinh');
+    const maGiamGia = document.querySelector('.ma-giam-gia');
+    const giaGoc = document.querySelector('.gia-goc');
+    const totalMoney = document.querySelector('.total-money');
+
+
 
     fetch('https://provinces.open-api.vn/api/?depth=2')
         .then(response => response.json())
         .then(data => {
             listProvince = data;
             console.log(listProvince);
-            const html = listProvince.map(value => (
+            const html1 = listProvince.map(value => (
                 `<option value=${value.codename}>${value.name}</option>`
             ))
-            elementProvince.innerHTML = html.join('');
+            const html2 = listProvince[0].districts.map(value => (
+                `<option value=${value.codename}>${value.name}</option>`
+            ))
+            elementProvince.innerHTML = html1.join('');
+            elementDistrict.innerHTML = html2.join('');
+            return data;
         })
         .catch(err => console.log("Lỗi"));
 
+    elementProvince.onclick = (e) => {
+        renderDistricts(e.target.value);
+    }
 
-    console.log(elementProvince)
+    renderDistricts = (codename) => {
+        listProvince.map(value => {
+            if (value.codename === codename) {
+                console.log(value);
+                const html = value.districts.map(value => (
+                    `<option value=${value.codename}>${value.name}</option>`
+                ))
+                elementDistrict.innerHTML = html.join('');
+            }
+        })
+    }
 
-    var item = JSON.parse(localStorage.getItem('index'))
-    var element = document.querySelector('input[name="luong_thien_phuoc"]');
+    /*var listCartabc = [
+         {
+             slug: "iphone-13",
+             name: "Iphone 13 pro max - 1TB - 8GB Ram",
+             diaDanh: "Hà Tiên",
+             priceSell: 15000000,
+             imgUrl: 'https://res.cloudinary.com/databaseimg/image/upload/v1634361661/xdirpgvyysvctqpu2thn.jpg',
+             price: 16500000,
+             quantity: 1,
+         },
+         {
+             slug: "truyen-tranh",
+             name: "Thánh gióng Việt Nam",
+             diaDanh: "Nha Trang",
+             priceSell: 550000,
+             imgUrl: 'https://res.cloudinary.com/databaseimg/image/upload/v1635354535/yiynknhhmgjdfdd28ehl.jpg',
+             price: 700000,
+             quantity: 1,
+         },
+         {
+             slug: "qua-luu-niem-qua-cau-tuyet",
+             name: "Quà lưu niệm quả cầu tuyết Doremon",
+             diaDanh: "Sapa",
+             priceSell: 350000,
+             imgUrl: 'https://res.cloudinary.com/databaseimg/image/upload/v1635354535/yiynknhhmgjdfdd28ehl.jpg',
+             price: 500000,
+             quantity: 1,
+         },
+         {
+             slug: "luong-thien-phuoc",
+             name: "Lương Thiện Phước đẹp trai",
+             diaDanh: "Cái Dầu",
+             priceSell: 999999999,
+             imgUrl: 'https://res.cloudinary.com/databaseimg/image/upload/v1635354535/yiynknhhmgjdfdd28ehl.jpg',
+             price: 999999999,
+             quantity: 2,
+         },
+     ]
+ 
+ 
+     localStorage.setItem('listCart', JSON.stringify(listCartabc));
+     */
+    renderListCart = () => {
+        var html = listCartProductScreen.map(value => (
+            `
+            <div style="margin-bottom: 30px" class="row">
+                                    <div class="col-4">
+                                        <img src="${value.imgUrl}"
+                                            class="img-thumbnail" alt="...">
+                                    </div>
+                                    <div class="col-8">
+                                        <div class="row">
+                                            <div class="col-8">
+                                                <a style="text-decoration: none; color: black; font-weight: 600;"
+                                                    href="#">${value.name}</a>
+                                                <p style="font-size: .8rem;">Địa danh: ${value.diaDanh}</p>
+                                                <div class="customize-raise-reduce" style="">
+                                                    <span onclick="reduceQuantity('${value.slug}')">
+                                                        <i class="fas fa-minus"></i>
+                                                    </span>
+                                                    <input name="${value.slug}" value='${value.quantity}' type="number">
+                                                    <span onclick="raiseQuantity('${value.slug}')">
+                                                        <i class="fas fa-plus"></i>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div class="col-4 customize-price-product">
+                                                <div>
+                                                    <button type="button" onclick="DeleteProduct('${value.slug}')" class="btn-close" aria-label="Close"></button>
+                                                </div>
+                                                <div>
+                                                    <div style="font-weight: 700">${value.priceSell.toLocaleString()}đ</div>
+                                                    <div style="text-decoration: line-through">${value.price.toLocaleString()}đ</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+            `
+        ))
+
+        console.log('Render success')
+        elementRenderListProduct.innerHTML = html.join('');
+    }
+
+    renderListCart();
 
     reduceQuantity = (slug) => {
-        element = document.querySelector(`input[name="${slug}"]`);
-        element.value = item.quantity--
-        console.log(element.value)
-        localStorage.setItem('index', JSON.stringify(item))
+        const element = document.querySelector(`input[name="${slug}"]`);
+        listCartProductScreen.map(value => {
+            if (value.slug === slug) {
+                if (value.quantity > 1) {
+                    value.quantity -= 1;
+                }
+            }
+
+        })
+        localStorage.setItem('listCart', JSON.stringify(listCartProductScreen));
+        renderListCart();
+        renderListAtHeaderAgain();
+        renderTotalMoney();
     }
 
     raiseQuantity = (slug) => {
-        element = document.querySelector(`input[name="${slug}"]`);
-        element.value = item.quantity++
-        console.log(item.quantity)
-        localStorage.setItem('index', JSON.stringify(item))
+        const element = document.querySelector(`input[name="${slug}"]`);
+        listCartProductScreen.map(value => {
+            if (value.slug === slug) {
+                value.quantity += 1;
+            }
+        })
+
+        localStorage.setItem('listCart', JSON.stringify(listCartProductScreen));
+        renderListCart();
+        renderListAtHeaderAgain();
+        renderTotalMoney();
     }
 
+    DeleteProduct = (slug) => {
+        console.log(slug);
+        listCartProductScreen = listCartProductScreen.filter(value => {
+            return value.slug !== slug
+        })
+        renderListCart();
+        renderQuantityAgain();
+        renderListAtHeaderAgain();
+        renderTotalMoney();
+    }
+
+    //Render total money
+
+    renderTotalMoney = () => {
+        let giaTienTamTinh = 0;
+        let giaTienGiamGia = 0;
+        let giaGocBanDau = 0;
+        let tongTien = 0;
+        listCartProductScreen.forEach(value => {
+            giaTienTamTinh += value.priceSell * value.quantity;
+            giaGocBanDau += value.price * value.quantity;
+        })
+
+        tongTien = giaTienTamTinh - giaTienGiamGia;
+
+        tamTinh.innerText = giaTienTamTinh.toLocaleString() + 'đ'
+        maGiamGia.innerText = giaTienGiamGia.toLocaleString() + 'đ'
+        giaGoc.innerText = giaGocBanDau.toLocaleString() + 'đ'
+        totalMoney.innerText = tongTien.toLocaleString() + 'đ'
+    }
+
+    renderTotalMoney();
+
+    // Render header
+    const elementRenderAgainAtHeaderProduct = window.document.querySelector('.quantity');
+
+    renderQuantityAgain = () => {
+        elementRenderAgainAtHeaderProduct.innerText = listCartProductScreen.length;
+    }
+
+    const elementRenderAgainAtHeaderProductList = window.document.querySelector('.render-list-product')
+    console.log(elementRenderAgainAtHeaderProductList)
+    renderListAtHeaderAgain = () => {
+        let html = listCartProductScreen.map(value => (
+            `
+                                    <div style="border-bottom: 1px #00000029 solid; margin-top: 10px;" class="col-10 offset-1">
+                                        <div class="row">
+                                            <div class="col-4">
+                                                <img src="${value.imgUrl}"
+                                                    class="img-thumbnail" alt="...">
+                                            </div>
+                                            <div class="col-8">
+                                                <a style="text-decoration: none; color: black; font-weight: 600;"
+                                                    href="#">${value.name}</a>
+                                                <div style="color: #ffba00;font-weight:700">
+                                                    ${value.priceSell.toLocaleString()}đ
+                                                    <span
+                                                        style="text-decoration: line-through; color:darkgrey; font-weight:400; margin-left: 10px">${value.price.toLocaleString()}đ</span>
+                                                </div>
+                                                <p style="font-size: .8rem; margin-bottom: 0">Địa danh: Hà Tiên</p>
+                                                <h6>SL: ${value.quantity}</h6>
+                                            </div>
+                                        </div>
+                                    </div>
+            `
+        ))
+        elementRenderAgainAtHeaderProductList.innerHTML = html.join('');
+    }
 </script>

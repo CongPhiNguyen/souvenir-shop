@@ -32,7 +32,10 @@ class AuthController {
     }
 
     renderHome(req, res) {
-        res.render('home');
+        const active = {
+            type: 'cart',
+        }
+        res.render('home', {active});
     }
 }
 

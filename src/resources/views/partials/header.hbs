@@ -44,9 +44,8 @@
                                         onclick="ProductScreenClick()">Xem tất cả</p>
                                 </div>
                                 {{!-- Sản phẩm --}}
-
-                                <div id="customize-scrollbar"
-                                    style="overflow-y: scroll; max-height: 440px; width:370px">
+                                <div id="customize-scrollbar" class="render-list-product"
+                                    style="overflow-y: scroll; max-height: 440px; width:365px">
                                     <div style="border-bottom: 1px #00000029 solid; margin-top: 10px;"
                                         class="col-10 offset-1">
                                         <div class="row">
@@ -159,10 +158,54 @@
     document.querySelector(`.${active}`).classList.add('active')
 
     const elementProductLink = document.querySelector('.cart');
+    const elementRenderProductCart = document.querySelector('.render-list-product');
+    const listCart = JSON.parse(localStorage.getItem('listCart'));
+    const elementQuantityProduct = document.querySelector('.quantity');
 
+    const a = 300000000;
+    const b = 300000000;
+    console.log(a.toLocaleString())
+
+    //Render số lượng
+    renderQuantity = () => {
+        elementQuantityProduct.innerText = listCart.length;
+    }
+
+    renderQuantity();
+
+    // Xem tất cả 
     ProductScreenClick = () => {
         elementProductLink.click();
     }
 
+
+    // Render Sản phẩm
+    renderProduct = () => {
+        let htmlList = listCart.map(value => (
+            `
+                                    <div style="border-bottom: 1px #00000029 solid; margin-top: 10px;" class="col-10 offset-1">
+                                        <div class="row">
+                                            <div class="col-4">
+                                                <img src="${value.imgUrl}"
+                                                    class="img-thumbnail" alt="...">
+                                            </div>
+                                            <div class="col-8">
+                                                <a style="text-decoration: none; color: black; font-weight: 600;"
+                                                    href="#">${value.name}</a>
+                                                <div style="color: #ffba00;font-weight:700">
+                                                    ${value.priceSell.toLocaleString()}đ
+                                                    <span
+                                                        style="text-decoration: line-through; color:darkgrey; font-weight:400; margin-left: 10px">${value.price.toLocaleString()}đ</span>
+                                                </div>
+                                                <p style="font-size: .8rem; margin-bottom: 0">Địa danh: Hà Tiên</p>
+                                                <h6>SL: ${value.quantity}</h6>
+                                            </div>
+                                        </div>
+                                    </div>
+            `
+        ))
+        elementRenderProductCart.innerHTML = htmlList.join('');
+    }
+    renderProduct();
 
 </script>
