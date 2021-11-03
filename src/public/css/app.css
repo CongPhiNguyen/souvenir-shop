@@ -109,3 +109,69 @@ body{
     background-color: #ffba00;
     border-radius: 8px;
 }
+
+/* FOOOTER */
+.footer-the-a{
+    text-decoration: none;
+    color: #b7bcc8;
+    margin: 8px 0;
+    transition: all ease-in-out 0.2s;
+}
+
+.footer-the-a:hover {
+    color: #ffba00;
+}
+
+.customize-lien-he-chung-toi{
+    margin-top: 5px;
+    height: 40px;
+    width: 40px;
+    border: 1px dashed  #ffba00;
+    display: flex;
+    border-radius: 50%;
+    align-items: center;
+    justify-content: center;
+    margin-right: 10px;
+}
+
+.footer__social{
+    font-size: 30px;
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}
+
+.footer__social-icon{
+    margin: 0 20px;
+}
+
+.footer__social-icon:hover{
+    color: #ffba00;
+}
+
+.footer__titele{
+    margin-top: 20px;
+    text-align: center;
+    font-size: 0.7rem;
+    color: var(--white-color);
+}
+
+.footer__aside-info{
+    font-size: 1rem;
+    margin-top: 30px;
+    color: var(--white-color);
+    justify-content: center;
+    display: flex;
+}
+
+.footer__aside-info-item{
+    padding: 0 30px;
+}
+
+.footer__aside-info-item:hover {
+    color: #ffba00;
+}
+
+.footer__aside-info-item + .footer__aside-info-item{
+    border-left: 1px solid #b7bcc8;
+}
