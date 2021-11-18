@@ -92,10 +92,10 @@
                     <div style="margin-top: 20px; color: #a77c07" class="col-12">
                         Nếu bạn không hài lòng với sản phẩm của chúng tôi? Bạn hoàn toàn có thể trả lại sản phẩm. Tìm
                         hiểu thêm
-                        <span style="font-weight: 700; color: #ffba00">tại đây</span>
+                        <a href="/cart/return-policy" style="font-weight: 700; color: #ffba00; text-decoration: none;">tại đây</a>
                     </div>
                     <div class="col-12">
-                        <button type="submit" class="btn btn-payment">
+                        <button type="button" class="btn btn-payment">
                             <h5>Đặt hàng</h5>
                             <h6>Ship tới không mua không sao</h6>
                             <h6>Mua rồi vẫn đổi trả miễn phí</h1>
@@ -157,7 +157,7 @@
                                 <div class="input-group mb-3">
                                     <input type="text" class="form-control" placeholder="MÃ GIẢM GIÁ"
                                         aria-label="Recipient's username" aria-describedby="button-addon2">
-                                    <button class="btn btn-outline-secondary" type="button" id="button-addon2">Áp
+                                    <button class="btn btn-outline-secondary btn-apply-code-discount" type="button" id="button-addon2">Áp
                                         Dụng</button>
                                 </div>
                             </div>
@@ -225,7 +225,18 @@
     const maGiamGia = document.querySelector('.ma-giam-gia');
     const giaGoc = document.querySelector('.gia-goc');
     const totalMoney = document.querySelector('.total-money');
-
+    const xhttp = new XMLHttpRequest();
+    let btnPayment = document.querySelector('.btn-payment')
+    let btnApplyCodeDiscount = document.querySelector('.btn-apply-code-discount');
+    quantityProduct = async (slug) => {
+        const data = {
+            name: 'eee',
+            aa: '123',
+        }
+        xhttp.open("POST", "/cart/raise-quantity");
+        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhttp.send(`slug=${slug}`);
+    }
 
 
     fetch('https://provinces.open-api.vn/api/?depth=2')
@@ -356,12 +367,13 @@
                     value.quantity -= 1;
                 }
             }
-
         })
         localStorage.setItem('listCart', JSON.stringify(listCartProductScreen));
         renderListCart();
         renderListAtHeaderAgain();
         renderTotalMoney();
+      
+
     }
 
     raiseQuantity = (slug) => {
@@ -371,7 +383,7 @@
                 value.quantity += 1;
             }
         })
-
+        quantityProduct(slug);
         localStorage.setItem('listCart', JSON.stringify(listCartProductScreen));
         renderListCart();
         renderListAtHeaderAgain();
@@ -408,18 +420,15 @@
         giaGoc.innerText = giaGocBanDau.toLocaleString() + 'đ'
         totalMoney.innerText = tongTien.toLocaleString() + 'đ'
     }
-
     renderTotalMoney();
 
     // Render header
     const elementRenderAgainAtHeaderProduct = window.document.querySelector('.quantity');
-
     renderQuantityAgain = () => {
         elementRenderAgainAtHeaderProduct.innerText = listCartProductScreen.length;
     }
 
     const elementRenderAgainAtHeaderProductList = window.document.querySelector('.render-list-product')
-    console.log(elementRenderAgainAtHeaderProductList)
     renderListAtHeaderAgain = () => {
         let html = listCartProductScreen.map(value => (
             `
@@ -445,5 +454,14 @@
             `
         ))
         elementRenderAgainAtHeaderProductList.innerHTML = html.join('');
+    }
+
+    //Handle 
+    btnPayment.onclick = (e) => {
+        showAlertMorriStore('alert-warning', 'Bạn chưa nhập địa chỉ mua hàng !')
+    }
+
+    btnApplyCodeDiscount.onclick = () => {
+        showAlertMorriStore('alert-success', 'Code đã được sử dụng !')
     }
 </script>
