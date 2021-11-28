@@ -7,11 +7,21 @@
 <div class="wrapper">
     <div class="container">
         <div class="fast-navbar">
-            <i class="fas fa-fire"></i>
-            <i class="fas fa-compass"></i>
-            <i class="fas fa-clock"></i>
-            <i class="fas fa-envelope"></i>
-            <i class="fas fa-bars"></i>    
+            <div class="fast-navbar-item" onclick="clickFastNavbar('Fire')">
+                <i class="fas fa-fire"></i>
+            </div>
+            <div class="fast-navbar-item">
+                <i class="fas fa-compass"></i>
+            </div>
+            <div class="fast-navbar-item">
+                <i class="fas fa-clock"></i>
+            </div>
+            <div class="fast-navbar-item">
+                <i class="fas fa-envelope"></i>
+            </div>
+            <div class="fast-navbar-item">
+                <i class="fas fa-bars"></i>    
+            </div>
         </div>
         {{!-- Phần breadscrum --}}
         <div class="breadscrum">
@@ -232,4 +242,11 @@
         </div>
     </div>
 </div>
+
+<script>
+    const dropdownStatusButton = document.querySelector('.btn-dropdown-status');
+    function clickFastNavbar(message) {
+        alert(message);
+    };
+</script>
 
