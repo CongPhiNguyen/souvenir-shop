@@ -16,7 +16,7 @@ class AuthController {
             })
             .catch(err => {
             })
-        res.redirect('home')
+        res.render('home')
     }
 
     // [POST] /signup-with-password

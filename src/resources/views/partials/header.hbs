@@ -9,31 +9,31 @@
             <div class="collapse navbar-collapse " id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item ">
-                        <a class="nav-link active home" href="/home">
+                        <a class="nav-link {{#if active.Home}}active{{/if}} home" href="/home">
                             <i class="fas fa-home"></i>
                             Trang chủ
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/product">
+                        <a class="nav-link {{#if active.Product}}active{{/if}}" href="/product">
                             <i class="fas fa-candy-cane"></i>
                             Sản phẩm
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/home2">
+                        <a class="nav-link {{#if active.Blog}}active{{/if}}" href="/home2">
                             <i class="fab fa-blogger"></i>
                             Blog
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link {{#if active.Cart}}active{{/if}}" href="#">
                             <i class="fas fa-shopping-cart"></i>
                             Giỏ hàng
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link {{#if active.Notification}}active{{/if}}" href="#">
                             <i class="fas fa-bell"></i>
                             Thông báo
                         </a>
@@ -45,13 +45,13 @@
                         </a>
                     </li> --}}
                     <li class="nav-item">
-                        <a class="nav-link" href="/signup">
+                        <a class="nav-link {{#if active.SignUp}}active{{/if}}" href="/signup">
                             <i class="fas fa-user"></i>
                             Đăng nhập
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/login">
+                        <a class="nav-link {{#if active.Login}}active{{/if}}" href="/login">
                             <i class="fas fa-user"></i>
                             Đăng nhập
                         </a>
