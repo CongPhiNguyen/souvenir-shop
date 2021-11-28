@@ -25,13 +25,21 @@ h1 {
     color: #9e9e9e
 }
 
+.container .breadscrum .breadscrum-list {
+    display: flex;
+}
+
+.container .breadscrum .breadscrum-list .breadscrum-item{
+    list-style: none;
+}
 
 .product-container {
     min-width: 400px;
+    
 }
 
 .product-image {
-
+    border: 1px solid #333;
 }
 
 .product-image-1 {
@@ -44,6 +52,7 @@ h1 {
 
 .product-info .product-name {
     width: 100%;
+    
 }
 
 .product-info .product-place {

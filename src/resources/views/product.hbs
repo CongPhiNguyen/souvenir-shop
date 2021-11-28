@@ -2,8 +2,6 @@
 <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
 <link rel="stylesheet" href="/css/product.css">
 
-<h1 style="text-align: center; display: block">Product</h1>
-
 <div class="wrapper">
     <div class="container">
         <div class="fast-navbar">
@@ -31,11 +29,13 @@
                         <span>Home</span>
                     </a>
                 </li>
+                >>
                 <li class='breadscrum-item'>
                     <a href="/home/figure">
                         <span>Figure</span>
                     </a>
                 </li>
+                >>
                 <li class='breadscrum-item'>
                     <a href="/home/figure/Stein;Gate">
                         <span>Stein;Gate</span>
@@ -45,7 +45,7 @@
         </div>
         {{!-- Phần của product --}}
         <div class="product-container row">
-            <div class="product-image col-md-4 ">
+            <div class="product-image col-md-4">
                 <img class="product-image-1" src="/img/figure/figure1.jfif" alt="">    
             </div>
             <div class="product-info col-md-8">
@@ -86,8 +86,8 @@
                         </button></span></div>
                 </div>
                 <div class="buy-container">
-                    <button class="add-to-cart">
-                        Add to cart
+                    <button class="add-to-cart bt-add-to-cart" onclick="addToCart()">
+                        Add to cart 
                     </button>
                     <button class="buy-now">
                         Buy now
@@ -244,9 +244,14 @@
 </div>
 
 <script>
-    const dropdownStatusButton = document.querySelector('.btn-dropdown-status');
+    //{{!-- const dropdownStatusButton = document.querySelector('.btn-dropdown-status'); --}}
     function clickFastNavbar(message) {
         alert(message);
+    };
+
+    //{{!-- const addCartButton = document.querySelector('.btn-add-to-cart'); --}}
+    function addToCart() {
+        alert('Add to cart');
     };
 </script>
 
