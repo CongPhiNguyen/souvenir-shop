@@ -40,6 +40,8 @@ h1 {
 
 .product-image {
     border: 1px solid #333;
+    border-radius: 12px;
+    
 }
 
 .product-image-1 {
@@ -52,7 +54,7 @@ h1 {
 
 .product-info .product-name {
     width: 100%;
-    
+    font-size: 32px;
 }
 
 .product-info .product-place {
