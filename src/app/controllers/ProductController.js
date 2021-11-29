@@ -8,8 +8,8 @@ class ProductController {
         res.render('product', { title: "Product" , active: {Product: true }});
     }
 
-    addToCart(req, res) {
-        console.log('Chạy ở dưới add to cart', 'req.body', req.body)
+    addProduct(req, res) {
+        console.log('Chạy ở dưới add product', 'req.body', req.body)
         var productInfo = new Product({
             productID: req.body.productID, 
             name: req.body.name, 
@@ -30,6 +30,11 @@ class ProductController {
             console.log(productInfo);
             res.status(200).json({ productInfo: productInfo });
         });
+    }
+    addToCart()
+    {
+        console.log('Chạy ở dưới add to cart', 'req.body', req.body);
+        
     }
 }
 

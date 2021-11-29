@@ -89,6 +89,9 @@
                     <button class="add-to-cart bt-add-to-cart" onclick="addToCart()">
                         Add to cart 
                     </button>
+                    <button class="add-to-cart bt-add-to-cart" onclick="addProduct()">
+                        Add product 
+                    </button>
                     <button class="buy-now">
                         Buy now
                     </button>
@@ -250,9 +253,47 @@
     };
 
     //{{!-- const addCartButton = document.querySelector('.btn-add-to-cart'); --}}
+    async function addProduct() {
+        alert('Đang chạy axios')
+        try{
+            const data = { 
+                productID: '1', 
+                name: 'Iphone 1 promax', 
+                location: 'Hawai', 
+                province: 'Akihabara, Tokyo', 
+                quantity: 123, 
+                remain: 12,
+                originalPrice: 120000,
+                sellPrice: 139000,
+                currentPrice: 130000,
+                imgUrl: "https://res.cloudinary.com/databaseimg/image/upload/v1637735182/f8dxrubo9icgb5o5iyf2.jpg",
+                description: "Đây là sản phẩm mới nhất của apple. Không thể tin được, thật không thể tin được là apple lại nhảy từ 13 về 1",
+                unit: 'phone',
+                rating: 4.3,
+            };
+            console.log("data", data);
+            await axios.post(`http://localhost:3000/product/add-product`, data)
+            .then(res => {
+                console.log("Save success");
+                alert("Lưu thành công")
+            })
+            .catch(err => {
+                alert(err);
+                if(err.response.data.message)
+                {
+                    alert(err.response.data.message);
+                }
+                console.log(err);
+                isAddOK = false;
+            })
+        }
+        catch(e)
+        {
+            alert(e);
+        }
+    };
     async function addToCart() {
-        //alert('Add to cart');
-        alert('Đang chạy fetch')
+        alert('Đang chạy axios')
         try{
             const data = { 
                 productID: '1', 
