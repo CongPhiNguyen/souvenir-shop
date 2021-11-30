@@ -44,7 +44,7 @@
                                 <div style=" display: flex; height: 30px; justify-content: space-between; padding-top: 10px; margin-bottom: 25px"
                                     class="col-10 offset-1">
                                     <p>
-                                        <span style="font-weight: 700;">5</span>
+                                        <span class="quantity-product" style="font-weight: 700;">5</span>
                                         Sản Phẩm
                                     </p>
                                     <p style="color: #ffba00;cursor: pointer; font-weight:700"
@@ -159,27 +159,57 @@
     </div>
     {{/if}}
 </header>
+
 <script type="text/javascript">
+    var listCartProductScreen = JSON.parse(localStorage.getItem('listCart'))
+    var cartUser
+
+
     const active = document.querySelector('.active').outerText;
     document.querySelector('.active').style.display = 'none'
     document.querySelector(`.${active}`).classList.add('active')
     var AlertMorriStore = document.getElementById('display-alert-css');
     const elementProductLink = document.querySelector('.cart');
     const elementRenderProductCart = document.querySelector('.render-list-product');
+    const elementQuantityProductTotal = document.querySelector('.quantity-product');
     const listCart = JSON.parse(localStorage.getItem('listCart'));
     const elementQuantityProduct = document.querySelector('.quantity');
 
-    const a = 300000000;
-    const b = 300000000;
-    console.log(a.toLocaleString())
+    getCart = async () => {
+        const username = 'lngthinphc@gmail.com'
+        try {
+            const res = await fetch('/cart/get-cart-user', {
+                method: 'POST',
+                body: JSON.stringify({ username }),
+                headers: { 'Content-Type': 'application/json' }
+            }).then(res => res.json())
+                .then(data => {
+                    return data
+                })
+            cartUser = res.cart.listProduct
+            renderProduct()
+            renderQuantity()
+            renderQuantityTotal()
+            renderListCart()
+            renderTotalMoney()
+        } catch {
+        }
+    }
+    getCart()
 
     //Render số lượng
     renderQuantity = () => {
-        elementQuantityProduct.innerText = listCart.length;
+        elementQuantityProduct.innerText = cartUser.length;
     }
 
-    renderQuantity();
-
+    //Render tổng số lượng
+    renderQuantityTotal = () => {
+        let index = 0
+        cartUser.map(value => {
+            index += value.quantity
+        })
+        elementQuantityProductTotal.innerText = index
+    }
     // Xem tất cả 
     ProductScreenClick = () => {
         elementProductLink.click();
@@ -188,21 +218,21 @@
 
     // Render Sản phẩm
     renderProduct = () => {
-        let htmlList = listCart.map(value => (
+        let htmlList = cartUser.map(value => (
             `
                                     <div style="border-bottom: 1px #00000029 solid; margin-top: 10px;" class="col-10 offset-1">
                                         <div class="row">
                                             <div class="col-4">
-                                                <img src="${value.imgUrl}"
+                                                <img src="${value.product.imgUrl}"
                                                     class="img-thumbnail" alt="...">
                                             </div>
                                             <div class="col-8">
                                                 <a style="text-decoration: none; color: black; font-weight: 600;"
-                                                    href="#">${value.name}</a>
+                                                    href="#">${value.product.name}</a>
                                                 <div style="color: #ffba00;font-weight:700">
-                                                    ${value.priceSell.toLocaleString()}đ
+                                                    ${value.product.priceSell.toLocaleString()}đ
                                                     <span
-                                                        style="text-decoration: line-through; color:darkgrey; font-weight:400; margin-left: 10px">${value.price.toLocaleString()}đ</span>
+                                                        style="text-decoration: line-through; color:darkgrey; font-weight:400; margin-left: 10px">${value.product.price.toLocaleString()}đ</span>
                                                 </div>
                                                 <p style="font-size: .8rem; margin-bottom: 0">Địa danh: Hà Tiên</p>
                                                 <h6>SL: ${value.quantity}</h6>
@@ -211,27 +241,7 @@
                                     </div>
             `
         ))
-        elementRenderProductCart.innerHTML = htmlList.join('');
     }
-    renderProduct();
-
-    loadDoc = async () => {
-        const xhttp = new XMLHttpRequest();
-        xhttp.onload = function () {
-            console.log(JSON.parse(this.responseText));
-        }
-        var data = {
-            name: 'lg',
-            pass: 'ge',
-        }
-        await xhttp.open('GET', 'https://provinces.open-api.vn/api/?depth=3');
-        await xhttp.send(data);
-
-        //xhttp.open("POST", "ajax_test.asp");
-        //xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        //xhttp.send("name=phuoc&hello=e");
-    }
-    loadDoc();
 
 
     //ALERT MORRI STORE
@@ -243,7 +253,7 @@
         AlertMorriStore.style.display = 'block'
         AlertMorriStore.classList = `alert ${typeAlert}`
         AlertMorriStore.innerText = message
-        setTimeout(() => { AlertMorriStore.style.display = 'none'}, 2000)
+        setTimeout(() => { AlertMorriStore.style.display = 'none' }, 2000)
     }
 
 
