@@ -117,39 +117,7 @@
                                 <h3 style="text-align: center; color: #ffba00;">Giỏ hàng của bạn</h3>
                             </div>
                             <div class="col-10 offset-1 render-list-product-cart">
-                                <div style="margin-bottom: 30px" class="row">
-                                    <div class="col-4">
-                                        <img src="https://res.cloudinary.com/databaseimg/image/upload/v1635354535/yiynknhhmgjdfdd28ehl.jpg"
-                                            class="img-thumbnail" alt="...">
-                                    </div>
-                                    <div class="col-8">
-                                        <div class="row">
-                                            <div class="col-8">
-                                                <a style="text-decoration: none; color: black; font-weight: 600;"
-                                                    href="#">Iphone 13 pro max - 1TB - 8GB Ram</a>
-                                                <p style="font-size: .8rem;">Địa danh: Hà Tiên</p>
-                                                <div class="customize-raise-reduce" style="">
-                                                    <span onclick="reduceQuantity('luong_thien_phuoc')">
-                                                        <i class="fas fa-minus"></i>
-                                                    </span>
-                                                    <input style="" value="1" type="number">
-                                                    <span onclick="raiseQuantity('luong_thien_phuoc')">
-                                                        <i class="fas fa-plus"></i>
-                                                    </span>
-                                                </div>
-                                            </div>
-                                            <div class="col-4 customize-price-product">
-                                                <div>
-                                                    <button type="button" class="btn-close" aria-label="Close"></button>
-                                                </div>
-                                                <div>
-                                                    <div>269.000đ</div>
-                                                    <div style="text-decoration: line-through">299.000đ</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                               
                             </div>
                         </div>
                     </div>
@@ -220,6 +188,9 @@
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script>
     var listProvince;
+    var discountUser = null;
+
+
     const elementRenderListProduct = document.querySelector('.render-list-product-cart');
     const tamTinh = document.querySelector('.tam-tinh');
     const maGiamGia = document.querySelector('.ma-giam-gia');
@@ -237,7 +208,6 @@
 
     let elementDiscount = document.querySelector('input[name="discount"]');
 
-    const xhttp = new XMLHttpRequest();
     let btnPayment = document.querySelector('.btn-payment')
     let btnApplyCodeDiscount = document.querySelector('.btn-apply-code-discount');
 
@@ -247,12 +217,11 @@
         .then(response => response.json())
         .then(data => {
             listProvince = data;
-            console.log(listProvince);
             const html1 = listProvince.map(value => (
-                `<option value=${value.name}>${value.name}</option>`
+                `<option value=${value.codename}>${value.name}</option>`
             ))
             const html2 = listProvince[0].districts.map(value => (
-                `<option value=${value.name}>${value.name}</option>`
+                `<option value=${value.codename}>${value.name}</option>`
             ))
             elementProvince.innerHTML = html1.join('');
             elementDistrict.innerHTML = html2.join('');
@@ -261,6 +230,7 @@
         .catch(err => console.log("Lỗi"));
 
     elementProvince.onclick = (e) => {
+        console.log(e.target.value)
         renderDistricts(e.target.value);
     }
 
@@ -276,10 +246,8 @@
         })
     }
 
-
-
     renderListCart = () => {
-        let html = cartUser.map(value => (
+        let html123 = cartUser.map(value => (
             `
             <div style="margin-bottom: 30px" class="row">
                                     <div class="col-4">
@@ -291,24 +259,24 @@
                                             <div class="col-8">
                                                 <a style="text-decoration: none; color: black; font-weight: 600;"
                                                     href="#">${value.product.name}</a>
-                                                <p style="font-size: .8rem;">Địa danh: ${value.product.diaDanh}</p>
+                                                <p style="font-size: .8rem;">Địa danh: ${value.product.location}</p>
                                                 <div class="customize-raise-reduce" style="">
-                                                    <span onclick="reduceQuantity('${value.product.slug}')">
+                                                    <span onclick="reduceQuantity('${value.product.productID}')">
                                                         <i class="fas fa-minus"></i>
                                                     </span>
-                                                    <input name="${value.product.slug}" value='${value.quantity}' type="number">
-                                                    <span onclick="raiseQuantity('${value.product.slug}')">
+                                                    <input name="${value.product.productID}" value='${value.quantity}' type="number">
+                                                    <span onclick="raiseQuantity('${value.product.productID}')">
                                                         <i class="fas fa-plus"></i>
                                                     </span>
                                                 </div>
                                             </div>
                                             <div class="col-4 customize-price-product">
                                                 <div>
-                                                    <button type="button" onclick="DeleteProduct('${value.product.slug}')" class="btn-close" aria-label="Close"></button>
+                                                    <button type="button" onclick="DeleteProduct('${value.product.productID}')" class="btn-close" aria-label="Close"></button>
                                                 </div>
                                                 <div>
-                                                    <div style="font-weight: 700">${value.product.priceSell.toLocaleString()}đ</div>
-                                                    <div style="text-decoration: line-through">${value.product.price.toLocaleString()}đ</div>
+                                                    <div style="font-weight: 700">${value.product.currentPrice.toLocaleString()}đ</div>
+                                                    <div style="text-decoration: line-through">${value.product.sellPrice.toLocaleString()}đ</div>
                                                 </div>
                                             </div>
                                         </div>
@@ -316,53 +284,108 @@
                                 </div>
             `
         ))
-        elementRenderListProduct.innerHTML = html.join('');
+        if (cartUser.length == 0) {
+            elementRenderListProduct.innerHTML = `
+            <div style="border-bottom: 1px #00000029 solid; margin-top: 10px;" class="col-10 offset-1">
+                <div style="text-align: center; padding-bottom: 30px;" class="row">
+                    <h4>Giỏ hàng trống</h4>
+                </div>
+            </div>
+            `
+        } else {
+            elementRenderListProduct.innerHTML = html123.join('');
+        }
+        console.log(html123)
+
     }
 
-    reduceQuantity = (slug) => {
-        const element = document.querySelector(`input[name="${slug}"]`);
-        cartUser.map(value => {
-            if (value.product.slug === slug) {
-                if (value.quantity > 1) {
-                    value.quantity -= 1;
+    reduceQuantity = async (productID) => {
+        try {
+            cartUser.map(value => {
+                if (value.product.productID === productID) {
+                    if (value.quantity > 1) {
+                        value.quantity -= 1;
+                    }
                 }
-            }
-        })
-        renderProduct()
-        renderQuantity()
-        renderQuantityTotal()
-        renderListCart()
-        renderTotalMoney()
+            })
+            await axios.post(`http://localhost:3000/cart/update-cart-user`, {
+                username: 'lngthinphc@gmail.com',
+                listProduct: cartUser
+            })
+                .then(res => {
+                    renderProduct()
+                    renderQuantity()
+                    renderQuantityTotal()
+                    renderListCart()
+                    renderTotalMoney()
+                })
+                .catch(err => {
+                    cartUser.map(value => {
+                        if (value.product.productID === productID) {
+                            value.quantity += 1;
+                        }
+                    })
+                })
+        } catch (e) {
+            console.log(e)
+        }
     }
 
-    raiseQuantity = (slug) => {
-        const element = document.querySelector(`input[name="${slug}"]`);
-        cartUser.map(value => {
-            if (value.product.slug === slug) {
-                value.quantity += 1;
-            }
-        })
-        renderProduct()
-        renderQuantity()
-        renderQuantityTotal()
-        renderListCart()
-        renderTotalMoney()
+    raiseQuantity = async (productID) => {
+        try {
+            cartUser.map(value => {
+                if (value.product.productID === productID) {
+                    value.quantity += 1;
+                }
+            })
+            await axios.post(`http://localhost:3000/cart/update-cart-user`, {
+                username: 'lngthinphc@gmail.com',
+                listProduct: cartUser
+            })
+                .then(res => {
+                    renderProduct()
+                    renderQuantity()
+                    renderQuantityTotal()
+                    renderListCart()
+                    renderTotalMoney()
+                })
+                .catch(err => {
+                    cartUser.map(value => {
+                        if (value.product.productID === productID) {
+                            value.quantity -= 1;
+                        }
+                    })
+                })
+        } catch (e) {
+            console.log(e)
+        }
     }
 
-    DeleteProduct = (slug) => {
-        console.log(slug);
-        cartUser = cartUser.filter(value => {
-            return value.product.slug !== slug
-        })
-        renderProduct()
-        renderQuantity()
-        renderQuantityTotal()
-        renderListCart()
-        renderTotalMoney()
+    DeleteProduct = async (productID) => {
+        try {
+            cartUser = cartUser.filter(value => {
+                return value.product.productID !== productID
+            })
+            await axios.post(`http://localhost:3000/cart/update-cart-user`, {
+                username: 'lngthinphc@gmail.com',
+                listProduct: cartUser
+            })
+                .then(res => {
+                    renderProduct()
+                    renderQuantity()
+                    renderQuantityTotal()
+                    renderListCart()
+                    renderTotalMoney()
+                })
+                .catch(err => {
+                   
+                })
+        } catch (e) {
+            console.log(e)
+        }
     }
 
     //Render total money
-
     renderTotalMoney = (percent) => {
         let giaTienTamTinh = 0;
         let giaTienGiamGia = 0;
@@ -370,8 +393,8 @@
         let tongTien = 0;
         let tienShip = 0;
         cartUser.forEach(value => {
-            giaTienTamTinh += value.product.priceSell * value.quantity;
-            giaGocBanDau += value.product.price * value.quantity;
+            giaTienTamTinh += value.product.currentPrice * value.quantity;
+            giaGocBanDau += value.product.currentPrice * value.quantity;
         })
 
         if (percent) {
@@ -384,7 +407,6 @@
 
         tongTien = giaTienTamTinh - giaTienGiamGia + tienShip;
 
-
         tienShip == 0 ? ship.innerText = "Miễn phí" : ship.innerText = tienShip.toLocaleString() + 'đ'
         tamTinh.innerText = giaTienTamTinh.toLocaleString() + 'đ'
         maGiamGia.innerText = giaTienGiamGia.toLocaleString() + 'đ'
@@ -393,74 +415,20 @@
     }
 
 
+    makeCode = (length) => {
+        var result = '';
+        var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        var charactersLength = characters.length;
+        for (var i = 0; i < length; i++) {
+            result += characters.charAt(Math.floor(Math.random() *
+                charactersLength));
+        }
+        return result;
+    }
+
     //Handle 
     btnPayment.onclick = async (e) => {
-        /*const username = 'lngthinphc@gmail.com';
-        const listCartabc = [
-            {
-                product: {
-                    slug: "iphone-13",
-                    name: "Iphone 13 pro max - 1TB - 8GB Ram",
-                    diaDanh: "Hà Tiên",
-                    priceSell: 15000000,
-                    imgUrl: 'https://res.cloudinary.com/databaseimg/image/upload/v1634361661/xdirpgvyysvctqpu2thn.jpg',
-                    price: 16500000,
-                    quantity: 1,
-                },
-                quantity: 1
-            },
-            {
-                product: {
-                    slug: "truyen-tranh",
-                    name: "Thánh gióng Việt Nam",
-                    diaDanh: "Nha Trang",
-                    priceSell: 550000,
-                    imgUrl: 'https://res.cloudinary.com/databaseimg/image/upload/v1635354535/yiynknhhmgjdfdd28ehl.jpg',
-                    price: 700000,
-                    quantity: 1,
-                },
-                quantity: 2,
-            },
-            {
-                product: {
-                    slug: "qua-luu-niem-qua-cau-tuyet",
-                    name: "Quà lưu niệm quả cầu tuyết Doremon",
-                    diaDanh: "Sapa",
-                    priceSell: 350000,
-                    imgUrl: 'https://res.cloudinary.com/databaseimg/image/upload/v1635354535/yiynknhhmgjdfdd28ehl.jpg',
-                    price: 500000,
-                    quantity: 1,
-                },
-                quantity: 2
-            },
-            {
-                product: {
-                    slug: "luong-thien-phuoc",
-                    name: "Lương Thiện Phước đẹp trai",
-                    diaDanh: "Cái Dầu",
-                    priceSell: 999999999,
-                    imgUrl: 'https://res.cloudinary.com/databaseimg/image/upload/v1635354535/yiynknhhmgjdfdd28ehl.jpg',
-                    price: 999999999,
-                    quantity: 2,
-                },
-                quantity: 1
-            },
-        ]*/
-
-        /*try {
-            const res = await fetch('/cart/add-product-to-cart', {
-                method: 'POST',
-                body: JSON.stringify({ username, listCartabc }),
-                headers: { 'Content-Type': 'application/json' }
-            });
-            const data = res.json();
-            console.log(data)
-        } catch {
-
-        }*/
-
-        /*let elementPaymentMethod = document.querySelector('input[name="payment-method"]:checked')
-        console.log(elementPaymentMethod);
+        let elementPaymentMethod = document.querySelector('input[name="payment-method"]:checked')
         let aElement = document.createElement('a');
         aElement.setAttribute('href', "/login");
         if (elementEmail.value == "") {
@@ -470,23 +438,63 @@
             showAlertMorriStore('alert-warning', 'Nhập đầy đủ thông tin !')
         } else {
             if (elementPaymentMethod) {
-                console.log(elementName.value)
-                console.log(elementPhone.value)
-                console.log(elementEmail.value)
-                console.log(elementAddress.value)
-                console.log(elementNote.value)
-                console.log(elementProvince.value)
-                console.log(elementDistrict.value)
-                console.log(elementPaymentMethod.value)
-                showAlertMorriStore('alert-success', 'Mua hàng thành công !')
+                let total = 0;
+                let totalFinal = 0;
+                let deliveryMoney = 0;
+                let discountMoney = 0
+                cartUser.forEach(value => {
+                    total += value.product.currentPrice * value.quantity;
+                })
+                if (discountUser) {
+                    discountMoney = total * discountUser.value / 100
+                }
+                if (total < 300000) {
+                    deliveryMoney = 30000
+                }
+                totalFinal = total - discountMoney + deliveryMoney;
+                let data = {
+                    recieptId: makeCode(6),
+                    name: elementName.value,
+                    phone: elementPhone.value,
+                    username: elementEmail.value,
+                    address: elementAddress.value,
+                    note: elementNote.value,
+                    province: elementProvince.value,
+                    district: elementDistrict.value,
+                    paymentMethod: elementPaymentMethod.value,
+                    listProduct: cartUser,
+                    total: total,
+                    totalFinal: totalFinal,
+                    deliveryMoney: deliveryMoney,
+                    coupon: discountUser ? discountUser : null,
+                    deliveryStatus: false,
+                }
+                await axios.post(`http://localhost:3000/cart/create-receipt`, { ...data })
+                    .then(res => {
+                        cartUser = []
+                        discountUser = null
+                        renderProduct()
+                        renderQuantity()
+                        renderQuantityTotal()
+                        renderListCart()
+                        renderTotalMoney()
+                        showAlertMorriStore('alert-success', 'Mua hàng thành công !')
+                    })
+                    .catch(err => {
+                        showAlertMorriStore('alert-warning', 'Mua hàng thất bại !')
+                    })
             } else {
                 showAlertMorriStore('alert-warning', 'Chọn phương thức thanh toán !')
             }
-        }*/
+        }
     }
 
-
     btnApplyCodeDiscount.onclick = async () => {
+        /*await axios.post(`http://localhost:3000/cart/add-product-to-cart`).then(res => {
+
+        }).catch(err=>{
+            
+        })*/
         try {
             await axios.post(`http://localhost:3000/cart/get-coupon`, {
                 couponCode: elementDiscount.value,
@@ -496,6 +504,7 @@
                     let time = new Date(res.data.Coupon.exp)
                     if (time - nowTime >= 0) {
                         if (!res.data.Coupon.isUsed) {
+                            discountUser = res.data.Coupon
                             renderTotalMoney(res.data.Coupon.value)
                             showAlertMorriStore('alert-success', 'Sử dụng code thành công!')
                         } else {

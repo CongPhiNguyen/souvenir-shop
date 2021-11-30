@@ -37,14 +37,14 @@
                         <a class="nav-link cart" href="/cart">
                             <i class="fas fa-shopping-cart"></i>
                             Giỏ hàng
-                            <div class="quantity">4</div>
+                            <div class="quantity">0</div>
                         </a>
                         <div class="modal-cart">
                             <div class="row">
                                 <div style=" display: flex; height: 30px; justify-content: space-between; padding-top: 10px; margin-bottom: 25px"
                                     class="col-10 offset-1">
                                     <p>
-                                        <span class="quantity-product" style="font-weight: 700;">5</span>
+                                        <span class="quantity-product" style="font-weight: 700;">0</span>
                                         Sản Phẩm
                                     </p>
                                     <p style="color: #ffba00;cursor: pointer; font-weight:700"
@@ -53,86 +53,7 @@
                                 {{!-- Sản phẩm --}}
                                 <div id="customize-scrollbar" class="render-list-product"
                                     style="overflow-y: scroll; max-height: 440px; width:365px">
-                                    <div style="border-bottom: 1px #00000029 solid; margin-top: 10px;"
-                                        class="col-10 offset-1">
-                                        <div class="row">
-                                            <div class="col-4">
-                                                <img src="https://res.cloudinary.com/databaseimg/image/upload/v1635354535/yiynknhhmgjdfdd28ehl.jpg"
-                                                    class="img-thumbnail" alt="...">
-                                            </div>
-                                            <div class="col-8">
-                                                <a style="text-decoration: none; color: black; font-weight: 600;"
-                                                    href="#">Iphone 13 pro max - 1TB - 8GB Ram</a>
-                                                <div style="color: #ffba00;font-weight:700">
-                                                    269.000đ
-                                                    <span
-                                                        style="text-decoration: line-through; color:darkgrey; font-weight:400; margin-left: 10px">299.000đ</span>
-                                                </div>
-                                                <p style="font-size: .8rem; margin-bottom: 0">Địa danh: Hà Tiên</p>
-                                                <h6>SL: 3</h6>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div style="border-bottom: 1px #00000029 solid; margin-top: 10px;"
-                                        class="col-10 offset-1">
-                                        <div class="row">
-                                            <div class="col-4">
-                                                <img src="https://res.cloudinary.com/databaseimg/image/upload/v1635354535/yiynknhhmgjdfdd28ehl.jpg"
-                                                    class="img-thumbnail" alt="...">
-                                            </div>
-                                            <div class="col-8">
-                                                <a style="text-decoration: none; color: black; font-weight: 600;"
-                                                    href="#">Iphone 13 pro max - 1TB - 8GB Ram</a>
-                                                <div style="color: #ffba00;font-weight:700">
-                                                    269.000đ
-                                                    <span
-                                                        style="text-decoration: line-through; color:darkgrey; font-weight:400; margin-left: 10px">299.000đ</span>
-                                                </div>
-                                                <p style="font-size: .8rem; margin-bottom: 0">Địa danh: Hà Tiên</p>
-                                                <h6>SL: 3</h6>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div style="border-bottom: 1px #00000029 solid; margin-top: 10px;"
-                                        class="col-10 offset-1">
-                                        <div class="row">
-                                            <div class="col-4">
-                                                <img src="https://res.cloudinary.com/databaseimg/image/upload/v1635354535/yiynknhhmgjdfdd28ehl.jpg"
-                                                    class="img-thumbnail" alt="...">
-                                            </div>
-                                            <div class="col-8">
-                                                <a style="text-decoration: none; color: black; font-weight: 600;"
-                                                    href="#">Iphone 13 pro max - 1TB - 8GB Ram</a>
-                                                <div style="color: #ffba00;font-weight:700">
-                                                    269.000đ
-                                                    <span
-                                                        style="text-decoration: line-through; color:darkgrey; font-weight:400; margin-left: 10px">299.000đ</span>
-                                                </div>
-                                                <p style="font-size: .8rem; margin-bottom: 0">Địa danh: Hà Tiên</p>
-                                                <h6>SL: 3</h6>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div style="border-bottom: 1px #00000029 solid; margin-top: 10px;"
-                                        class="col-10 offset-1">
-                                        <div class="row">
-                                            <div class="col-4">
-                                                <img src="https://res.cloudinary.com/databaseimg/image/upload/v1635354535/yiynknhhmgjdfdd28ehl.jpg"
-                                                    class="img-thumbnail" alt="...">
-                                            </div>
-                                            <div class="col-8">
-                                                <a style="text-decoration: none; color: black; font-weight: 600;"
-                                                    href="#">Iphone 13 pro max - 1TB - 8GB Ram</a>
-                                                <div style="color: #ffba00;font-weight:700">
-                                                    269.000đ
-                                                    <span
-                                                        style="text-decoration: line-through; color:darkgrey; font-weight:400; margin-left: 10px">299.000đ</span>
-                                                </div>
-                                                <p style="font-size: .8rem; margin-bottom: 0">Địa danh: Hà Tiên</p>
-                                                <h6>SL: 3</h6>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    {{!-- Render sản phẩm --}}
                                 </div>
                             </div>
                         </div>
@@ -187,6 +108,7 @@
                     return data
                 })
             cartUser = res.cart.listProduct
+            console.log(cartUser)
             renderProduct()
             renderQuantity()
             renderQuantityTotal()
@@ -230,9 +152,9 @@
                                                 <a style="text-decoration: none; color: black; font-weight: 600;"
                                                     href="#">${value.product.name}</a>
                                                 <div style="color: #ffba00;font-weight:700">
-                                                    ${value.product.priceSell.toLocaleString()}đ
+                                                    ${value.product.sellPrice.toLocaleString()}đ
                                                     <span
-                                                        style="text-decoration: line-through; color:darkgrey; font-weight:400; margin-left: 10px">${value.product.price.toLocaleString()}đ</span>
+                                                        style="text-decoration: line-through; color:darkgrey; font-weight:400; margin-left: 10px">${value.product.currentPrice.toLocaleString()}đ</span>
                                                 </div>
                                                 <p style="font-size: .8rem; margin-bottom: 0">Địa danh: Hà Tiên</p>
                                                 <h6>SL: ${value.quantity}</h6>
@@ -241,6 +163,17 @@
                                     </div>
             `
         ))
+        if (cartUser.length == 0) {
+            elementRenderProductCart.innerHTML= `
+            <div style="border-bottom: 1px #00000029 solid; margin-top: 10px;" class="col-10 offset-1">
+                <div style="text-align: center; padding-bottom: 30px;" class="row">
+                    <h4>Giỏ hàng trống</h4>
+                </div>
+            </div>
+            `
+        } else {
+            elementRenderProductCart.innerHTML = htmlList.join('');
+        }
     }
 
 
