@@ -35,7 +35,8 @@
     "jsonwebtoken": "^8.5.1",
     "load": "^1.0.2",
     "mongoose": "^6.0.9",
-    "node-fetch": "^3.1.0"
+    "node-fetch": "^3.1.0",
+    "mongoose-delete": "^0.5.4"
   },
   "devDependencies": {
     "morgan": "^1.10.0",
