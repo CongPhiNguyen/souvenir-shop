@@ -295,7 +295,8 @@
     async function addToCart() {
         alert('Đang chạy axios')
         try{
-            const data = { 
+            const data = {
+                email: localStorage.getItem('username'),
                 productID: '1', 
                 name: 'Iphone 1 promax', 
                 location: 'Hawai', 

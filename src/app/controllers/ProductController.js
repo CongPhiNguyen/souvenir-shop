@@ -31,7 +31,7 @@ class ProductController {
             res.status(200).json({ productInfo: productInfo });
         });
     }
-    addToCart()
+    addToCart(req, res)
     {
         console.log('Chạy ở dưới add to cart', 'req.body', req.body);
         

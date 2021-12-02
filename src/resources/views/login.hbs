@@ -45,19 +45,12 @@
 
 
 					<div class="form-group d-flex justify-content-end pt-3">
-						<input type="submit" id="login_btn" value="Login" class="btn float-right login_btn">
+						<input type="submit" id="login_btn" value="Login" onclick="getUsername()"
+						class="btn float-right login_btn">
 					</div>
 				</form>
 			</div>
-			<script>
-				let btn = document.getElementById("login_btn");
-				btn.addEventListener("keypress", e =>{
-					e.preventDefault();
-					if(e.keyCode === 13){
-						btn.click();
-					}
-				})
-			</script>
+			
 
 			<div class="card-footer text-center">
 				<div>
@@ -68,3 +61,27 @@
 		</div>
 	</div>
 </div>
+<script>
+	function getUsername()
+	{
+		console.log('Tên đăng nhập', document.querySelector('input[name="username"]').value);
+		localStorage.setItem('username', document.querySelector('input[name="username"]').value);
+	}
+	{{!-- console.log('Nó có chạy vô đây không nhỉ')
+	let btn = document.getElementById("login_btn");
+	//btn.onclick = () {
+	//	localStorage.setItem()
+	//}
+	
+	console.log("btn", btn)
+	btn.onclick = (e) {
+		alert("Button đã được ấn")
+		console.log('Tên đăng nhập', document.querySelector('input[name="username"]').value);
+	}
+	btn.addEventListener("keypress", e =>{
+		e.preventDefault();
+		if(e.keyCode === 13){
+			btn.click();
+		}
+	}) --}}
+</script>
