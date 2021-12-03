@@ -86,17 +86,27 @@ class ProductController {
             }
             if(!isFound)
             {
-                // 
+                currentListProduct.push(
+                    {
+                        product: {
+                            productID: req.body.productID,
+                            name: req.body.name,
+                            location: req.body.location,
+                            province: req.body.province,
+                            quantity: req.body.quantity,
+                            remain: req.body.remain,
+                            originalPrice: req.body.originalPrice,
+                            sellPrice: req.body.sellPrice,
+                            currentPrice: req.body.currentPrice,
+                            imgUrl: req.body.imgUrl,
+                            description: req.body.description,
+                            unit: req.body.unit,
+                            rating: req.body.rating,
+                        },
+                        quantity: 1,
+                    }
+                )
             }
-            // Cart.findOneAndUpdate({
-            //     'username': username
-            // },
-            //     {
-            //         $set: {
-            //             listProduct: []
-            //         }
-            //     },
-            //     { returnOriginal: false }).exec()
             Cart.findOneAndUpdate(
                 {username: req.body.email, deleted: false},
                 {
