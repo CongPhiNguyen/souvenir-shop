@@ -69,6 +69,57 @@ class ProductController {
             });
             return;
         }
+        else {
+            // Thêm vào cái cart có sẵn.
+            // Get cái cart hiện tại là newI va xử lý với nó
+            var currentListProduct = newI.listProduct;
+            //Tìm kiếm id sản phẩm trong list
+            var isFound = false;
+            for(var i = 0; i < currentListProduct.length ;i++)
+            {   
+                if(req.body.productID == currentListProduct[i].product.productID)
+                {
+                    currentListProduct[i].quantity++;
+                    isFound = true;
+                    break;
+                }
+            }
+            if(!isFound)
+            {
+                // 
+            }
+            // Cart.findOneAndUpdate({
+            //     'username': username
+            // },
+            //     {
+            //         $set: {
+            //             listProduct: []
+            //         }
+            //     },
+            //     { returnOriginal: false }).exec()
+            Cart.findOneAndUpdate(
+                {username: req.body.email, deleted: false},
+                {
+                    $set: {
+                        listProduct: currentListProduct
+                    },
+                },
+                {
+                    returnOriginal: false,
+                },
+                function (err, doc) {
+                    if (err) {
+                        res.status(404).send(err);
+                    } else {
+                        res.status(200).send(
+                            JSON.stringify({
+                                listProduct : currentListProduct,
+                            })
+                        );
+                    }
+                }
+            );
+        }
     }
 }
 
