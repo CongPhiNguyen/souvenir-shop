@@ -47,7 +47,10 @@
                 </li>
             </ol>
         </div>
-        
+        <input type="file" id="avatar" name="avatar" accept="image/png, image/jpeg">
+        <button onclick="uploadPicture()">
+            Send picture
+        </button>
         {{!-- Phần của product --}}
         <div class="product-container row">
             <div class="product-image col-md-4">
@@ -252,11 +255,11 @@
 </div>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script>
+    var imageName = "Image chưa được thay đổi";
     //{{!-- const dropdownStatusButton = document.querySelector('.btn-dropdown-status'); --}}
     function clickFastNavbar(message) {
         alert(message);
-    };
-
+    }
     //{{!-- const addCartButton = document.querySelector('.btn-add-to-cart'); --}}
     async function addProduct() {
         alert('Đang chạy axios')
@@ -297,6 +300,23 @@
             alert(e);
         }
     };
+
+    function uploadPicture() 
+    {
+        var fileName = document.getElementById('avatar').files[0];
+        console.log(fileName);
+        const formData = new FormData();
+        formData.append("file", fileName)
+        formData.append("upload_preset", "qqqhcaa3");
+        axios.post(`https://api.cloudinary.com/v1_1/databaseimg/image/upload`, formData)
+            .then(res => {
+                console.log("link", res.data.url);
+            })
+            .catch(err => {
+                console.log("Thất bại");
+            })
+    }
+
     async function addToCart() {
         alert('Đang chạy axios')
         try{

@@ -16,13 +16,13 @@
             <div class="collapse navbar-collapse " id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item ">
-                        <a class="nav-link {{#if active.Home}}active{{/if}} home" href="/home">
+                        <a class="nav-link active home" href="/home">
                             <i class="fas fa-home"></i>
                             Trang chủ
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {{#if active.Product}}active{{/if}} product" href="/product">
+                        <a class="nav-link product" href="/product">
                             <i class="fas fa-candy-cane"></i>
                             Sản phẩm
                         </a>
@@ -94,7 +94,7 @@
 
     const active = document.querySelector('.active').outerText;
     document.querySelector('.active').style.display = 'none'
-    document.querySelector(`.${active}`).classList.add('active')
+    {{!-- document.querySelector(`.${active}`).classList.add('active') --}}
     var AlertMorriStore = document.getElementById('display-alert-css');
     const elementProductLink = document.querySelector('.cart');
     const elementRenderProductCart = document.querySelector('.render-list-product');
