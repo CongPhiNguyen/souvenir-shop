@@ -6,12 +6,12 @@ const route = require('./routes');
 const connectDB = require('./config/connectDb');
 const app = express();
 const port = 3000;
-var load = require('express-load');
+const cookieParser = require('cookie-parser')
+const session = require('express-session');
 
 
 app.use(express.static('public'))
-const cookieParser = require('cookie-parser')
-const session = require('express-session')
+
 
 //middlewares
 app.use(cookieParser('secret'))
@@ -30,10 +30,13 @@ connectDB();
 // // Connect to database
 // db.connect();
 
-// Khắc phục [nodemon] app crashed - waiting for file changes before starting...
-load('config')
-  .then('routes')
-  .into(app);
+// // Khắc phục [nodemon] app crashed - waiting for file changes before starting...
+// load('config')
+//   .then('routes')
+//   .into(app);
+//middlewares
+app.use(cookieParser('secret'))
+app.use(session({cookie: {maxAge: null}}))
 
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.urlencoded({
@@ -51,10 +54,47 @@ app.engine('hbs', exphandlebars({
 app.set('view engine', 'hbs');
 app.set('views', path.join(__dirname, 'resources/views'));
 
+// register handlebars function
+var hbs = exphandlebars.create({});
+hbs.handlebars.registerHelper('ifCond', function (v1, operator, v2, options) {
+
+  switch (operator) {
+      case '==':
+          return (v1 == v2) ? options.fn(this) : options.inverse(this);
+      case '===':
+          return (v1 === v2) ? options.fn(this) : options.inverse(this);
+      case '!=':
+          return (v1 != v2) ? options.fn(this) : options.inverse(this);
+      case '!==':
+          return (v1 !== v2) ? options.fn(this) : options.inverse(this);
+      case '<':
+          return (v1 < v2) ? options.fn(this) : options.inverse(this);
+      case '<=':
+          return (v1 <= v2) ? options.fn(this) : options.inverse(this);
+      case '>':
+          return (v1 > v2) ? options.fn(this) : options.inverse(this);
+      case '>=':
+          return (v1 >= v2) ? options.fn(this) : options.inverse(this);
+      case '&&':
+          return (v1 && v2) ? options.fn(this) : options.inverse(this);
+      case '||':
+          return (v1 || v2) ? options.fn(this) : options.inverse(this);
+      default:
+          return options.inverse(this);
+  }
+});
+
+hbs.handlebars.registerHelper('toDateTimeString', function (datetime) {
+    var datetimeString = datetime.toDateString() + ' ' + datetime.toTimeString().substring(0, 5);
+    return datetimeString;
+});
+
+
 //route init
 route(app);
 
 app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`)
 });
+
 
