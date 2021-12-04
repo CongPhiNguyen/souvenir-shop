@@ -6,7 +6,8 @@ const route = require('./routes');
 const connectDB = require('./config/connectDb');
 const app = express();
 const port = 3000;
-var load = require('express-load');
+const cookieParser = require('cookie-parser')
+const session = require('express-session');
 
 
 app.use(express.static('public'))
@@ -34,6 +35,9 @@ connectDB();
 load('config')
   .then('routes')
   .into(app);
+//middlewares
+app.use(cookieParser('secret'))
+app.use(session({cookie: {maxAge: null}}))
 
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.urlencoded({
