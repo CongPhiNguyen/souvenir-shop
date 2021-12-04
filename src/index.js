@@ -6,9 +6,15 @@ const route = require('./routes');
 const connectDB = require('./config/connectDb');
 const app = express();
 const port = 3000;
+const cookieParser = require('cookie-parser')
+const session = require('express-session');
 
 // Connect mongoDb
 connectDB();
+
+//middlewares
+app.use(cookieParser('secret'))
+app.use(session({cookie: {maxAge: null}}))
 
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.urlencoded({
