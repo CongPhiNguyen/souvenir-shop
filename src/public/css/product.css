@@ -25,6 +25,14 @@ h1 {
     color: #9e9e9e
 }
 
+.add-product-button {
+    text-decoration: none;
+    border: 1px solid #333;
+    padding: 4px;
+    margin-top: 12px;
+    display: inline-block;
+}
+
 .container .breadscrum .breadscrum-list {
     display: flex;
 }

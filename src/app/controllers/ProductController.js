@@ -9,6 +9,16 @@ class ProductController {
         res.render('product', { title: "Product" , active: {Product: true }});
     }
 
+    addProductView(req, res){
+        // console.log('Đang chạy ở trên Index', 'req.body', req.body)
+        res.render('product/addProductView', { title: "Product" , active: {Product: true }});
+    }
+
+    editProductView(req, res){
+        // console.log('Đang chạy ở trên Index', 'req.body', req.body)
+        res.render('product/editProductView', { title: "Product" , active: {Product: true }});
+    }
+
     async addProduct(req, res) {
         console.log('Chạy ở dưới add product', 'req.body', req.body)
         var productInfo = new Product({
@@ -32,6 +42,62 @@ class ProductController {
             res.status(200).json({ productInfo: productInfo });
         });
     }
+
+    async updateProduct(req, res) {
+        console.log('Chạy update product', 'req.body', req.body);
+        // get các cái cart thử xem sao
+        // var newI = await Product.findOne({productID: req.body.productID,});
+        // console.log("newI", newI);
+        Product.findOneAndUpdate(
+            {productID: req.body.productID,},
+            {
+                $set: {
+                    productID: req.body.productID, 
+                    name: req.body.name, 
+                    location: req.body.location, 
+                    province: req.body.province, 
+                    quantity: req.body.quantity, 
+                    remain: req.body.remain,
+                    originalPrice: req.body.originalPrice,
+                    sellPrice: req.body.sellPrice,
+                    currentPrice: req.body.currentPrice,
+                    imgUrl: req.body.imgUrl,
+                    description: req.body.description,
+                    unit: req.body.unit,
+                    rating: req.body.rating,
+                },
+            },
+            {
+                returnOriginal: false,
+            },
+            function (err, doc) {
+                if (err) {
+                    res.status(404).send(err);
+                } else {
+                    res.status(200).send(
+                        JSON.stringify({
+                            product : {
+                                productID: req.body.productID, 
+                                name: req.body.name, 
+                                location: req.body.location, 
+                                province: req.body.province, 
+                                quantity: req.body.quantity, 
+                                remain: req.body.remain,
+                                originalPrice: req.body.originalPrice,
+                                sellPrice: req.body.sellPrice,
+                                currentPrice: req.body.currentPrice,
+                                imgUrl: req.body.imgUrl,
+                                description: req.body.description,
+                                unit: req.body.unit,
+                                rating: req.body.rating,
+                            },
+                        })
+                    );
+                }
+            }
+        );
+    }
+
     async addToCart(req, res)
     {
         console.log('Chạy ở dưới add to cart', 'req.body', req.body);
