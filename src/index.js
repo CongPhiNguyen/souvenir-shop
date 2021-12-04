@@ -11,8 +11,7 @@ const session = require('express-session');
 
 
 app.use(express.static('public'))
-const cookieParser = require('cookie-parser')
-const session = require('express-session')
+
 
 //middlewares
 app.use(cookieParser('secret'))
@@ -31,10 +30,10 @@ connectDB();
 // // Connect to database
 // db.connect();
 
-// Khắc phục [nodemon] app crashed - waiting for file changes before starting...
-load('config')
-  .then('routes')
-  .into(app);
+// // Khắc phục [nodemon] app crashed - waiting for file changes before starting...
+// load('config')
+//   .then('routes')
+//   .into(app);
 //middlewares
 app.use(cookieParser('secret'))
 app.use(session({cookie: {maxAge: null}}))
