@@ -1,0 +1,8 @@
+
+@media (max-width: 1000px) {
+    .nav-item:hover .modal-cart {
+        z-index: 20;
+        display: none;
+        opacity: 1;
+    }
+}

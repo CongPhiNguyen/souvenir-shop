@@ -1,0 +1,527 @@
+<title>Cart</title>
+<link rel="stylesheet" href="/css/cart.css">
+<div>
+    <div class="row">
+        <div class="col-7 info-to-delivery">
+            <div>
+                <h3>Thông tin nhận hàng</h3>
+                <form action="">
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="form-floating mb-3">
+                                <input type="text" name="name" class="form-control" id="floatingInput">
+                                <label for="floatingInput">Họ tên</label>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-floating mb-3 ">
+                                <input type="number" name="phone" class="form-control" id="floatingInput"
+                                    placeholder="name@example.com">
+                                <label for="floatingInput">Số điện thoại</label>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-floating mb-3">
+                                <input type="email" value="lngthinphc@gmail.com" name="email" class="form-control"
+                                    id="floatingInput" placeholder="name@example.com" disabled>
+                                <label for="floatingInput">Email</label>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-floating mb-3 ">
+                                <input type="text" name="address" class="form-control" id="floatingInput"
+                                    placeholder="">
+                                <label for="floatingInput">Địa chỉ</label>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <select name="province" class="form-select form-select-lg mb-3"
+                                aria-label=".form-select-lg example">
+                                <option selected>Chọn tỉnh / thành phố</option>
+                                <option value="1">One</option>
+                                <option value="2">Two</option>
+                                <option value="3">Three</option>
+                            </select>
+                        </div>
+                        <div class="col-6">
+                            <select name="district" class="form-select form-select-lg mb-3"
+                                aria-label=".form-select-lg example">
+                                <option selected>Chọn quận / huyện</option>
+                            </select>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-floating mb-3 ">
+                                <input type="text" name="note" class="form-control" id="floatingInput"
+                                    placeholder="ádasd">
+                                <label for="floatingInput">Ghi chú thêm</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <h3>Chọn hình thức thanh toán</h3>
+                    </div>
+                    <div class="col-12">
+                        <div class="form-check customize-radio">
+                            <input class="form-check-input input-radio-customize" value="paymentCod" type="radio"
+                                name="payment-method" id="flexRadioDefault1">
+                            <label class="form-check-label" for="flexRadioDefault1">
+                                <div class="title-radio">
+                                    <i class="radio-icon fas fa-plane"></i>
+                                    <div class="description-radio">
+                                        <h6>Thanh toán khi nhận hàng (COD)</h6>
+                                        <p>Miễn phí vận chuyển với đơn hàng trên 300k</p>
+                                    </div>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="form-check customize-radio">
+                            <input class="form-check-input input-radio-customize" value="paymentMomo" type="radio"
+                                name="payment-method" id="flexRadioDefault2">
+                            <label class="form-check-label" for="flexRadioDefault2">
+                                <div class="title-radio">
+                                    <i class="radio-icon fas fa-id-card"></i>
+                                    <div class="description-radio">
+                                        <h6>Thành toán qua momo</h6>
+                                        <p>Miễn phí và tiện lợi</p>
+                                    </div>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+                    <div style="margin-top: 20px; color: #a77c07" class="col-12">
+                        Nếu bạn không hài lòng với sản phẩm của chúng tôi? Bạn hoàn toàn có thể trả lại sản phẩm. Tìm
+                        hiểu thêm
+                        <a href="/cart/return-policy"
+                            style="font-weight: 700; color: #ffba00; text-decoration: none;">tại đây</a>
+                    </div>
+                    <div class="col-12">
+                        <button type="button" class="btn btn-payment">
+                            <h5>Đặt hàng</h5>
+                            <h6>Ship tới không mua không sao</h6>
+                            <h6>Mua rồi vẫn đổi trả miễn phí</h1>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="col-5 list-product-to-delivery">
+
+            <div class="row">
+                <div class="col-12">
+                    <div style="background-color: white; margin-bottom: 50px;margin-top: 100px;"
+                        class="col-10 offset-1">
+                        <div style="padding-bottom: 30px;" class="row">
+                            <div style="margin-top: 50px; margin-bottom: 50px" class="col-10 offset-1">
+                                <h3 style="text-align: center; color: #ffba00;">Giỏ hàng của bạn</h3>
+                            </div>
+                            <div class="col-10 offset-1 render-list-product-cart">
+                               
+                            </div>
+                        </div>
+                    </div>
+                    <div style="background-color: white; margin-bottom: 30px" class="col-10 offset-1">
+                        <div class="row">
+                            <div style="margin-top: 40px" class="col-10 offset-1">
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" name="discount" placeholder="MÃ GIẢM GIÁ"
+                                        aria-label="Recipient's username" aria-describedby="button-addon2">
+                                    <button class="btn btn-outline-secondary btn-apply-code-discount" type="button"
+                                        id="button-addon2">Áp
+                                        Dụng</button>
+                                </div>
+                            </div>
+                            <div style="margin-top: 40px; margin-bottom: 40px;background-color: #f2f1f1"
+                                class="col-10 offset-1">
+                                <div class="row">
+                                    <div style="display: flex; justify-content: space-between; margin:15px; margin-bottom: 5px"
+                                        class="col">
+                                        <h6 style="font-weight: 400;">Tạm tính</h6>
+                                        <h6 class="tam-tinh">1.760.999đ</h6>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div style=" display: flex; justify-content: space-between; margin:15px; margin-bottom: 5px"
+                                        class="col">
+                                        <h6 style="font-weight: 400;">Mã giảm giá</h6>
+                                        <h6 class="ma-giam-gia" style="color: #ffba00; font-weight: 700;">0đ</h6>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div style="display: flex; justify-content: space-between; margin:15px; margin-bottom: 5px"
+                                        class="col">
+                                        <h6 style="font-weight: 400;">Giá gốc</h6>
+                                        <h6 class="gia-goc"
+                                            style="color: #ffba00; font-weight: 700;text-decoration: line-through">
+                                            1.760.999đ</h6>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div style="display: flex; justify-content: space-between; margin:15px; margin-bottom: 5px"
+                                        class="col">
+                                        <h6 style="font-weight: 400;">Phí giao hàng</h6>
+                                        <h6 class="tien-ship" style="color: #ffba00; font-weight: 700; ">Miễn phí</h6>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div style="border-top: 1px solid black" class="col">
+
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div style="display: flex; justify-content: space-between; margin:15px; margin-bottom: 5px"
+                                        class="col">
+                                        <h6 style="font-weight: 700;">TỔNG CỘNG</h6>
+                                        <h6 class="total-money" style="color: #ffba00; font-weight: 700; ">3.000.000đ
+                                        </h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script>
+    var listProvince;
+    var discountUser = null;
+
+
+    const elementRenderListProduct = document.querySelector('.render-list-product-cart');
+    const tamTinh = document.querySelector('.tam-tinh');
+    const maGiamGia = document.querySelector('.ma-giam-gia');
+    const giaGoc = document.querySelector('.gia-goc');
+    const ship = document.querySelector('.tien-ship')
+    const totalMoney = document.querySelector('.total-money');
+
+    let elementName = document.querySelector('input[name="name"]')
+    let elementPhone = document.querySelector('input[name="phone"]')
+    let elementEmail = document.querySelector('input[name="email"]')
+    let elementAddress = document.querySelector('input[name="address"]')
+    let elementNote = document.querySelector('input[name="note"]')
+    let elementProvince = document.querySelector('select[name="province"]');
+    let elementDistrict = document.querySelector('select[name="district"]');
+
+    let elementDiscount = document.querySelector('input[name="discount"]');
+
+    let btnPayment = document.querySelector('.btn-payment')
+    let btnApplyCodeDiscount = document.querySelector('.btn-apply-code-discount');
+
+
+
+    fetch('https://provinces.open-api.vn/api/?depth=2')
+        .then(response => response.json())
+        .then(data => {
+            listProvince = data;
+            const html1 = listProvince.map(value => (
+                `<option value=${value.codename}>${value.name}</option>`
+            ))
+            const html2 = listProvince[0].districts.map(value => (
+                `<option value=${value.codename}>${value.name}</option>`
+            ))
+            elementProvince.innerHTML = html1.join('');
+            elementDistrict.innerHTML = html2.join('');
+            return data;
+        })
+        .catch(err => console.log("Lỗi"));
+
+    elementProvince.onclick = (e) => {
+        console.log(e.target.value)
+        renderDistricts(e.target.value);
+    }
+
+    renderDistricts = (codename) => {
+        listProvince.map(value => {
+            if (value.codename === codename) {
+                console.log(value);
+                const html = value.districts.map(value => (
+                    `<option value=${value.codename}>${value.name}</option>`
+                ))
+                elementDistrict.innerHTML = html.join('');
+            }
+        })
+    }
+
+    renderListCart = () => {
+        let html123 = cartUser.map(value => (
+            `
+            <div style="margin-bottom: 30px" class="row">
+                                    <div class="col-4">
+                                        <img src="${value.product.imgUrl}"
+                                            class="img-thumbnail" alt="...">
+                                    </div>
+                                    <div class="col-8">
+                                        <div class="row">
+                                            <div class="col-8">
+                                                <a style="text-decoration: none; color: black; font-weight: 600;"
+                                                    href="#">${value.product.name}</a>
+                                                <p style="font-size: .8rem;">Địa danh: ${value.product.location}</p>
+                                                <div class="customize-raise-reduce" style="">
+                                                    <span onclick="reduceQuantity('${value.product.productID}')">
+                                                        <i class="fas fa-minus"></i>
+                                                    </span>
+                                                    <input name="${value.product.productID}" value='${value.quantity}' type="number">
+                                                    <span onclick="raiseQuantity('${value.product.productID}')">
+                                                        <i class="fas fa-plus"></i>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div class="col-4 customize-price-product">
+                                                <div>
+                                                    <button type="button" onclick="DeleteProduct('${value.product.productID}')" class="btn-close" aria-label="Close"></button>
+                                                </div>
+                                                <div>
+                                                    <div style="font-weight: 700">${value.product.currentPrice.toLocaleString()}đ</div>
+                                                    <div style="text-decoration: line-through">${value.product.sellPrice.toLocaleString()}đ</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+            `
+        ))
+        if (cartUser.length == 0) {
+            elementRenderListProduct.innerHTML = `
+            <div style="border-bottom: 1px #00000029 solid; margin-top: 10px;" class="col-10 offset-1">
+                <div style="text-align: center; padding-bottom: 30px;" class="row">
+                    <h4>Giỏ hàng trống</h4>
+                </div>
+            </div>
+            `
+        } else {
+            elementRenderListProduct.innerHTML = html123.join('');
+        }
+        console.log(html123)
+
+    }
+
+    reduceQuantity = async (productID) => {
+        try {
+            cartUser.map(value => {
+                if (value.product.productID === productID) {
+                    if (value.quantity > 1) {
+                        value.quantity -= 1;
+                    }
+                }
+            })
+            await axios.post(`http://localhost:3000/cart/update-cart-user`, {
+                username: 'lngthinphc@gmail.com',
+                listProduct: cartUser
+            })
+                .then(res => {
+                    renderProduct()
+                    renderQuantity()
+                    renderQuantityTotal()
+                    renderListCart()
+                    renderTotalMoney()
+                })
+                .catch(err => {
+                    cartUser.map(value => {
+                        if (value.product.productID === productID) {
+                            value.quantity += 1;
+                        }
+                    })
+                })
+        } catch (e) {
+            console.log(e)
+        }
+    }
+
+    raiseQuantity = async (productID) => {
+        try {
+            cartUser.map(value => {
+                if (value.product.productID === productID) {
+                    value.quantity += 1;
+                }
+            })
+            await axios.post(`http://localhost:3000/cart/update-cart-user`, {
+                username: 'lngthinphc@gmail.com',
+                listProduct: cartUser
+            })
+                .then(res => {
+                    renderProduct()
+                    renderQuantity()
+                    renderQuantityTotal()
+                    renderListCart()
+                    renderTotalMoney()
+                })
+                .catch(err => {
+                    cartUser.map(value => {
+                        if (value.product.productID === productID) {
+                            value.quantity -= 1;
+                        }
+                    })
+                })
+        } catch (e) {
+            console.log(e)
+        }
+    }
+
+    DeleteProduct = async (productID) => {
+        try {
+            cartUser = cartUser.filter(value => {
+                return value.product.productID !== productID
+            })
+            await axios.post(`http://localhost:3000/cart/update-cart-user`, {
+                username: 'lngthinphc@gmail.com',
+                listProduct: cartUser
+            })
+                .then(res => {
+                    renderProduct()
+                    renderQuantity()
+                    renderQuantityTotal()
+                    renderListCart()
+                    renderTotalMoney()
+                })
+                .catch(err => {
+                   
+                })
+        } catch (e) {
+            console.log(e)
+        }
+    }
+
+    //Render total money
+    renderTotalMoney = (percent) => {
+        let giaTienTamTinh = 0;
+        let giaTienGiamGia = 0;
+        let giaGocBanDau = 0;
+        let tongTien = 0;
+        let tienShip = 0;
+        cartUser.forEach(value => {
+            giaTienTamTinh += value.product.currentPrice * value.quantity;
+            giaGocBanDau += value.product.currentPrice * value.quantity;
+        })
+
+        if (percent) {
+            giaTienGiamGia = giaTienTamTinh * percent / 100
+        }
+
+        if (giaTienTamTinh < 300000) {
+            tienShip = 30000
+        }
+
+        tongTien = giaTienTamTinh - giaTienGiamGia + tienShip;
+
+        tienShip == 0 ? ship.innerText = "Miễn phí" : ship.innerText = tienShip.toLocaleString() + 'đ'
+        tamTinh.innerText = giaTienTamTinh.toLocaleString() + 'đ'
+        maGiamGia.innerText = giaTienGiamGia.toLocaleString() + 'đ'
+        giaGoc.innerText = giaGocBanDau.toLocaleString() + 'đ'
+        totalMoney.innerText = tongTien.toLocaleString() + 'đ'
+    }
+
+
+    makeCode = (length) => {
+        var result = '';
+        var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        var charactersLength = characters.length;
+        for (var i = 0; i < length; i++) {
+            result += characters.charAt(Math.floor(Math.random() *
+                charactersLength));
+        }
+        return result;
+    }
+
+    //Handle 
+    btnPayment.onclick = async (e) => {
+        let elementPaymentMethod = document.querySelector('input[name="payment-method"]:checked')
+        let aElement = document.createElement('a');
+        aElement.setAttribute('href', "/login");
+        if (elementEmail.value == "") {
+            aElement.click();
+            showAlertMorriStore('alert-warning', 'Bạn cần đăng nhập !')
+        } else if (elementName.value.length == 0 || elementPhone.value.length == 0 || elementAddress.value.length == 0 || elementNote.value.length == 0) {
+            showAlertMorriStore('alert-warning', 'Nhập đầy đủ thông tin !')
+        } else {
+            if (elementPaymentMethod) {
+                let total = 0;
+                let totalFinal = 0;
+                let deliveryMoney = 0;
+                let discountMoney = 0
+                cartUser.forEach(value => {
+                    total += value.product.currentPrice * value.quantity;
+                })
+                if (discountUser) {
+                    discountMoney = total * discountUser.value / 100
+                }
+                if (total < 300000) {
+                    deliveryMoney = 30000
+                }
+                totalFinal = total - discountMoney + deliveryMoney;
+                let data = {
+                    recieptId: makeCode(6),
+                    name: elementName.value,
+                    phone: elementPhone.value,
+                    username: elementEmail.value,
+                    address: elementAddress.value,
+                    note: elementNote.value,
+                    province: elementProvince.value,
+                    district: elementDistrict.value,
+                    paymentMethod: elementPaymentMethod.value,
+                    listProduct: cartUser,
+                    total: total,
+                    totalFinal: totalFinal,
+                    deliveryMoney: deliveryMoney,
+                    coupon: discountUser ? discountUser : null,
+                    deliveryStatus: false,
+                }
+                await axios.post(`http://localhost:3000/cart/create-receipt`, { ...data })
+                    .then(res => {
+                        cartUser = []
+                        discountUser = null
+                        renderProduct()
+                        renderQuantity()
+                        renderQuantityTotal()
+                        renderListCart()
+                        renderTotalMoney()
+                        showAlertMorriStore('alert-success', 'Mua hàng thành công !')
+                    })
+                    .catch(err => {
+                        showAlertMorriStore('alert-warning', 'Mua hàng thất bại !')
+                    })
+            } else {
+                showAlertMorriStore('alert-warning', 'Chọn phương thức thanh toán !')
+            }
+        }
+    }
+
+    btnApplyCodeDiscount.onclick = async () => {
+        /*await axios.post(`http://localhost:3000/cart/add-product-to-cart`).then(res => {
+
+        }).catch(err=>{
+            
+        })*/
+        try {
+            await axios.post(`http://localhost:3000/cart/get-coupon`, {
+                couponCode: elementDiscount.value,
+            })
+                .then(res => {
+                    let nowTime = Date.now()
+                    let time = new Date(res.data.Coupon.exp)
+                    if (time - nowTime >= 0) {
+                        if (!res.data.Coupon.isUsed) {
+                            discountUser = res.data.Coupon
+                            renderTotalMoney(res.data.Coupon.value)
+                            showAlertMorriStore('alert-success', 'Sử dụng code thành công!')
+                        } else {
+                            showAlertMorriStore('alert-warning', 'Code dã được sử dụng !')
+                        }
+                    } else {
+                        showAlertMorriStore('alert-warning', 'Code đã hết hạn !')
+                    }
+                })
+                .catch(err => {
+                    if (err.response.data.message) {
+                        console.log(err.response.data.message)
+                        showAlertMorriStore('alert-warning', err.response.data.message)
+                    }
+                })
+        } catch (e) {
+            alert(e);
+        }
+    }
+</script>
