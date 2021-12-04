@@ -1,95 +1,243 @@
 <title>Home</title>
 <link rel="stylesheet" href="/css/home.css">
-<div class="header-home">
-    <h2 class="header-home__title">MORRI STORE</h2>
-    <h4>Mua sắm hòa lưu niệm thoải mái </h4>
-    <div class="header-home__search">
-        <form action="/search" method="get">
-            <input name="search" placeholder="Tìm kiếm sản phẩm tại đây" class="header-home__search-input" type="text">
-            <button type="submit" class="header-home__search-btn">
-                <i class="fas fa-search"></i>
-                Search
-            </button>
-        </form>
-    </div>
-    <div class="header-home__search-nearest container">
-        <div class="row justify-content-md-center gx-4">
-            <div class="col-3 ">
-                <div class="p-2 slider-item">TP.HCM</div>
+
+<div>
+    <div class="header-home">
+        <h2 class="header-home__title">MORRI STORE</h2>
+        <h4>Mua sắm hòa lưu niệm thoải mái </h4>
+        <div style="margin-bottom: 100px;" class="header-home__search">
+            <form action="/search" method="get">
+                <input name="search" placeholder="Tìm kiếm sản phẩm tại đây" class="header-home__search-input"
+                    type="text">
+                <button type="submit" class="header-home__search-btn">
+                    <i class="fas fa-search"></i>
+                    Search
+                </button>
+            </form>
+        </div>
+        {{!-- <div class="header-home__search-nearest container">
+            <div class="row justify-content-md-center gx-4">
+                <div class="col-3 ">
+                    <div class="p-2 slider-item">TP.HCM</div>
+                </div>
+                <div class="col-3 ">
+                    <div class="p-2 slider-item ">Vũng Tàu</div>
+                </div>
+                <div class="col-3 ">
+                    <div class="p-2  slider-item">An Giang</div>
+                </div>
+                <div class="col-3 ">
+                    <div class="p-2 slider-item ">Lâm Đồng</div>
+                </div>
+                <div class="col-3 ">
+                    <div class="p-2  slider-item ">Hà Nội</div>
+                </div>
+                <div class="col-3 ">
+                    <div class="p-2  slider-item">Quảng Ninh</div>
+                </div>
+                <div class="col-3 ">
+                    <div class="p-2  slider-item">Khánh Hòa</div>
+                </div>
             </div>
-            <div class="col-3 ">
-                <div class="p-2 slider-item ">Vũng Tàu</div>
+        </div> --}}
+        <div>
+            <!-- Slideshow container -->
+            <div class="slideshow-container">
+
+                <!-- Full-width images with number and caption text -->
+                <div class="mySlides fade">
+                    <div class="numbertext">1 / 5</div>
+                    <img src="/img/home-header/gift_1.png" style="width:100%">
+                    <div class="text">MORRI STORE</div>
+                </div>
+
+                <div class="mySlides fade">
+                    <div class="numbertext">2 / 5</div>
+                    <img src="/img/home-header/gift_2.png" style="width:100%">
+                    <div class="text">MORRI STORE</div>
+                </div>
+
+                <div class="mySlides fade">
+                    <div class="numbertext">3 / 5</div>
+                    <img src="/img/home-header/gift_3.png" style="width:100%">
+                    <div class="text">MORRI STORE</div>
+                </div>
+
+                <div class="mySlides fade">
+                    <div class="numbertext">4 / 5</div>
+                    <img src="/img/home-header/gift_4.png" style="width:100%">
+                    <div class="text">MORRI STORE</div>
+                </div>
+
+                <div class="mySlides fade">
+                    <div class="numbertext">5 / 5</div>
+                    <img src="/img/home-header/gift_5.png" style="width:100%">
+                    <div class="text">MORRI STORE</div>
+                </div>
+                <!-- Next and previous buttons -->
+                {{!-- <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+                <a class="next" onclick="plusSlides(1)">&#10095;</a> --}}
             </div>
-            <div class="col-3 ">
-                <div class="p-2  slider-item">An Giang</div>
-            </div>
-            <div class="col-3 ">
-                <div class="p-2 slider-item ">Lâm Đồng</div>
-            </div>
-            <div class="col-3 ">
-                <div class="p-2  slider-item ">Hà Nội</div>
-            </div>
-            <div class="col-3 ">
-                <div class="p-2  slider-item">Quảng Ninh</div>
-            </div>
-            <div class="col-3 ">
-                <div class="p-2  slider-item">Khánh Hòa</div>
+            <br>
+
+            <!-- The dots/circles -->
+            <div style="text-align:center">
+                <span class="dot" onclick="currentSlide(1)"></span>
+                <span class="dot" onclick="currentSlide(2)"></span>
+                <span class="dot" onclick="currentSlide(3)"></span>
+                <span class="dot" onclick="currentSlide(4)"></span>
+                <span class="dot" onclick="currentSlide(5)"></span>
             </div>
         </div>
     </div>
-    <div>
-        <!-- Slideshow container -->
-        <div class="slideshow-container">
 
-            <!-- Full-width images with number and caption text -->
-            <div class="mySlides fade">
-                <div class="numbertext">1 / 5</div>
-                <img src="/img/home-header/gift_1.png" style="width:100%">
-                <div class="text">MORRI STORE</div>
+    {{!-- Tỉnh thành --}}
+    <div class="grid wide container">
+        <div class="cook__heading">HOT HIT</div>
+        <div class="row">
+            <div class="col-lg-3 col-sm-6">
+                <div class="cook__card">
+                    <img class="cook__image" src="/img/dia-diem/hanoi.jpg" alt="">
+                    <div class="cook__title">
+                        <p class="cook__address">Hà Nội</p>
+                        <p class="cook__index">100 món</p>
+                    </div>
+                </div>
             </div>
-
-            <div class="mySlides fade">
-                <div class="numbertext">2 / 5</div>
-                <img src="/img/home-header/gift_2.png" style="width:100%">
-                <div class="text">MORRI STORE</div>
+            <div class="col-lg-3 col-sm-6">
+                <div class="cook__card">
+                    <img class="cook__image" src="/img/dia-diem/hcm.jpg" alt="">
+                    <div class="cook__title">
+                        <p class="cook__address">TP.HCM</p>
+                        <p class="cook__index">112 món</p>
+                    </div>
+                </div>
             </div>
-
-            <div class="mySlides fade">
-                <div class="numbertext">3 / 5</div>
-                <img src="/img/home-header/gift_3.png" style="width:100%">
-                <div class="text">MORRI STORE</div>
+            <div class="col-lg-3 col-sm-6">
+                <div class="cook__card">
+                    <img class="cook__image" src="/img/dia-diem/danang.jpg" alt="">
+                    <div class="cook__title">
+                        <p class="cook__address">Đà Nẵng</p>
+                        <p class="cook__index">70 món</p>
+                    </div>
+                </div>
             </div>
-
-            <div class="mySlides fade">
-                <div class="numbertext">4 / 5</div>
-                <img src="/img/home-header/gift_4.png" style="width:100%">
-                <div class="text">MORRI STORE</div>
+            <div class="col-lg-3 col-sm-6">
+                <div class="cook__card">
+                    <img class="cook__image" src="/img/dia-diem/cantho.jpg" alt="">
+                    <div class="cook__title">
+                        <p class="cook__address">Cần Thơ</p>
+                        <p class="cook__index">92 món</p>
+                    </div>
+                </div>
             </div>
-
-            <div class="mySlides fade">
-                <div class="numbertext">5 / 5</div>
-                <img src="/img/home-header/gift_5.png" style="width:100%">
-                <div class="text">MORRI STORE</div>
+            <div class="col-lg-3 col-sm-6">
+                <div class="cook__card">
+                    <img class="cook__image" src="/img/dia-diem/thonhiky.jpg" alt="">
+                    <div class="cook__title">
+                        <p class="cook__address">Thổ Nhị Kỳ</p>
+                        <p class="cook__index">104 món</p>
+                    </div>
+                </div>
             </div>
-
-
-            <!-- Next and previous buttons -->
-            {{!-- <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-            <a class="next" onclick="plusSlides(1)">&#10095;</a> --}}
-        </div>
-        <br>
-
-        <!-- The dots/circles -->
-        <div style="text-align:center">
-            <span class="dot" onclick="currentSlide(1)"></span>
-            <span class="dot" onclick="currentSlide(2)"></span>
-            <span class="dot" onclick="currentSlide(3)"></span>
-            <span class="dot" onclick="currentSlide(4)"></span>
-            <span class="dot" onclick="currentSlide(5)"></span>
+            <div class="col-lg-3 col-sm-6">
+                <div class="cook__card">
+                    <img class="cook__image" src="/img/dia-diem/phap.jpg" alt="">
+                    <div class="cook__title">
+                        <p class="cook__address">Pháp</p>
+                        <p class="cook__index">132 món</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-6">
+                <div class="cook__card">
+                    <img class="cook__image" src="/img/dia-diem/anh.jpg" alt="">
+                    <div class="cook__title">
+                        <p class="cook__address">Anh</p>
+                        <p class="cook__index">703 món</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-6">
+                <div class="cook__card">
+                    <img class="cook__image" src="/img/dia-diem/y.jpg" alt="">
+                    <div class="cook__title">
+                        <p class="cook__address">Ý</p>
+                        <p class="cook__index">922 món</p>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
-     
+    {{!-- Blog --}}
+    <div class="grid wide container">
+        <div class="cook__heading">BLOG - cẩm nang du lịch</div>
+        <div class="row">
+            <div class="col-lg-3 col-sm-6">
+                <div class="cook__blog-card">
+                    <img class="cook__blog-card-img"
+                        src="https://kayapati.com/demos/cooks/wp-content/uploads/sites/15/2014/04/slider3.jpg" alt="">
+                    <div class="cook__blog-card-address">
+                        <a href="">The Best Soft Chocolate Chip Cookies</a>
+                    </div>
+                    <p class="cook__blog-card-date">28 Tháng Ba, 2020</p>
+                    <p class="cook__blog-card-border"></p>
+                    <p class="cook__blog-card-description">These are the BEST chocolate chip cookies ever! I make them
+                        and they don’t last a day! Delicious!! ❤️ My fave chocolate chip recipe!! ❤️</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-6">
+                <div class="cook__blog-card">
+                    <img class="cook__blog-card-img"
+                        src="https://kayapati.com/demos/cooks/wp-content/uploads/sites/15/2014/04/slider3.jpg" alt="">
+                    <div class="cook__blog-card-address">
+                        <a href="">15 Minute Lo Mein</a>
+                    </div>
+                    <p class="cook__blog-card-date">28 Tháng Tư, 2020</p>
+                    <p class="cook__blog-card-border"></p>
+                    <p class="cook__blog-card-description">I made this recipe for dinner tonight! It was delicious and
+                        incredibly easy. It’s definitely going into the weeknight dinner rotation. Thanks!</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-6">
+                <div class="cook__blog-card">
+                    <img class="cook__blog-card-img"
+                        src="https://kayapati.com/demos/cooks/wp-content/uploads/sites/15/2014/04/slider3.jpg" alt="">
+                    <div class="cook__blog-card-address">
+                        <a href="">Spicy Shrimp Tacos with Garlic Cilantro Lime Slaw</a>
+                    </div>
+                    <p class="cook__blog-card-date">28 Tháng Ba, 2021</p>
+                    <p class="cook__blog-card-border"></p>
+                    <p class="cook__blog-card-description">These tacos are so fresh and delicious with just the right
+                        amount of heat to them. Great flavors and textures and super healthy too!</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-6">
+                <div class="cook__blog-card">
+                    <img class="cook__blog-card-img"
+                        src="https://kayapati.com/demos/cooks/wp-content/uploads/sites/15/2014/04/slider3.jpg" alt="">
+                    <div class="cook__blog-card-address">
+                        <a href="">Spicy Fish Taco Bowls with Cilantro Lime Slaw
+                        </a>
+                    </div>
+                    <p class="cook__blog-card-date">2 Tháng Mười, 2020</p>
+                    <p class="cook__blog-card-border"></p>
+                    <p class="cook__blog-card-description">I made these on Monday night- WOW WOW WOW!! What a creative
+                        take on the fish taco – officially added to our rotation of recipes. THANK YOU!!</p>
+                </div>
+            </div>
+        </div>
+        <div class="row blog__sign-in">
+            <div class="blog_sign-in-left">
+                <h1 class="blog__sign-in-left-title">Blog chia sẽ thức ăn ngon và lành mạnh</h1>
+                <p class="blog__sign-in-left-description">“Ăn Gì Review Nấy” chia sẻ ngay trên Blog để trải nghiệm ăn
+                    uống được tốt hơn. Ngoài ra, bạn còn thoải mái học được nhiều món ăn ngon</p>
+                <div class="btn blog__btn">Tìm hiểu ngay</div>
+            </div>
+            <div class="blog_sign-in-right"></div>
+        </div>
+    </div>
 </div>
 
 

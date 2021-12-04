@@ -183,3 +183,168 @@ h1 {
   width: 50%;
   margin-bottom: 30px;
 }
+
+
+/* Blog */
+.blog{
+  margin-left: 12px;
+  margin-right: 12px;
+}
+
+.cook__heading{
+  font-family: 'Quicksand', sans-serif;
+  font-size: 2rem;
+  font-weight: 700;
+  margin-top: 50px;
+  margin-bottom: 30px;
+  justify-content: center;
+  align-content: center;
+}
+
+.cook__blog-card{
+  overflow: hidden;
+  border-radius: 10px;
+  width: 100%;
+}
+
+.cook__blog-card-img{
+  object-fit: cover;
+  height: 30vmin;
+  min-height: 280px;   
+  border-radius: 10px;
+  image-rendering: pixelated;
+  width: 100%;
+  transform: scale(1);
+  transition: transform ease-in 0.25s;
+}
+
+.cook__blog-card-img:hover{
+  transform: scale(1.02);
+}
+
+.cook__blog-card-address{
+  margin-top: 10px;
+  /* height: 30px; */
+  font-size: 1.6rem;
+  font-weight: 900;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  display: block;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+}
+.cook__blog-card-address a {
+  color: var(--black-color);
+  text-decoration: none;
+}
+.cook__blog-card-address a:hover{
+  color:var(--primary-color);
+}
+
+.cook__blog-card-date{
+  font-size: 1rem;
+}
+.cook__blog-card-border{
+  width: 20%;
+  border-top: 3px solid #757575;
+}
+ 
+.blog__sign-in{
+  margin-top: 40px;
+  margin-bottom: 80px;
+  border-radius: 25px;
+  background-color: var(--primary-color);
+  background-color: #da254f9d;
+  height: 350px;
+  box-shadow: 1px 1px 5px #757575;
+  transform: scale(.98);
+  transition: transform ease-in 0.25s;
+}
+
+.blog_sign-in-left{
+  width: 50%;
+  background-image: linear-gradient(
+      90deg ,rgba(0, 0, 0, 0), rgba(160, 104, 104, 0.795));
+}
+
+.blog_sign-in-right{
+  background-image: url('https://kayapati.com/demos/cooks/wp-content/uploads/sites/15/2014/04/slider3.jpg');   
+  width: 50%;
+  object-fit: cover;
+  background-size: cover;
+  background-repeat: no-repeat;
+  image-rendering: pixelated;
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+}
+
+.blog__sign-in-left-title{
+  margin: 80px 60px 20px 60px;
+  font-size: 1.6rem;
+  color: var(--white-color);
+}
+
+.blog__sign-in-left-description{
+  margin: 0px 60px 20px 60px;
+  font-size: 1.2rem;
+  color: var(--white-color);
+}
+
+.blog__btn{
+  margin: 0px 60px 20px 60px;
+  font-size: 1.5rem;
+  font-weight: 500;
+  background-color: white;
+}
+
+/* Hott hit */
+.cook__heading{
+  font-family: 'Quicksand', sans-serif;
+  font-size: 2rem;
+  font-weight: 700;
+  margin-top: 50px;
+  margin-bottom: 30px;
+  justify-content: center;
+  align-content: center;
+}
+
+.cook__card{
+  width: 100%;
+  display: flex;
+  overflow: hidden;
+  height: 130px;
+  margin-bottom: 50px;
+}
+
+.cook__title{
+  margin: auto 0;
+}
+
+
+.cook__image{
+  overflow: hidden;
+  width: 50%;
+  border-radius: 20px;
+  margin-right: 20px;
+  object-fit: cover;
+  image-rendering: pixelated;
+  transform: scale(1);
+  transition: transform ease-in 0.25s;
+}
+
+.cook__address{
+  font-size: 1.4rem;
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+.cook__card:hover .cook__image{
+  transform: scale(1.02);
+}
+.cook__index{
+  font-size: 1rem;
+  font-weight: 300;
+}
+
