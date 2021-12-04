@@ -307,8 +307,8 @@
         console.log(fileName);
         const formData = new FormData();
         formData.append("file", fileName)
-        formData.append("upload_preset", "qqqhcaa3");
-        axios.post(`https://api.cloudinary.com/v1_1/databaseimg/image/upload`, formData)
+        formData.append("upload_preset", "phiroud");
+        axios.post(`https://api.cloudinary.com/v1_1/phiroud321/image/upload`, formData)
             .then(res => {
                 console.log("link", res.data.url);
             })
