@@ -357,11 +357,10 @@
     }
 
     async function addToCart() {
-        alert('Đang chạy axios')
         try{
             const data = {
                 email: localStorage.getItem('username'),
-                productID: '1', 
+                productID: '9', 
                 name: 'Iphone 1 promax', 
                 location: 'Hawai', 
                 province: 'Akihabara, Tokyo', 
@@ -376,7 +375,7 @@
                 rating: 4.3,
             };
             console.log("data", data);
-            await axios.post(`http://localhost:3000/product/add-to-cart`, data)
+            {{!-- await axios.post(`http://localhost:3000/product/add-to-cart`, data)
             .then(res => {
                 console.log("Save success");
                 alert("Lưu thành công")
@@ -389,7 +388,7 @@
                 }
                 console.log(err);
                 isAddOK = false;
-            })
+            }) --}}
             // Chạy các hàm refresh của bé Thiện
             
             // Cần làm
@@ -399,8 +398,45 @@
                         ...data
                     }
                 }
-            ) 
-            renderProduct()
+            )  --}}
+            
+            var isFound = false;
+            for(var i = 0 ; i < cartUser.length; i++)
+            {
+                if(cartUser[i].product.productID == data.productID)
+                {
+                    cartUser[i].quantity++;
+                    isFound = true;
+                    break;
+                }
+            }
+            
+            if(!isFound)
+            {
+                cartUser.push(
+                    {
+                        product: {
+                            productID: data.productID, 
+                            name: data.name, 
+                            location: data.location, 
+                            province: data.province, 
+                            quantity: data.quantity, 
+                            remain: data.remain,
+                            originalPrice: data.originalPrice,
+                            sellPrice: data.sellPrice,
+                            currentPrice: data.currentPrice,
+                            imgUrl: data.imgUrl,
+                            description: data.description,
+                            unit: data.unit,
+                            rating: data.rating,
+                        },
+                        quantity: 1,
+                    }
+                )
+            }
+
+            console.log("cartUser", cartUser);
+            {{!-- renderProduct()
             renderQuantity()
             renderQuantityTotal()
             renderListCart()
