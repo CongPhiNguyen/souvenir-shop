@@ -24,6 +24,7 @@
   },
   "homepage": "https://github.com/UIT19522006/souvenir-shop#readme",
   "dependencies": {
+    "@popperjs/core": "^2.11.0",
     "axios": "^0.23.0",
     "bcrypt": "^5.0.1",
     "config": "^3.3.6",

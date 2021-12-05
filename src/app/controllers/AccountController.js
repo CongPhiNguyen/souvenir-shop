@@ -3,6 +3,7 @@ const { json } = require("express/lib/response");
 const mongoose = require ('mongoose');
 const bcrypt = require('bcrypt');
 const User = require('../models/user');
+const Receipt = require('../models/receipt');
 
 module.exports.profile_get = (req, res) => {
     if (req.session.user) {
@@ -63,5 +64,53 @@ module.exports.profile_post = async (req, res) => {
     else {
         console.log('req.session.user null');
         res.render('404NotFound');
+    }
+}
+
+module.exports.receipt_get = async (req, res) => {
+    if (req.session.user) {
+        if (req.session.user.role === 'admin') {
+            res.render('adminReceipt');
+        }
+        else {
+            try {
+                const receiptList = await Receipt.find({ userCode: req.session.user.userCode }).sort({ createdAt: -1 }).lean();
+                if (receiptList) {
+                    console.log(receiptList);
+                    res.render('accountReceipt', { receipts: receiptList });
+                }
+                else {
+                    console.log('account receiptList null');
+                }
+            }
+            catch(err) {
+                console.log('account get receipt error');
+                console.log(err);
+            }
+        }
+    }
+    else res.render('404NotFound');
+}
+
+module.exports.receiptDetail_get = async (req, res) => {
+    console.log('receipt code: ', req.params.code);
+    try {
+        const receipt = await Receipt.findOne({ receiptId: req.params.code }).lean();
+        if (receipt) {
+            console.log(receipt);
+            if (receipt.userCode === req.session.user.userCode) {
+                res.render('accountReceiptDetail', { receipt: receipt });
+            }
+            else {
+                res.render('404NotFound');
+            }
+        }
+        else {
+            console.log('account receipt detail null');
+        }
+    }
+    catch(err) {
+        console.log('account receipt detail error');
+        console.log(err);
     }
 }
