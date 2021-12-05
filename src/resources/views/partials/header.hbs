@@ -16,7 +16,7 @@
             <div class="collapse navbar-collapse " id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item ">
-                        <a class="nav-link active home" href="/home">
+                        <a class="nav-link home {{#if active.Home}}active{{/if}}" href="/home">
                             <i class="fas fa-home"></i>
                             Trang chủ
                         </a>
@@ -71,7 +71,7 @@
                         </a>
                     </li> --}}
                     <li class="nav-item">
-                        <a class="nav-link {{#if active.SignUp}}active{{/if}}" href="/signup">
+                        <a class="nav-link" href="/signup">
                             <i class="fas fa-user"></i>
                             Đăng ký
                         </a>
@@ -88,12 +88,9 @@
 </header>
 
 <script type="text/javascript">
+    console.log("Home active", homeActive);
     var listCartProductScreen = JSON.parse(localStorage.getItem('listCart'))
     var cartUser
-
-    const active = document.querySelector('.active').outerText;
-    document.querySelector('.active').style.display = 'none'
-    {{!-- document.querySelector(`.${active}`).classList.add('active') --}}
     var AlertMorriStore = document.getElementById('display-alert-css');
     const elementProductLink = document.querySelector('.cart');
     const elementRenderProductCart = document.querySelector('.render-list-product');
@@ -102,7 +99,7 @@
     const elementQuantityProduct = document.querySelector('.quantity');
 
     getCart = async () => {
-        const username = 'lngthinphc@gmail.com'
+        const username = localStorage.getItem('username')
         try {
             const res = await fetch('/cart/get-cart-user', {
                 method: 'POST',

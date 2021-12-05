@@ -8,6 +8,7 @@ class CartController {
     async getCart(req, res) {
         const active = {
             type: 'cart',
+            Cart: true,
         }
         res.render('cart', { active });
     }

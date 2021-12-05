@@ -6,7 +6,7 @@ const { deleteOne, exists } = require("./../models/user");
 class LoginController {
     // [GET] /
     index(req, res) {
-        res.render('login', { layout: 'layout2.hbs' });
+        res.render('login', {layout: 'layout2.hbs' });
     }
     login(req, res) {
         let { username, password } = req.body;

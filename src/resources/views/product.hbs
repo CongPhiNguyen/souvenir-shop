@@ -375,7 +375,7 @@
                 rating: 4.3,
             };
             console.log("data", data);
-            {{!-- await axios.post(`http://localhost:3000/product/add-to-cart`, data)
+            await axios.post(`http://localhost:3000/product/add-to-cart`, data)
             .then(res => {
                 console.log("Save success");
                 alert("Lưu thành công")
@@ -388,17 +388,8 @@
                 }
                 console.log(err);
                 isAddOK = false;
-            }) --}}
+            })
             // Chạy các hàm refresh của bé Thiện
-            
-            // Cần làm
-            {{!-- cartUser.push(
-                {
-                    product: {
-                        ...data
-                    }
-                }
-            )  --}}
             
             var isFound = false;
             for(var i = 0 ; i < cartUser.length; i++)
@@ -436,15 +427,16 @@
             }
 
             console.log("cartUser", cartUser);
-            {{!-- renderProduct()
+            renderProduct()
             renderQuantity()
             renderQuantityTotal()
             renderListCart()
-            renderTotalMoney()  --}}
+            renderTotalMoney() 
         }
         catch(e)
         {
             alert(e);
+            console.log(e);
         }
     };
 </script>

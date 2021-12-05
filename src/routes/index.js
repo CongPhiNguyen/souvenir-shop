@@ -11,10 +11,10 @@ const { requireAuth, checkUser } = require('../app/middleware/AuthMiddleware');
 function route(app) {
     app.get('*', checkUser);
     app.get('/', (req, res) => {
-        res.render('home');
+        res.render('home',{ title: "Home" , active: {Home: true }});
     })
     app.get('/home', (req, res) => {
-        res.render('home');
+        res.render('home',{ title: "Home" , active: {Home: true }});
     })
     app.use('/product', productRouter);
     app.use('/cart', cartRouter);
