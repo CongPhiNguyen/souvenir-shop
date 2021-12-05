@@ -27,7 +27,7 @@ class LoginController {
                     const hashedPassword = data.password;
                     bcrypt.compare(password, hashedPassword).then(result => {
                         if (result) {
-                            res.redirect('home');
+                            res.redirect('home', { title: "Home" , active: {Home: true }});
                         } else {
                             req.session.message = {
                                 type: 'danger-custom',
