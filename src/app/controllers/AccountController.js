@@ -23,33 +23,55 @@ module.exports.profile_post = async (req, res) => {
         try {
             if (oldPassword === '' || newPassword === '') {
                 console.log('update user without updating password');
-                var updateUser = await User.findById(req.session.user._id);
-                updateUser.name = newName;
-                updateUser.phone = newPhone;
-                updateUser.mail = newEmail;
-                updateUser.address = newAddress;
-                updateUser.save().then(result => {
-                    res.locals.user = updateUser;
-                    req.session.user = updateUser;
+                // var updateUser = await User.findById(req.session.user._id);
+                // updateUser.name = newName;
+                // updateUser.phone = newPhone;
+                // updateUser.mail = newEmail;
+                // updateUser.address = newAddress;
+                // updateUser.save({ runValidators: true, context: 'query' }).then(result => {
+                //     res.locals.user = updateUser;
+                //     req.session.user = updateUser;
+                //     res.json({ info: { newName, newEmail, newPhone, newAddress } });
+                // });
+
+                await User.findOneAndUpdate(
+                    { userCode: req.session.user.userCode },
+                    { name: newName, phone: newPhone, mail: newEmail, address: newAddress },
+                    { runValidators: true, context: 'query' },
+                ).then(result => {
+                    res.locals.user = result;
+                    req.session.user = result;
                     res.json({ info: { newName, newEmail, newPhone, newAddress } });
                 });
             }
             else {
                 console.log('update user with updating password');
-                var updateUser = await User.findById(req.session.user._id);
-                const auth = await bcrypt.compare(oldPassword, updateUser.password);
+                // var updateUser = await User.findById(req.session.user._id);
+                const auth = await bcrypt.compare(oldPassword, req.session.user.password);
                 if (auth) {
-                    updateUser.name = newName;
-                    updateUser.phone = newPhone;
-                    updateUser.mail = newEmail;
-                    updateUser.address = newAddress;
+                    // updateUser.name = newName;
+                    // updateUser.phone = newPhone;
+                    // updateUser.mail = newEmail;
+                    // updateUser.address = newAddress;
+                    // const salt = await bcrypt.genSalt();
+                    // updateUser.password = await bcrypt.hash(newPassword, salt);
+                    // updateUser.save().then(result => {
+                    //     res.locals.user = updateUser;
+                    //     req.session.user = updateUser;
+                    //     res.json({ info: { newName, newEmail, newPhone, newAddress } });
+                    // });
                     const salt = await bcrypt.genSalt();
-                    updateUser.password = await bcrypt.hash(newPassword, salt);
-                    updateUser.save().then(result => {
-                        res.locals.user = updateUser;
-                        req.session.user = updateUser;
+                    const encryptedPassword = await bcrypt.hash(newPassword, salt);
+                    await User.findOneAndUpdate(
+                        { userCode: req.session.user.userCode },
+                        { name: newName, phone: newPhone, mail: newEmail, address: newAddress, password: encryptedPassword },
+                        { runValidators: true, context: 'query' },
+                    ).then(result => {
+                        res.locals.user = result;
+                        req.session.user = result;
                         res.json({ info: { newName, newEmail, newPhone, newAddress } });
                     });
+
                 }
                 else {
                     res.json({ error: { password: 'Incorrect Password' } });
