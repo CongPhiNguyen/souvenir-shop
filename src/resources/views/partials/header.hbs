@@ -87,8 +87,8 @@
     {{/if}}
 </header>
 
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script type="text/javascript">
-    var listCartProductScreen = JSON.parse(localStorage.getItem('listCart'))
     var cartUser
 
     const active = document.querySelector('.active').outerText;
@@ -101,28 +101,8 @@
     const listCart = JSON.parse(localStorage.getItem('listCart'));
     const elementQuantityProduct = document.querySelector('.quantity');
 
-    getCart = async () => {
-        const username = 'lngthinphc@gmail.com'
-        try {
-            const res = await fetch('/cart/get-cart-user', {
-                method: 'POST',
-                body: JSON.stringify({ username }),
-                headers: { 'Content-Type': 'application/json' }
-            }).then(res => res.json())
-                .then(data => {
-                    return data
-                })
-            cartUser = res.cart.listProduct
-            console.log(cartUser)
-            renderProduct()
-            renderQuantity()
-            renderQuantityTotal()
-            renderListCart()
-            renderTotalMoney()
-        } catch {
-        }
-    }
-    getCart()
+
+   
 
     //Render số lượng
     renderQuantity = () => {
@@ -169,7 +149,7 @@
             `
         ))
         if (cartUser.length == 0) {
-            elementRenderProductCart.innerHTML= `
+            elementRenderProductCart.innerHTML = `
             <div style="border-bottom: 1px #00000029 solid; margin-top: 10px;" class="col-10 offset-1">
                 <div style="text-align: center; padding-bottom: 30px;" class="row">
                     <h4>Giỏ hàng trống</h4>
