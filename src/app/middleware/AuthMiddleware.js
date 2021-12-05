@@ -26,15 +26,11 @@ const requireAuth1 = (req, res, next) => {
     jwt.verify(token, 'Morii Store super secret password', (err, decodedToken) => {
       if (err) {
         console.log(err.message);
-        res.redirect('/login');
-
       } else {
         console.log(decodedToken);
         next();
       }
     });
-  } else {
-    res.redirect('/login');
   }
 };
 

@@ -11,16 +11,7 @@ class Home1Controller {
         res.render('home' , {active});
     }
 
-    getDataUser(req, res) {
-        console.log('hello anh zai')
-        console.log(req.session.user);
-        res.status(201).send(
-            JSON.stringify({
-                status: 201,
-                dataUser: req.session.user,
-            })
-        );
-    }
+    
 
     renderHome(req, res) {
         const active = {

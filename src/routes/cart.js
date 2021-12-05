@@ -5,6 +5,7 @@ const CartController = require('../app/controllers/CartController');
 const { requireAuth, requireAuth1 } = require('../app/middleware/AuthMiddleware');
 
 
+router.get('/get-data-user', requireAuth1 ,CartController.getDataUser);
 router.post('/update-cart-user', CartController.updateCartUser);
 router.post('/delete-product-from-cart' , CartController.deleteProductFromCart)
 router.post('/add-product-to-cart', CartController.addProductToCart)
