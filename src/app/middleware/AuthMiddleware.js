@@ -53,10 +53,10 @@ const checkUser = (req, res, next) => {
         res.locals.user = user;
         console.log('checkUser user not null');
         console.log(user);
-        console.log('res.locals.user');
-        console.log(res.locals.user);
-        console.log('req.session.user');
-        console.log(req.session.user);
+        // console.log('res.locals.user');
+        // console.log(res.locals.user);
+        // console.log('req.session.user');
+        // console.log(req.session.user);
         next();
       }
     });

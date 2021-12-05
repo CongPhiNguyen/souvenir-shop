@@ -124,25 +124,33 @@
 					const mail = signupForm.mail.value;
 					const phone = signupForm.phone.value;
 
-                    console.log(name);
-
 					try {
-						const res = await fetch('/signup', {
-							method: 'POST',
-							body: JSON.stringify({ username, password, confirmPassword, name, phone, mail }),
-							headers: {'Content-Type': 'application/json'}
-						});
-						const data = await res.json();
-						if (data.errors) {
-							usernameError.textContent = data.errors.username;
-							passwordError.textContent = data.errors.password;
-							confirmPasswordError.textContent = data.errors.confirmPassword;
-							nameError.textContent = data.errors.name;
-							mailError.textContent = data.errors.mail;
-							phoneError.textContent = data.errors.phone;
+						if (password.length < 6) {
+							passwordError.textContent = 'Minimum password length is 6 characters';
 						}
-						if (data.user) {
-							location.assign('/');
+						else if (password !== confirmPassword) {
+							confirmPasswordError.textContent = 'Password does not match';
+						}
+						else {
+							const res = await fetch('/signup', {
+								method: 'POST',
+								body: JSON.stringify({ username, password, name, phone, mail }),
+								headers: {'Content-Type': 'application/json'}
+							});
+							const data = await res.json();
+							if (data.errors) {
+								usernameError.textContent = data.errors.username;
+								passwordError.textContent = data.errors.password;
+								nameError.textContent = data.errors.name;
+								mailError.textContent = data.errors.mail;
+								phoneError.textContent = data.errors.phone;
+							}
+							else if (data.user) {
+								console.log('sign up successful');
+								location.assign('/');
+								// Lưu vô localStorage username và hashpassWord
+								localStorage.setItem("username", username);
+							}
 						}
 					}
 					catch (err) {

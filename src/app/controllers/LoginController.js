@@ -6,7 +6,7 @@ const { deleteOne, exists } = require("./../models/user");
 class LoginController {
     // [GET] /
     index(req, res) {
-        res.render('login', { layout: 'layout2.hbs' });
+        res.render('login', {layout: 'layout2.hbs' });
     }
     login(req, res) {
         let { username, password } = req.body;
@@ -27,7 +27,7 @@ class LoginController {
                     const hashedPassword = data.password;
                     bcrypt.compare(password, hashedPassword).then(result => {
                         if (result) {
-                            res.redirect('home');
+                            res.redirect('home', { title: "Home" , active: {Home: true }});
                         } else {
                             req.session.message = {
                                 type: 'danger-custom',

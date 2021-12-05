@@ -9,6 +9,7 @@ class CartController {
         console.log(req.session.user);
         const active = {
             type: 'cart',
+            Cart: true,
         }
         res.render('cart', { active, user: req.session.user });
     }
