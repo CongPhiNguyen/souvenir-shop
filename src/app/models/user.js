@@ -1,5 +1,6 @@
-const mongoes = require ('mongoose');
-const Schema = mongoes.Schema;
+const mongooes = require ('mongoose');
+const uniqueValidator = require('mongoose-unique-validator');
+const Schema = mongooes.Schema;
 const bcrypt = require('bcrypt');
 
 const userSchema = new Schema({
@@ -12,12 +13,10 @@ const userSchema = new Schema({
         type: String,
         required: [true, 'Please enter a username'],
         unique: true,
-        lowercase: true,
     },
     password: {
         type: String,
         required: [true, 'Please enter a password'],
-        minlength: [6, 'Minimum password length is 6 characters'],
     },
     name: {
         type: String,
@@ -29,7 +28,6 @@ const userSchema = new Schema({
     },
     mail: {
         type: String,
-        required: [true, 'Please enter your email'],
     },
     role: {
         type: String,
@@ -42,6 +40,7 @@ const userSchema = new Schema({
         type: String
     }
 });
+userSchema.plugin(uniqueValidator);
 
 // static method to login user
 userSchema.statics.login = async function(username, password) {
@@ -56,5 +55,5 @@ userSchema.statics.login = async function(username, password) {
     throw Error('Incorrect username');
 };
 
-const user = mongoes.model('user', userSchema);
+const user = mongooes.model('user', userSchema);
 module.exports = user;

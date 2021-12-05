@@ -5,19 +5,15 @@ const bcrypt = require('bcrypt');
 const User = require('../models/user');
 
 module.exports.profile_get = (req, res) => {
-
-    if (req.session.user) console.log('req.session.user not null');
-    else console.log('req.session.user null');
-
     if (req.session.user) {
-        if (res.locals.user.role === 'admin') {
+        if (req.session.user.role === 'admin') {
             // res.render('adminProfile');
         }
         else {
             res.render('accountProfile');
         }
     }
-    else res.render('accountProfile');
+    else res.render('404NotFound');
 }
 
 module.exports.profile_post = async (req, res) => {
