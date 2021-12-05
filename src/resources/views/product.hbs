@@ -53,8 +53,9 @@
         </button>
         {{!-- Phần của product --}}
         <div class="product-container row">
-            <div class="product-image col-md-4">
-                <img class="product-image-1" src="/img/figure/figure1.jfif" alt="">    
+            <div class="product-image col-md-4" onclick="changePictureModal()">
+                <img class="product-current-img" src="/img/figure/figure1.jfif" alt="">
+                {{!-- <img class="product-image-1" src="/img/figure/figure1.jfif" alt="">     --}}  
             </div>
             <div class="product-info col-md-8">
                 <div class="product-name">Figure Makise Kurisu trong visual novel Stein;Gate</div>
@@ -251,16 +252,54 @@
                 </ul>
             </div>
         </div>
+
+        {{!-- Đây là phần modal --}}
+        <!-- Modal -->
+        <div class="picture-modal d-none" id="pictureModal">
+            <div class="picture-modal-dialog" onclick="changePictureModal()">
+                <div class="modal-content picture-modal-container">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Product picture viewer</h5>
+                        <button type="button" class="btn-close" onclick="changePictureModal()"   aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body row">
+                        <div class="product-image col-8 modal-image">
+                            <img class="product-current-img" src="/img/figure/figure1.jfif" alt="">
+                            {{!-- <img class="product-image-1" src="/img/figure/figure1.jfif" alt="">     --}}  
+                        </div>
+                    </div>
+                    <div class="modal-footer image-modal-footer">
+                        <button type="button" class="btn btn-secondary btn-close-modal" onclick="changePictureModal()">Close</button>
+                        {{!-- <button type="button" class="btn btn-primary">Save changes</button> --}}
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script>
     var imageName = "Image chưa được thay đổi";
+    var modalContainer = document.querySelector('.modal-content.picture-modal-container');
+    modalContainer.addEventListener('click', function (event)
+    {
+        event.stopPropagation();
+    });
     //{{!-- const dropdownStatusButton = document.querySelector('.btn-dropdown-status'); --}}
     function clickFastNavbar(message) {
         alert(message);
     }
     //{{!-- const addCartButton = document.querySelector('.btn-add-to-cart'); --}}
+    function changePictureModal(){
+        
+        var pictureModal = document.querySelector('#pictureModal');
+        if(pictureModal.classList.contains('d-none')){
+            if(window.innerWidth >=800)
+                pictureModal.classList.remove('d-none');
+        }
+        else pictureModal.classList.add('d-none');
+    }
+
     async function addProduct() {
         alert('Đang chạy axios')
         try{
