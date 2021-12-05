@@ -123,6 +123,12 @@ h1 {
     margin-top: -4px;
 }
 
+/* Product Manager Screen */
+.product-manager-title {
+    padding: 20px
+}
+
+
 /* Reposive fix */
 @media (max-width: 576px) {
     .product-image {

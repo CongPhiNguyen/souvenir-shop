@@ -19,6 +19,11 @@ class ProductController {
         res.render('product/editProductView', { title: "Product" , active: {Product: true }});
     }
 
+    editProductView(req, res){
+        // console.log('Đang chạy ở trên Index', 'req.body', req.body)
+        res.render('product/productManager', { title: "Product" , active: {Product: true }});
+    }
+
     async addProduct(req, res) {
         console.log('Chạy ở dưới add product', 'req.body', req.body)
         var productInfo = new Product({
@@ -41,6 +46,22 @@ class ProductController {
             // console.log(productInfo);
             res.status(200).json({ productInfo: productInfo });
         });
+    }
+
+    async getProduct(req, res) {
+        // console.log("Chạy được vô get ở database rồi")
+        Product.find({})
+            .exec()
+            .then((data) => {
+                res.status(200).send(
+                    JSON.stringify({
+                        data,
+                    })
+                );
+            })
+            .catch((err) => {
+                res.status(404).send(err);
+            });
     }
 
     async updateProduct(req, res) {

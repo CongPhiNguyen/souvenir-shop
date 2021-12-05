@@ -25,6 +25,9 @@
         <a class="add-product-button" href="product/update-product-view">
             Edit Product 
         </a>
+        <a class="add-product-button" href="product/manager-view">
+            Product Manager 
+        </a>
         {{!-- Phần breadscrum --}}
         <div class="breadscrum">
             <ol class='breadscrum-list'>    
@@ -430,8 +433,8 @@
             renderProduct()
             renderQuantity()
             renderQuantityTotal()
-            renderListCart()
-            renderTotalMoney() 
+            {{!-- renderListCart()
+            renderTotalMoney()  --}}
         }
         catch(e)
         {
