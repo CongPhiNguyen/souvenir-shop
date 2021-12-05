@@ -21,7 +21,7 @@ const handleErrors = (err) => {
     }
   
     // duplicate username error
-    if (err.code === 11000) {
+    if (err.message.includes('expected `username` to be unique')) {
         errors.username = 'Username already registered';
         return errors;
     }
@@ -81,18 +81,20 @@ module.exports.signup_get = (req, res) => {
 
 module.exports.signup_post = async (req, res) => {
 
-    const { username, password, confirmPassword, name, phone, mail } = req.body;
+    const { username, password, name, phone, mail } = req.body;
 
     try {
-        if (password != confirmPassword) throw Error('Password does not match');
         const salt = await bcrypt.genSalt();
         encryptedPassword = await bcrypt.hash(password, salt);
         const user = await User.create({ role: 'customer', userCode: generateUserCode(), username, password: encryptedPassword, name, phone, mail, address: '', avatar: '' });
         const token = createToken(user._id);
         res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 });
         res.status(201).json({ user: user._id });
+        console.log('sign up successful');
     }
     catch(err) {
+        console.log('sign up post error');
+        console.log(err);
         const errors = handleErrors(err);
         res.status(400).json({ errors });
     }
