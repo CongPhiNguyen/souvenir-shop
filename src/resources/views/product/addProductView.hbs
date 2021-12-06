@@ -50,13 +50,17 @@
                 <img class="product-image-1" src="/img/figure/figure1.jfif" alt="">    
             </div>
             <div class="product-info col-md-8">
-                <div class="product-name">Figure Makise Kurisu trong visual novel Stein;Gate</div>
+                <input type="text" class="product-name" name="productName"></input>
                 <div class="product-place">
                     <i class="fas fa-map-marker-alt"></i>
-                    <span class="product-location">Akihabara, Japan</span>
+                    <input class="product-location" name="location"></input>
                 </div>
                 <div class="product-price-sale">
-                    <div class="product-old-price">650.000vnd</div>
+                    <div class='import-price-input row' style='margin-top: 5px'>
+                        <div class='input-lable col-5'>Product import price</div>
+                        <input class="product-import-price col-4" style='margin-left: 8px'></input>
+                    </div>
+                    <div class="product-old-price">700.000vnd</div>
                     <div class="product-price">650.000vnd</div>
                     <div class="sale-percent">7%</div>
                 </div>
@@ -75,11 +79,12 @@
                     <i class="product-rating-icon fas fa-star"></i>
                 </div>
                 <div class="quantity-choose">
-                    <div class="quantity-chose-title">Chọn số lượng</div>
+                    <div class="quantity-chose-title">Chọn số lượng nhập</div>
                     <div class="input-group bootstrap-touchspin">
                         <span class="input-group-addon bootstrap-touchspin-prefix" style="display: none;"></span>
-                        <input type="number" name="qty" id="quantity_wanted" value="1" class="input-group form-control" min="1" aria-label="Quantity" style="display: block;">
+                        <input type="number" name="productQuantity" value="1" class="input-group form-control" min="1" aria-label="Quantity" style="display: block;">
                         <span class="input-group-addon bootstrap-touchspin-postfix" style="display: none;"></span><span class="input-group-btn-vertical">
+                        
                         <button class="btn btn-touchspin js-touchspin bootstrap-touchspin-up" type="button">
                             <i class="material-icons touchspin-up"></i>
                         </button><button class="btn btn-touchspin js-touchspin bootstrap-touchspin-down" type="button">
@@ -130,120 +135,6 @@
                 Akihabara has been undergoing major redevelopment over the years, including the renovation and expansion of Akihabara Station and the construction of new buildings in its proximity. Among these newly opened buildings were a huge Yodobashi electronics store and the Akihabara Crossfield, a business complex with the aim of promoting Akihabara as a center for global electronics technology and trade.
             </div>
         </div>
-        {{!-- <div class="rating-container">
-            <div class="title">Rating and review</div>
-            <div class="row">
-                <div class="review-heading">
-                    <div class="summary-review">
-                        <div class="review-num">5</div>
-                        <div class="star-represent">
-                            <i class="product-rating-icon fas fa-star"></i>
-                            <i class="product-rating-icon fas fa-star"></i>
-                            <i class="product-rating-icon fas fa-star"></i>
-                            <i class="product-rating-icon fas fa-star"></i>
-                            <i class="product-rating-icon fas fa-star"></i>
-                        </div>
-                        <div class="review-num">9 reviews</div>
-                        <div class="star-review-list">
-                            <div class="start-review-item">
-                                <i class="product-rating-icon fas fa-star"></i>
-                                <i class="product-rating-icon fas fa-star"></i>
-                                <i class="product-rating-icon fas fa-star"></i>
-                                <i class="product-rating-icon fas fa-star"></i>
-                                <i class="product-rating-icon fas fa-star"></i>
-                                <div class="percent-bar"></div>
-                                <div class="review-star-num">
-                                    9
-                                </div>
-                            </div>
-                            <div class="start-review-item">
-                                <i class="product-rating-icon fas fa-star"></i>
-                                <i class="product-rating-icon fas fa-star"></i>
-                                <i class="product-rating-icon fas fa-star"></i>
-                                <i class="product-rating-icon fas fa-star"></i>
-                                <i class="product-rating-icon fas fa-star"></i>
-                                <div class="percent-bar"></div>
-                                <div class="review-star-num">
-                                    0
-                                </div>
-                            </div>
-                            <div class="start-review-item">
-                                <i class="product-rating-icon fas fa-star"></i>
-                                <i class="product-rating-icon fas fa-star"></i>
-                                <i class="product-rating-icon fas fa-star"></i>
-                                <i class="product-rating-icon fas fa-star"></i>
-                                <i class="product-rating-icon fas fa-star"></i>
-                                <div class="percent-bar"></div>
-                                <div class="review-star-num">
-                                    0
-                                </div>
-                            </div>
-                            <div class="start-review-item">
-                                <i class="product-rating-icon fas fa-star"></i>
-                                <i class="product-rating-icon fas fa-star"></i>
-                                <i class="product-rating-icon fas fa-star"></i>
-                                <i class="product-rating-icon fas fa-star"></i>
-                                <i class="product-rating-icon fas fa-star"></i>
-                                <div class="percent-bar"></div>
-                                <div class="review-star-num">
-                                    0
-                                </div>
-                            </div>
-                            <div class="start-review-item">
-                                <i class="product-rating-icon fas fa-star"></i>
-                                <i class="product-rating-icon fas fa-star"></i>
-                                <i class="product-rating-icon fas fa-star"></i>
-                                <i class="product-rating-icon fas fa-star"></i>
-                                <i class="product-rating-icon fas fa-star"></i>
-                                <div class="percent-bar"></div>
-                                <div class="review-star-num">
-                                    0
-                                </div>
-                            </div>
-                            
-                        </div>
-                    </div>
-                    <div class="summary-filter">
-                        <div class="filter-title">Filter with:</div>
-                        <ul class="list-filter">
-                            <li class="list-filter-item">
-                                1 <i class="product-rating-icon fas fa-star"></i>
-                            </li>
-                            <li class="list-filter-item">
-                                2 <i class="product-rating-icon fas fa-star"></i>
-                            </li>
-                            <li class="list-filter-item">
-                                3 <i class="product-rating-icon fas fa-star"></i>
-                            </li>
-                            <li class="list-filter-item">
-                                4 <i class="product-rating-icon fas fa-star"></i>
-                            </li>
-                            <li class="list-filter-item">
-                                5 <i class="product-rating-icon fas fa-star"></i>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <ul class="review-item-list">
-                    <li class="review-item">
-                        <div class="review-item-container">
-                            <div class="avatar">Avata</div>
-                            <div class="name">Nguyễn Công Phi</div>
-                            <div class="rated-star">
-                                <i class="product-rating-icon fas fa-star"></i>
-                                <i class="product-rating-icon fas fa-star"></i>
-                                <i class="product-rating-icon fas fa-star"></i>
-                                <i class="product-rating-icon fas fa-star"></i>
-                                <i class="product-rating-icon fas fa-star"></i>
-                            </div>
-                            <div class="review-content">
-                                This is the best firgue I have had.. Kurisu is incredible beautiful.
-                            </div>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </div> --}}
     </div>
 </div>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
@@ -256,13 +147,27 @@
     //{{!-- const addCartButton = document.querySelector('.btn-add-to-cart'); --}}
     async function addProduct() {
         alert('Đang chạy axios')
+        var resultProduct;
+        //GenID by last productID +1
+        await axios.get(`http://localhost:3000/product/get-product`, {
+            params: {filter:{}}
+        })
+        .then(res => {
+            resultProduct = res.data.data;
+        })
+        .catch(err => {
+            alert(err)
+            console.log(err)
+            return;
+        })
+        var productIDGen = parseInt(resultProduct[resultProduct.length - 1].productID) + 1;
         try{
             const data = { 
-                productID: '1', 
-                name: 'Iphone 1 promax', 
-                location: 'Hawai', 
-                province: 'Akihabara, Tokyo', 
-                quantity: 123, 
+                productID: productIDGen, 
+                name: document.querySelector('input[name="productName"').value, 
+                location: document.querySelector('input[name="location"').value, 
+                province: document.querySelector('input[name="location"').value, 
+                quantity: document.querySelector('input[name="productQuantity"').value, 
                 remain: 12,
                 originalPrice: 120000,
                 sellPrice: 139000,
@@ -287,52 +192,6 @@
                 console.log(err);
                 isAddOK = false;
             })
-        }
-        catch(e)
-        {
-            alert(e);
-        }
-    };
-    async function addToCart() {
-        alert('Đang chạy axios')
-        try{
-            const data = {
-                email: localStorage.getItem('username'),
-                productID: '1', 
-                name: 'Iphone 1 promax', 
-                location: 'Hawai', 
-                province: 'Akihabara, Tokyo', 
-                quantity: 123, 
-                remain: 12,
-                originalPrice: 120000,
-                sellPrice: 139000,
-                currentPrice: 130000,
-                imgUrl: "https://res.cloudinary.com/databaseimg/image/upload/v1637735182/f8dxrubo9icgb5o5iyf2.jpg",
-                description: "Đây là sản phẩm mới nhất của apple. Không thể tin được, thật không thể tin được là apple lại nhảy từ 13 về 1",
-                unit: 'phone',
-                rating: 4.3,
-            };
-            console.log("data", data);
-            await axios.post(`http://localhost:3000/product/add-to-cart`, data)
-            .then(res => {
-                console.log("Save success");
-                alert("Lưu thành công")
-            })
-            .catch(err => {
-                alert(err);
-                if(err.response.data.message)
-                {
-                    alert(err.response.data.message);
-                }
-                console.log(err);
-                isAddOK = false;
-            })
-            // Chạy các hàm refresh của bé Thiện
-            {{!-- renderProduct()
-            renderQuantity()
-            renderQuantityTotal()
-            renderListCart()
-            renderTotalMoney() --}}
         }
         catch(e)
         {

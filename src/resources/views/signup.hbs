@@ -148,6 +148,8 @@
 							else if (data.user) {
 								console.log('sign up successful');
 								location.assign('/');
+								// Lưu vô localStorage username và hashpassWord
+								localStorage.setItem("username", username);
 							}
 						}
 					}

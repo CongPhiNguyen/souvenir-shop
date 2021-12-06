@@ -1,0 +1,149 @@
+<title>Order Detail</title>
+<link rel="stylesheet" href="/css/general.css">
+<link rel="stylesheet" href="/css/accountReceiptDetail.css">
+
+
+<div class="container-xl account-order-container">
+    <div class="row">
+        <div class="col-12 col-md-4 col-lg-3 my-3">
+            <div class="account-sidebar list-group">
+                <div class="d-flex justify-content-center align-items-end" style="height: 48px">
+                    <p class="bg-dark text-white px-1 m-0">Morii Store Member</p>
+                </div>
+                <div class="account-sidebar__user d-flex align-items-center">
+                    <div class="d-flex sidebar-user_name fw-bold text-wrap align-item-center">
+                        <i class="sidebar-user__icon fas fa-paw px-4"></i>
+                        <span>{{user.name}}</span>
+                    </div>
+                </div>
+                <div class="account-sidebar__itemlist">
+                    <a href="/account/profile" class="account-sidebar__item list-group-item list-group-item-action text-wrap">
+                        <i class="sidebar-item__icon fas fa-user-alt"></i>
+                        <span>Thông tin cá nhân</span>
+                    </a>
+                    <a href="/account/receipt" class="account-sidebar__item list-group-item list-group-item-action text-wrap">
+                        <i class="sidebar-item__icon fas fa-receipt"></i>
+                        <span class="sidebar-item__name">Danh sách đơn hàng</span>
+                    </a>
+                    <a href="#" class="account-sidebar__item list-group-item list-group-item-action text-wrap">
+                        <i class="sidebar-item__icon fas fa-envelope text-wrap"></i>
+                        <span class="sidebar-item__name">Gửi ý kiến cho ChicPet</span>
+                    </a>
+                    <a href="/logout" class="account-sidebar__item list-group-item list-group-item-action text-wrap">
+                        <i class="sidebar-item__icon fas fa-sign-out-alt"></i>
+                        <span class="sidebar-item__name">Thoát</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-md-8 col-lg-9 my-3">
+
+            <div class="order-detail-header text-center">
+                <h2 class="text-uppercase order-detail-header__title">Thông tin đơn hàng của bạn</h2>
+                <div class="my-3">
+                    Dưới đây là thông tin đơn hàng 
+                    <span class="order-detail-header__order-code">#{{receipt.receiptId}}</span>
+                    <span class="order-detail-header__order-time"> - {{toDateTimeString receipt.createdAt}}</span>
+                </div>
+                <div class="mb-4">
+                    <div class="order-detail-header__order-status-title mb-3">Trạng thái đơn hàng:</div>
+                    <span class="order-detail-header__order-status text--primary pb-2">{{receipt.deliveryStatus}}</span>
+                </div>
+            </div>
+            <div class="order-detail-service-table text-center">
+                <table class="table service-table table-borderless">
+                    <thead>
+                        <tr>
+                            <th scope="col-4" class="text-start align-middle" >Tên sản phẩm</th>
+                            <th scope="col-2" class="align-middle">Địa danh</th>
+                            <th scope="col-2" class="align-middle">Số lượng</th>
+                            <th scope="col-2" class="align-middle">Đơn giá</th>
+                            <th scope="col-2" class="align-middle">Thành tiền</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        {{#each receipt.listProduct}}
+                            <tr>
+                                <td class="text-start" style="width: 40%;">{{this.product.name}}</td>
+                                <td style="width: 15%;">{{this.product.location}}</td>
+                                <td style="width: 15%;">{{this.quantity}}</td>
+                                <td style="width: 15%;">{{this.product.currentPrice}}</td>
+                                <td style="width: 15%;">{{cal this.product.currentPrice '*' this.quantity}}</td>
+                            </tr>
+                        {{/each}}
+
+
+                        {{!-- <tr>
+                            <td class="text-start" style="width: 40%;">Cắt tỉa lông chó</td>
+                            <td style="width: 15%;">2</td>
+                            <td style="width: 15%;">150.000đ</td>
+                            <td style="width: 15%;">M</td>
+                            <td style="width: 15%;">300.000đ</td>
+                        </tr>
+                        <tr>
+                            <td class="text-start">Spa cho chó</td>
+                            <td>2</td>
+                            <td>150.000đ</td>
+                            <td>M</td>
+                            <td>300.000đ</td>
+                        </tr> --}}
+                        
+                    </tbody>
+                </table>
+            </div>
+            <div class="order-detail-total-table">
+                <table class="table total-table table-bordered border-white">
+                    <tbody>
+                        <tr>
+                            <td class="text-start table-light">Tổng giá trị sản phẩm</td>
+                            <td class="text-end table-light">{{receipt.total}}</td>
+                        </tr>
+                        <tr>
+                            <td class="text-start table-light">Voucher khuyến mãi</td>
+                            <td class="text-end table-light">{{receipt.discount}}</td>
+                        </tr>
+                        <tr>
+                            <td class="text-start table-light">Phí giao hàng</td>
+                            <td class="text-end table-light">{{receipt.deliveryMoney}}</td>
+                        </tr>
+                        <tr>
+                            <td class="text-start fw-bold">Tổng thanh toán</td>
+                            <td class="text-end fw-bold">{{receipt.totalFinal}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="order-detail-customer-info mt-4">
+                <p class="fw-bold my-3">
+                    Thông tin nhận hàng
+                </p>
+                <p class="my-3">
+                    Tên người nhận: 
+                    <span class="fw-bold">{{receipt.name}}</span>
+                </p>
+                <p class="my-3">
+                    Địa chỉ Email: 
+                    <span class="fw-bold">{{receipt.mail}}</span>
+                </p>
+                <p class="my-3">
+                    Số điện thoại: 
+                    <span class="fw-bold">{{receipt.phone}}</span>
+                </p>
+                <p class="my-3">
+                    Hình thức thanh toán: 
+                    <span class="fw-bold">{{receipt.paymentMethod}}</span>
+                </p>
+            </div>
+            <div class="row order-detail-note my-3">
+                <div class="col-2">
+                    Ghi chú:
+                </div>
+                <div class="col-8">
+                    {{receipt.note}}
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

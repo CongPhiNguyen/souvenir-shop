@@ -48,8 +48,8 @@
                     <a href="./signup" class="text-decoration-none"><small>Create account</small></a>
                 </div>
 			</div>
-
 			<script>
+
 				const loginForm = document.getElementById('form-login');
 				const usernameError = document.querySelector('.username-error');
 				const passwordError = document.querySelector('.password-error');
@@ -76,6 +76,8 @@
 						}
 						if (data.user) {
 							location.assign('/');
+							// Lưu vô localStorage username và hashpassWord
+							localStorage.setItem("username", username);
 						}
 					}
 					catch (err) {

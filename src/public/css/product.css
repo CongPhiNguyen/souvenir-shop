@@ -49,7 +49,13 @@ h1 {
 .product-image {
     border: 1px solid #333;
     border-radius: 12px;
-    
+    vertical-align: middle;
+}
+
+.product-current-img{
+    width: 100%;
+    height: 100%;   
+    object-fit: cover;
 }
 
 .product-image-1 {
@@ -71,6 +77,57 @@ h1 {
 .product-info .product-rating-average .product-rating-icon {
     color: #ffce4b;
 }
+
+.picture-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1055;
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+    outline: 0;
+}
+
+.picture-modal-dialog {
+    background-color: rgba(61, 56, 56, 0.2);
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: fixed;
+}
+
+.modal-content.picture-modal-container {
+    width: 60%;
+    height: 80%;
+    margin: auto;
+    margin-top: 5%;
+}
+
+.modal-body .product-image .product-current-img{
+    /* width: 60%; */
+    height: 100%;   
+    margin-left: auto;
+    margin-right: auto;  
+}
+
+.modal-body .product-image.modal-image{
+    width: 50%;
+    height: 100%;
+    border: 1px solid #ccc;
+}
+
+.modal-footer.image-modal-footer .btn-close-modal {
+    margin-top: -4px;
+}
+
+/* Product Manager Screen */
+.product-manager-title {
+    padding: 20px
+}
+
 
 /* Reposive fix */
 @media (max-width: 576px) {

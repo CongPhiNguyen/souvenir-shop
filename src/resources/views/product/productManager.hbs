@@ -1,0 +1,62 @@
+<title>Product</title>
+<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+<link rel="stylesheet" href="/css/product.css">
+
+<div class="wrapper">
+    <div class="container">
+        <div class="row">
+            <div class="product-manager-title col-12">
+                Product Manager
+            </div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">ID</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Quantity</th>
+                    </tr>
+                </thead>
+                <tbody id='product-manager-container'>
+                    
+                </tbody>
+            </table>
+        </div>    
+    </div>
+</div>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script>
+    // Get các sản phẩm từ database 
+    var productContainer = document.querySelector('#product-manager-container')
+    const data = {
+        filter: {}   
+    }
+    axios.get(`http://localhost:3000/product/get-product`, {
+        params: {...data}
+    })
+        .then(res => {
+            result = res.data.data;
+            console.log("result", result)
+            // Thêm các sản phẩm vào innerHTMl
+            var htmlForProduct = '';
+            for(var i = 0 ; i < result.length;i++)
+            {
+                htmlForProduct += 
+                `
+                <tr> 
+                    <th scope="row">${i+1}</th>
+                    <td>${result[i].productID}</td>
+                    <td>${result[i].name}</td>
+                    <td>${result[i].quantity}</td>
+                </tr>
+                `
+            }
+            {{!-- console.log("htmlProduct", htmlForProduct) --}}
+            productContainer.innerHTML = htmlForProduct;    
+        })
+        .catch(err => {
+            alert(err)
+            console.log(err)
+        })
+    
+</script>

@@ -5,15 +5,21 @@ class Home1Controller {
     index(req, res){
         const active = {
             type: 'home',
+            Home: true,
         }
-        res.render('home' , { active });
+        console.log("active", active)
+        res.render('home' , {active});
     }
+
+    
 
     renderHome(req, res) {
         const active = {
             type: 'home',
+            Home: true,
         }
-        res.render('home', {active});
+        console.log("active", active)
+        res.render('home', {active,});
     }
 }
 
