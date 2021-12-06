@@ -232,9 +232,10 @@
     }
 
     const showAlertMorriStore = (typeAlert, message) => {
-        AlertMorriStore.style.display = 'block'
-        AlertMorriStore.classList = `alert ${typeAlert}`
-        AlertMorriStore.innerText = message
+        console.log('fuck man, vô được cái show-alert rồi')
+        AlertMorriStore.style.display = 'block';
+        AlertMorriStore.classList = `alert ${typeAlert}`;
+        AlertMorriStore.innerText = message;
         setTimeout(() => { AlertMorriStore.style.display = 'none' }, 2000)
     }
 
