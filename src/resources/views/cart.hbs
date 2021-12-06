@@ -257,31 +257,39 @@
     }
 
 
-    {{!-- getCart = async () => {
-        const userCode = elementCode.value
-        try {
-            const res = await fetch('/cart/get-cart-user', {
-                method: 'POST',
-                body: JSON.stringify({ userCode }),
-                headers: { 'Content-Type': 'application/json' }
-            }).then(res => res.json())
-                .then(data => {
-                    return data
-                })
-            cartUser = res.cart.listProduct
-            console.log(cartUser)
+    getCart = async () => {
+        var newUserCode;
+        await axios.get(`http://localhost:3000/cart/get-data-user`)
+            .then(res => {
+                {{!-- console.log('res.data', res.data.dataUser.userCode) --}}
+                newUserCode = res.data.dataUser.userCode
+            })
+            .catch(err => {
+                console.log(err)
+            })
+        var resultCart;
+        await axios.post(`http://localhost:3000/cart/get-cart-user`, {userCode: newUserCode  })
+        .then(res => {
+            resultCart = res.data.cart;
+            cartUser = resultCart.listProduct;
+            console.log("resultCart", resultCart)
             renderProduct()
             renderQuantity()
             renderQuantityTotal()
             renderListCart()
             renderTotalMoney()
-        } catch {
-        }
+            
+        })
+        .catch(err => {
+            console.log(err)
+        })
+        
     }
     
-    getCart() --}}
+    getCart()
 
     renderListCart = () => {
+        console.log("cartUser", cartUser)
         let html123 = cartUser.map(value => (
             `
             <div style="margin-bottom: 30px" class="row">
@@ -330,10 +338,11 @@
         } else {
             elementRenderListProduct.innerHTML = html123.join('');
         }
-        console.log(html123)
+        console.log("html123", html123)
 
     }
 
+    renderListCart();
     reduceQuantity = async (productID) => {
         try {
             cartUser.map(value => {

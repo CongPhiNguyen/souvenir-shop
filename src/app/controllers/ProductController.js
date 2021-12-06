@@ -123,11 +123,13 @@ class ProductController {
     {
         console.log('Chạy ở dưới add to cart', 'req.body', req.body);
         // get các cái cart thử xem sao
-        var newI = await Cart.findOne({username: req.body.email, deleted: false});
+        var newI = await Cart.findOne({userCode: req.body.userCode, deleted: false});
+        console.log(newI)
         //Nếu không tìm thấy thì add vô
         if (newI == null ){
             var newCart = new Cart({
-                username: req.body.email,
+                userCode: req.body.userCode,
+                // usercode: 
                 listProduct: [
                     {
                         product: {
@@ -195,7 +197,7 @@ class ProductController {
                 )
             }
             Cart.findOneAndUpdate(
-                {username: req.body.email, deleted: false},
+                {userCode: req.body.userCode, deleted: false},
                 {
                     $set: {
                         listProduct: currentListProduct
