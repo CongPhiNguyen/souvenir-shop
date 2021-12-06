@@ -6,7 +6,8 @@
 <div class="container-xl account-order-container">
     <div class="row">
         <div class="col-12 col-md-4 col-lg-3 my-3">
-            <div class="account-sidebar list-group">
+            {{> accountSidebar}}
+            {{!-- <div class="account-sidebar list-group">
                 <div class="d-flex justify-content-center align-items-end" style="height: 48px">
                     <p class="bg-dark text-white px-1 m-0">Morri Store Member</p>
                 </div>
@@ -34,7 +35,7 @@
                         <span class="sidebar-item__name">Thoát</span>
                     </a>
                 </div>
-            </div>
+            </div> --}}
         </div>
         <div class="col-12 col-md-8 col-lg-9 my-3">
             <h4 class="text-uppercase mb-4 mt-4">Danh sách đơn hàng</h4>
@@ -140,3 +141,8 @@
         </div>
     </div>
 </div>
+
+<script>
+    const accountSidebarItem_Receipt = document.getElementById('account_sidebar__receipt');
+    accountSidebarItem_Receipt.classList.add('account-sidebar__item--active');
+</script>
