@@ -7,30 +7,38 @@
                 <h3>Thông tin nhận hàng</h3>
                 <form action="">
                     <div class="row">
+                        <div style="display: none" class="col-6">
+                            <div class="form-floating mb-3">
+                                <input type="text" name="userCode" value="{{#if user.userCode}}{{user.userCode}}{{/if}}"
+                                    class="form-control" id="floatingInput" disabled>
+                                <label for="floatingInput">Họ tên</label>
+                            </div>
+                        </div>
                         <div class="col-6">
                             <div class="form-floating mb-3">
-                                <input type="text" name="name" class="form-control" id="floatingInput">
+                                <input type="text" name="name" value="{{#if user.name}}{{user.name}}{{/if}}"
+                                    class="form-control" id="floatingInput">
                                 <label for="floatingInput">Họ tên</label>
                             </div>
                         </div>
                         <div class="col-6">
                             <div class="form-floating mb-3 ">
-                                <input type="number" name="phone" class="form-control" id="floatingInput"
-                                    placeholder="name@example.com">
+                                <input type="number" name="phone" value="{{#if user.phone}}{{user.phone}}{{/if}}"
+                                    class="form-control" id="floatingInput" placeholder="name@example.com">
                                 <label for="floatingInput">Số điện thoại</label>
                             </div>
                         </div>
                         <div class="col-12">
                             <div class="form-floating mb-3">
-                                <input type="email" value="lngthinphc@gmail.com" name="email" class="form-control"
-                                    id="floatingInput" placeholder="name@example.com" disabled>
-                                <label for="floatingInput">Email</label>
+                                <input type="text" value="{{#if user.mail}}{{user.mail}}{{/if}}" name="mail"
+                                    class="form-control" id="floatingInput" placeholder="name@example.com" disabled>
+                                <label for="floatingInput">Mail</label>
                             </div>
                         </div>
                         <div class="col-12">
                             <div class="form-floating mb-3 ">
-                                <input type="text" name="address" class="form-control" id="floatingInput"
-                                    placeholder="">
+                                <input type="text" name="address" value="{{#if user.address}}{{user.address}}{{/if}}"
+                                    class="form-control" id="floatingInput" placeholder="">
                                 <label for="floatingInput">Địa chỉ</label>
                             </div>
                         </div>
@@ -117,7 +125,7 @@
                                 <h3 style="text-align: center; color: #ffba00;">Giỏ hàng của bạn</h3>
                             </div>
                             <div class="col-10 offset-1 render-list-product-cart">
-                               
+
                             </div>
                         </div>
                     </div>
@@ -198,9 +206,10 @@
     const ship = document.querySelector('.tien-ship')
     const totalMoney = document.querySelector('.total-money');
 
+    let elementCode = document.querySelector('input[name="userCode"]');
     let elementName = document.querySelector('input[name="name"]')
     let elementPhone = document.querySelector('input[name="phone"]')
-    let elementEmail = document.querySelector('input[name="email"]')
+    let elementEmail = document.querySelector('input[name="mail"]')
     let elementAddress = document.querySelector('input[name="address"]')
     let elementNote = document.querySelector('input[name="note"]')
     let elementProvince = document.querySelector('select[name="province"]');
@@ -234,6 +243,7 @@
         renderDistricts(e.target.value);
     }
 
+
     renderDistricts = (codename) => {
         listProvince.map(value => {
             if (value.codename === codename) {
@@ -245,6 +255,31 @@
             }
         })
     }
+
+
+    {{!-- getCart = async () => {
+        const userCode = elementCode.value
+        try {
+            const res = await fetch('/cart/get-cart-user', {
+                method: 'POST',
+                body: JSON.stringify({ userCode }),
+                headers: { 'Content-Type': 'application/json' }
+            }).then(res => res.json())
+                .then(data => {
+                    return data
+                })
+            cartUser = res.cart.listProduct
+            console.log(cartUser)
+            renderProduct()
+            renderQuantity()
+            renderQuantityTotal()
+            renderListCart()
+            renderTotalMoney()
+        } catch {
+        }
+    }
+    
+    getCart() --}}
 
     renderListCart = () => {
         let html123 = cartUser.map(value => (
@@ -309,8 +344,8 @@
                 }
             })
             await axios.post(`http://localhost:3000/cart/update-cart-user`, {
-                username: 'lngthinphc@gmail.com',
-                listProduct: cartUser
+                userCode: elementCode.value,
+                listProduct: cartUser,
             })
                 .then(res => {
                     renderProduct()
@@ -339,8 +374,8 @@
                 }
             })
             await axios.post(`http://localhost:3000/cart/update-cart-user`, {
-                username: 'lngthinphc@gmail.com',
-                listProduct: cartUser
+                userCode: elementCode.value,
+                listProduct: cartUser,
             })
                 .then(res => {
                     renderProduct()
@@ -367,7 +402,7 @@
                 return value.product.productID !== productID
             })
             await axios.post(`http://localhost:3000/cart/update-cart-user`, {
-                username: 'lngthinphc@gmail.com',
+                userCode: elementCode.value,
                 listProduct: cartUser
             })
                 .then(res => {
@@ -378,7 +413,7 @@
                     renderTotalMoney()
                 })
                 .catch(err => {
-                   
+
                 })
         } catch (e) {
             console.log(e)
@@ -417,7 +452,7 @@
 
     makeCode = (length) => {
         var result = '';
-        var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        var characters = '0123456789';
         var charactersLength = characters.length;
         for (var i = 0; i < length; i++) {
             result += characters.charAt(Math.floor(Math.random() *
@@ -453,10 +488,11 @@
                 }
                 totalFinal = total - discountMoney + deliveryMoney;
                 let data = {
-                    recieptId: makeCode(6),
+                    receiptId: makeCode(9),
                     name: elementName.value,
                     phone: elementPhone.value,
-                    username: elementEmail.value,
+                    userCode: elementCode.value,
+                    mail: elementEmail.value,
                     address: elementAddress.value,
                     note: elementNote.value,
                     province: elementProvince.value,
@@ -466,8 +502,9 @@
                     total: total,
                     totalFinal: totalFinal,
                     deliveryMoney: deliveryMoney,
+                    discount: totalFinal - deliveryMoney - total,
                     coupon: discountUser ? discountUser : null,
-                    deliveryStatus: false,
+                    deliveryStatus: 'chờ xác nhận',
                 }
                 await axios.post(`http://localhost:3000/cart/create-receipt`, { ...data })
                     .then(res => {
@@ -491,9 +528,7 @@
 
     btnApplyCodeDiscount.onclick = async () => {
         /*await axios.post(`http://localhost:3000/cart/add-product-to-cart`).then(res => {
-
         }).catch(err=>{
-            
         })*/
         try {
             await axios.post(`http://localhost:3000/cart/get-coupon`, {

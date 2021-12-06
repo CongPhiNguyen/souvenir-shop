@@ -6,11 +6,12 @@ const Receipt = require('../models/receipt')
 class CartController {
     // [GET] /home
     async getCart(req, res) {
+        console.log(req.session.user);
         const active = {
             type: 'cart',
             Cart: true,
         }
-        res.render('cart', { active });
+        res.render('cart', { active, user: req.session.user });
     }
 
     async getReturnPolicy(req, res) {
@@ -24,9 +25,9 @@ class CartController {
 
     async updateCartUser(req, res) {
         try {
-            const { username, listProduct } = req.body
+            const { userCode, listProduct } = req.body
             Cart.findOneAndUpdate({
-                'username': username
+                userCode
             },
                 {
                     $set: {
@@ -56,7 +57,7 @@ class CartController {
     }
 
     async addProductToCart(req, res) {
-        let username = 'lngthinphc@gmail.com';
+        let userCode = '675472127';
         let listCartabc = [
             {
                 product: {
@@ -113,7 +114,7 @@ class CartController {
                 quantity: 1
             },
         ]
-        const newCart = await Cart.create({ username: username, listProduct: listCartabc })
+        const newCart = await Cart.create({ userCode: userCode, listProduct: listCartabc })
         newCart.save()
             .then(result => {
                 res.status(201).redirect('cart')
@@ -124,8 +125,8 @@ class CartController {
     }
 
     async getCartUser(req, res) {
-        const { username } = req.body;
-        Cart.findOne({ username: username })
+        const { userCode } = req.body;
+        Cart.findOne({ userCode })
             .then(result => {
                 if (result) {
                     res.status(201).send(
@@ -160,20 +161,20 @@ class CartController {
     }
 
     async createReceipt(req, res) {
-        const { recieptId, name, phone, username, address, note, province, district, paymentMethod, listProduct, total, totalFinal, deliveryMoney, coupon, deliveryStatus } = req.body;
-        const newReceipt = await Receipt.create({ recieptId, name, phone, username, address, note, province, district, paymentMethod, listProduct, total, totalFinal, deliveryMoney, coupon, deliveryStatus })
+        let { receiptId, name, phone, userCode, mail,address, note, province, district, paymentMethod, listProduct, total, totalFinal, deliveryMoney, discount,coupon, deliveryStatus } = req.body;
+        const newReceipt = await Receipt.create({ receiptId, name, phone, userCode, mail,address, note, province, district, paymentMethod, listProduct, total, totalFinal, deliveryMoney, discount,coupon, deliveryStatus })
         newReceipt.save()
             .then(result => {
                 if (result) {
-                    Cart.findOneAndUpdate({
-                        'username': username
-                    },
-                        {
-                            $set: {
-                                listProduct: []
-                            }
-                        },
-                        { returnOriginal: false }).exec()
+                    // Cart.findOneAndUpdate({
+                    //     'userCode': userCode
+                    // },
+                    //     {
+                    //         $set: {
+                    //             listProduct: []
+                    //         }
+                    //     },
+                    //     { returnOriginal: false }).exec()
                     if (coupon) {
                         Coupon.findOneAndUpdate(
                             { 'couponCode': req.body.coupon.couponCode },
@@ -201,6 +202,24 @@ class CartController {
                     )
                 }
             })
+            .catch(err => {
+                res.status(403).send(
+                    JSON.stringify({
+                        status: 403,
+                        message: "Đặt hàng thất bại",
+                    })
+                )
+            })
+    }
+
+    async getDataUser(req, res) {
+        console.log(req.session.user);
+        res.status(201).send(
+            JSON.stringify({
+                status: 201,
+                dataUser: req.session.user,
+            })
+        );
     }
 }
 

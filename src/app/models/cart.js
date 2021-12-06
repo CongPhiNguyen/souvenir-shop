@@ -5,7 +5,7 @@ const Schema = mongoose.Schema;
 
 const Cart = new Schema(
     {
-        username: { type: String},
+        userCode: { type: String},
         listProduct : [],
     },
     {

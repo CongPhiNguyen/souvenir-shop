@@ -3,7 +3,6 @@ const User = require('../models/user');
 
 const requireAuth = (req, res, next) => {
   const token = req.cookies.jwt;
-
   // check json web token exists & is verified
   if (token) {
     jwt.verify(token, 'Morii Store super secret password', (err, decodedToken) => {
@@ -17,6 +16,21 @@ const requireAuth = (req, res, next) => {
     });
   } else {
     res.redirect('/login');
+  }
+};
+
+const requireAuth1 = (req, res, next) => {
+  const token = req.cookies.jwt;
+  // check json web token exists & is verified
+  if (token) {
+    jwt.verify(token, 'Morii Store super secret password', (err, decodedToken) => {
+      if (err) {
+        console.log(err.message);
+      } else {
+        console.log(decodedToken);
+        next();
+      }
+    });
   }
 };
 
@@ -49,4 +63,4 @@ const checkUser = (req, res, next) => {
 };
 
 
-module.exports = { requireAuth, checkUser };
+module.exports = { requireAuth, checkUser, requireAuth1 };

@@ -128,8 +128,8 @@
     </nav>
 </header>
 
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script type="text/javascript">
-    var listCartProductScreen = JSON.parse(localStorage.getItem('listCart'))
     var cartUser
     var AlertMorriStore = document.getElementById('display-alert-css');
     const elementProductLink = document.querySelector('.cart');
@@ -138,19 +138,25 @@
     const listCart = JSON.parse(localStorage.getItem('listCart'));
     const elementQuantityProduct = document.querySelector('.quantity');
 
-    getCart = async () => {
-        const username = localStorage.getItem('username')
+    getApiDataUser = async () => {
+        let userCode
+        await axios.get(`http://localhost:3000/cart/get-data-user`)
+            .then(res => {
+                userCode = res.dataUser.userCode
+            })
+            .catch(err => {
+                console.log('err')
+            })
         try {
             const res = await fetch('/cart/get-cart-user', {
                 method: 'POST',
-                body: JSON.stringify({ username }),
+                body: JSON.stringify({ userCode }),
                 headers: { 'Content-Type': 'application/json' }
             }).then(res => res.json())
                 .then(data => {
                     return data
                 })
             cartUser = res.cart.listProduct
-            console.log(cartUser)
             renderProduct()
             renderQuantity()
             renderQuantityTotal()
@@ -159,7 +165,8 @@
         } catch {
         }
     }
-    getCart()
+
+    getApiDataUser()
 
     //Render số lượng
     renderQuantity = () => {
@@ -206,7 +213,7 @@
             `
         ))
         if (cartUser.length == 0) {
-            elementRenderProductCart.innerHTML= `
+            elementRenderProductCart.innerHTML = `
             <div style="border-bottom: 1px #00000029 solid; margin-top: 10px;" class="col-10 offset-1">
                 <div style="text-align: center; padding-bottom: 30px;" class="row">
                     <h4>Giỏ hàng trống</h4>
@@ -232,39 +239,4 @@
     }
 
 
-    // SET COOKIE 
-    function setCookie(cname, cvalue, exdays) {
-        console.log('thành công')
-        const d = new Date();
-        d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
-        let expires = "expires=" + d.toUTCString();
-        document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
-    }
-
-    function getCookie(cname) {
-        let name = cname + "=";
-        let ca = document.cookie.split(';');
-        for (let i = 0; i < ca.length; i++) {
-            let c = ca[i];
-            while (c.charAt(0) == ' ') {
-                c = c.substring(1);
-            }
-            if (c.indexOf(name) == 0) {
-                return c.substring(name.length, c.length);
-            }
-        }
-        return '';
-    }
-
-    function checkCookie() {
-        let user = getCookie("username");
-        if (user != "") {
-            alert("Welcome again " + user);
-        } else {
-            user = prompt("Please enter your name:", "");
-            if (user != "" && user != null) {
-                setCookie("username", user, 365);
-            }
-        }
-    }
 </script>

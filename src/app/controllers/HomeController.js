@@ -11,6 +11,8 @@ class Home1Controller {
         res.render('home' , {active});
     }
 
+    
+
     renderHome(req, res) {
         const active = {
             type: 'home',
