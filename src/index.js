@@ -84,6 +84,21 @@ hbs.handlebars.registerHelper('ifCond', function (v1, operator, v2, options) {
   }
 });
 
+hbs.handlebars.registerHelper('cal', function (v1, operator, v2) {
+    switch (operator) {
+        case '+':
+            return (v1 + v2);
+        case '-':
+            return (v1 - v2);
+        case '*':
+            return (v1 * v2);
+        case '/':
+            return (v1 / v2);
+        default:
+            return -1;
+    }
+});
+
 hbs.handlebars.registerHelper('toDateTimeString', function (datetime) {
     var datetimeString = datetime.toDateString() + ' ' + datetime.toTimeString().substring(0, 5);
     return datetimeString;

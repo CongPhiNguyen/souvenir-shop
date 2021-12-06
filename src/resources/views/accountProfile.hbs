@@ -7,7 +7,7 @@
         <div class="col-12 col-md-4 col-lg-3 my-3">
             <div class="account-sidebar list-group">
                 <div class="d-flex justify-content-center align-items-end" style="height: 48px">
-                    <p class="bg-dark text-white px-1 m-0">ChicPet Member</p>
+                    <p class="bg-dark text-white px-1 m-0">Morri Store Member</p>
                 </div>
                 <div class="account-sidebar__user d-flex align-items-center">
                     <div class="d-flex sidebar-user_name fw-bold text-wrap align-item-center">
@@ -20,7 +20,7 @@
                         <i class="sidebar-item__icon fas fa-user-alt"></i>
                         <span>Thông tin cá nhân</span>
                     </a>
-                    <a href="/account/order" class="account-sidebar__item list-group-item list-group-item-action text-wrap">
+                    <a href="/account/receipt" class="account-sidebar__item list-group-item list-group-item-action text-wrap">
                         <i class="sidebar-item__icon fas fa-receipt"></i>
                         <span class="sidebar-item__name">Danh sách đơn hàng</span>
                     </a>
@@ -156,6 +156,7 @@
             else {
                 if (oldPassword === '') inputPasswordError.textContent = 'Vui lòng nhập mật khẩu cũ';
                 else if (newPassword === '') inputNewPasswordError.textContent = 'Vui lòng nhập mật khẩu mới';
+                else if (newPassword.length < 6) inputNewPasswordError.textContent = 'Mật khẩu phải có ít nhất 6 ký tự';
                 else if (confirmPassword === '') inputConfirmPasswordError.textContent = 'Vui lòng nhập lại mật khẩu';
                 else if (newPassword !== confirmPassword) {
                     inputConfirmPasswordError.textContent = 'Nhập lại mật khẩu không chính xác';

@@ -1,4 +1,6 @@
 <link rel="stylesheet" href="/css/responsive.css">
+<link rel="stylesheet" href="/css/header.css">
+
 
 {{!-- Alert --}}
 <div style="cursor: pointer;" id="display-alert-css" class="alert" role="alert">
@@ -70,12 +72,56 @@
                             Đăng nhập
                         </a>
                     </li> --}}
-                    <li class="nav-item">
-                        <a class="nav-link" href="/signup">
-                            <i class="fas fa-user"></i>
-                            Đăng ký
-                        </a>
-                    </li>
+                        {{#if user }}
+                            {{#ifCond user.role '==' 'admin'}}
+                                <li class="nav-item nav-item-account dropdown">
+                                    <a class="nav-link dropdown-toggle" href="/account" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <span>
+                                            <i class="fas fa-user"></i>
+                                        </span>
+                                        <span class="px-2">
+                                            {{user.name}}
+                                        </span>
+                                    </a>
+                                    
+                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                        <li><a class="dropdown-item dropdown-account-item" href="/account/profile">Thông tin cá nhân</a></li>
+                                        <li><a class="dropdown-item dropdown-account-item" href="/account/customer">Danh sách khách hàng</a></li>
+                                        <li><a class="dropdown-item dropdown-account-item" href="/account/receipt">Danh sách đơn hàng</a></li>
+                                        <li><a class="dropdown-item dropdown-account-item" href="/account/voucher">Danh sách voucher</a></li>
+                                        <li><a class="dropdown-item dropdown-account-item" href="/logout">Đăng xuất</a></li>
+                                    </ul>
+                                </li>
+                            {{else}}
+                                <li class="nav-item nav-item-account dropdown">
+                                    <a class="nav-link dropdown-toggle" href="/account" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <span>
+                                            <i class="fas fa-user"></i>
+                                        </span>
+                                        <span class="px-2">
+                                            {{user.name}}
+                                        </span>
+                                    </a>
+                                    
+                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                        <li><a class="dropdown-item dropdown-account-item" href="/account/profile">Thông tin cá nhân</a></li>
+                                        <li><a class="dropdown-item dropdown-account-item" href="/account/receipt">Danh sách đơn hàng</a></li>
+                                        <li><a class="dropdown-item dropdown-account-item" href="/logout">Đăng xuất</a></li>
+                                    </ul>
+                                </li>
+                            {{/ifCond}}
+                        {{else}}
+                            <li class="nav-item nav-item-account">
+                                <a class="nav-link" href="/login">
+                                    <span>
+                                        <i class="fas fa-user"></i>
+                                    </span>
+                                    <span class="px-2">
+                                        Login
+                                    </span>
+                                </a>
+                            </li>
+                        {{/if}}
                 </ul>
             </div>
         </div>

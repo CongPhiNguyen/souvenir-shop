@@ -1,0 +1,8 @@
+.dropdown-account-item {
+    line-height: 1.5;
+    padding: 8px 16px;
+}
+
+.dropdown-account-item:hover {
+    background-color: #f8f9fa;
+}

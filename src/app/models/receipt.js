@@ -9,7 +9,7 @@ const Receipt = new Schema(
         receiptId: { type: String},
         name: { type: String},
         phone: { type: String},
-        username: { type: String},
+        userCode: {type: String},
         address: { type: String},
         note: { type: String},
         province: { type: String},
