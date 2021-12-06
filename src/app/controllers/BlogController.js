@@ -41,7 +41,7 @@ module.exports.blog_get = async (req, res) => {
         if (blogList) {
            // console.log(blogList);
             blogListcache.set("blogList", blogList);
-            res.render('blog', { blogs: blogList });
+            res.render('blog', { blogs: blogList , active: {Blog: true}});
         }
         else {
             console.log('blogList Null');

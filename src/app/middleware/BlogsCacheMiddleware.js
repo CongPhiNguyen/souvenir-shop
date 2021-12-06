@@ -10,7 +10,7 @@ const verifyCache = (req, res, next) => {
         if (blogListcache.has("blogList")) {
             console.log("cache have");
             //return res.status(200).json(blogListcache.get("blogList"));
-            return  res.render('blog', { blogs: blogListcache.get("blogList") });
+            return  res.render('blog', { blogs: blogListcache.get("blogList") ,  active: {Blog: true}});
         }
       return next();
     } catch (err) {
