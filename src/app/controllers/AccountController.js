@@ -1,6 +1,6 @@
 const res = require("express/lib/response");
 const { json } = require("express/lib/response");
-const mongoose = require ('mongoose');
+const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const User = require('../models/user');
 const Receipt = require('../models/receipt');
@@ -78,7 +78,7 @@ module.exports.profile_post = async (req, res) => {
                 }
             }
         }
-        catch(err) {
+        catch (err) {
             console.log('account post profile error');
             console.log(err);
         }
@@ -105,13 +105,49 @@ module.exports.receipt_get = async (req, res) => {
                     console.log('account receiptList null');
                 }
             }
-            catch(err) {
+            catch (err) {
                 console.log('account get receipt error');
                 console.log(err);
             }
         }
     }
     else res.render('404NotFound');
+}
+
+module.exports.profileStatistic = async (req, res) => {
+    try {
+        console.log(req.session.user);
+        res.render('adminStatistic', { user: req.session.user })
+    }
+    catch (err) {
+        console.log('account receipt detail error');
+        console.log(err);
+    }
+}
+
+module.exports.getAllReceipt = async (req, res) => {
+    try {
+        const receipts = await  Receipt.find({}).lean();
+        if(receipts) {
+            console.log(receipts)
+            res.status(201).send(
+                JSON.stringify({
+                    status: 201,
+                    receipts: receipts,
+                })
+            );
+        } else {
+            res.status(401).send(
+                JSON.stringify({
+                    message: "Lỗi kết nối",
+                })
+            );
+        }
+    }
+    catch (err) {
+        console.log('account receipt detail error');
+        console.log(err);
+    }
 }
 
 module.exports.receiptDetail_get = async (req, res) => {
@@ -131,7 +167,7 @@ module.exports.receiptDetail_get = async (req, res) => {
             console.log('account receipt detail null');
         }
     }
-    catch(err) {
+    catch (err) {
         console.log('account receipt detail error');
         console.log(err);
     }

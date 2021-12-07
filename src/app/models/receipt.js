@@ -23,6 +23,7 @@ const Receipt = new Schema(
         discount: { type: Number},
         coupon: {},
         deliveryStatus: { type: String},
+        date: {type: Date, default: new Date()}
     },
     {
         timestamps: true,

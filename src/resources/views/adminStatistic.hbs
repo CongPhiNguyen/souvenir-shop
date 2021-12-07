@@ -1,0 +1,489 @@
+<title>Account</title>
+<link rel="stylesheet" href="/css/accountProfile.css">
+<link rel="stylesheet" href="/css/general.css">
+
+<div class="container-xl account-info-container">
+    <div class="row">
+        <div class="col-12 col-md-4 col-lg-3 my-3">
+            <div class="account-sidebar list-group">
+                <div class="d-flex justify-content-center align-items-end" style="height: 48px">
+                    <p class="bg-dark text-white px-1 m-0">Morri Store Member</p>
+                </div>
+                <div class="account-sidebar__user d-flex align-items-center">
+                    <div class="d-flex sidebar-user_name fw-bold text-wrap align-item-center">
+                        <i class="sidebar-user__icon fas fa-paw px-4"></i>
+                        <span>{{user.name}}</span>
+                    </div>
+                </div>
+                <div class="account-sidebar__itemlist">
+                    <a href="/account/profile"
+                        class="account-sidebar__item  list-group-item list-group-item-action text-wrap">
+                        <i class="sidebar-item__icon fas fa-user-alt"></i>
+                        <span>Thông tin cá nhân</span>
+                    </a>
+                    <a href="/account/receipt"
+                        class="account-sidebar__item list-group-item list-group-item-action text-wrap">
+                        <i class="sidebar-item__icon fas fa-receipt"></i>
+                        <span class="sidebar-item__name">Danh sách đơn hàng</span>
+                    </a>
+                    <a href="#" class="account-sidebar__item list-group-item list-group-item-action text-wrap">
+                        <i class="sidebar-item__icon fas fa-envelope text-wrap"></i>
+                        <span class="sidebar-item__name">Gửi ý kiến cho ChicPet</span>
+                    </a>
+                    <a href="#"
+                        class="account-sidebar__item list-group-item account-sidebar__item--active list-group-item-action text-wrap">
+                        <i class="sidebar-item__icon fas fa-boxes"></i>
+                        <span class="sidebar-item__name">Thống kê</span>
+                    </a>
+                    <a href="/logout" class="account-sidebar__item list-group-item list-group-item-action text-wrap">
+                        <i class="sidebar-item__icon fas fa-sign-out-alt"></i>
+                        <span class="sidebar-item__name">Thoát</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-md-8 col-lg-9 my-3">
+            <div style="display:flex; flex-direction: column;" class="col">
+                <h4 class="text-uppercase mb-4 mt-4">Thống kê doanh thu</h4>
+                <div style="margin-bottom: 20px;" class="btn-group" role="group"
+                    aria-label="Basic mixed styles example">
+                    <button type="button" class="btn state-receipt btn-dark">Tất cả</button>
+                    <button type="button" class="btn state-receipt btn-secondary">Chờ xác nhận</button>
+                    <button type="button" class="btn state-receipt btn-info">Đã xác nhận</button>
+                    <button type="button" class="btn state-receipt btn-warning">Đang vận chuyển</button>
+                    <button type="button" class="btn state-receipt btn-success">Đã hoàn thành</button>
+                    <button type="button" class="btn state-receipt btn-danger">Đã hủy</button>
+                </div>
+                <div>
+                    <div style="margin-bottom: 20px; margin-right: 15px" class="btn-group" role="group">
+                        <button id="btnGroupDrop1" type="button"
+                            class="btn btn-primary btn-show-value-select-year dropdown-toggle" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            2021
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                            <li value="2021" class="dropdown-item select-year">2021</li>
+                            <li value="2020" class="dropdown-item select-year">2020</li>
+                            <li value="2019" class="dropdown-item select-year">2019</li>
+                            <li value="2018" class="dropdown-item select-year">2018</li>
+                            <li value="2017" class="dropdown-item select-year">2017</li>
+                            <li value="2016" class="dropdown-item select-year">2016</li>
+                            <li value="2015" class="dropdown-item select-year">2015</li>
+                            <li value="2014" class="dropdown-item select-year">2014</li>
+                            <li value="2013" class="dropdown-item select-year">2013</li>
+                            <li value="2012" class="dropdown-item select-year">2012</li>
+                            <li value="2011" class="dropdown-item select-year">2011</li>
+                            <li value="2010" class="dropdown-item select-year">2010</li>
+                            <li value="2009" class="dropdown-item select-year">2009</li>
+                            <li value="2008" class="dropdown-item select-year">2008</li>
+                        </ul>
+                    </div>
+                    <div style="margin-bottom: 20px; margin-right: 15px" class="btn-group" role="group">
+                        <button id="btnGroupDrop1" type="button"
+                            class="btn btn-primary btn-show-value-select-month dropdown-toggle"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            All
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                            <li value="0" class="dropdown-item select-month">All</li>
+                            <li value="1" class="dropdown-item select-month">Tháng 1</li>
+                            <li value="2" class="dropdown-item select-month">Tháng 2</li>
+                            <li value="3" class="dropdown-item select-month">Tháng 3</li>
+                            <li value="4" class="dropdown-item select-month">Tháng 4</li>
+                            <li value="5" class="dropdown-item select-month">Tháng 5</li>
+                            <li value="6" class="dropdown-item select-month">Tháng 6</li>
+                            <li value="7" class="dropdown-item select-month">Tháng 7</li>
+                            <li value="8" class="dropdown-item select-month">Tháng 8</li>
+                            <li value="9" class="dropdown-item select-month">Tháng 9</li>
+                            <li value="10" class="dropdown-item select-month">Tháng 10</li>
+                            <li value="11" class="dropdown-item select-month">Tháng 11</li>
+                            <li value="12" class="dropdown-item select-month">Tháng 12</li>
+                        </ul>
+                    </div>
+                    <div style="margin-bottom: 20px; margin-right: 15px; display: none" class="btn-group show-option"
+                        role="group">
+                        <button id="btnGroupDrop1" type="button"
+                            class="btn btn-primary btn-show-value-select-currentMonth dropdown-toggle"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Tháng này
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                            <li value="0" class="dropdown-item select-currentMonth">Tháng này</li>
+                            <li value="1" class="dropdown-item select-currentMonth">Hôm nay</li>
+                            <li value="2" class="dropdown-item select-currentMonth">Hôm qua</li>
+                            <li value="3" class="dropdown-item select-currentMonth">Tuần này</li>
+                            <li value="4" class="dropdown-item select-currentMonth">Tuần qua</li>
+                        </ul>
+                    </div>
+                </div>
+
+
+                <table class="table ">
+                    <thead>
+                        <tr class="table-dark">
+                            <th scope="col">#</th>
+                            <th scope="col">Mã hóa đơn</th>
+                            <th scope="col">Người nhận hàng</th>
+                            <th scope="col">Ngày</th>
+                            <th scope="col">Trạng thái</th>
+                            <th scope="col">Tổng tiền</th>
+                        </tr>
+                    </thead>
+                    <tbody class="tbody-table-receipt">
+                        <tr class="table-success">
+                            <th scope="row">3</th>
+                            <th scope="row">3</th>
+                            <td colspan="2">Larry the Bird</td>
+                            <td>@twitter</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div style="display:flex; justify-content:end; color: green">
+                    <h5>Tổng đơn hàng: <span class="total-money">30000</span> VNĐ</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    let listReceipt = []
+    let stateReceipt = 'Tất cả'
+
+    let month = 0;
+    let year = 2021;
+    let option = 0;
+
+    const elementTableReceipt = document.querySelector('.tbody-table-receipt');
+    const elementListStateReceipt = document.querySelectorAll('.state-receipt');
+
+    const elementListSelectMonth = document.querySelectorAll('.select-month');
+    const elementSelectMonth = document.querySelector('.btn-show-value-select-month')
+    const elementListSelectYear = document.querySelectorAll('.select-year');
+    const elementSelectYear = document.querySelector('.btn-show-value-select-year')
+    const elementListSelectCurrentMonth = document.querySelectorAll('.select-currentMonth');
+    const elementSelectCurrentMonth = document.querySelector('.btn-show-value-select-currentMonth')
+
+    const elementShowOption = document.querySelector('.show-option')
+    const elementShowMoney = document.querySelector('.total-money')
+
+    elementListSelectCurrentMonth.forEach(value => {
+        value.onclick = (e) => {
+            option = e.target.value
+            renderReceipt(stateReceipt)
+            elementSelectCurrentMonth.innerText = e.target.innerText
+        }
+    })
+
+    elementListSelectMonth.forEach(value => {
+        let time = new Date();
+        value.onclick = (e) => {
+            month = e.target.value;
+            if (month == time.getMonth() + 1 && year == time.getFullYear()) {
+                elementShowOption.style.display = 'inline-flex'
+            } else {
+                elementShowOption.style.display = 'none'
+            }
+            renderReceipt(stateReceipt)
+            elementSelectMonth.innerText = e.target.innerText
+        }
+    })
+
+    elementListSelectYear.forEach(value => {
+        let time = new Date();
+        value.onclick = (e) => {
+            year = e.target.value;
+            if (month == time.getMonth() + 1 && year == time.getFullYear()) {
+                elementShowOption.style.display = 'inline-flex'
+            } else {
+                elementShowOption.style.display = 'none'
+            }
+            renderReceipt(stateReceipt)
+            elementSelectYear.innerText = e.target.innerText
+        }
+    })
+
+    elementListStateReceipt.forEach(value => {
+        value.onclick = (e) => {
+            stateReceipt = e.target.innerText
+            renderReceipt(e.target.innerText)
+        }
+    })
+
+    renderMoney = (arr) => {
+        let money = 0;
+        arr.map(value => {
+            if (value.deliveryStatus == 'Đã hoàn thành') {
+                money += value.totalFinal
+            }
+        })
+        elementShowMoney.innerText = money.toLocaleString();
+    }
+
+    renderReceipt = (state) => {
+        let listReceiptRender = []
+        let nowTime = new Date()
+        if (state == 'Tất cả') {
+            if (month == 0) {
+                listReceiptRender = listReceipt.filter(value => {
+                    let date = new Date(value.updatedAt)
+                    if (date.getFullYear() == year) {
+                        return value
+                    }
+                })
+            } else if (year == nowTime.getFullYear() && month == nowTime.getMonth() + 1) {
+                if (option == 0) {
+                    listReceiptRender = listReceipt.filter(value => {
+                        let date = new Date(value.updatedAt)
+                        if (date.getFullYear() == year && date.getMonth() + 1 == month) {
+                            return value
+                        }
+                    })
+                } else if (option == 1) {
+                    listReceiptRender = listReceipt.filter(value => {
+                        let date = new Date(value.updatedAt)
+                        if (date.getFullYear() == year && date.getMonth() + 1 == month && date.getDate() == nowTime.getDate()) {
+                            return value
+                        }
+                    })
+                } else if (option == 2) {
+                    listReceiptRender = listReceipt.filter(value => {
+                        let date = new Date(value.updatedAt)
+                        if (date.getFullYear() == year && date.getMonth() + 1 == month && date.getDate() == nowTime.getDate() - 1) {
+                            return value
+                        }
+                    })
+                } else if (option == 3) {
+                    if (nowTime.getDay() == 0) {
+                        listReceiptRender = listReceipt.filter(value => {
+                            let newTime = new Date()
+                            for (let i = 0; i < 7; i++) {
+                                newTime.setDate(nowTime.getDate() - i);
+                                let date = new Date(value.updatedAt)
+                                if (date.getFullYear() == newTime.getFullYear() && date.getMonth() == newTime.getMonth() && date.getDate() == newTime.getDate()) {
+                                    return value
+                                }
+                            }
+                        })
+                    } else {
+                        listReceiptRender = listReceipt.filter(value => {
+                            let newTime = new Date()
+                            for (let i = 0; i < nowTime.getDay(); i++) {
+                                newTime.setDate(nowTime.getDate() - i);
+                                let date = new Date(value.updatedAt)
+                                if (date.getFullYear() == newTime.getFullYear() && date.getMonth() == newTime.getMonth() && date.getDate() == newTime.getDate()) {
+                                    return value
+                                }
+                            }
+                        })
+                    }
+                } else if (option == 4) {
+                    if (nowTime.getDay() == 0) {
+                        listReceiptRender = listReceipt.filter(value => {
+                            let newTime = new Date()
+                            for (let i = 0; i < 7; i++) {
+                                newTime.setDate(nowTime.getDate() - i - nowTime.getDay());
+                                let date = new Date(value.updatedAt)
+                                if (date.getFullYear() == newTime.getFullYear() && date.getMonth() == newTime.getMonth() && date.getDate() == newTime.getDate()) {
+                                    return value
+                                }
+                            }
+                        })
+                    } else {
+                        listReceiptRender = listReceipt.filter(value => {
+                            let newTime = new Date()
+                            for (let i = 0; i < 7; i++) {
+                                newTime.setDate(nowTime.getDate() - i - nowTime.getDay());
+                                let date = new Date(value.updatedAt)
+                                if (date.getFullYear() == newTime.getFullYear() && date.getMonth() == newTime.getMonth() && date.getDate() == newTime.getDate()) {
+                                    return value
+                                }
+                            }
+                        })
+                    }
+                }
+            } else {
+                listReceiptRender = listReceipt.filter(value => {
+                    let date = new Date(value.updatedAt)
+                    if (date.getFullYear() == year && date.getMonth() + 1 == month) {
+                        return value
+                    }
+                })
+            }
+            renderMoney(listReceiptRender);
+            let html = listReceiptRender.map((value, key) => (
+                `<tr class="table-${determineTheState(value.deliveryStatus)}">
+                        <th scope="row">${key + 1}</th>
+                        <td>${value.userCode}</td>
+                        <td>${value.name}</td>
+                        <td>${convertDate(value.updatedAt)}</td>
+                        <td>${value.deliveryStatus}</td>
+                        <td>${value.totalFinal}</td>
+                    </tr>`
+            ))
+            elementTableReceipt.innerHTML = html.join('')
+        } else {
+            let arr = listReceipt.filter(value => {
+                if (value.deliveryStatus == state) {
+                    return value
+                }
+            })
+            if (month == 0) {
+                listReceiptRender = arr.filter(value => {
+                    let date = new Date(value.updatedAt)
+                    if (date.getFullYear() == year) {
+                        return value
+                    }
+                })
+            } else if (year == nowTime.getFullYear() && month == nowTime.getMonth() + 1) {
+                if (option == 0) {
+                    listReceiptRender = arr.filter(value => {
+                        let date = new Date(value.updatedAt)
+                        if (date.getFullYear() == year && date.getMonth() + 1 == month) {
+                            return value
+                        }
+                    })
+                } else if (option == 1) {
+                    listReceiptRender = arr.filter(value => {
+                        let date = new Date(value.updatedAt)
+                        if (date.getFullYear() == year && date.getMonth() + 1 == month && date.getDate() == nowTime.getDate()) {
+                            return value
+                        }
+                    })
+                } else if (option == 2) {
+                    listReceiptRender = arr.filter(value => {
+                        let date = new Date(value.updatedAt)
+                        if (date.getFullYear() == year && date.getMonth() + 1 == month && date.getDate() == nowTime.getDate() - 1) {
+                            return value
+                        }
+                    })
+                } else if (option == 3) {
+                    if (nowTime.getDay() == 0) {
+                        listReceiptRender = arr.filter(value => {
+                            let newTime = new Date()
+                            for (let i = 0; i < 7; i++) {
+                                newTime.setDate(nowTime.getDate() - i);
+                                let date = new Date(value.updatedAt)
+                                if (date.getFullYear() == newTime.getFullYear() && date.getMonth() == newTime.getMonth() && date.getDate() == newTime.getDate()) {
+                                    return value
+                                }
+                            }
+                        })
+                    } else {
+                        listReceiptRender = arr.filter(value => {
+                            let newTime = new Date()
+                            for (let i = 0; i < nowTime.getDay(); i++) {
+                                newTime.setDate(nowTime.getDate() - i);
+                                let date = new Date(value.updatedAt)
+                                if (date.getFullYear() == newTime.getFullYear() && date.getMonth() == newTime.getMonth() && date.getDate() == newTime.getDate()) {
+                                    return value
+                                }
+                            }
+                        })
+                    }
+                } else if (option == 4) {
+                    if (nowTime.getDay() == 0) {
+                        listReceiptRender = arr.filter(value => {
+                            let newTime = new Date()
+                            for (let i = 0; i < 7; i++) {
+                                newTime.setDate(nowTime.getDate() - i - nowTime.getDay());
+                                let date = new Date(value.updatedAt)
+                                if (date.getFullYear() == newTime.getFullYear() && date.getMonth() == newTime.getMonth() && date.getDate() == newTime.getDate()) {
+                                    return value
+                                }
+                            }
+                        })
+                    } else {
+                        listReceiptRender = arr.filter(value => {
+                            let newTime = new Date()
+                            for (let i = 0; i < 7; i++) {
+                                newTime.setDate(nowTime.getDate() - i - nowTime.getDay());
+                                let date = new Date(value.updatedAt)
+                                if (date.getFullYear() == newTime.getFullYear() && date.getMonth() == newTime.getMonth() && date.getDate() == newTime.getDate()) {
+                                    return value
+                                }
+                            }
+                        })
+                    }
+                }
+            } else {
+                listReceiptRender = arr.filter(value => {
+                    let date = new Date(value.updatedAt)
+                    if (date.getFullYear() == year && date.getMonth() + 1 == month) {
+                        return value
+                    }
+                })
+            } 
+            renderMoney(listReceiptRender);
+            let html = listReceiptRender.map((value, key) => (
+                `<tr class="table-${determineTheState(value.deliveryStatus)}">
+                        <th scope="row">${key + 1}</th>
+                        <td>${value.userCode}</td>
+                        <td>${value.name}</td>
+                        <td>${convertDate(value.updatedAt)}</td>
+                        <td>${value.deliveryStatus}</td>
+                        <td>${value.totalFinal}</td>
+                    </tr>`
+            ))
+            elementTableReceipt.innerHTML = html.join('')
+        }
+    }
+
+    convertDate = (date) => {
+        let time = new Date(date);
+        return time.getDate() + "/" + (time.getMonth() + 1) + "/" + time.getFullYear()
+    }
+
+    determineTheState = (state) => {
+        switch (state) {
+            case 'Chờ xác nhận':
+                return 'secondary'
+                break;
+            case 'Đã xác nhận':
+                return 'info'
+                break;
+            case 'Đang vận chuyển':
+                return 'warning'
+                break;
+            case 'Đã hoàn thành':
+                return 'success'
+                break;
+            case 'Đã hủy':
+                return 'danger'
+                break;
+            default:
+                return 'light'
+        }
+    }
+
+    getApiReceipt = async () => {
+        await axios.get(`/account/get-all-receipt`)
+            .then(res => {
+                listReceipt = res.data.receipts
+                let nowTime = new Date()
+                let arr = listReceipt.filter(value => {
+                    let date = new Date(value.updatedAt)
+                    if (date.getFullYear() == nowTime.getFullYear()) {
+                        return value
+                    }
+                })
+                renderMoney(arr);
+                let html = arr.map((value, key) => (
+                    `<tr class="table-${determineTheState(value.deliveryStatus)}">
+                        <th scope="row">${key + 1}</th>
+                        <td>${value.userCode}</td>
+                        <td>${value.name}</td>
+                        <td>${convertDate(value.updatedAt)}</td>
+                        <td>${value.deliveryStatus}</td>
+                        <td>${value.totalFinal}</td>
+                    </tr>`
+                ))
+                elementTableReceipt.innerHTML = html.join('');
+            })
+            .catch(err => {
+                console.log(err)
+            })
+    }
+    getApiReceipt()
+</script>
