@@ -513,7 +513,7 @@
                     deliveryMoney: deliveryMoney,
                     discount: totalFinal - deliveryMoney - total,
                     coupon: discountUser ? discountUser : null,
-                    deliveryStatus: 'chờ xác nhận',
+                    deliveryStatus: 'Chờ xác nhận',
                 }
                 await axios.post(`http://localhost:3000/cart/create-receipt`, { ...data })
                     .then(res => {

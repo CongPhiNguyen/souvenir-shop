@@ -138,8 +138,15 @@
                         </tr>
                     </tbody>
                 </table>
-                <div style="display:flex; justify-content:end; color: green">
-                    <h5>Tổng đơn hàng: <span class="total-money">30000</span> VNĐ</h5>
+                <div style="display:flex; justify-content:space-between;">
+                    <div>
+                        <h6 style="color:#6c757d">Chờ xác nhận: <span class="cho-xac-nhan-quantity"></span></h6>
+                        <h6 style="color:#0dcaf0">Đã xác nhận: <span class="da-xac-nhan-quantity"></span> </h6>
+                        <h6 style="color:#ffc107">Đang vận chuyển: <span class="dang-van-chuyen-quantity"></span></h6>
+                        <h6 style="color:#198754">Đã hoàn thành: <span class="da-hoan-thanh-quantity"></span></h6>
+                        <h6 style="color:#dc3545">Đã hủy: <span class="da-huy-quantity"></span></h6>
+                    </div>
+                    <h5 style="color:#198754" >Tổng đơn hàng: <span class="total-money">30000</span> VNĐ</h5>
                 </div>
             </div>
         </div>
@@ -167,6 +174,12 @@
 
     const elementShowOption = document.querySelector('.show-option')
     const elementShowMoney = document.querySelector('.total-money')
+
+    const elementHoanThanh = document.querySelector('.da-hoan-thanh-quantity')
+    const elementDaHuy = document.querySelector('.da-huy-quantity')
+    const elementChoXacNhan = document.querySelector('.cho-xac-nhan-quantity')
+    const elementDaXacNhan = document.querySelector('.da-xac-nhan-quantity')
+    const elementDangVanChuyen = document.querySelector('.dang-van-chuyen-quantity')
 
     elementListSelectCurrentMonth.forEach(value => {
         value.onclick = (e) => {
@@ -414,7 +427,7 @@
                         return value
                     }
                 })
-            } 
+            }
             renderMoney(listReceiptRender);
             let html = listReceiptRender.map((value, key) => (
                 `<tr class="table-${determineTheState(value.deliveryStatus)}">
@@ -468,6 +481,31 @@
                         return value
                     }
                 })
+                let hoanThanh = 0;
+                let daHuy = 0;
+                let choXacNhan = 0;
+                let daXacNhan = 0;
+                let dangVanChuyen = 0;
+                listReceipt.map(value => {
+                    if (value.deliveryStatus == 'Chờ xác nhận') {
+                        choXacNhan++
+                    } else if (value.deliveryStatus == 'Đã xác nhận') {
+                        daXacNhan++
+                    } else if (value.deliveryStatus == 'Đang vận chuyển') {
+                        dangVanChuyen++
+                    } else if (value.deliveryStatus == 'Đã hoàn thành') {
+                        hoanThanh++
+                    } else if (value.deliveryStatus == 'Đã hủy') {
+                        daHuy++
+                    }
+                })
+
+                elementHoanThanh.innerText = hoanThanh
+                elementDaHuy.innerText = daHuy
+                elementChoXacNhan.innerText = choXacNhan
+                elementDaXacNhan.innerText = daXacNhan
+                elementDangVanChuyen.innerText = dangVanChuyen
+
                 renderMoney(arr);
                 let html = arr.map((value, key) => (
                     `<tr class="table-${determineTheState(value.deliveryStatus)}">
