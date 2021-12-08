@@ -282,19 +282,15 @@
 </div>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script>
-
-
     var imageName = "Image chưa được thay đổi";
     var modalContainer = document.querySelector('.modal-content.picture-modal-container');
     modalContainer.addEventListener('click', function (event)
     {
         event.stopPropagation();
     });
-    //{{!-- const dropdownStatusButton = document.querySelector('.btn-dropdown-status'); --}}
     function clickFastNavbar(message) {
         alert(message);
     }
-    //{{!-- const addCartButton = document.querySelector('.btn-add-to-cart'); --}}
     function changePictureModal(){
         
         var pictureModal = document.querySelector('#pictureModal');
@@ -363,10 +359,10 @@
 
     async function addToCart() {
         try{
-            
             const data = {
                 email: localStorage.getItem('username'),
-                productID: '9', 
+                userCode: userCode,
+                productID: '91', 
                 name: 'Iphone 1 promax', 
                 location: 'Hawai', 
                 province: 'Akihabara, Tokyo', 
@@ -383,9 +379,7 @@
             console.log("data", data);
             await axios.post(`http://localhost:3000/product/add-to-cart`, data)
             .then(res => {
-                {{!-- console.log("Save success"); --}}
                 showAlertMorriStore('alert-success', 'Thêm cart thành công !')
-                {{!-- alert("Lưu thành công") --}}
             })
             .catch(err => {
                 alert(err);
@@ -437,8 +431,6 @@
             renderProduct()
             renderQuantity()
             renderQuantityTotal()
-            {{!-- renderListCart()
-            renderTotalMoney()  --}}
             
         }
         catch(e)

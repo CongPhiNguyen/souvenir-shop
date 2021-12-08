@@ -136,7 +136,16 @@ class CartController {
                         })
                     );
                 }
+                else{
+                    res.status(200).send(
+                        JSON.stringify({
+                            status: 200,
+                            cart: [],
+                        })
+                    )
+                }
             })
+
     }
 
     async getCoupon(req, res) {

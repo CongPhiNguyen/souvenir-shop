@@ -36,6 +36,7 @@
     "express-session": "^1.17.2",
     "jsonwebtoken": "^8.5.1",
     "load": "^1.0.2",
+    "moment": "^2.29.1",
     "mongoose": "^6.0.9",
     "mongoose-delete": "^0.5.4",
     "mongoose-unique-validator": "^3.0.0",
