@@ -155,7 +155,7 @@
             const res = await axios.post(`https://api.cloudinary.com/v1_1/tanthanh0805/image/upload`, formData)
 
             if(res.data){
-                document.querySelector('.blog-img').id = res.data.url;
+                document.querySelector('.blog-img').name = res.data.url;
                 var myToastEl = document.querySelector('.toast');
                 var myToast = new bootstrap.Toast(myToastEl);
                 myToast.show();
@@ -179,7 +179,7 @@
         try {
         //--------------------------------------------------
             const title = inputTitle;
-            const img = document.querySelector('.blog-img').id;
+            const img = document.querySelector('.blog-img').name;
             const category = inputCategory;
             const description = inputDescription;
             const contentCode = myContent;
@@ -200,6 +200,7 @@
                 var myModal = new bootstrap.Modal(document.getElementById('modal-inform'));
                 myModal.show();
                 console.log("Post Thanh Cong");
+                document.querySelector('.blog-img').name = "blog-img"
             }
         }
         catch (err) {
@@ -212,6 +213,10 @@
     const formPost = document.querySelector('.form-post')
     btnNew.addEventListener('click', ()=>{
         formPost.reset();
+        document.querySelector('.title-error').textContent = "";
+        document.querySelector('.img-error').textContent = "";
+        document.querySelector('.description-error').textContent = "";
+        document.querySelector('.content-error').textContent = "";
     })
 
 
@@ -220,7 +225,7 @@
 
     btnPreview.addEventListener('click', ()=>{
         const inputTitle = document.querySelector('.title-blog').value;
-        const inputImg = document.querySelector('.img-blog').value;
+        const inputImg = document.querySelector('.img-blog').id;
         const inputCategory = document.querySelector('.category-blog').value;
         const inputDescription = document.querySelector('.description-blog').value
         var myContent = tinymce.get("editor").getContent();
