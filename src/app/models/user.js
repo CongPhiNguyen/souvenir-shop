@@ -28,6 +28,7 @@ const userSchema = new Schema({
     },
     mail: {
         type: String,
+        required: [true, 'Please enter your mail'],
     },
     role: {
         type: String,
