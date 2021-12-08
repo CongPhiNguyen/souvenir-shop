@@ -19,8 +19,13 @@ class ProductController {
         res.render('product/editProductView', { title: "Product" , active: {Product: true }});
     }
 
-    editProductView(req, res){
+    viewProductView(req, res){
         // console.log('Đang chạy ở trên Index', 'req.body', req.body)
+        res.render('product/productManager', { title: "Product" , active: {Product: true }});
+    }
+
+    viewProductCustomer(req, res) {
+        console.log("res",res);
         res.render('product/productManager', { title: "Product" , active: {Product: true }});
     }
 
