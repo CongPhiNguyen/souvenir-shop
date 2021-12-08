@@ -200,7 +200,7 @@
                 var myModal = new bootstrap.Modal(document.getElementById('modal-inform'));
                 myModal.show();
                 console.log("Post Thanh Cong");
-                document.querySelector('.blog-img').name = "blog-img"
+                document.querySelector('.blog-img').name = "blog-img";
             }
         }
         catch (err) {
@@ -225,7 +225,7 @@
 
     btnPreview.addEventListener('click', ()=>{
         const inputTitle = document.querySelector('.title-blog').value;
-        const inputImg = document.querySelector('.img-blog').id;
+        const inputImg = document.querySelector('.blog-img').name;
         const inputCategory = document.querySelector('.category-blog').value;
         const inputDescription = document.querySelector('.description-blog').value
         var myContent = tinymce.get("editor").getContent();
