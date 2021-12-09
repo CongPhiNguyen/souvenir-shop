@@ -1,6 +1,7 @@
 const res = require("express/lib/response");
 const Product = require('../models/Product');
 const Cart = require('../models/cart');
+var ObjectId = require('mongodb').ObjectID;
 
 class ProductController {
     // [GET] /home
@@ -24,9 +25,14 @@ class ProductController {
         res.render('product/productManager', { title: "Product" , active: {Product: true }});
     }
 
-    viewProductCustomer(req, res) {
-        console.log("res",res);
-        res.render('product/productManager', { title: "Product" , active: {Product: true }});
+    async viewProductCustomer(req, res) {
+        var newI = await Product.findOne({'_id': new ObjectId(req.originalUrl.replace(req.baseUrl + '/', ''))});
+        // console.log(newI);
+        res.render('product/viewProductView', { title: "Product" , active: {Product: true }, 
+            dataProduct: {
+                name: newI.name
+            } 
+        });
     }
 
     async addProduct(req, res) {
