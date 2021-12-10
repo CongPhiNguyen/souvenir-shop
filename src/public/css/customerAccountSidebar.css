@@ -1,8 +1,4 @@
-.account-info-container {
-    padding: 100px 0 50px 0;
-}
-
-/* .account-sidebar {
+.account-sidebar {
     border-radius: 12px;
     background-color: #f5f5f5;
 }
@@ -53,18 +49,4 @@
 
 .sidebar-item_name {
     height: 100%;
-} */
-
-.btn-update {
-    color: white;
-    background-color: rgb(255, 186, 0);
-}
-
-.btn-update:hover {
-    color: white;
-    background-color: rgba(255, 186, 0, 85%);
-}
-
-.text-error {
-    color: red;
 }

@@ -8,7 +8,7 @@ const Receipt = require('../models/receipt');
 module.exports.profile_get = (req, res) => {
     if (req.session.user) {
         if (req.session.user.role === 'admin') {
-            // res.render('adminProfile');
+            res.render('adminProfile');
         }
         else {
             res.render('accountProfile');

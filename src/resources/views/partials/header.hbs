@@ -143,10 +143,7 @@
         
         await axios.get(`http://localhost:3000/cart/get-data-user`)
             .then(res => {
-<<<<<<< HEAD
-=======
                 {{!-- console.log('res.data', res.data.dataUser.userCode) --}}
->>>>>>> 61bbbf4becd263984eb03ab93e358ff6d2d6a7dc
                 userCode = res.data.dataUser.userCode
             })
             .catch(err => {
@@ -241,7 +238,6 @@
     }
 
     const showAlertMorriStore = (typeAlert, message) => {
-        console.log('fuck man, vô được cái show-alert rồi')
         AlertMorriStore.style.display = 'block';
         AlertMorriStore.classList = `alert ${typeAlert}`;
         AlertMorriStore.innerText = message;
