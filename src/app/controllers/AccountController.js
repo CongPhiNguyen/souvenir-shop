@@ -89,6 +89,105 @@ module.exports.profile_post = async (req, res) => {
     }
 }
 
+module.exports.customer_get = (req, res) => {
+    if (req.session.user) {
+        if (req.session.user.role === 'admin') {
+            res.render('adminCustomer');
+        }
+        else {
+            res.render('404NotFound');
+        }
+    }
+    else res.render('404NotFound');
+}
+
+module.exports.adminCustomerList_post = async (req, res) => {
+    if (req.session.user) {
+        if (req.session.user.role === 'admin') {
+            try {
+                const { customerCodeSearch, customerNameSearch, customerPhoneSearch, customerMailSearch } = req.body;
+                console.log(customerCodeSearch);
+                console.log(customerNameSearch);
+                console.log(customerPhoneSearch);
+                console.log(customerMailSearch);
+
+                var customerList = [];
+                if (customerCodeSearch === '' && customerNameSearch === '' && customerPhoneSearch === '' && customerMailSearch === '') {
+                    console.log('get all customers');
+                    customerList = await User.find({ role: 'customer' });
+                }
+                else if (customerCodeSearch !== '') {
+                    console.log('search by customer code');
+                    customerList = await User.find({ role: 'customer', userCode: customerCodeSearch });
+                }
+                else if (customerNameSearch !== '') {
+                    console.log('search by customer name');
+                    customerList = await User.find({ role: 'customer', name: customerNameSearch });
+                }
+                else if (customerPhoneSearch !== '') {
+                    console.log('search by customer phone');
+                    customerList = await User.find({ role: 'customer', phone: customerPhoneSearch });
+                }
+                else if (customerMailSearch !== '') {
+                    console.log('search by customer mail');
+                    customerList = await User.find({ role: 'customer', mail: customerMailSearch });
+                }
+
+                if (customerList) {
+                    console.log(customerList);
+                    res.json({ customerList: customerList });
+                }
+                else {
+                    console.log('admin customerList null');
+                }
+            }
+            catch(err) {
+                console.log('admin customer list post error');
+                console.log(err);
+            }
+        }
+        else {
+            console.log('customerList post not authorized');
+        }
+    }
+    else {
+        console.log('user not log in');
+    }
+}
+
+module.exports.adminDeleteCustomer_post = async (req, res) => {
+    if (req.session.user) {
+        if (req.session.user.role === 'admin') {
+            try {
+                const { userCodeToDelete } = req.body;
+                const result = await User.deleteOne({ userCode: userCodeToDelete });
+                if (result) {
+                    console.log('delete successful');
+                    console.log(result);
+                    res.json({ status: 200 });
+                }
+                else {
+                    console.log('delete fail');
+                    res.json({ status: 400, error: 'delete return null' });
+                }
+            }
+            catch(err) {
+                console.log('admin customer delete post error');
+                console.log(err);
+                res.json({ status: 400, error: 'delete customer error' });
+            }
+        }
+        else {
+            console.log('customer delete post not authorized');
+            res.json({ status: 400, error: 'user not authorized' });
+        }
+    }
+    else {
+        console.log('user not log in');
+        res.json({ status: 400, error: 'user not log in' });
+    }
+}
+
 module.exports.receipt_get = async (req, res) => {
     if (req.session.user) {
         if (req.session.user.role === 'admin') {

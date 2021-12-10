@@ -6,9 +6,9 @@ const accountController = require('../app/controllers/AccountController');
 
 router.get('/profile', requireAuth, accountController.profile_get);
 router.post('/profile', requireAuth, accountController.profile_post);
-// router.get('/customer', requireAuth, accountController.customer_get);
-// router.post('/admin-get-customer', requireAuth, accountController.adminCustomerList_post);
-// router.post('/admin-delete-customer', requireAuth, accountController.adminDeleteCustomer_post);
+router.get('/customer', requireAuth, accountController.customer_get);
+router.post('/admin-get-customer', requireAuth, accountController.adminCustomerList_post);
+router.post('/admin-delete-customer', requireAuth, accountController.adminDeleteCustomer_post);
 router.get('/get-all-receipt', requireAuth, accountController.getAllReceipt)
 router.get('/statistic', requireAuth, accountController.profileStatistic)
 router.get('/receipt', requireAuth, accountController.receipt_get);

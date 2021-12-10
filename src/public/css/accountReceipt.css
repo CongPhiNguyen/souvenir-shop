@@ -3,7 +3,7 @@ a {
 }
 
 a:hover {
-    color: rgb(255, 101, 80);
+    color: rgb(255, 186, 0);
 }
 
 .account-order-container {
@@ -160,7 +160,7 @@ a:hover {
 
 .total__amount {
     padding-left: 10px;
-    color: rgb(255, 101, 80);
+    color: rgb(255, 186, 0);
     font-size: 20px;
     font-weight: 700;
 }
