@@ -45,28 +45,29 @@
             </ol>
         </div>
         {{!-- Phần của product --}}
-        <div>Xem từng sản phẩm {{dataProduct.name}}<div>
         <div class="product-container row">
             <div class="product-image col-md-4">
-                <img class="product-image-1" src="/img/figure/figure1.jfif" alt="">    
+                <img class="product-image-1" src={{dataProduct.imgUrl}} alt="">    
             </div>
             <div class="product-info col-md-8">
-                <input class="product-name" >Figure Makise Kurisu trong visual novel Stein;Gate</input>
+                <div class="product-name">{{dataProduct.name}}</div>
                 <div class="product-place">
                     <i class="fas fa-map-marker-alt"></i>
-                    <span class="product-location">Akihabara, Japan</span>
+                    <span class="product-location">{{dataProduct.location}}</span>
                 </div>
                 <div class="product-price-sale">
-                    <div class="product-old-price">650.000vnd</div>
-                    <div class="product-price">650.000vnd</div>
-                    <div class="sale-percent">7%</div>
+                    <div class="product-old-price">{{dataProduct.sellPrice}}</div>
+                    <div class="product-price">{{dataProduct.currentPrice}}</div>
+                    <div class="sale-percent">
+                        {{!-- {{((parseInt(dataProduct.sellPrice) - parseInt(data.currentPrice))/(dataProduct.sellPrice))}} --}}
+                    </div>
                 </div>
                 <div class="product-description">
-                    Đây là một sản phẩm tuyệt vời dành cho fan của bộ truyện steingate và là quà lưu niệm của những người du lịch từ Akihabara
+                    {{dataProduct.description}}
                 </div>
                 <div class="product-sold">
-                    <div class="sold-title">Đã bán</div>
-                    <div class="sold-num">12</div>
+                    <div class="sold-title">Đã bán: </div>
+                    <div class="sold-num">0</div>
                 </div>
                 <div class="product-rating-average">
                     <i class="product-rating-icon fas fa-star"></i>
@@ -92,7 +93,7 @@
                         Add to cart 
                     </button> --}}
                     <button class="add-to-cart bt-add-to-cart" onclick="updateProduct()">
-                        Update product 
+                        Buy product 
                     </button>
                     {{!-- <button class="buy-now">
                         Buy now

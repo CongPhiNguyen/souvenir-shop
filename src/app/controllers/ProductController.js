@@ -30,7 +30,16 @@ class ProductController {
         // console.log(newI);
         res.render('product/viewProductView', { title: "Product" , active: {Product: true }, 
             dataProduct: {
-                name: newI.name
+                name: newI.name,
+                location: newI.location, 
+                province: newI.province, 
+                quantity: newI.quantity, 
+                remain: newI.remain,
+                originalPrice: newI.originalPrice,
+                sellPrice: newI.sellPrice,
+                currentPrice: newI.currentPrice,
+                imgUrl: newI.imgUrl,
+                description: newI.description,
             } 
         });
     }

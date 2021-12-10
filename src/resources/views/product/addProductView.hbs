@@ -66,7 +66,8 @@
                     <input class="product-price col-12" name="currentPrice" placeholder="current price"></input>
                     {{!-- <div class="sale-percent">7%</div> --}}
                 </div>
-                <input type='text' class="product-description" name="description" placeholder="Description"> </input>
+                
+                <textarea type='text' class="product-description" cols="60" rows="5" name="description" placeholder="Description"></textarea>
                 <div class="product-sold"   >
                     <div class="sold-title">Đã bán: </div>
                     <div class="sold-num">...</div>
@@ -207,7 +208,7 @@
                 sellPrice:  document.querySelector('input[name="sellPrice"').value,
                 currentPrice:  document.querySelector('input[name="currentPrice"').value,
                 imgUrl: currentLink,
-                description: document.querySelector('input[name="description"').value,
+                description: document.querySelector('textarea[name="description"').value,
             };
             console.log("data", data);
             await axios.post(`http://localhost:3000/product/add-product`, data)

@@ -75,6 +75,8 @@ h1 {
 
 .product-image-1 {
     width: 100%;
+    height: 100%;  
+    object-fit: cover;
 }
 
 .product-info {
@@ -107,6 +109,10 @@ h1 {
 
 .product-container .product-sold {
     display: flex;
+}
+
+.product-container .product-price-sale .product-old-price {
+    text-decoration: line-through;
 }
 
 /* Phần picture modal */
