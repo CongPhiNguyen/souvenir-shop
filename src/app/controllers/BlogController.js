@@ -162,3 +162,57 @@ module.exports.editBlog_post = async (req, res) => {
         console.log(err);
     }
 }
+
+/*-----------------------------------edit detail--------------------------------------------*/
+module.exports.editDetailBlog_get = async (req, res) => {
+    console.log('blog code: ', req.params.code);
+    var objectId = mongoose.Types.ObjectId(req.params.code);
+    console.log('objectID: ', objectId);
+    try {
+        const blog = await Blog.findOne({ _id: objectId }).lean();
+        if (blog) {
+            console.log(blog);
+            res.render('editDetailBlog', { blog: blog });
+        } else {
+            console.log('blog null');
+        }
+    } catch (err) {
+        console.log('blog detail error');
+        console.log(err);
+    }
+}
+
+module.exports.editDetailBlog_post = async (req, res) => {
+
+    const { id, title, img, category, description, contentCode } = req.body;
+    var objectId = mongoose.Types.ObjectId(id);
+    const newBlog = new Blog({
+        title: title,
+        img: img,
+        category: category,
+        description: description,
+        contentCode: contentCode
+    });
+    try {
+        //const query = { _id: objectId };
+        const result = await Blog.updateOne({ _id: objectId }, {
+            title: title,
+            img: img,
+            category: category,
+            description: description,
+            contentCode: contentCode
+        });
+        if (result.modifiedCount === 1) {
+            console.log("Successfully deleted one document.");
+            blogListcache.del( "blogList" );//remove cache
+            res.status(200).json({ blog: newBlog });
+
+        } else {
+            console.log("No documents matched the query. uploaded 0 documents.");
+        }
+
+    } catch (err) {
+        console.log('update service error');
+        console.log(err);
+    }
+}
