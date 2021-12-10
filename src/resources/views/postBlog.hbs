@@ -117,6 +117,13 @@
     </div>
 </div>
 
+<div class="toast toast-inform align-items-center hide position-fixed top-0 end-0" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="d-flex">
+        <div class="toast-body">Image uploaded!</div>
+        <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+</div>
+
 {{!-- test value -------------------------------------------------------------}}
 {{!--         <div class="show-value">
             <textarea name="" id="show-value" cols="30" rows="10"></textarea>
@@ -143,6 +150,7 @@
     const imgError = document.querySelector('.img-error');
     const descriptionError = document.querySelector('.description-error');
     const contentError = document.querySelector('.content-error');
+
     async function uploadPicture() 
     {
         var fileName = document.querySelector('.blog-img').files[0];
@@ -168,17 +176,20 @@
 
     btnPost.addEventListener('click', async ()=> {
         const inputTitle = document.querySelector('.title-blog').value;
-       // const inputImg = document.querySelector('.blog-img').value;
        // var inputImg = "https://lightwidget.com/wp-content/uploads/local-file-not-found.png";
         const inputCategory = document.querySelector('.category-blog').value;
         const inputDescription = document.querySelector('.description-blog').value
         var myContent = tinymce.get("editor").getContent();
+        var inputImg = document.querySelector('.blog-img').name;
 
         console.log('btn-post clicked');
+
+        if(inputImg == "blog-img") inputImg = "";
+
         try {
         //--------------------------------------------------
             const title = inputTitle;
-            const img = document.querySelector('.blog-img').name;
+            const img = inputImg;
             const category = inputCategory;
             const description = inputDescription;
             const contentCode = myContent;
