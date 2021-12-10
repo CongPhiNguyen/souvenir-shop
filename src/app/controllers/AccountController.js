@@ -697,38 +697,63 @@ module.exports.adminDeleteVoucher_post = async (req, res) => {
     }
 };
 
-module.exports.profileStatistic = async (req, res) => {
-    try {
-        console.log(req.session.user);
-        res.render('adminStatistic', { user: req.session.user })
-    }
-    catch (err) {
-        console.log('account receipt detail error');
-        console.log(err);
-    }
-}
-
-module.exports.getAllReceipt = async (req, res) => {
-    try {
-        const receipts = await  Receipt.find({}).lean();
-        if(receipts) {
-            console.log(receipts)
-            res.status(201).send(
-                JSON.stringify({
-                    status: 201,
-                    receipts: receipts,
-                })
-            );
-        } else {
-            res.status(401).send(
-                JSON.stringify({
-                    message: "Lỗi kết nối",
-                })
-            );
+module.exports.adminStatistic_get = async (req, res) => {
+    if (req.session.user) {
+        if (req.session.user.role === 'admin') {
+            try {
+                console.log(req.session.user);
+                res.render('adminStatistic', { user: req.session.user })
+            }
+            catch (err) {
+                console.log('account receipt detail error');
+                console.log(err);
+            }
+        }
+        else {
+            console.log('user not authorized');
+            res.render('404NotFound');
         }
     }
-    catch (err) {
-        console.log('account receipt detail error');
-        console.log(err);
+    else {
+        console.log('user not log in');
+        res.render('404NotFound');
+    }   
+}
+
+module.exports.getAllReceipt_get = async (req, res) => {
+    if (req.session.user) {
+        if (req.session.user.role === 'admin') {
+            try {
+                const receipts = await  Receipt.find({}).lean();
+                if(receipts) {
+                    console.log(receipts)
+                    res.status(201).send(
+                        JSON.stringify({
+                            status: 201,
+                            receipts: receipts,
+                        })
+                    );
+                } else {
+                    res.status(401).send(
+                        JSON.stringify({
+                            message: "Lỗi kết nối",
+                        })
+                    );
+                }
+            }
+            catch (err) {
+                console.log('get all receipt post error');
+                console.log(err);
+                res.json({ status: 400, error: err });
+            }
+        }
+        else {
+            console.log('get all receipt post not authorized');
+            res.status(400).json({ status: 400, error: 'user not authorized' });
+        }
+    }
+    else {
+        console.log('user not log in');
+        res.status(400).json({ status: 400, error: 'user not log in' });
     }
 }
