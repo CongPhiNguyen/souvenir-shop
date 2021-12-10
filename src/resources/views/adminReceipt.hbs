@@ -1,0 +1,391 @@
+<title>Orders</title>
+<link rel="stylesheet" href="/css/general.css">
+<link rel="stylesheet" href="/css/adminReceipt.css">
+
+<div class="container-xl account-order-container">
+    <div class="row">
+        <div class="col-12 col-md-4 col-lg-3 my-3">
+            {{> adminAccountSidebar}}
+        </div>
+        <div class="col-12 col-md-8 col-lg-9 my-3">
+            <div class="row justify-content-between">
+                <h4 class="text-uppercase mb-4 mt-4 w-auto">Danh sách đơn hàng</h4>
+                <button type="button" class="btn btn-search">Tìm kiếm</button>
+            </div>
+            <div class="admin-order-search-container">
+                <div class="row mb-3">
+                    <div class="col-6">
+                        <div class="row">
+                            <div class="col-1"></div>
+                            <label for="inputOrderCode" class="col-3 col-form-label">Mã đơn</label>
+                            <div class="col-7">
+                                <input type="text" class="form-control col-form-label" id="inputOrderCode">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="row">
+                            <div class="col-1"></div>
+                            <label for="inputOrderCustomerCode" class="col-3 col-form-label">Mã KH</label>
+                            <div class="col-7">
+                                <input type="text" class="form-control" id="inputOrderCustomerCode">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-6">
+                        <div class="row">
+                            <div class="col-1"></div>
+                            <label for="inputOrderCustomerName" class="col-3 col-form-label">Tên KH</label>
+                            <div class="col-7">
+                                <input type="text" class="form-control col-form-label" id="inputOrderCustomerName">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="row">
+                            <div class="col-1"></div>
+                            <label for="dropdownStatusSearch" class="col-3 col-form-label">Trạng thái</label>
+                            <div class="col-7">
+                                <div class="dropdown dropdown-status-search-container">
+                                    <button class="btn btn-dropdown-status-search dropdown-toggle" type="button" id="dropdownStatusSearch" data-bs-toggle="dropdown" aria-expanded="false">Tất cả</button>
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownOrderPayment">
+                                        <li><div class="dropdown-item dropdown-status-search-item" onclick="updateDropdownStatusSearchBtn('Tất cả')">Tất cả</div></li>
+                                        <li><div class="dropdown-item dropdown-status-search-item" onclick="updateDropdownStatusSearchBtn('Chờ xác nhận')">Chờ xác nhận</div></li>
+                                        <li><div class="dropdown-item dropdown-status-search-item" onclick="updateDropdownStatusSearchBtn('Đã xác nhận')">Đã xác nhận</div></li>
+                                        <li><div class="dropdown-item dropdown-status-search-item" onclick="updateDropdownStatusSearchBtn('Đang vận chuyển')">Đang vận chuyển</div></li>
+                                        <li><div class="dropdown-item dropdown-status-search-item" onclick="updateDropdownStatusSearchBtn('Đã hoàn thành')">Đã hoàn thành</div></li>
+                                        <li><div class="dropdown-item dropdown-status-search-item" onclick="updateDropdownStatusSearchBtn('Đã hủy')">Đã hủy</div></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-6">
+                        <div class="row">
+                            <div class="col-1"></div>
+                            <label for="inputOrderFromDay" class="col-3 col-form-label">Từ ngày</label>
+                            <div class="col-7">
+                                <input type="date" class="form-control col-form-label" id="inputOrderFromDay">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="row">
+                            <div class="col-1"></div>
+                            <label for="inputOrderToDay" class="col-3 col-form-label">Đến ngày</label>
+                            <div class="col-7">
+                                <input type="date" class="form-control col-form-label" id="inputOrderToDay">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="admin-order-table-container">
+                <table class="table table-hover order-table text-center">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Mã đơn</th>
+                            <th scope="col">Mã KH</th>
+                            <th scope="col">Thời gian</th>
+                            <th scope="col">Khách hàng</th>
+                            <th scope="col">Thành tiền</th>
+                            <th scope="col">Trạng thái</th>
+                        </tr>
+                    </thead>
+                    <tbody class="order-table-body">
+
+
+                       
+                    </tbody>
+                </table>
+            </div>
+            <div class="admin-order-detail-container d-none">
+                <div class="order-detail-header text-center">
+                    <h2 class="text-uppercase order-detail-header__title">Thông tin đơn hàng</h2>
+                    <div class="my-3">
+                        Dưới đây là thông tin đơn hàng 
+                        <span class="order-detail-header__order-code">123456789</span>
+                        <span class="order-detail-header__order-time"> - 10:30 01/01/2021</span>
+                    </div>
+                    <div class="mb-4">
+                        <div class="order-detail-header__order-status-title mb-3">Trạng thái đơn hàng:</div>
+                        <div class="dropdown">
+                            <button class="btn btn-dropdown-status dropdown-toggle" type="button" id="dropdownOrderStatusButton" data-bs-toggle="dropdown" aria-expanded="false">
+                                Đã hoàn thành
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownOrderStatusButton">
+                                <li><div class="dropdown-item dropdown-status-item" onclick="updateDropdownStatusBtn('Chờ xác nhận')">Chờ xác nhận</div></li>
+                                <li><div class="dropdown-item dropdown-status-item" onclick="updateDropdownStatusBtn('Đã xác nhận')">Đã xác nhận</div></li>
+                                <li><div class="dropdown-item dropdown-status-item" onclick="updateDropdownStatusBtn('Đang vận chuyển')">Đang vận chuyển</div></li>
+                                <li><div class="dropdown-item dropdown-status-item" onclick="updateDropdownStatusBtn('Đã hoàn thành')">Đã hoàn thành</div></li>
+                                <li><div class="dropdown-item dropdown-status-item" onclick="updateDropdownStatusBtn('Đã hủy')">Đã hủy</div></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="order-detail-service-table text-center">
+                    <table class="table service-table table-borderless">
+                        <thead>
+                            <tr>
+                                <th scope="col-4" class="text-start align-middle" >Tên sản phẩm</th>
+                                <th scope="col-2" class="align-middle">Địa danh</th>
+                                <th scope="col-2" class="align-middle">Số lượng</th>
+                                <th scope="col-2" class="align-middle">Đơn giá</th>
+                                <th scope="col-2" class="align-middle">Thành tiền</th>
+                            </tr>
+                        </thead>
+                        <tbody class="service-table-body">
+
+                        </tbody>
+                    </table>
+                </div>
+                <div class="order-detail-total-table">
+                    <table class="table total-table table-bordered border-white">
+                        <tbody>
+                            <tr>
+                                <td class="text-start table-light">Tổng giá trị sản phẩm</td>
+                                <td class="text-end table-light total-table__sum"></td>
+                            </tr>
+                            <tr>
+                                <td class="text-start table-light">Voucher khuyến mãi</td>
+                                <td class="text-end table-light total-table__voucher"></td>
+                            </tr>
+                            <tr>
+                                <td class="text-start table-light">Phí giao hàng</td>
+                                <td class="text-end table-light total-table__ship"></td>
+                            </tr>
+                            <tr>
+                                <td class="text-start fw-bold">Tổng thanh toán</td>
+                                <td class="text-end fw-bold total-table__total"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="order-detail-customer-info mt-4">
+                    <p class="fw-bold my-3">
+                        Thông tin nhận hàng
+                    </p>
+                    <div class="row my-3">
+                        <label for="customerCode" class="col-3 col-form-label">Mã khách hàng:</label>
+                        <div class="col-9">
+                            <div id="customerCode" class="customer-info__customer-code"></div>
+                        </div>
+                    </div>
+                    <div class="row my-3">
+                        <label for="customerName" class="col-3 col-form-label">Tên người nhận:</label>
+                        <div class="col-9">
+                            <div id="customerName" class="customer-info__customer-code"></div>
+                        </div>
+                    </div>
+                    <div class="row my-3">
+                        <label for="customerMail" class="col-3 col-form-label">Địa chỉ Email:</label>
+                        <div class="col-9">
+                            <div id="customerMail" class="customer-info__customer-code"></div>
+                        </div>
+                    </div>
+                    <div class="row my-3">
+                        <label for="customerPhone" class="col-3 col-form-label">Số điện thoại:</label>
+                        <div class="col-9">
+                            <div id="customerPhone" class="customer-info__customer-code"></div>
+                        </div>
+                    </div>
+                    <div class="row my-3">
+                        <label for="orderPayment" class="col-3 col-form-label">Hình thức thanh toán:</label>
+                        <div class="col-9">
+                            <div id="orderPayment" class="customer-info__customer-code"></div>
+                        </div>
+                    </div>
+                    <div class="row my-3">
+                        <label for="orderNote" class="col-3 col-form-label">Ghi chú:</label>
+                        <div class="col-9">
+                            <div id="orderNote" class="customer-info__customer-code"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="d-flex justify-content-end">
+                    <button type="button" class="btn btn-save">Lưu</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    const sidebarItemOrder = document.getElementById('account_sidebar__order');
+    sidebarItemOrder.classList.add('account-sidebar__item--active');
+
+    const dropdownStatusSearch = document.getElementById('dropdownStatusSearch');
+    function updateDropdownStatusSearchBtn(payment) {
+        dropdownStatusSearch.textContent = payment;
+    }
+    const dropdownStatusButton = document.querySelector('.btn-dropdown-status');
+    function updateDropdownStatusBtn(status) {
+        dropdownStatusButton.textContent = status;
+    };
+</script>
+<script>
+    const inputOrderCode = document.getElementById('inputOrderCode');
+    const inputOrderCustomerCode = document.getElementById('inputOrderCustomerCode');
+    const inputOrderCustomerName = document.getElementById('inputOrderCustomerName');
+    const dropdownOrderStatusSearch = document.getElementById('dropdownStatusSearch');
+    const inputOrderFromDay = document.getElementById('inputOrderFromDay');
+    const inputOrderToDay = document.getElementById('inputOrderToDay');
+    const btnSearch = document.querySelector('.btn-search');
+
+    const orderTable = document.querySelector('.order-table');
+    const orderTableBody = document.querySelector('.order-table-body');
+
+    const orderDetailContainer = document.querySelector('.admin-order-detail-container');
+    const orderDetailCode = document.querySelector('.order-detail-header__order-code');
+    const orderDetailTime = document.querySelector('.order-detail-header__order-time');
+    const orderDetailDropdownStatus = document.getElementById('dropdownOrderStatusButton');
+    const orderDetailServiceTableBody = document.querySelector('.service-table-body');
+    const orderDetailTotalTableSum = document.querySelector('.total-table__sum');
+    const orderDetailTotalTableVoucher = document.querySelector('.total-table__voucher');
+    const orderDetailTotalTableShip = document.querySelector('.total-table__ship');
+    const orderDetailTotalTableTotal = document.querySelector('.total-table__total');
+    const orderDetailCustomerCode = document.getElementById('customerCode');
+    const orderDetailCustomerName = document.getElementById('customerName');
+    const orderDetailCustomerMail = document.getElementById('customerMail');
+    const orderDetailCustomerPhone = document.getElementById('customerPhone');
+    const orderDetailPayment = document.getElementById('orderPayment');
+    const orderDetailNote = document.getElementById('orderNote');
+
+    var data = [];
+    var currentIndex = 0;
+
+    btnSearchOnClick();
+    if (orderTable.rows.length > 1) orderTable.rows[1].classList.add('table-active'); 
+
+    function orderTableRowClick(rowIndex) {
+        console.log('table row ', rowIndex, ' clicked');
+        for (i = 1; i < orderTable.rows.length; i++) {
+            if (orderTable.rows[i].classList.contains('table-active')) {
+                orderTable.rows[i].classList.remove('table-active');
+            }
+        }
+        orderTable.rows[rowIndex].classList.add('table-active');
+        currentIndex = rowIndex - 1;
+        console.log(data.orderList[currentIndex]);
+        orderDetailCode.textContent = data.orderList[currentIndex].receiptId;
+        orderDetailTime.textContent = ' - ' + data.orderList[currentIndex].createdAt;
+        orderDetailDropdownStatus.textContent = data.orderList[currentIndex].deliveryStatus;
+        orderDetailCustomerCode.textContent = data.orderList[currentIndex].userCode;
+        orderDetailCustomerName.textContent = data.orderList[currentIndex].name;
+        orderDetailCustomerMail.textContent = data.orderList[currentIndex].mail;
+        orderDetailCustomerPhone.textContent = data.orderList[currentIndex].phone;
+        orderDetailPayment.textContent = data.orderList[currentIndex].paymentMethod;
+        orderDetailNote.textContent = data.orderList[currentIndex].note;
+        var serviceTableBody = '';
+        for (i = 0; i < data.orderList[currentIndex].listProduct.length; i++) {
+            var row = '<tr>'
+                            + '<td class="text-start" style="width: 40%;">' + data.orderList[currentIndex].listProduct[i].product.name + '</td>'
+                            + '<td style="width: 15%;">' + data.orderList[currentIndex].listProduct[i].product.location + '</td>'
+                            + '<td style="width: 15%;">' + data.orderList[currentIndex].listProduct[i].quantity + '</td>'
+                            + '<td style="width: 15%;">' + data.orderList[currentIndex].listProduct[i].product.currentPrice + '</td>'
+                            + '<td style="width: 15%;">' + (data.orderList[currentIndex].listProduct[i].product.currentPrice * data.orderList[currentIndex].listProduct[i].quantity) + '</td>'
+                        + '</tr>';
+            serviceTableBody += row;
+        }
+        orderDetailServiceTableBody.innerHTML = serviceTableBody;
+        orderDetailTotalTableSum.textContent = data.orderList[currentIndex].total;
+        orderDetailTotalTableVoucher.textContent = data.orderList[currentIndex].discount;
+        orderDetailTotalTableShip.textContent = data.orderList[currentIndex].deliveryMoney;
+        orderDetailTotalTableTotal.textContent = data.orderList[currentIndex].totalFinal;
+    }
+       
+    btnSearch.addEventListener('click', btnSearchOnClick);
+    async function btnSearchOnClick() {
+        try {
+            var orderCodeSearch = inputOrderCode.value;
+            var orderCustomerCodeSearch = inputOrderCustomerCode.value;
+            var orderCustomerNameSearch = inputOrderCustomerName.value;
+            var orderStatusSearch = dropdownOrderStatusSearch.textContent;
+            var orderFromDaySearch = inputOrderFromDay.value;
+            var orderToDaySearch = inputOrderToDay.value;
+
+            const res = await fetch('/account/admin-get-order', {
+                method: 'POST',
+                body: JSON.stringify({ orderCodeSearch, orderCustomerCodeSearch, orderCustomerNameSearch, orderStatusSearch, orderFromDaySearch, orderToDaySearch }),
+                headers: {'Content-Type': 'application/json'}
+            });
+            data = await res.json();
+            if (data) {
+                console.log('Search successful');
+                console.log(data);
+                var tableBody = '';
+                for (i = 0; i < data.orderList.length; i++) {
+                    var date = new Date(data.orderList[i].createdAt);
+                    var row = '<tr class="" onclick="orderTableRowClick(' + (i + 1) + ')">'
+                                + '<th scope="row">' + (i + 1) + '</th>'
+                                + '<td>' + data.orderList[i].receiptId + '</td>'
+                                + '<td>' + data.orderList[i].userCode + '</td>'
+                                + '<td>' + date.toDateString() + ' ' + date.toTimeString().substring(0, 5) + '</td>'
+                                + '<td>' + data.orderList[i].name + '</td>'
+                                + '<td>' + data.orderList[i].totalFinal + '</td>'
+                                + '<td id="order-table__status-' + i + '">' + data.orderList[i].deliveryStatus + '</td>'
+                            + '</tr>';
+                    tableBody += row;
+                }
+                orderTableBody.innerHTML = tableBody;
+                if (data.orderList.length > 0) {
+                    orderTableRowClick(1);
+                    if (orderDetailContainer.classList.contains('d-none')) {
+                        orderDetailContainer.classList.remove('d-none');
+                    }
+                }
+                else {
+                    if (!orderDetailContainer.classList.contains('d-none')) {
+                        orderDetailContainer.classList.add('d-none');
+                    }
+                }
+            }
+        }
+        catch(err) {
+            console.log('Search failed');
+            console.log(err);
+        }
+    }
+
+    const btnSave = document.querySelector('.btn-save');
+    btnSave.addEventListener('click', async (req, res) => {
+        if (!orderDetailContainer.classList.contains('d-none')) {
+            try {
+                const orderCode = data.orderList[currentIndex].receiptId;
+                const orderStatus = orderDetailDropdownStatus.textContent;
+                const res = await fetch('/account/admin-update-order-status', {
+                    method: 'POST',
+                    body: JSON.stringify({ orderCode, orderStatus }),
+                    headers: {'Content-Type': 'application/json'}
+                });
+                updatedOrderData = await res.json();
+                if (updatedOrderData) {
+                    if (updatedOrderData.updatedOrder) {
+                        console.log('update order status successful');
+                        console.log(updatedOrderData.updatedOrder);
+                        data.orderList[currentIndex].deliveryStatus = updatedOrderData.updatedOrder.orderStatus;
+                        orderDetailDropdownStatus.textContent = updatedOrderData.updatedOrder.orderStatus;
+                        const orderTableStatus = document.getElementById('order-table__status-' + currentIndex);
+                        orderTableStatus.textContent = updatedOrderData.updatedOrder.orderStatus;
+                        showAlertMorriStore('alert-success', 'Cập nhật trạng thái đơn thành công');
+                    }
+                }
+                else {
+                    console.log('update order status failed');
+                    console.log(updatedOrderData.error);
+                    showAlertMorriStore('alert-danger', 'Cập nhật trạng thái đơn thất bại, vui lòng thử lại');
+                }
+            }
+            catch(err) {
+                console.log('btn save error');
+                console.log(err);
+                showAlertMorriStore('alert-danger', 'Cập nhật trạng thái đơn thất bại, vui lòng thử lại');
+            }
+        }
+    });
+</script>
