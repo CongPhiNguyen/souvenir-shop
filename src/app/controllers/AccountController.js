@@ -5,6 +5,7 @@ const bcrypt = require('bcrypt');
 const User = require('../models/user');
 const Receipt = require('../models/receipt');
 const Voucher = require('../models/voucher');
+const Cart = require('../models/cart');
 
 module.exports.profile_get = (req, res) => {
     if (req.session.user) {
@@ -178,10 +179,11 @@ module.exports.adminDeleteCustomer_post = async (req, res) => {
         if (req.session.user.role === 'admin') {
             try {
                 const { userCodeToDelete } = req.body;
-                const result = await User.deleteOne({ userCode: userCodeToDelete });
-                if (result) {
+                const deletedUserResult = await User.deleteOne({ userCode: userCodeToDelete });
+                const deletedCartResult = await Cart.deleteOne({ userCode: userCodeToDelete });
+                if (deletedUserResult && deletedCartResult) {
                     console.log('delete successful');
-                    console.log(result);
+                    console.log(deletedUserResult);
                     res.json({ status: 200 });
                 }
                 else {

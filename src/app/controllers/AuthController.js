@@ -1,5 +1,6 @@
 const res = require("express/lib/response");
 const User = require('../models/user');
+const Cart = require('../models/cart');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
@@ -86,7 +87,9 @@ module.exports.signup_post = async (req, res) => {
     try {
         const salt = await bcrypt.genSalt();
         encryptedPassword = await bcrypt.hash(password, salt);
-        const user = await User.create({ role: 'customer', userCode: generateUserCode(), username, password: encryptedPassword, name, phone, mail, address: '', province: '', district: '', avatar: '' });
+        const newUserCode = generateUserCode();
+        const user = await User.create({ role: 'customer', userCode: newUserCode, username, password: encryptedPassword, name, phone, mail, address: '', province: '', district: '', avatar: '' });
+        const cart = await Cart.create({ userCode: newUserCode, listProduct: [] });
         const token = createToken(user._id);
         res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 });
         res.status(201).json({ user: user._id });
