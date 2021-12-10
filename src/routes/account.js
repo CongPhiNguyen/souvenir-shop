@@ -6,6 +6,7 @@ const accountController = require('../app/controllers/AccountController');
 
 router.get('/profile', requireAuth, accountController.profile_get);
 router.post('/profile', requireAuth, accountController.profile_post);
+router.post('/get-user-info', requireAuth, accountController.accountProfileInfo_post);
 router.get('/customer', requireAuth, accountController.customer_get);
 router.post('/admin-get-customer', requireAuth, accountController.adminCustomerList_post);
 router.post('/admin-delete-customer', requireAuth, accountController.adminDeleteCustomer_post);

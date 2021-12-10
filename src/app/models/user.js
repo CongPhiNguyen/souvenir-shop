@@ -35,11 +35,17 @@ const userSchema = new Schema({
         required: [true, 'User role not defined'],
     },
     avatar: {
-        type: String
+        type: String,
     },
     address: {
-        type: String
-    }
+        type: String,
+    },
+    province: {
+        type: String,
+    },
+    district: {
+        type: String,
+    },
 });
 userSchema.plugin(uniqueValidator);
 

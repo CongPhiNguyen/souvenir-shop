@@ -35,8 +35,22 @@
                 <div class="mb-4 row">
                     <label for="inputAddress" class="col-lg-3 col-form-label mb-1">Địa chỉ</label>
                     <div class="col-lg-7">
-                        <input type="tel" class="form-control mb-2" id="inputAddress">
-                        <div class="inputAddress-error text-error"></div>
+                        <input type="tel" class="form-control mb-2" id="inputAddress" value="{{user.address}}">
+                        <div class="inputAddress-error text-error mb-2"></div>
+                        <div class="row">
+                            <div class="col-6">
+                                <select name="province" class="form-select"
+                                    aria-label="example">
+                                    <option selected>Chọn tỉnh / thành phố</option>
+                                </select>
+                            </div>
+                            <div class="col-6">
+                                <select name="district" class="form-select"
+                                    aria-label="example">
+                                    <option selected>Chọn quận / huyện</option>
+                                </select>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div>
@@ -77,6 +91,10 @@
     const sidebarItemProfile = document.getElementById('account_sidebar__profile');
     sidebarItemProfile.classList.add('account-sidebar__item--active');
 
+    var listProvince;
+    let selectProvince = document.querySelector('select[name="province"]');
+    let selectDistrict = document.querySelector('select[name="district"]');
+
     const inputName = document.getElementById('inputName');
     const inputNameError = document.querySelector('.inputName-error');
     const inputEmail = document.getElementById('inputEmail');
@@ -95,7 +113,110 @@
     const changePasswordSection = document.querySelector('.change-password-section');
     const btnUpdate = document.querySelector('.btn-update');
 
+
+    fetch('https://provinces.open-api.vn/api/?depth=2')
+        .then(response => response.json())
+        .then(async data => {
+            listProvince = data;
+            console.log(listProvince);
+
+            try {
+                const res = await fetch('/account/get-user-info', {
+                    method: 'POST',
+                    body: JSON.stringify({ }),
+                    headers: {'Content-Type': 'application/json'}
+                });
+                const userInfoData = await res.json();
+                if (userInfoData) {
+                    if (userInfoData.userInfo) {
+                        var html1 = '';
+                        var html2 = '';
+
+                        if (userInfoData.userInfo.province === '') {
+                            html1 = '<option selected value="">Chọn tỉnh / thành phố</option>';
+                        }
+                        if (userInfoData.userInfo.district === '') {
+                            html2 = '<option selected value="">Chọn quận / huyện</option>';
+                        }
+
+                        for (i = 0; i < listProvince.length; i++) {
+                            var provinceHTML = '';
+                            if (listProvince[i].codename === userInfoData.userInfo.province) {
+                                provinceHTML = `<option selected value=${listProvince[i].codename}>${listProvince[i].name}</option>`;
+                                for (j = 0; j < listProvince[i].districts.length; j++) {
+                                    var districtHTML = '';
+                                    if (listProvince[i].districts[j].codename === userInfoData.userInfo.district) {
+                                        districtHTML = `<option selected value=${listProvince[i].districts[j].codename}>${listProvince[i].districts[j].name}</option>`;
+                                    }
+                                    else {
+                                        districtHTML = `<option value=${listProvince[i].districts[j].codename}>${listProvince[i].districts[j].name}</option>`;
+                                    }
+                                    html2 += districtHTML;
+                                }
+                            }
+                            else {
+                                provinceHTML = `<option value=${listProvince[i].codename}>${listProvince[i].name}</option>`;
+                            }
+                            html1 += provinceHTML;
+                        }
+
+                        selectProvince.innerHTML = html1;
+                        selectDistrict.innerHTML = html2;
+
+                    }
+                }
+                else {
+                    console.log('get user info failed');
+
+                    const html1 = listProvince.map(value => (
+                        `<option value=${value.codename}>${value.name}</option>`
+                    ))
+                    const html2 = listProvince[0].districts.map(value => (
+                        `<option value=${value.codename}>${value.name}</option>`
+                    ))
+                    selectProvince.innerHTML = html1.join('');
+                    selectDistrict.innerHTML = html2.join('');
+                    return data;
+                }
+            }
+            catch(err) {
+                console.log('error');
+                console.log(err);
+
+                const html1 = listProvince.map(value => (
+                    `<option value=${value.codename}>${value.name}</option>`
+                ))
+                const html2 = listProvince[0].districts.map(value => (
+                    `<option value=${value.codename}>${value.name}</option>`
+                ))
+                selectProvince.innerHTML = html1.join('');
+                selectDistrict.innerHTML = html2.join('');
+                return data;
+            }
+        })
+        .catch(err => console.log("Lỗi"));
+
+    selectProvince.onclick = (e) => {
+        console.log(e.target.value)
+        renderDistricts(e.target.value);
+    }
+
+
+    renderDistricts = (codename) => {
+        listProvince.map(value => {
+            if (value.codename === codename) {
+                console.log(value);
+                const html = value.districts.map(value => (
+                    `<option value=${value.codename}>${value.name}</option>`
+                ))
+                selectDistrict.innerHTML = html.join('');
+            }
+        })
+    }
+
     changePasswordbtn.addEventListener('click', (e) => {
+        console.log(selectProvince.value);
+        console.log(selectDistrict.value);
         if (changePasswordSection.classList.contains('d-none')) {
             changePasswordSection.classList.remove('d-none');
         }
@@ -109,6 +230,8 @@
         const newEmail = inputEmail.value;
         const newPhone = inputPhone.value;
         const newAddress = inputAddress.value;
+        const newProvince = selectProvince.value;
+        const newDistrict = selectDistrict.value;
         var oldPassword = inputPassword.value;
         var newPassword = inputNewPassword.value;
         const confirmPassword = inputConfirmPassword.value;
@@ -140,7 +263,7 @@
                     newPassword = '';
                     const res = await fetch('/account/profile', {
                         method: 'POST',
-                        body: JSON.stringify({ newName, newEmail, newPhone, newAddress, oldPassword, newPassword }),
+                        body: JSON.stringify({ newName, newEmail, newPhone, newAddress, newProvince, newDistrict, oldPassword, newPassword }),
                         headers: {'Content-Type': 'application/json'}
                     });
                     const data = await res.json();
@@ -171,7 +294,7 @@
                     else {
                         const res = await fetch('/account/profile', {
                             method: 'POST',
-                            body: JSON.stringify({ newName, newEmail, newPhone, newAddress, oldPassword, newPassword }),
+                            body: JSON.stringify({ newName, newEmail, newPhone, newAddress, newProvince, newDistrict, oldPassword, newPassword }),
                             headers: {'Content-Type': 'application/json'}
                         });
                         const data = await res.json();

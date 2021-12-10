@@ -46,9 +46,6 @@
                             <select name="province" class="form-select form-select-lg mb-3"
                                 aria-label=".form-select-lg example">
                                 <option selected>Chọn tỉnh / thành phố</option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
                             </select>
                         </div>
                         <div class="col-6">
@@ -224,17 +221,83 @@
 
     fetch('https://provinces.open-api.vn/api/?depth=2')
         .then(response => response.json())
-        .then(data => {
+        .then(async data => {
             listProvince = data;
-            const html1 = listProvince.map(value => (
-                `<option value=${value.codename}>${value.name}</option>`
-            ))
-            const html2 = listProvince[0].districts.map(value => (
-                `<option value=${value.codename}>${value.name}</option>`
-            ))
-            elementProvince.innerHTML = html1.join('');
-            elementDistrict.innerHTML = html2.join('');
-            return data;
+            console.log(listProvince);
+
+            try {
+                const res = await fetch('/account/get-user-info', {
+                    method: 'POST',
+                    body: JSON.stringify({ }),
+                    headers: {'Content-Type': 'application/json'}
+                });
+                const userInfoData = await res.json();
+                if (userInfoData) {
+                    if (userInfoData.userInfo) {
+                        var html1 = '';
+                        var html2 = '';
+
+                        if (userInfoData.userInfo.province === '') {
+                            html1 = '<option selected value="">Chọn tỉnh / thành phố</option>';
+                        }
+                        if (userInfoData.userInfo.district === '') {
+                            html2 = '<option selected value="">Chọn quận / huyện</option>';
+                        }
+
+                        for (i = 0; i < listProvince.length; i++) {
+                            var provinceHTML = '';
+                            if (listProvince[i].codename === userInfoData.userInfo.province) {
+                                provinceHTML = `<option selected value=${listProvince[i].codename}>${listProvince[i].name}</option>`;
+                                for (j = 0; j < listProvince[i].districts.length; j++) {
+                                    var districtHTML = '';
+                                    if (listProvince[i].districts[j].codename === userInfoData.userInfo.district) {
+                                        districtHTML = `<option selected value=${listProvince[i].districts[j].codename}>${listProvince[i].districts[j].name}</option>`;
+                                    }
+                                    else {
+                                        districtHTML = `<option value=${listProvince[i].districts[j].codename}>${listProvince[i].districts[j].name}</option>`;
+                                    }
+                                    html2 += districtHTML;
+                                }
+                            }
+                            else {
+                                provinceHTML = `<option value=${listProvince[i].codename}>${listProvince[i].name}</option>`;
+                            }
+                            html1 += provinceHTML;
+                        }
+
+                        elementProvince.innerHTML = html1;
+                        elementDistrict.innerHTML = html2;
+
+                    }
+                }
+                else {
+                    console.log('get user info failed');
+
+                    const html1 = listProvince.map(value => (
+                        `<option value=${value.codename}>${value.name}</option>`
+                    ))
+                    const html2 = listProvince[0].districts.map(value => (
+                        `<option value=${value.codename}>${value.name}</option>`
+                    ))
+                    elementProvince.innerHTML = html1.join('');
+                    elementDistrict.innerHTML = html2.join('');
+                    return data;
+                }
+            }
+            catch(err) {
+                console.log('error');
+                console.log(err);
+
+                const html1 = listProvince.map(value => (
+                    `<option value=${value.codename}>${value.name}</option>`
+                ))
+                const html2 = listProvince[0].districts.map(value => (
+                    `<option value=${value.codename}>${value.name}</option>`
+                ))
+                elementProvince.innerHTML = html1.join('');
+                elementDistrict.innerHTML = html2.join('');
+                return data;
+            }
         })
         .catch(err => console.log("Lỗi"));
 
