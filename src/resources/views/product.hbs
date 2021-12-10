@@ -50,10 +50,10 @@
                 </li>
             </ol>
         </div>
-        <input type="file" id="avatar" name="avatar" accept="image/png, image/jpeg">
+        {{!-- <input type="file" id="avatar" name="avatar" accept="image/png, image/jpeg">
         <button onclick="uploadPicture()">
             Send picture
-        </button>
+        </button> --}}
         {{!-- Phần của product --}}
         <div class="product-container row">
             <div class="product-image col-md-4" onclick="changePictureModal()">
@@ -300,6 +300,21 @@
         }
         else pictureModal.classList.add('d-none');
     }
+
+    document.getElementById('avatar').onchange = function(evt) {
+        var tgt = evt.target || window.event.srcElement,
+        files = tgt.files;
+
+        // FileReader support
+        if (FileReader && files && files.length) {
+            var fr = new FileReader();
+            fr.onload = function () {
+                document.getElementById(outImage).src = fr.result;
+            }
+            fr.readAsDataURL(files[0]);
+        }
+    }
+
 
     async function addProduct() {
         alert('Đang chạy axios')
