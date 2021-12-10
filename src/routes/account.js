@@ -13,8 +13,8 @@ router.get('/get-all-receipt', requireAuth, accountController.getAllReceipt)
 router.get('/statistic', requireAuth, accountController.profileStatistic)
 router.get('/receipt', requireAuth, accountController.receipt_get);
 router.get('/get-order/:code', requireAuth, accountController.receiptDetail_get);
-// router.post('/admin-get-order', requireAuth, accountController.adminOrderList_post);
-// router.get('/make-order', requireAuth, accountController.makeOrder_get);
+router.post('/admin-get-order', requireAuth, accountController.adminOrderList_post);
+router.post('/admin-update-order-status', requireAuth, accountController.adminUpdateOrderStatus_post);
 // router.get('/voucher', requireAuth, accountController.voucher_get);
 router.get('/', requireAuth, accountController.profile_get);
 

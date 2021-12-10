@@ -213,6 +213,296 @@ module.exports.receipt_get = async (req, res) => {
     else res.render('404NotFound');
 }
 
+module.exports.adminOrderList_post = async (req, res) => {
+    if (req.session.user) {
+        if (req.session.user.role === 'admin') {
+            try {
+                const { orderCodeSearch, orderCustomerCodeSearch, orderCustomerNameSearch, orderStatusSearch, orderFromDaySearch, orderToDaySearch } = req.body;
+                console.log(orderCodeSearch);
+                console.log(orderCustomerCodeSearch);
+                console.log(orderCustomerNameSearch);
+                console.log(orderStatusSearch);
+                console.log(orderFromDaySearch);
+                console.log(orderToDaySearch);
+                var orderList = [];
+                if (orderCodeSearch === '' && orderCustomerCodeSearch === '' && orderCustomerNameSearch === '' && orderStatusSearch === 'Tất cả' && orderFromDaySearch === '' && orderToDaySearch === '') {
+                    console.log('get all orders');
+                    // console.log('get all orders in last 30 days');
+                    // var currentDate = Date.now();
+                    // currentDate = new Date(currentDate);
+                    // console.log(currentDate);
+                    // var fromDate = currentDate;
+                    // fromDate.setDate(fromDate.getDate() - 29);
+                    // fromDate.setHours(0, 0, 0);
+                    // fromDate = new Date(fromDate);
+                    // console.log(fromDate);
+                    orderList = await Receipt.find({ }).sort({ createdAt: -1 });
+                }
+                else if (orderCodeSearch !== '') {
+                    console.log('search by order code');
+                    orderList = await Receipt.find({ orderCode: orderCodeSearch }).sort({ createdAt: -1 });
+                }
+                else if (orderCustomerCodeSearch !== '') {
+                    if (orderStatusSearch !== 'Tất cả') {
+                        if (orderFromDaySearch !== '' && orderToDaySearch !== '') {
+                            console.log('search by customer code, order status, from date and to date');
+                            var fromDate = new Date(orderFromDaySearch);
+                            fromDate = fromDate.setHours(fromDate.getHours() - 7);
+                            fromDate = new Date(fromDate);
+                            var toDate = new Date(orderToDaySearch);
+                            toDate = toDate.setHours(toDate.getHours() - 7 + 24);
+                            toDate = new Date(toDate);
+                            orderList = await Receipt.find({ userCode: orderCustomerCodeSearch, deliveryStatus: orderStatusSearch, createdAt: { $gte: fromDate, $lte: toDate } }).sort({ createdAt: -1 });
+                        }
+                        else if (orderFromDaySearch !== '') {
+                            console.log('search by customer code, order status, from date');
+                            var fromDate = new Date(orderFromDaySearch);
+                            fromDate = fromDate.setHours(fromDate.getHours() - 7);
+                            fromDate = new Date(fromDate);
+                            orderList = await Receipt.find({ userCode: orderCustomerCodeSearch, deliveryStatus: orderStatusSearch, createdAt: { $gte: fromDate } }).sort({ createdAt: -1 });
+                        }
+                        else if (orderToDaySearch !== '') {
+                            console.log('search by customer code, order status, to date');
+                            var toDate = new Date(orderToDaySearch);
+                            toDate = toDate.setHours(toDate.getHours() - 7 + 24);
+                            toDate = new Date(toDate);
+                            orderList = await Receipt.find({ userCode: orderCustomerCodeSearch, deliveryStatus: orderStatusSearch, createdAt: { $lte: toDate } }).sort({ createdAt: -1 });
+                        }
+                        else {
+                            console.log('search by customer code, order status');
+                            orderList = await Receipt.find({ userCode: orderCustomerCodeSearch, deliveryStatus: orderStatusSearch }).sort({ createdAt: -1 });
+                        }
+                    }
+                    else {
+                        if (orderFromDaySearch !== '' && orderToDaySearch !== '') {
+                            console.log('search by customer code, from date and to date');
+                            var fromDate = new Date(orderFromDaySearch);
+                            fromDate = fromDate.setHours(fromDate.getHours() - 7);
+                            fromDate = new Date(fromDate);
+                            var toDate = new Date(orderToDaySearch);
+                            toDate = toDate.setHours(toDate.getHours() - 7 + 24);
+                            toDate = new Date(toDate);
+                            orderList = await Receipt.find({ userCode: orderCustomerCodeSearch, createdAt: { $gte: fromDate, $lte: toDate } }).sort({ createdAt: -1 });
+                        }
+                        else if (orderFromDaySearch !== '') {
+                            console.log('search by customer code, from date');
+                            var fromDate = new Date(orderFromDaySearch);
+                            fromDate = fromDate.setHours(fromDate.getHours() - 7);
+                            fromDate = new Date(fromDate);
+                            orderList = await Receipt.find({ userCode: orderCustomerCodeSearch, createdAt: { $gte: fromDate } }).sort({ createdAt: -1 });
+                        }
+                        else if (orderToDaySearch !== '') {
+                            console.log('search by customer code, to date');
+                            var toDate = new Date(orderToDaySearch);
+                            toDate = toDate.setHours(toDate.getHours() - 7 + 24);
+                            toDate = new Date(toDate);
+                            orderList = await Receipt.find({ userCode: orderCustomerCodeSearch, createdAt: { $lte: toDate } }).sort({ createdAt: -1 });
+                        }
+                        else {
+                            console.log('search by customer code');
+                            orderList = await Receipt.find({ userCode: orderCustomerCodeSearch }).sort({ createdAt: -1 });
+                        }
+                    }
+                }
+                else if (orderCustomerNameSearch !== '') {
+                    if (orderStatusSearch !== 'Tất cả') {
+                        if (orderFromDaySearch !== '' && orderToDaySearch !== '') {
+                            console.log('search by customer name, order status, from date and to date');
+                            var fromDate = new Date(orderFromDaySearch);
+                            fromDate = fromDate.setHours(fromDate.getHours() - 7);
+                            fromDate = new Date(fromDate);
+                            var toDate = new Date(orderToDaySearch);
+                            toDate = toDate.setHours(toDate.getHours() - 7 + 24);
+                            toDate = new Date(toDate);
+                            orderList = await Receipt.find({ name: orderCustomerNameSearch, deliveryStatus: orderStatusSearch, createdAt: { $gte: fromDate, $lte: toDate } }).sort({ createdAt: -1 });
+                        }
+                        else if (orderFromDaySearch !== '') {
+                            console.log('search by customer name, order status, from date');
+                            var fromDate = new Date(orderFromDaySearch);
+                            fromDate = fromDate.setHours(fromDate.getHours() - 7);
+                            fromDate = new Date(fromDate);
+                            orderList = await Receipt.find({ name: orderCustomerNameSearch, deliveryStatus: orderStatusSearch, createdAt: { $gte: fromDate } }).sort({ createdAt: -1 });
+                        }
+                        else if (orderToDaySearch !== '') {
+                            console.log('search by customer name, order status, to date');
+                            var toDate = new Date(orderToDaySearch);
+                            toDate = toDate.setHours(toDate.getHours() - 7 + 24);
+                            toDate = new Date(toDate);
+                            orderList = await Receipt.find({ name: orderCustomerNameSearch, deliveryStatus: orderStatusSearch, createdAt: { $lte: toDate } }).sort({ createdAt: -1 });
+                        }
+                        else {
+                            console.log('search by customer name, order status');
+                            orderList = await Receipt.find({ name: orderCustomerNameSearch, deliveryStatus: orderStatusSearch }).sort({ createdAt: -1 });
+                        }
+                    }
+                    else {
+                        if (orderFromDaySearch !== '' && orderToDaySearch !== '') {
+                            console.log('search by customer name, from date and to date');
+                            var fromDate = new Date(orderFromDaySearch);
+                            fromDate = fromDate.setHours(fromDate.getHours() - 7);
+                            fromDate = new Date(fromDate);
+                            var toDate = new Date(orderToDaySearch);
+                            toDate = toDate.setHours(toDate.getHours() - 7 + 24);
+                            toDate = new Date(toDate);
+                            orderList = await Receipt.find({ name: orderCustomerNameSearch, createdAt: { $gte: fromDate, $lte: toDate } }).sort({ createdAt: -1 });
+                        }
+                        else if (orderFromDaySearch !== '') {
+                            console.log('search by customer name, from date');
+                            var fromDate = new Date(orderFromDaySearch);
+                            fromDate = fromDate.setHours(fromDate.getHours() - 7);
+                            fromDate = new Date(fromDate);
+                            orderList = await Receipt.find({ name: orderCustomerNameSearch, createdAt: { $gte: fromDate } }).sort({ createdAt: -1 });
+                        }
+                        else if (orderToDaySearch !== '') {
+                            console.log('search by customer name, to date');
+                            var toDate = new Date(orderToDaySearch);
+                            toDate = toDate.setHours(toDate.getHours() - 7 + 24);
+                            toDate = new Date(toDate);
+                            orderList = await Receipt.find({ name: orderCustomerNameSearch, createdAt: { $lte: toDate } }).sort({ createdAt: -1 });
+                        }
+                        else {
+                            console.log('search by customer name');
+                            orderList = await Receipt.find({ name: orderCustomerNameSearch }).sort({ createdAt: -1 });
+                        }
+                    }
+                }
+                else if (orderStatusSearch !== 'Tất cả') {
+                    if (orderFromDaySearch !== '' && orderToDaySearch !== '') {
+                        console.log('search by order status, from date and to date');
+                        var fromDate = new Date(orderFromDaySearch);
+                        fromDate = fromDate.setHours(fromDate.getHours() - 7);
+                        fromDate = new Date(fromDate);
+                        var toDate = new Date(orderToDaySearch);
+                        toDate = toDate.setHours(toDate.getHours() - 7 + 24);
+                        toDate = new Date(toDate);
+                        orderList = await Receipt.find({ deliveryStatus: orderStatusSearch, createdAt: { $gte: fromDate, $lte: toDate } }).sort({ createdAt: -1 });
+                    }
+                    else if (orderFromDaySearch !== '') {
+                        console.log('search by order status, from date');
+                        var fromDate = new Date(orderFromDaySearch);
+                        fromDate = fromDate.setHours(fromDate.getHours() - 7);
+                        fromDate = new Date(fromDate);
+                        orderList = await Receipt.find({ deliveryStatus: orderStatusSearch, createdAt: { $gte: fromDate } }).sort({ createdAt: -1 });
+                    }
+                    else if (orderToDaySearch !== '') {
+                        console.log('search by order status, to date');
+                        var toDate = new Date(orderToDaySearch);
+                        toDate = toDate.setHours(toDate.getHours() - 7 + 24);
+                        toDate = new Date(toDate);
+                        orderList = await Receipt.find({ deliveryStatus: orderStatusSearch, createdAt: { $lte: toDate } }).sort({ createdAt: -1 });
+                    }
+                    else {
+                        console.log('search by order status');
+                        orderList = await Receipt.find({ deliveryStatus: orderStatusSearch }).sort({ createdAt: -1 });
+                    }
+                }
+                else if (orderFromDaySearch !== '' && orderToDaySearch !== '') {
+                    console.log('search by from date and to date');
+                    var fromDate = new Date(orderFromDaySearch);
+                    fromDate = fromDate.setHours(fromDate.getHours() - 7);
+                    fromDate = new Date(fromDate);
+                    var toDate = new Date(orderToDaySearch);
+                    toDate = toDate.setHours(toDate.getHours() - 7 + 24);
+                    toDate = new Date(toDate);
+                    console.log(fromDate);
+                    console.log(toDate);
+                    orderList = await Receipt.find({ createdAt: { $gte: fromDate, $lte: toDate } }).sort({ createdAt: -1 });
+                }
+                else if (orderFromDaySearch !== '') {
+                    console.log('search by from date');
+                    var fromDate = new Date(orderFromDaySearch);
+                    fromDate = fromDate.setHours(fromDate.getHours() - 7);
+                    fromDate = new Date(fromDate);
+                    orderList = await Receipt.find({ createdAt: { $gte: fromDate } }).sort({ createdAt: -1 });
+                }
+                else if (orderToDaySearch !== '') {
+                    console.log('search by to date');
+                    var toDate = new Date(orderToDaySearch);
+                    toDate = toDate.setHours(toDate.getHours() - 7 + 24);
+                    toDate = new Date(toDate);
+                    orderList = await Receipt.find({ createdAt: { $lte: toDate } }).sort({ createdAt: -1 });
+                }
+
+                if (orderList) {
+                    console.log(orderList);
+                    res.status(200).json({ orderList: orderList });
+                }
+                else {
+                    console.log('admin orderList null');
+                    res.status(400).json({ error: 'orderList null' });
+                }
+            }
+            catch(err) {
+                console.log('admin post orderList error');
+                console.log(err);
+                res.status(400).json({ error: err });
+            }
+        }
+        else {
+            console.log('orderList post not authorized');
+            res.status(400).json({ error: 'user not authorized' });
+        }
+    }
+    else {
+        console.log('user not log in');
+        res.status(400).json({ error: 'user not log in' });
+    }
+}
+
+module.exports.adminUpdateOrderStatus_post = async (req, res) => {
+    if (req.session.user) {
+        if (req.session.user.role === 'admin') {
+            try {
+                const { orderCode, orderStatus } = req.body;
+                await Receipt.findOneAndUpdate(
+                    { receiptId: orderCode },
+                    { deliveryStatus: orderStatus },
+                    { runValidators: true, context: 'query' },
+                ).then(result => {
+                    console.log('update order status successful');
+                    res.status(200).json({ updatedOrder: { orderCode, orderStatus } });
+                });
+            }
+            catch(err) {
+                console.log('admin update order status error');
+                console.log(err);
+                res.status(400).json({ error: err });
+            }
+        }
+        else {
+            console.log('update order status post not authorized');
+            res.status(400).json({ error: 'user not authorized' });
+        }
+    }
+    else {
+        console.log('user not log in');
+        res.status(400).json({ error: 'user not log in' });
+    }
+}
+
+module.exports.receiptDetail_get = async (req, res) => {
+    console.log('receipt code: ', req.params.code);
+    try {
+        const receipt = await Receipt.findOne({ receiptId: req.params.code }).lean();
+        if (receipt) {
+            console.log(receipt);
+            if (receipt.userCode === req.session.user.userCode) {
+                res.render('accountReceiptDetail', { receipt: receipt });
+            }
+            else {
+                res.render('404NotFound');
+            }
+        }
+        else {
+            console.log('account receipt detail null');
+        }
+    }
+    catch (err) {
+        console.log('account receipt detail error');
+        console.log(err);
+    }
+}
+
 module.exports.profileStatistic = async (req, res) => {
     try {
         console.log(req.session.user);
@@ -241,29 +531,6 @@ module.exports.getAllReceipt = async (req, res) => {
                     message: "Lỗi kết nối",
                 })
             );
-        }
-    }
-    catch (err) {
-        console.log('account receipt detail error');
-        console.log(err);
-    }
-}
-
-module.exports.receiptDetail_get = async (req, res) => {
-    console.log('receipt code: ', req.params.code);
-    try {
-        const receipt = await Receipt.findOne({ receiptId: req.params.code }).lean();
-        if (receipt) {
-            console.log(receipt);
-            if (receipt.userCode === req.session.user.userCode) {
-                res.render('accountReceiptDetail', { receipt: receipt });
-            }
-            else {
-                res.render('404NotFound');
-            }
-        }
-        else {
-            console.log('account receipt detail null');
         }
     }
     catch (err) {
