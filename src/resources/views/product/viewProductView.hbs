@@ -44,25 +44,27 @@
                 </li>
             </ol>
         </div>
+        <div id="product-code" data-value={{dataProduct._id}}>{{dataProduct._id}}</div>
+        <div id="product-id" data-value={{dataProduct.productID}}>{{dataProduct.productID}}</div>
         {{!-- Phần của product --}}
         <div class="product-container row">
             <div class="product-image col-md-4">
                 <img class="product-image-1" src={{dataProduct.imgUrl}} alt="">    
             </div>
             <div class="product-info col-md-8">
-                <div class="product-name">{{dataProduct.name}}</div>
+                <div class="product-name" data-value={{dataProduct.name}}>{{dataProduct.name}}</div>
                 <div class="product-place">
                     <i class="fas fa-map-marker-alt"></i>
-                    <span class="product-location">{{dataProduct.location}}</span>
+                    <span class="product-location" data-value={{dataProduct.location}}>{{dataProduct.location}}</span>
                 </div>
                 <div class="product-price-sale">
-                    <div class="product-old-price">{{dataProduct.sellPrice}}</div>
-                    <div class="product-price">{{dataProduct.currentPrice}}</div>
+                    <div class="product-old-price" data-value={{dataProduct.sellPrice}}>{{dataProductc}}</div>
+                    <div class="product-price" data-value={{dataProduct.currentPrice}}>{{dataProduct.currentPrice}}</div>
                     <div class="sale-percent">
                         {{!-- {{((parseInt(dataProduct.sellPrice) - parseInt(data.currentPrice))/(dataProduct.sellPrice))}} --}}
                     </div>
                 </div>
-                <div class="product-description">
+                <div class="product-description" data-value={{dataProduct.description}}>
                     {{dataProduct.description}}
                 </div>
                 <div class="product-sold">
@@ -80,7 +82,7 @@
                     <div class="quantity-chose-title">Chọn số lượng</div>
                     <div class="input-group bootstrap-touchspin">
                         <span class="input-group-addon bootstrap-touchspin-prefix" style="display: none;"></span>
-                        <input type="number" name="qty" id="quantity_wanted" value="1" class="input-group form-control" min="1" aria-label="Quantity" style="display: block;">
+                        <input type="number" name="quantity" id="quantity_wanted" value="1" class="input-group form-control" min="1" aria-label="Quantity" style="display: block;">
                         <span class="input-group-addon bootstrap-touchspin-postfix" style="display: none;"></span><span class="input-group-btn-vertical">
                         <button class="btn btn-touchspin js-touchspin bootstrap-touchspin-up" type="button">
                             <i class="material-icons touchspin-up"></i>
@@ -92,8 +94,8 @@
                     {{!-- <button class="add-to-cart bt-add-to-cart" onclick="addToCart()">
                         Add to cart 
                     </button> --}}
-                    <button class="add-to-cart bt-add-to-cart" onclick="updateProduct()">
-                        Buy product 
+                    <button class="add-to-cart bt-add-to-cart" onclick="addToCart   ()">
+                        Add to cart 
                     </button>
                     {{!-- <button class="buy-now">
                         Buy now
@@ -136,6 +138,85 @@
 </div>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script>
-    
+    async function addToCart() {
+        {{!-- try { --}}
+            const data = {
+                email: localStorage.getItem('username'),
+                userCode: userCode,
+                _id: document.querySelector('#product-code').getAttribute('data-value'),
+                productID: document.querySelector('#product-id').getAttribute('data-value'), 
+                name: document.querySelector('#product-code').getAttribute('data-value'), 
+                location: document.querySelector('.product-location').getAttribute('data-value'), 
+                province: document.querySelector('.product-location').getAttribute('data-value'),     
+                originalPrice: document.querySelector('.product-old-price').getAttribute('data-value'),
+                sellPrice: document.querySelector('.product-old-price').getAttribute('data-value'),
+                currentPrice: document.querySelector('.product-price').getAttribute('data-value'),
+                imgUrl: document.querySelector('.product-image-1').src,
+                description: document.querySelector('.product-description').getAttribute('data-value'),
+                unit: 'cái',
+                rating: 0.0,
+            };
+            console.log("data", data);
+            await axios.post(`http://localhost:3000/product/add-to-cart`, data)
+            .then(res => {
+                showAlertMorriStore('alert-success', 'Thêm cart thành công !')
+            })
+            .catch(err => {
+                alert(err);
+                if(err.response.data.message)
+                {
+                    alert(err.response.data.message);
+                }
+                console.log(err);
+                isAddOK = false;
+            })
+            // Chạy các hàm refresh của bé Thiện
+            
+            var isFound = false;
+            for(var i = 0 ; i < cartUser.length; i++)
+            {
+                if(cartUser[i].product.productID == data.productID)
+                {
+                    cartUser[i].quantity++;
+                    isFound = true;
+                    break;
+                }
+            }
+            
+            if(!isFound)
+            {
+                cartUser.push(
+                    {
+                        product: {
+                            productID: data.productID, 
+                            name: data.name, 
+                            location: data.location, 
+                            province: data.province, 
+                            quantity: data.quantity, 
+                            remain: data.remain,
+                            originalPrice: data.originalPrice,
+                            sellPrice: data.sellPrice,
+                            currentPrice: data.currentPrice,
+                            imgUrl: data.imgUrl,
+                            description: data.description,
+                            unit: data.unit,
+                            rating: data.rating,
+                        },
+                        quantity: 1,
+                    }
+                )
+            }
+
+            console.log("cartUser", cartUser);
+            renderProduct()
+            renderQuantity()
+            renderQuantityTotal() 
+        {{!-- }
+        catch(e)
+        {
+            alert(e);
+            console.log(e);
+        } --}}
+    };
 </script>
 

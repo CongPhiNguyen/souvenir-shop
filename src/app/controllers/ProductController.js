@@ -30,6 +30,7 @@ class ProductController {
         // console.log(newI);
         res.render('product/viewProductView', { title: "Product" , active: {Product: true }, 
             dataProduct: {
+                _id: newI._id,
                 name: newI.name,
                 location: newI.location, 
                 province: newI.province, 
