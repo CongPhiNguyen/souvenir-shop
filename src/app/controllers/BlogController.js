@@ -62,19 +62,8 @@ module.exports.postBlog_get = (req, res) => {
 
 module.exports.postBlog_post = async (req, res) => {
     console.log('req.body: ' + req.body);
-
-/*     if (req.files == undefined) {
-        return res.send({
-          message: "You must select a file.",
-        });
-    }
-    else{
-        console.log(req.file)
-    } */
-  
     const { title, img, category, description, contentCode} = req.body;
-/*     var image = fs.readFileSync(req.file.path);
-    var encode_image = image.toString('base64'); */
+
     try {
         if(title == '') throw Error('Title is required');
         if(img == '') throw Error('Image is required');
@@ -185,6 +174,13 @@ module.exports.editDetailBlog_get = async (req, res) => {
 module.exports.editDetailBlog_post = async (req, res) => {
 
     const { id, title, img, category, description, contentCode } = req.body;
+        
+    if(title == '') throw Error('Title is required');
+    if(img == '') throw Error('Image is required');
+    if(category == '') throw Error('Category is required');
+    if(description == '') throw Error('Description is required');
+    if(contentCode == '') throw Error('Content is required');
+    
     var objectId = mongoose.Types.ObjectId(id);
     const newBlog = new Blog({
         title: title,

@@ -8,11 +8,6 @@
                 
                 <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
                     <li class="nav-item">
-                        <button class="nav-link align-middle px-0 btn btn-new">
-                            <i class="far fa-calendar-plus ms-2"></i> New 
-                        </button>
-                    </li>
-                    <li class="nav-item">
                         <button class="nav-link align-middle px-0 btn btn-preview"> 
                             <i class="fas fa-chalkboard-teacher ms-2"></i> Preview
                         </button>
@@ -217,18 +212,6 @@
             console.log(err);
         }
     });
-
-
-    const btnNew = document.querySelector('.btn-new');
-    const formPost = document.querySelector('.form-post')
-    btnNew.addEventListener('click', ()=>{
-        formPost.reset();
-        document.querySelector('.title-error').textContent = "";
-        document.querySelector('.img-error').textContent = "";
-        document.querySelector('.description-error').textContent = "";
-        document.querySelector('.content-error').textContent = "";
-    })
-
 
     const btnPreview = document.querySelector('.btn-preview');
     const bodyPreview = document.querySelector('.previewModal-body');
