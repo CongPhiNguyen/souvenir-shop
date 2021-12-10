@@ -43,8 +43,8 @@
             {
                 htmlForProduct += 
                 `
-                <tr> 
-                    <th scope="row">${i+1}</th>
+                <tr class="product-item" style="transform: rotate(0);"> 
+                    <th scope="row"><a href="product/view-product/${result[i].productID}" class="stretched-link">${i+1}</a></th>
                     <td>${result[i].productID}</td>
                     <td>${result[i].name}</td>
                     <td>${result[i].quantity}</td>
@@ -58,5 +58,9 @@
             alert(err)
             console.log(err)
         })
-    
+    function moveToProduct(id)
+    {
+        {{!-- alert("Chuyển đến trang "+ id); --}}
+        window.location = ''
+    }
 </script>

@@ -130,39 +130,48 @@
 
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script type="text/javascript">
-    var cartUser
+    var cartUser = [];
     var AlertMorriStore = document.getElementById('display-alert-css');
     const elementProductLink = document.querySelector('.cart');
     const elementRenderProductCart = document.querySelector('.render-list-product');
     const elementQuantityProductTotal = document.querySelector('.quantity-product');
     const listCart = JSON.parse(localStorage.getItem('listCart'));
     const elementQuantityProduct = document.querySelector('.quantity');
+    let userCode
 
     getApiDataUser = async () => {
-        let userCode
+        
         await axios.get(`http://localhost:3000/cart/get-data-user`)
             .then(res => {
+<<<<<<< HEAD
+=======
+                {{!-- console.log('res.data', res.data.dataUser.userCode) --}}
+>>>>>>> 61bbbf4becd263984eb03ab93e358ff6d2d6a7dc
                 userCode = res.data.dataUser.userCode
             })
             .catch(err => {
                 console.log(err)
             })
         try {
-            const res = await fetch('/cart/get-cart-user', {
-                method: 'POST',
-                body: JSON.stringify({ userCode }),
-                headers: { 'Content-Type': 'application/json' }
-            }).then(res => res.json())
-                .then(data => {
-                    return data
-                })
-            cartUser = res.cart.listProduct
+            var resultCart;
+            await axios.post(`http://localhost:3000/cart/get-cart-user`, {userCode: userCode })
+            .then(res => {
+                resultCart = res.data.cart;
+                {{!-- console.log("resultCart", resultCart) --}}
+            })
+            .catch(err => {
+                console.log(err)
+            })
+            cartUser = resultCart.listProduct;
+            console.log("cartUser", cartUser)
+            {{!-- console.log('Chạy đến đây rồi mà chưa load cartUser ?') --}}
             renderProduct()
             renderQuantity()
             renderQuantityTotal()
-            renderListCart()
-            renderTotalMoney()
-        } catch {
+            {{!-- renderListCart()
+            renderTotalMoney() --}}
+        } catch (e){
+            console
         }
     }
 

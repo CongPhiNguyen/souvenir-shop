@@ -128,6 +128,23 @@ h1 {
     padding: 20px
 }
 
+#product-manager-container {
+
+}
+
+#product-manager-container .product-item{
+
+}
+
+#product-manager-container .product-item:hover{
+    background-color: #eee;
+    cursor: pointer; 
+}
+
+#product-manager-container .product-item .stretched-link:hover{
+    background-color: #eee;
+    cursor: pointer;    
+}
 
 /* Reposive fix */
 @media (max-width: 576px) {
