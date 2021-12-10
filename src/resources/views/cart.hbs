@@ -261,31 +261,29 @@
         var newUserCode;
         await axios.get(`http://localhost:3000/cart/get-data-user`)
             .then(res => {
-                {{!-- console.log('res.data', res.data.dataUser.userCode) --}}
                 newUserCode = res.data.dataUser.userCode
             })
             .catch(err => {
                 console.log(err)
             })
         var resultCart;
-        await axios.post(`http://localhost:3000/cart/get-cart-user`, {userCode: newUserCode  })
-        .then(res => {
-            resultCart = res.data.cart;
-            cartUser = resultCart.listProduct;
-            console.log("resultCart", resultCart)
-            renderProduct()
-            renderQuantity()
-            renderQuantityTotal()
-            renderListCart()
-            renderTotalMoney()
-            
-        })
-        .catch(err => {
-            console.log(err)
-        })
-        
+        await axios.post(`http://localhost:3000/cart/get-cart-user`, { userCode: newUserCode })
+            .then(res => {
+                resultCart = res.data.cart;
+                cartUser = resultCart.listProduct;
+                console.log("resultCart", resultCart)
+                renderProduct()
+                renderQuantity()
+                renderQuantityTotal()
+                renderListCart()
+                renderTotalMoney()
+            })
+            .catch(err => {
+                console.log(err)
+            })
+
     }
-    
+
     getCart()
 
     renderListCart = () => {
@@ -430,7 +428,7 @@
     }
 
     //Render total money
-    renderTotalMoney = (percent) => {
+    renderTotalMoney = () => {
         let giaTienTamTinh = 0;
         let giaTienGiamGia = 0;
         let giaGocBanDau = 0;
@@ -441,8 +439,15 @@
             giaGocBanDau += value.product.currentPrice * value.quantity;
         })
 
-        if (percent) {
-            giaTienGiamGia = giaTienTamTinh * percent / 100
+        if (discountUser) {
+            if (discountUser.type == "Mức tiền") {
+                giaTienGiamGia = discountUser.value
+            } else {
+                giaTienGiamGia = giaTienTamTinh * discountUser.value / 100
+                if (giaTienGiamGia > discountUser.max) {
+                    giaTienGiamGia = discountUser.max
+                }
+            }
         }
 
         if (giaTienTamTinh < 300000) {
@@ -450,6 +455,10 @@
         }
 
         tongTien = giaTienTamTinh - giaTienGiamGia + tienShip;
+
+        if (tongTien < 0) {
+            tongTien = 0
+        }
 
         tienShip == 0 ? ship.innerText = "Miễn phí" : ship.innerText = tienShip.toLocaleString() + 'đ'
         tamTinh.innerText = giaTienTamTinh.toLocaleString() + 'đ'
@@ -486,16 +495,30 @@
                 let totalFinal = 0;
                 let deliveryMoney = 0;
                 let discountMoney = 0
+                let giaTienGiamGia = 0
                 cartUser.forEach(value => {
                     total += value.product.currentPrice * value.quantity;
                 })
+
                 if (discountUser) {
-                    discountMoney = total * discountUser.value / 100
+                    if (discountUser.type == "Mức tiền") {
+                        discountMoney = discountUser.value
+                    } else {
+                        discountMoney = total * discountUser.value / 100
+                        if (discountMoney > discountUser.max) {
+                            discountMoney = discountUser.max
+                        }
+                    }
                 }
+
                 if (total < 300000) {
                     deliveryMoney = 30000
                 }
+
                 totalFinal = total - discountMoney + deliveryMoney;
+                if (totalFinal < 0) {
+                    totalFinal = 0
+                }
                 let data = {
                     receiptId: makeCode(9),
                     name: elementName.value,
@@ -511,7 +534,7 @@
                     total: total,
                     totalFinal: totalFinal,
                     deliveryMoney: deliveryMoney,
-                    discount: totalFinal - deliveryMoney - total,
+                    discount: discountMoney,
                     coupon: discountUser ? discountUser : null,
                     deliveryStatus: 'Chờ xác nhận',
                 }
@@ -536,26 +559,15 @@
     }
 
     btnApplyCodeDiscount.onclick = async () => {
-        /*await axios.post(`http://localhost:3000/cart/add-product-to-cart`).then(res => {
-        }).catch(err=>{
-        })*/
         try {
-            await axios.post(`http://localhost:3000/cart/get-coupon`, {
+            await axios.post(`http://localhost:3000/cart/check-voucher`, {
                 couponCode: elementDiscount.value,
             })
                 .then(res => {
-                    let nowTime = Date.now()
-                    let time = new Date(res.data.Coupon.exp)
-                    if (time - nowTime >= 0) {
-                        if (!res.data.Coupon.isUsed) {
-                            discountUser = res.data.Coupon
-                            renderTotalMoney(res.data.Coupon.value)
-                            showAlertMorriStore('alert-success', 'Sử dụng code thành công!')
-                        } else {
-                            showAlertMorriStore('alert-warning', 'Code dã được sử dụng !')
-                        }
-                    } else {
-                        showAlertMorriStore('alert-warning', 'Code đã hết hạn !')
+                    if (res.data.status == 201) {
+                        discountUser = res.data.Coupon
+                        renderTotalMoney()
+                        showAlertMorriStore('alert-success', 'Sử dụng code thành công!')
                     }
                 })
                 .catch(err => {
