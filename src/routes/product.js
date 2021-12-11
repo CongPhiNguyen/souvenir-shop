@@ -3,6 +3,7 @@ const router = express.Router();
 
 const productController = require('../app/controllers/ProductController');
 
+router.get('/search', productController.searchProduct);
 router.post('/add-product', productController.addProduct)
 router.get('/get-product', productController.getProduct)
 router.post('/update-product', productController.updateProduct)

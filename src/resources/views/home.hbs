@@ -4,10 +4,10 @@
 <div>
     <div class="header-home">
         <h2 class="header-home__title">MORRI STORE</h2>
-        <h4>Mua sắm hòa lưu niệm thoải mái </h4>
-        <div style="margin-bottom: 100px;" class="header-home__search">
-            <form action="/search" method="get">
-                <input name="search" placeholder="Tìm kiếm sản phẩm tại đây" class="header-home__search-input"
+        <h4>Mua sắm quà lưu niệm thoải mái </h4>
+        <div style="margin-bottom: 30px;" class="header-home__search">
+            <form action="/product/search" method="GET">
+                <input name="slug" placeholder="Tìm kiếm sản phẩm tại đây" class="header-home__search-input"
                     type="text">
                 <button type="submit" class="header-home__search-btn">
                     <i class="fas fa-search"></i>
@@ -177,30 +177,36 @@
             <div class="col-lg-3 col-sm-6 col-12">
                 <div class="cook__blog-card">
                     <img class="cook__blog-card-img"
-                        src="https://cdn.tgdd.vn/Files/2021/10/20/1392184/top-qua-luu-niem-y-nghia-cho-nhieu-doi-tuong-kh-17.png" alt="">
+                        src="https://cdn.tgdd.vn/Files/2021/10/20/1392184/top-qua-luu-niem-y-nghia-cho-nhieu-doi-tuong-kh-17.png"
+                        alt="">
                     <div class="cook__blog-card-address">
                         <a href="/blog/61ad8940ab0179831428c956">Quà lưu niệm đặc trưng của Việt Nam</a>
                     </div>
                     <p class="cook__blog-card-date">28 Tháng Ba, 2020</p>
                     <p class="cook__blog-card-border"></p>
-                    <p class="cook__blog-card-description">Quà lưu niệm là những món quà không đặt nặng giá trị vật chất. 
+                    <p class="cook__blog-card-description">Quà lưu niệm là những món quà không đặt nặng giá trị vật
+                        chất.
                         Thay vào đó, ý nghĩa về mặt tinh thần là yếu tố quan trọng hơn hết khi tặng quà lưu niệm.</p>
                 </div>
             </div>
             <div class="col-lg-3 col-sm-6 col-12">
                 <div class="cook__blog-card">
-                    <img class="cook__blog-card-img"
-                        src="https://donghothuysy.vn/upload_images/images/dsc00135.jpg" alt="">
+                    <img class="cook__blog-card-img" src="https://donghothuysy.vn/upload_images/images/dsc00135.jpg"
+                        alt="">
                     <div class="cook__blog-card-address">
                         <a href="/blog/61ad8da30b0c0b55f6822588">Ý nghĩa tặng đồng hồ đeo tay cho người yêu</a>
                     </div>
                     <p class="cook__blog-card-date">28 Tháng Tư, 2020</p>
                     <p class="cook__blog-card-border"></p>
-                    <p class="cook__blog-card-description">Tặng quà sinh nhật cho người yêu là đồng hồ mang ý nghĩa thể hiện tình cảm chân thành, 
-                        mong muốn cùng nhau vượt qua mọi khó khăn trong cuộc sống. Chắc hẳn trong chúng ta ai cũng biết, tặng quà là hành động không thể thiếu giữa các cặp đôi, 
-                        giúp chúng ta thể hiện tình cảm và sự yêu thương dành cho đối phương. Những món quà tình cảm ấy sẽ gắn kết yêu thương thật nhiều. 
-                        Và quả thật không thể bỏ qua ý nghĩa tặng đồng hồ đeo tay cho người yêu. Một món quà bất ngờ có thể không cần quá xa xỉ,
-                         điều quan trọng là nó thể hiện được tình cảm của bạn và đem đến niềm vui cho đối phương.</p>
+                    <p class="cook__blog-card-description">Tặng quà sinh nhật cho người yêu là đồng hồ mang ý nghĩa thể
+                        hiện tình cảm chân thành,
+                        mong muốn cùng nhau vượt qua mọi khó khăn trong cuộc sống. Chắc hẳn trong chúng ta ai cũng biết,
+                        tặng quà là hành động không thể thiếu giữa các cặp đôi,
+                        giúp chúng ta thể hiện tình cảm và sự yêu thương dành cho đối phương. Những món quà tình cảm ấy
+                        sẽ gắn kết yêu thương thật nhiều.
+                        Và quả thật không thể bỏ qua ý nghĩa tặng đồng hồ đeo tay cho người yêu. Một món quà bất ngờ có
+                        thể không cần quá xa xỉ,
+                        điều quan trọng là nó thể hiện được tình cảm của bạn và đem đến niềm vui cho đối phương.</p>
                 </div>
             </div>
             <div class="col-lg-3 col-sm-6 col-12">
@@ -212,9 +218,12 @@
                     </div>
                     <p class="cook__blog-card-date">28 Tháng Ba, 2021</p>
                     <p class="cook__blog-card-border"></p>
-                    <p class="cook__blog-card-description">Quà tặng người yêu luôn là sự cống hiến, chân thành và trọn vẹn của cảm xúc mà người gửi muốn gửi đến người nhận. 
-                        Nhưng mọi người nói rằng một món quà có giá trị hay không bằng cách tặng nó. Vì vậy, khi tặng quà,
-                         bạn nên đưa ra những câu nói ý nghĩa để khiến người yêu cảm thấy hạnh phúc và cảm động khi nhận quà từ bạn.</p>
+                    <p class="cook__blog-card-description">Quà tặng người yêu luôn là sự cống hiến, chân thành và trọn
+                        vẹn của cảm xúc mà người gửi muốn gửi đến người nhận.
+                        Nhưng mọi người nói rằng một món quà có giá trị hay không bằng cách tặng nó. Vì vậy, khi tặng
+                        quà,
+                        bạn nên đưa ra những câu nói ý nghĩa để khiến người yêu cảm thấy hạnh phúc và cảm động khi nhận
+                        quà từ bạn.</p>
                 </div>
             </div>
             <div class="col-lg-3 col-sm-6 col-12">
@@ -227,16 +236,21 @@
                     </div>
                     <p class="cook__blog-card-date">2 Tháng Mười, 2020</p>
                     <p class="cook__blog-card-border"></p>
-                    <p class="cook__blog-card-description">Anh Chị ạ, có nhiều thứ khiến cho cuộc sống chẳng bao giờ hoàn hảo cả. 
-                        Thế nhưng vui buồn sướng khổ là do ta tự cảm thấy thế, rồi khiến cho động lực cuộc sống chẳng còn ý nghĩa gì nữa. 
-                        Hãy luôn tạo cho mình những mục tiêu và tìm cách chinh phục mục tiêu đó, để cuộc sống thú vị hơn.</p>
+                    <p class="cook__blog-card-description">Anh Chị ạ, có nhiều thứ khiến cho cuộc sống chẳng bao giờ
+                        hoàn hảo cả.
+                        Thế nhưng vui buồn sướng khổ là do ta tự cảm thấy thế, rồi khiến cho động lực cuộc sống chẳng
+                        còn ý nghĩa gì nữa.
+                        Hãy luôn tạo cho mình những mục tiêu và tìm cách chinh phục mục tiêu đó, để cuộc sống thú vị
+                        hơn.</p>
                 </div>
             </div>
         </div>
         <div class="row blog__sign-in">
             <div class="blog_sign-in-left">
                 <h1 class="blog__sign-in-left-title">Blog chia sẽ về du lịch và những món quà</h1>
-                <p class="blog__sign-in-left-description"> “Giá trị của món quà không nằm trong món quà, mà trong chính tấm lòng của người trao tặng” . “Hãy bắt đầu làm những việc cần thiết, sau đó làm những việc bạn có thể, và tự nhiên bạn có thể làm những điều không thể” </p>
+                <p class="blog__sign-in-left-description"> “Giá trị của món quà không nằm trong món quà, mà trong chính
+                    tấm lòng của người trao tặng” . “Hãy bắt đầu làm những việc cần thiết, sau đó làm những việc bạn có
+                    thể, và tự nhiên bạn có thể làm những điều không thể” </p>
                 <a href="/blog" class="btn blog__btn">Xem thêm</a>
             </div>
             <div class="blog_sign-in-right"></div>

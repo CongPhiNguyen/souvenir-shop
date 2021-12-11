@@ -3,6 +3,9 @@ const Product = require('../models/Product');
 const Cart = require('../models/cart');
 var ObjectId = require('mongodb').ObjectID;
 
+const { removeAccents } = require('../helper/removeVietnameseAccents')
+
+
 class ProductController {
     // [GET] /home
     index(req, res){
@@ -138,6 +141,32 @@ class ProductController {
                 }
             }
         );
+    }
+
+    async searchProduct(req, res) {
+        const active = {
+            type: 'home',
+            Home: true,
+        }
+        let productSearch;
+        let search = req.query.slug.toLowerCase().replace(/ /g, '')
+        search = removeAccents(search)
+        let listProduct = await Product.find({}).lean()
+        if(listProduct) {
+            productSearch = listProduct.filter(value => {
+                let slug = value.name.toLowerCase().replace(/ /g, '');
+                slug = removeAccents(slug);
+                let province = value.province.toLowerCase().replace(/ /g, '');
+                province = removeAccents(province);
+                let location = value.location.toLowerCase().replace(/ /g, '');
+                location = removeAccents(location);
+                let description = value.description.toLowerCase().replace(/ /g, '');
+                description = removeAccents(description);
+                return slug.includes(search) || province.includes(search) || location.includes(search) || description.includes(search)
+            })
+        }
+        console.log(productSearch)
+        res.render('product/search' , {active, productSearch});
     }
 
     async addToCart(req, res)

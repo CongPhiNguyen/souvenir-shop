@@ -7,7 +7,6 @@ class Home1Controller {
             type: 'home',
             Home: true,
         }
-        console.log("active", active)
         res.render('home' , {active});
     }
 
@@ -18,7 +17,6 @@ class Home1Controller {
             type: 'home',
             Home: true,
         }
-        console.log("active", active)
         res.render('home', {active,});
     }
 }
