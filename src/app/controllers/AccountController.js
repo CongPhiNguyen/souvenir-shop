@@ -5,6 +5,7 @@ const bcrypt = require('bcrypt');
 const User = require('../models/user');
 const Receipt = require('../models/receipt');
 const Voucher = require('../models/voucher');
+const Cart = require('../models/cart');
 
 module.exports.profile_get = (req, res) => {
     if (req.session.user) {
@@ -18,8 +19,25 @@ module.exports.profile_get = (req, res) => {
     else res.render('404NotFound');
 }
 
+module.exports.accountProfileInfo_post = async (req, res) => {
+    if (req.session.user) {
+        try {
+            res.status(200).json({ userInfo: { name: req.session.user.name, mail: req.session.user.mail, phone: req.session.user.phone, address: req.session.user.address, province: req.session.user.province, district: req.session.user.district } });
+        }
+        catch(err) {
+            console.log('account profile info get error');
+            console.log(err);
+            res.status(400).json({ error: err });
+        }
+    }
+    else {
+        console.log('user not log in');
+        res.status(400).json({ error: 'user not log in' });
+    }
+}
+
 module.exports.profile_post = async (req, res) => {
-    const { newName, newEmail, newPhone, newAddress, oldPassword, newPassword } = req.body;
+    const { newName, newEmail, newPhone, newAddress, newProvince, newDistrict, oldPassword, newPassword } = req.body;
     if (req.session.user) {
         try {
             if (oldPassword === '' || newPassword === '') {
@@ -37,12 +55,12 @@ module.exports.profile_post = async (req, res) => {
 
                 await User.findOneAndUpdate(
                     { userCode: req.session.user.userCode },
-                    { name: newName, phone: newPhone, mail: newEmail, address: newAddress },
+                    { name: newName, phone: newPhone, mail: newEmail, address: newAddress, province: newProvince, district: newDistrict },
                     { runValidators: true, context: 'query' },
                 ).then(result => {
                     res.locals.user = result;
                     req.session.user = result;
-                    res.json({ info: { newName, newEmail, newPhone, newAddress } });
+                    res.json({ info: { newName, newEmail, newPhone, newAddress, newProvince, newDistrict } });
                 });
             }
             else {
@@ -65,12 +83,12 @@ module.exports.profile_post = async (req, res) => {
                     const encryptedPassword = await bcrypt.hash(newPassword, salt);
                     await User.findOneAndUpdate(
                         { userCode: req.session.user.userCode },
-                        { name: newName, phone: newPhone, mail: newEmail, address: newAddress, password: encryptedPassword },
+                        { name: newName, phone: newPhone, mail: newEmail, address: newAddress, province: newProvince, district: newDistrict, password: encryptedPassword },
                         { runValidators: true, context: 'query' },
                     ).then(result => {
                         res.locals.user = result;
                         req.session.user = result;
-                        res.json({ info: { newName, newEmail, newPhone, newAddress } });
+                        res.json({ info: { newName, newEmail, newPhone, newAddress, newProvince, newDistrict } });
                     });
 
                 }
@@ -161,10 +179,11 @@ module.exports.adminDeleteCustomer_post = async (req, res) => {
         if (req.session.user.role === 'admin') {
             try {
                 const { userCodeToDelete } = req.body;
-                const result = await User.deleteOne({ userCode: userCodeToDelete });
-                if (result) {
+                const deletedUserResult = await User.deleteOne({ userCode: userCodeToDelete });
+                const deletedCartResult = await Cart.deleteOne({ userCode: userCodeToDelete });
+                if (deletedUserResult && deletedCartResult) {
                     console.log('delete successful');
-                    console.log(result);
+                    console.log(deletedUserResult);
                     res.json({ status: 200 });
                 }
                 else {
