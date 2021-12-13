@@ -4,7 +4,7 @@
 
 <div class="wrapper">
     <div class="container">
-        <div class="fast-navbar">
+        <div class="fast-navbar d-none">
             <div class="fast-navbar-item" onclick="clickFastNavbar('Fire')">
                 <i class="fas fa-fire"></i>
             </div>
@@ -49,10 +49,10 @@
         
         {{!-- Phần của product ở đây mình kiểu chi 4 8 ra rồi tính tiếp các kiểu--}}
         <div class="product-container row">
-            <div class="product-image col-md-4">
+            <div class="product-image col-md-5">
                 <image class="product-image-1" src={{dataProduct.imgUrl}} alt=""></image>    
             </div>
-            <div class="product-info col-md-8">
+            <div class="product-info col-md-6">
 
                 <div class="product-name" data-value={{dataProduct.name}}>{{dataProduct.name}}</div>
                 
@@ -110,35 +110,45 @@
             </div>
 
         </div>  
-        <div class="product-detail-container">
+
+        <div class="divider">
+
+        </div>
+
+        <div class="product-detail-container row">
             <div class="detail-title">
-                Product Description
+                Chi tiết sản phẩm
             </div>
             <div class="bread-scrum-detail content-container">
-                <div class="title">BreadScrum</div>
+                <div class="title">Doanh mục</div>
                 <div class="content">Morri Shop >> Figure >> Stern; Gate</div>         
             </div>
             <div class="origin-detail content-container">
-                <div class="title">Source</div>
+                <div class="title">Nơi bán</div>
                 <div class="content">Akihabara, Japan</div>    
             </div>
             <div class="remain-num content-container">
-                <div class="title">Remain</div>
+                <div class="title">Còn lại</div>
                 <div class="content">4</div>    
             </div>
+            <div class="detail-title">
+                Mô tả sản phẩm
+            </div>
             <div class="detail-description">
-                From Max Factory/Good Smile Company. A rerelease?. This must also be the choice of Steins; Gate. From the sci-fi adventure series Steins; Gate comes a rerelease of the young genius, figma Kurisu Makise. Using the smooth yet posable joints of figma and the included articulated figma stand, you can act out a variety of different scenes. She comes with three expressions: a standard face, an angry face and a smirking face to show all sides of her tsundere personality. Extra arm parts are included to recreate her classic "folded arm" pose. Mirai Gadget #6: "Cyalume Saber" is also included. Plus, a total of 12 extra hand parts are included, including hands that allow her to hold important items from the game, such as her cellphone and a drink bottle.
+                Từ Max Factory / Good Smile Company. Xin vui lòng lại ?. Đây cũng phải là sự lựa chọn của Steins; Cái cổng. Từ loạt phim phiêu lưu khoa học viễn tưởng Steins; Gate là sự tái hiện của thiên tài trẻ, figma Kurisu Makise. Bằng cách sử dụng các khớp mượt mà nhưng có thể định vị của figma và chân đế figma có khớp nối đi kèm, bạn có thể diễn nhiều cảnh khác nhau. Cô ấy có ba biểu cảm: một khuôn mặt chuẩn, một khuôn mặt giận dữ và một khuôn mặt nhếch mép để thể hiện tất cả các khía cạnh của tính cách tsundere của cô. Phần cánh tay phụ được đưa vào để tạo lại tư thế "khoanh tay" cổ điển của cô. Mirai Gadget # 6: "Cyalume Sabre" cũng được bao gồm. Ngoài ra, có tổng cộng 12 bộ phận tay bổ sung được bao gồm, bao gồm cả bàn tay cho phép cô ấy cầm các vật quan trọng trong trò chơi, chẳng hạn như điện thoại di động và chai nước uống.
             </div>
         </div>
         <div class="blog-container">
-            <div class="blog-title">
-                Source place
+            <div class="blog-title detail-title">
+                Nơi sản xuất quà lưu niệm
             </div>
             <div class="blog-desc">
                 Akihabara (秋葉原), also called Akiba after a former local shrine, is a district in central Tokyo that is famous for its many electronics shops. In more recent years, Akihabara has gained recognition as the center of Japan's otaku (diehard fan) culture, and many shops and establishments devoted to anime and manga are now dispersed among the electronic stores in the district. On Sundays, Chuo Dori, the main street through the district, is closed to car traffic from 13:00 to 18:00 (until 17:00 from October through March).
                 Akihabara has been undergoing major redevelopment over the years, including the renovation and expansion of Akihabara Station and the construction of new buildings in its proximity. Among these newly opened buildings were a huge Yodobashi electronics store and the Akihabara Crossfield, a business complex with the aim of promoting Akihabara as a center for global electronics technology and trade.
             </div>
+            <a href='#'>More</a>
         </div>
+
     </div>
 </div>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>

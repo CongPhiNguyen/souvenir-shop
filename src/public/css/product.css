@@ -88,6 +88,7 @@ h1 {
     height: 100%;
     object-fit: cover;
     border-radius: 10px;
+    max-height: 350px;
 }
 
 .product-info {
@@ -172,7 +173,7 @@ input[name="quantity"] {
 
 
 .quantity-choose .quantity-chose-title{
-    margin-right: 10px;
+    margin-right: 16px;
 }
 
 .quantity-choose {
@@ -234,6 +235,42 @@ input[name="quantity"] {
     margin-top: -4px;
 }
 
+
+/* Phần product detail */
+.divider {
+    border-top: 1px solid #ccc;
+    width: 95%;
+    margin-top: 16px;
+}
+
+.product-detail-container {
+    
+}
+
+.product-detail-container .detail-title{
+    text-transform: uppercase;
+    padding: 20px;
+    padding-left: 12px;
+    font-size: 18px;
+}
+
+.product-detail-container .content-container {
+    display: flex;
+    font-size: 16px;
+}
+
+.product-detail-container .content-container .title{
+    width: 100px; 
+    color: rgba(0,0,0,.6);
+    margin-right: 2.5rem;
+}
+
+.blog-container .detail-title{
+    text-transform: uppercase;
+    padding: 20px;
+    padding-left: 0px;
+    font-size: 18px;
+}
 
 
 /* Product Manager Screen */
