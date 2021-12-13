@@ -523,6 +523,16 @@ module.exports.receiptDetail_get = async (req, res) => {
     }
 }
 
+module.exports.contact_get = (req, res) => {
+    if (req.session.user) {
+        res.render('accountContact');
+    }
+    else {
+        console.log('user not log in');
+        res.render('login');
+    }
+}
+
 module.exports.voucher_get = (req, res) => {
     if (req.session.user) {
         if (req.session.user.role === 'admin') {
