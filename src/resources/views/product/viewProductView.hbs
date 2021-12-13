@@ -23,7 +23,7 @@
         </div>
         {{!-- <a class="add-product-button" href="#">Add product</a> --}}
         {{!-- Phần breadscrum --}}
-        <div class="breadscrum">
+        {{!-- <div class="breadscrum">
             <ol class='breadscrum-list'>    
                 <li class='breadscrum-item'>
                     <a href="/home">
@@ -43,58 +43,63 @@
                     </a>
                 </li>
             </ol>
-        </div>
-        <div id="product-code" data-value={{dataProduct._id}}>{{dataProduct._id}}</div>
+        </div> --}}
+        <div id="product-code" class='d-none' data-value={{dataProduct._id}}>{{dataProduct._id}}</div>
         <div id="product-id" data-value={{dataProduct.productID}}>{{dataProduct.productID}}</div>
-        {{!-- Phần của product --}}
+        
+        {{!-- Phần của product ở đây mình kiểu chi 4 8 ra rồi tính tiếp các kiểu--}}
         <div class="product-container row">
             <div class="product-image col-md-4">
-                <img class="product-image-1" src={{dataProduct.imgUrl}} alt="">    
+                <image class="product-image-1" src={{dataProduct.imgUrl}} alt=""></image>    
             </div>
             <div class="product-info col-md-8">
+
                 <div class="product-name" data-value={{dataProduct.name}}>{{dataProduct.name}}</div>
-                <div class="product-place">
-                    <i class="fas fa-map-marker-alt"></i>
+                
+                <div class="product-rating d-flex">
+                    <div class="product-rating-average">
+                        <i class="product-rating-icon fas fa-star"></i>
+                        <i class="product-rating-icon fas fa-star"></i>
+                        <i class="product-rating-icon fas fa-star"></i>
+                        <i class="product-rating-icon fas fa-star"></i>
+                        <i class="product-rating-icon fas fa-star"></i>
+                    </div>
+                    <div class="product-rating-number">
+                        0 Đã đánh giá
+                    </div>
+
+                    <div class="product-sold d-flex">
+                        0 Đã bán
+                    </div>
+                </div>
+                
+
+                <div class="product-place mt-1">
+                    <i class="fas fa-map-marker-alt product-place-icon"></i>
                     <span class="product-location" data-value={{dataProduct.location}}>{{dataProduct.location}}</span>
                 </div>
-                <div class="product-price-sale">
-                    <div class="product-old-price" data-value={{dataProduct.sellPrice}}>{{dataProductc}}</div>
-                    <div class="product-price" data-value={{dataProduct.currentPrice}}>{{dataProduct.currentPrice}}</div>
+                
+                <div class="product-description mt-2" data-value={{dataProduct.description}}>
+                    {{dataProduct.description}}
+                </div>
+
+                <div class="product-price-sale d-flex mt-4">
+                    <div class="product-old-price" data-value={{dataProduct.sellPrice}}>{{dataProduct.sellPrice}}VNĐ</div>
+                    <div class="product-price" data-value={{dataProduct.currentPrice}}>{{dataProduct.currentPrice}}VNĐ</div>
                     <div class="sale-percent">
                         {{!-- {{((parseInt(dataProduct.sellPrice) - parseInt(data.currentPrice))/(dataProduct.sellPrice))}} --}}
                     </div>
                 </div>
-                <div class="product-description" data-value={{dataProduct.description}}>
-                    {{dataProduct.description}}
-                </div>
-                <div class="product-sold">
-                    <div class="sold-title">Đã bán: </div>
-                    <div class="sold-num">0</div>
-                </div>
-                <div class="product-rating-average">
-                    <i class="product-rating-icon fas fa-star"></i>
-                    <i class="product-rating-icon fas fa-star"></i>
-                    <i class="product-rating-icon fas fa-star"></i>
-                    <i class="product-rating-icon fas fa-star"></i>
-                    <i class="product-rating-icon fas fa-star"></i>
-                </div>
-                <div class="quantity-choose">
+ 
+                <div class="quantity-choose d-flex mt-2">
                     <div class="quantity-chose-title">Chọn số lượng</div>
-                    <div class="input-group bootstrap-touchspin">
-                        <span class="input-group-addon bootstrap-touchspin-prefix" style="display: none;"></span>
-                        <input type="number" name="quantity" id="quantity_wanted" value="1" class="input-group form-control" min="1" aria-label="Quantity" style="display: block;">
-                        <span class="input-group-addon bootstrap-touchspin-postfix" style="display: none;"></span><span class="input-group-btn-vertical">
-                        <button class="btn btn-touchspin js-touchspin bootstrap-touchspin-up" type="button">
-                            <i class="material-icons touchspin-up"></i>
-                        </button><button class="btn btn-touchspin js-touchspin bootstrap-touchspin-down" type="button">
-                            <i class="material-icons touchspin-down"></i>
-                        </button></span></div>
+                    <input type="number" name="quantity" id="quantity_wanted" value="1" class="input-group form-control" min="1" aria-label="Quantity" style="display: block;">
                 </div>
-                <div class="buy-container">
+                <div class="buy-container mt-2">
                     {{!-- <button class="add-to-cart bt-add-to-cart" onclick="addToCart()">
                         Add to cart 
                     </button> --}}
-                    <button class="add-to-cart bt-add-to-cart" onclick="addToCart   ()">
+                    <button class="add-to-cart bt-add-to-cart" onclick="addToCart()">
                         Add to cart 
                     </button>
                     {{!-- <button class="buy-now">
@@ -137,7 +142,8 @@
     </div>
 </div>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-<script>
+<script> 
+
     async function addToCart() {
         {{!-- try { --}}
             const data = {

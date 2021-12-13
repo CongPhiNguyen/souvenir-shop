@@ -1,3 +1,7 @@
+:root {
+    --primary-color: #ffce4b;
+}
+
 h1 {
     color: cyan;
 }
@@ -41,15 +45,21 @@ h1 {
     list-style: none;
 }
 
+
+
+/* Ở đây là phần chứa các cái product */
 .product-container {
     min-width: 400px;
-    
+    margin-top: 40px;
 }
 
 .product-image {
-    border: 1px solid #333;
+    /* border: 1px solid #333; */
     border-radius: 12px;
     vertical-align: middle;
+    display: flex;
+    justify-content: center;
+
 }
 
 .add-image-label:hover {
@@ -75,12 +85,15 @@ h1 {
 
 .product-image-1 {
     width: 100%;
-    height: 100%;  
+    height: 100%;
     object-fit: cover;
+    border-radius: 10px;
 }
 
 .product-info {
-    
+    /* justify-content: center;
+    display: flex;
+    flex-direction: column; */
 }
 
 .product-info .product-name {
@@ -91,8 +104,32 @@ h1 {
 .product-info .product-place {
     width: 100%;
 }
+
+.product-info .product-place-icon {
+    color: '#ffce4b'
+}
+
+
+.product-info .product-rating {
+
+}
+
+.product-info .product-rating .product-rating-average{
+    margin-right: 10px;
+}
+
+
 .product-info .product-rating-average .product-rating-icon {
     color: #ffce4b;
+}
+
+
+.product-info .product-rating .product-rating-number{
+    margin-right: 10px;
+}
+
+.product-info .product-rating .product-sold{
+
 }
 
 .product-container .product-decription {
@@ -107,12 +144,48 @@ h1 {
     width: 50%
 }
 
-.product-container .product-sold {
-    display: flex;
+.product-container .product-price-sale {
+    align-items: center;
 }
 
 .product-container .product-price-sale .product-old-price {
     text-decoration: line-through;
+    font-size: 1rem;
+    color: #929292;
+    margin-right: 10px;
+    line-height: 30px;
+    margin-top: 1px;
+}
+
+.product-container .product-price-sale .product-price {
+    font-size: 20px;
+    font-weight: 500;
+    color: var(--primary-color);
+    line-height: 30px;
+}
+
+/* Phần số lượng sản phẩm */
+input[name="quantity"] {
+    width: 120px;
+    text-align: center;
+}
+
+
+.quantity-choose .quantity-chose-title{
+    margin-right: 10px;
+}
+
+.quantity-choose {
+    align-items: center;
+}
+ 
+.bt-add-to-cart {
+    background: var(--primary-color);
+    border: none;
+    padding: 8px 16px;
+    color: #FFF;
+    margin-right: 10px;
+    border-radius: 4px;
 }
 
 /* Phần picture modal */
