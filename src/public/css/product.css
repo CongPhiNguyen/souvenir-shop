@@ -249,8 +249,9 @@ input[name="quantity"] {
 
 .product-detail-container .detail-title{
     text-transform: uppercase;
-    padding: 20px;
+    padding: 28px;
     padding-left: 12px;
+    padding-bottom: 4px;
     font-size: 18px;
 }
 
@@ -267,10 +268,80 @@ input[name="quantity"] {
 
 .blog-container .detail-title{
     text-transform: uppercase;
-    padding: 20px;
+    padding: 28px;
     padding-left: 0px;
+    padding-bottom: 4px;
     font-size: 18px;
 }
+
+/* Đây là các cái của phần rating */
+.rating-container {
+
+}
+
+.rating-container .title {
+    text-transform: uppercase;
+    padding: 28px;
+    padding-left: 0px;
+    padding-bottom: 4px;
+    font-size: 18px;
+}
+
+.rating-container .summary-review .rating-content-overview{
+    display: flex;
+}
+
+.rating-container .summary-review .review-rating{
+    font-size: 32px;
+    line-height: 40px;
+    font-weight: 700;
+    white-space: nowrap;
+    margin: 0px 16px 0px;
+    margin-top: 4px;
+}
+
+.rating-container .summary-review .all-statistic {
+
+}
+
+.rating-container .summary-review .all-statistic .review-num{
+    font-size: 14px;
+}
+
+.product-rating-icon {
+    color: var(--primary-color);
+}
+
+.rating-container .summary-review .star-review-list {
+    margin-left: 16px;
+    margin-top: 4px;
+}
+
+.rating-container .summary-review .star-review-list .start-review-item {
+    display: flex;
+    font-size: 14px;
+    align-items: center;
+}
+
+.rating-container .summary-review .star-review-list .product-rating-icon{
+    font-size: 10px;
+    margin-right: 2px;
+} 
+
+.star-review-list .start-review-item {
+    margin-top: -4px;
+}
+
+
+.star-review-list .start-review-item .review-star-num{
+    margin-left: 4px;
+}
+
+.star-review-list .start-review-item .percent-bar {
+    margin: 0 4px;
+}
+
+
 
 
 /* Product Manager Screen */
