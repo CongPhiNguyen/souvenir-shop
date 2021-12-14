@@ -341,9 +341,66 @@ input[name="quantity"] {
     margin: 0 4px;
 }
 
+.summary-filter {
 
+}
 
+.summary-filter .filter-title{
+    
+}
 
+.summary-filter .list-filter{
+    display: flex;
+    list-style: none;
+    margin-top: 14px;
+    margin-left: 0px;
+    padding-left: 0px;
+}
+
+.summary-filter .list-filter .list-filter-item{
+    border: 1px solid #999;
+    padding: 0px 12px;
+    margin-right: 8px;
+    border-radius: 16px;
+}
+
+.summary-filter .list-filter .list-filter-item:hover{
+    cursor: pointer;
+    opacity: 0.7;
+}
+
+.summary-filter .list-filter .list-filter-item.active{
+    background-color: #ddd;
+}
+
+.review-item-list {
+    list-style: none;
+}
+
+.review-item-list .review-item {
+
+}
+
+.review-item-list .review-item .user-information{
+    display: flex;
+}
+
+.review-item-list .review-item .user-information .avatar{
+    width: 70px;
+    height: 70px;
+}
+
+.review-item-list .review-item .user-information .name{
+    margin-top: 21px;
+}
+
+.review-item .review-container {
+    margin-top: 6px;
+}
+
+.review-item .review-container .review-time {
+    font-size: 14px;
+}
 /* Product Manager Screen */
 .product-manager-title {
     padding: 20px
