@@ -403,7 +403,17 @@ input[name="quantity"] {
 }
 /* Product Manager Screen */
 .product-manager-title {
-    padding: 20px
+    padding: 20px;
+    padding-left: 0px;
+    font-size: 28px;
+}
+
+.product-manager .product-manager-feature {
+    padding-top: 20px;
+}
+
+.product-manager .product-row {
+    text-align: center;
 }
 
 #product-manager-container {
@@ -422,6 +432,40 @@ input[name="quantity"] {
 #product-manager-container .product-item .stretched-link:hover{
     background-color: #eee;
     cursor: pointer;    
+}
+
+/* Đây là phần của cái doanh mục */
+.category-manager {
+    padding: 20px;
+    padding-left: 0px;
+}
+
+.category-manager .category-manager-title {
+    font-size: 28px;
+    padding-bottom: 20px;
+}
+
+.category-manager .category-manager-feature {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.category-manager-feature .bt-add-category {
+    height: 40px;
+    background-color: #ffba00;
+    border: none;
+    padding: 0 12px;
+    border-radius: 12px;
+    color: #fff;
+}
+
+.category-manager-feature .bt-add-category:hover{
+    cursor: pointer;
+    opacity: 0.7;
+}
+
+.category-row .category-cell {
+    text-align: right;
 }
 
 /* Reposive fix */

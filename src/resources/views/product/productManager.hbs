@@ -3,24 +3,51 @@
 <link rel="stylesheet" href="/css/product.css">
 
 <div class="wrapper">
-    <div class="container">
-        <div class="row">
+    <div class="container ">
+        <div class="row product-manager">
             <div class="product-manager-title col-12">
-                Product Manager
+                Quản lý hàng hoá
             </div>
             <table class="table">
                 <thead>
                     <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">ID</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Quantity</th>
+                        <th scope="col" class="product-row">STT</th>
+                        <th scope="col" class="product-row">ID</th>
+                        <th scope="col" class="product-row">Tên</th>
+                        <th scope="col" class="product-row">Số lượng nhập</th>
+                        <th scope="col" class="product-row">Còn lại</th>
                     </tr>
                 </thead>
                 <tbody id='product-manager-container'>
                     
                 </tbody>
             </table>
+        </div>    
+        <div class="divider mt-8" style='width: 100%; margin-top: 60px'>
+
+        </div>
+        <div class="row category-manager">
+            <div class="category-manager-title col-8">
+                Quản lý doanh mục
+            </div>
+            <div class="category-manager-feature col-4">
+                <button class="bt-add-category">
+                    Thêm doanh mục
+                </button>
+            </div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col" style='text-align: center'>STT</th>
+                        <th scope="col" style='text-align: right'>ID</th>
+                        <th scope="col">Tên doanh mục</th>
+                    </tr>
+                </thead>
+                <tbody id='category-manager-container'>
+                    
+                </tbody>
+            </table>
+
         </div>    
     </div>
 </div>
@@ -48,6 +75,7 @@
                     <td>${result[i]._id}</td>
                     <td>${result[i].name}</td>
                     <td>${result[i].quantity}</td>
+                    <td>${result[i].remain}</td>
                 </tr>
                 `
             }
@@ -58,6 +86,84 @@
             alert(err)
             console.log(err)
         })
+
+    // Render các cái doanh mục theo mẫu 
+    //(này là mình get từ server xuống và xử lý thì mới được ntn) 
+    var listCategory = [
+        {
+            id: '1',
+            name: 'Morri store',
+            child: [
+                {
+                    id: '1.1',
+                    name: 'Hàng lưu niệm rẻ',
+                    child: [
+                        {
+                            id: '1.1.1',
+                            name: 'Hàng lưu niệm nội địa rẻ',
+                            child: [],
+                        },
+                        {
+                            id: '1.1.2',
+                            name: 'Hàng lưu niệm nhập khẩu rẻ',
+                            child: [],
+                        }
+                    ]
+                },
+                {
+                    id: '1.2',
+                    name: 'Hàng lưu niệm đẹp',
+                    child: [],
+                }
+            ]
+        },
+        {
+            id: '2',
+            name: 'Cốc sứ nghệ thuật',
+            child: []
+        }
+    ];
+    var countCategory = 0;
+
+    function renderPartialCategory(smallcategory) {
+        var htmlForSmallCategory = 
+                    `<tr class="category-row">
+                        <td scope="col" style='text-align: center'>${countCategory}</td>
+                        <td scope="col" class="category-cell">${smallcategory.id}</td>
+                        <td scope="col">${smallcategory.name}</td>
+                    </tr>`;
+        countCategory++;
+        console.log("smallcategory", smallcategory);
+        console.log("smallcategory.child",smallcategory.child);
+        if(smallcategory.child.length   ==0) return htmlForSmallCategory;
+        else {
+            for(var i= 0; i < smallcategory.child.length; i++)
+            {
+                htmlForSmallCategory += renderPartialCategory(smallcategory.child[i]);
+            }
+            return htmlForSmallCategory;
+        }
+        
+    }
+    // Hiển thị các doanh mục sản phẩm
+    function renderCategory()
+    {
+        var htmlForCategory = ``;
+        for(var i = 0 ; i < listCategory.length ; i++)
+        {
+            htmlForCategory += renderPartialCategory(listCategory[i]);
+        }
+        var categoryContainer = document.querySelector('#category-manager-container');
+        categoryContainer.innerHTML = htmlForCategory;
+    }
+    renderCategory();
+
+
+    // Thêm sự kiện add cho cái category
+    document.querySelector('.bt-add-category').onclick = (e) => {
+        console.log('ABC')
+    }
+
     function moveToProduct(id)
     {
         {{!-- alert("Chuyển đến trang "+ id); --}}
