@@ -46,9 +46,32 @@
                 <tbody id='category-manager-container'>
                     
                 </tbody>
-            </table>
+            </table>    
 
-        </div>    
+        </div>  
+        {{!-- Modal add category --}}
+        <div class="category-modal d-none" id="addCategoryModal">
+            <div class="category-modal-dialog">
+                <div class="modal-content category-modal-container">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Product Category viewer</h5>
+                        <button type="button" class="btn-close" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body row">
+                        <div class="product-image col-8 modal-image">
+                            <img class="product-current-img" src="/img/figure/figure1.jfif" alt="">
+                            {{!-- <img class="product-image-1" src="/img/figure/figure1.jfif" alt="">     --}}  
+                        </div>
+                    </div>
+                    <div class="modal-footer image-modal-footer">
+                        <button type="button" class="btn btn-secondary btn-close-modal">Close</button>
+                        {{!-- <button type="button" class="btn btn-primary">Save changes</button> --}}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
     </div>
 </div>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
@@ -159,8 +182,26 @@
     renderCategory();
 
 
+    function changeCategoryModal(){
+        var CategoryModal = document.querySelector('#addCategoryModal');
+        if(CategoryModal.classList.contains('d-none')){
+                CategoryModal.classList.remove('d-none');
+        }
+        else CategoryModal.classList.add('d-none');
+    }
     // Thêm sự kiện add cho cái category
     document.querySelector('.bt-add-category').onclick = (e) => {
+        changeCategoryModal();
+        console.log('ABC')
+    }
+    // Thêm các nút tắt
+    document.querySelector('.category-modal-dialog').onclick = (e) => {
+        e.preventDefault();
+        console.log(e.target);
+        if(e.target.classList.contains('btn-close-modal') || e.target.classList.contains('btn-close'))
+        {
+            changeCategoryModal();
+        }
         console.log('ABC')
     }
 
