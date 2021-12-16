@@ -229,3 +229,18 @@ a:hover {
 .btn-save:hover {
     background-color: rgba(255, 186, 0, 75%);
 }
+
+.btn-delete {
+    background-color: rgb(244,164,96);
+    color: white;
+    font-size: 14px;
+    font-weight: 600;
+    width: 120px;
+    padding: 8px 0px;
+    margin: 16px 40px 16px 0;
+    border-radius: 8px;
+}
+
+.btn-delete:hover {
+    background-color: rgba(244,164,96, 75%);
+}

@@ -553,6 +553,10 @@
                 inputPercentVoucherValueError.textContent = 'Vui lòng nhập giá trị Voucher';
                 inputValidated = false;
             }
+            else if (inputPercentVoucherValue.value < 1 || inputPercentVoucherValue.value > 100) {
+                inputPercentVoucherValueError.textContent = 'Giá trị Voucher không hợp lệ';
+                inputValidated = false;
+            }
             if (inputPercentVoucherMaxValue.value === '') {
                 inputPercentVoucherMaxValueError.textContent = 'Vui lòng nhập giá trị tối đa';
                 inputValidated = false;
@@ -562,7 +566,7 @@
             inputVoucherQuantityError.textContent = 'Vui lòng nhập số lượng Voucher';
             inputValidated = false;
         }
-        if (inputVoucherQuantity.value < 1) {
+        else if (inputVoucherQuantity.value < 1) {
             inputVoucherQuantityError.textContent = 'Vui lòng nhập số lượng Voucher';
             inputValidated = false;
         }
