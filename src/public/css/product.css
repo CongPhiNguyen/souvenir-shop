@@ -436,68 +436,6 @@ input[name="quantity"] {
     cursor: pointer;    
 }
 
-/* Đây là phần của cái doanh mục */
-.category-manager {
-    padding: 20px;
-    padding-left: 0px;
-}
-
-.category-manager .category-manager-title {
-    font-size: 28px;
-    padding-bottom: 20px;
-}
-
-.category-manager .category-manager-feature {
-    display: flex;
-    justify-content: flex-end;
-}
-
-.category-manager-feature .bt-add-category {
-    height: 40px;
-    background-color: #ffba00;
-    border: none;
-    padding: 0 12px;
-    border-radius: 12px;
-    color: #fff;
-}
-
-.category-manager-feature .bt-add-category:hover{
-    cursor: pointer;
-    opacity: 0.7;
-}
-
-.category-row .category-cell {
-    text-align: right;
-}
-
-/* Đây kiểu phần modal của doanh mục */
-.category-modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 1055;
-    width: 100%;
-    height: 100%;
-    overflow-x: hidden;
-    overflow-y: auto;
-    outline: 0;
-}
-
-.category-modal-dialog {
-    background-color: rgba(61, 56, 56, 0.2);
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    position: fixed;
-}
-
-.modal-content.category-modal-container {
-    width: 60%;
-    height: 80%;
-    margin: auto;
-    margin-top: 5%;
-}
 
 
 /* Reposive fix */

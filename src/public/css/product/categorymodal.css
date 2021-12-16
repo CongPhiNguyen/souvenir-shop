@@ -1,0 +1,149 @@
+/* Đây là phần của cái doanh mục */
+.category-manager {
+    padding: 20px;
+    padding-left: 0px;
+}
+
+.category-manager .category-manager-title {
+    font-size: 28px;
+    padding-bottom: 20px;
+}
+
+.category-manager .category-manager-feature {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.category-manager-feature .bt-add-category {
+    height: 40px;
+    background-color: #ffba00;
+    border: none;
+    padding: 0 12px;
+    border-radius: 12px;
+    color: #fff;
+}
+
+.category-manager-feature .bt-add-category:hover{
+    cursor: pointer;
+    opacity: 0.7;
+}
+
+.category-row .category-cell {
+    text-align: right;
+}
+
+/* Đây kiểu phần modal của doanh mục */
+.category-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1055;
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+    outline: 0;
+}
+
+.category-modal-dialog {
+    background-color: rgba(61, 56, 56, 0.2);
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: fixed;
+}
+
+.modal-content.category-modal-container {
+    width: 60%;
+    height: 80%;
+    margin: auto;
+    margin-top: 5%;
+}
+
+.category-modal-body {
+    margin: 10px;
+    padding: 0px 30px 30px 30px ;
+}
+
+.category-modal-content{
+    margin: 10px;
+    display: flex;
+} 
+
+.modal-header {
+    flex: 1;
+}
+
+.modal-footer {
+    flex: 1;
+}
+
+.category-modal-body {
+    flex:14;
+}
+
+/* Phần hiển thị các doanh mục */
+.list-category-title {
+    padding: 20px;
+    padding-left: 0px;
+    font-size: 28px;
+    margin-left: -10px;
+}
+
+.list-category {
+    
+}
+
+.list-category .list-category-item{
+    display: flex;
+    padding: 8px 20px;
+    border: 1px solid #bbb;
+    border-radius: 12px;
+    margin: 8px 0px;
+}
+
+.list-category .list-category-item.tier-2{
+    display: flex;
+    padding: 8px 20px;
+    margin-left: 28px;
+}
+
+.list-category .list-category-item.tier-3{
+    display: flex;
+    padding: 8px 20px;
+    margin-left: 70px;
+}
+
+.list-category .list-category-item .category-item-icon{
+    color: var(--primary-color);
+
+}
+
+.list-category .list-category-item .category-item.name {
+
+}
+
+.list-category .list-category-item .category-item-name.input{
+    border: 1px solid #ccc;
+    
+}
+
+.pointer-none {
+    pointer-events: none;
+}
+
+.list-category .list-category-item .category-item-name.input:focus{
+    border: 1px solid #ccc;
+    outline: none;
+}
+
+.list-category .list-category-item .category-item-action{
+    text-align: right;
+}
+
+
+.list-category-item .category-item-action .category-item-icon{
+    color: var(--primary-color);
+    font-size: 20px;
+}

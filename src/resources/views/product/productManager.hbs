@@ -1,7 +1,8 @@
 <title>Product</title>
 <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
 <link rel="stylesheet" href="/css/product.css">
-
+<link rel="stylesheet" href="/css/product/categorymodal.css">
+<link rel="stylesheet" href="/css/product/locationmanager.css">
 <div class="wrapper">
     <div class="container ">
         <div class="row product-manager">
@@ -28,7 +29,7 @@
         </div>
         <div class="row category-manager">
             <div class="category-manager-title col-8">
-                Quản lý doanh mục
+                Danh sách các doanh mục
             </div>
             <div class="category-manager-feature col-4">
                 <button class="bt-add-category">
@@ -49,20 +50,171 @@
             </table>    
 
         </div>  
+        <div class="row category-manager">
+            <div class="category-manager-title col-8">
+                Danh sách các địa danh
+            </div>
+            <div class="category-manager-feature col-4">
+                <button class="bt-add-location">
+                    Thêm địa danh
+                </button>
+            </div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col" style='text-align: center'>STT</th>
+                        <th scope="col" style='text-align: center'>ID</th>
+                        <th scope="col" style='text-align: center'>Địa danh</th>
+                    </tr>
+                </thead>
+                <tbody id='location-manager-container'>
+                    <tr>
+                        <td scope="col" style='text-align: center'>1</td>
+                        <td scope="col" style='text-align: center'>1</td>
+                        <td scope="col" style='text-align: center'>Hà Nội</td>
+                    </tr>
+                    <tr>
+                        <td scope="col" style='text-align: center'>2</td>
+                        <td scope="col" style='text-align: center'>2</td>
+                        <td scope="col" style='text-align: center'>TP HCM</td>
+                    </tr>
+                    <tr>
+                        <td scope="col" style='text-align: center'>3</td>
+                        <td scope="col" style='text-align: center'>3</td>
+                        <td scope="col" style='text-align: center'>Đà Nẵng</td>
+                    </tr>
+                    <tr>
+                        <td scope="col" style='text-align: center'>4</td>
+                        <td scope="col" style='text-align: center'>4</td>
+                        <td scope="col" style='text-align: center'>Cần Thơ</td>
+                    </tr>
+                    <tr>
+                        <td scope="col" style='text-align: center'>5</td>
+                        <td scope="col" style='text-align: center'>5</td>
+                        <td scope="col" style='text-align: center'>Huế</td>
+                    </tr>
+                    <tr>
+                        <td scope="col" style='text-align: center'>6</td>
+                        <td scope="col" style='text-align: center'>6</td>
+                        <td scope="col" style='text-align: center'>An Giang</th>
+                    </tr>
+                    <tr>
+                        <td scope="col" style='text-align: center'>7</td>
+                        <td scope="col" style='text-align: center'>7</td>
+                        <td scope="col" style='text-align: center'>Lâm Đồng</td>
+                    </tr>
+                    <tr>
+                        <td scope="col" style='text-align: center'>8</td>
+                        <td scope="col" style='text-align: center'>8</td>
+                        <td scope="col" style='text-align: center'>Bình Định</td>
+                    </tr>
+                </tbody>
+            </table>    
+        </div>  
         {{!-- Modal add category --}}
-        <div class="category-modal" id="addCategoryModal">
+        <div class="category-modal d-none" id="addCategoryModal">
             <div class="category-modal-dialog">
                 <div class="modal-content category-modal-container">
                     <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLabel">Thêm doanh mục</h5>
                         <button type="button" class="btn-close" aria-label="Close"></button>
                     </div>
-                    <div class="modal-body row">
-                        <label class="list-category-title">
-                            
+                    <div class="category-modal-body">
+                        <label class="list-category-title col-12">
+                            Quản lý các doanh mục
                         </label>
-                        <div class="list-category">
-
+                        <div class="list-category col-12">
+                            <div class="list-category-item row">
+                                <div class="category-add-button col-1">
+                                    <i class="fas fa-plus category-item-icon" ></i>
+                                </div>
+                                <div class="category-item-name col-8">
+                                    Morri Store
+                                </div>
+                                <div class="category-item-action col-3">
+                                    <i class="fas fa-edit category-item-icon"></i>
+                                    {{!-- <i class="fas fa-plus category-item-icon" ></i> --}}
+                                    <i class="fas fa-trash-alt category-item-icon"></i>
+                                </div>
+                            </div>
+                            <div class="list-category-item tier-2 row">
+                                <div class="category-add-button col-1">
+                                    <i class="fas fa-plus category-item-icon" ></i>
+                                </div>
+                                <div class="category-item-name col-8">
+                                    Hàng lưu niệm rẻ
+                                </div>
+                                <div class="category-item-action col-3">
+                                    <i class="fas fa-edit category-item-icon"></i>
+                                    {{!-- <i class="fas fa-plus category-item-icon" ></i> --}}
+                                    <i class="fas fa-trash-alt category-item-icon"></i>
+                                </div>
+                            </div>
+                             <div class="list-category-item tier-3 row">
+                                 <div class="category-add-button col-1">
+                                    <i class="fas fa-plus category-item-icon" ></i>
+                                </div>
+                                <div class="category-item-name col-8">
+                                    Hàng lưu niệm nhập khẩu rẻ
+                                </div>
+                                <div class="category-item-action col-3">
+                                    <i class="fas fa-edit category-item-icon"></i>
+                                    {{!-- <i class="fas fa-plus category-item-icon" ></i> --}}
+                                    <i class="fas fa-trash-alt category-item-icon"></i>
+                                </div>
+                            </div>
+                            <div class="list-category-item tier-3 row">
+                                <div class="category-add-button col-1">
+                                    <i class="fas fa-plus category-item-icon" ></i>
+                                </div>
+                                <div class="category-item-name col-8">
+                                    Hàng lưu niệm nội địa rẻ
+                                </div>
+                                <div class="category-item-action col-3">
+                                    <i class="fas fa-edit category-item-icon"></i>
+                                    {{!-- <i class="fas fa-plus category-item-icon" ></i> --}}
+                                    <i class="fas fa-trash-alt category-item-icon"></i>
+                                </div>
+                            </div>
+                            <div class="list-category-item tier-3 row">
+                                <div class="category-add-button col-1">
+                                    <i class="fas fa-plus category-item-icon" ></i>
+                                </div>
+                                <input class="category-item-name input col-8">
+                                </input>
+                                <div class="category-item-action col-3">
+                                    <i class="fas fa-edit category-item-icon"></i>
+                                    {{!-- <i class="fas fa-plus category-item-icon" ></i> --}}
+                                    <i class="fas fa-trash-alt category-item-icon"></i>
+                                </div>
+                            </div>
+                            <div class="list-category-item tier-2 row">
+                                <div class="category-add-button col-1">
+                                    <i class="fas fa-plus category-item-icon" ></i>
+                                </div>
+                                <div class="category-item-name col-8">
+                                    Hàng lưu niệm đẹp
+                                </div>
+                                <div class="category-item-action col-3">
+                                    <i class="fas fa-edit category-item-icon"></i>
+                                    {{!-- <i class="fas fa-plus category-item-icon" ></i> --}}
+                                    <i class="fas fa-trash-alt category-item-icon"></i>
+                                </div>
+                            </div>
+                            <div class="list-category-item row">
+                                <div class="category-add-button col-1">
+                                    <i class="fas fa-plus category-item-icon" ></i>
+                                </div>
+                                <div class="category-item-name col-8">
+                                    Cốc sứ nghệ thuật
+                                </div>
+                                <div class="category-item-action col-3">
+                                    <i class="fas fa-edit category-item-icon"></i>
+                                    {{!-- <i class="fas fa-plus category-item-icon" ></i> --}}
+                                    <i class="fas fa-trash-alt category-item-icon"></i>
+                                </div>
+                            </div>
+                            
                         </div>
                     </div>
                     <div class="modal-footer image-modal-footer">
@@ -73,6 +225,120 @@
             </div>
         </div>
 
+
+        {{!-- Modal add location --}}
+        <div class="location-modal d-none" id="locationModal">
+            <div class="location-modal-dialog">
+                <div class="modal-content location-modal-container">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Thêm doanh mục</h5>
+                        <button type="button" class="btn-close" aria-label="Close"></button>
+                    </div>
+                    <div class="location-modal-body">
+                        <label class="list-location-title col-12">
+                            Quản lý các địa danh
+                        </label>
+                        <div class="list-category col-12">
+                            <div class="list-category-item row">
+                                <div class="category-add-button col-1">
+                                    <i class="fas fa-plus category-item-icon" ></i>
+                                </div>
+                                <div class="category-item-name col-8">
+                                    Morri Store
+                                </div>
+                                <div class="category-item-action col-3">
+                                    <i class="fas fa-edit category-item-icon"></i>
+                                    {{!-- <i class="fas fa-plus category-item-icon" ></i> --}}
+                                    <i class="fas fa-trash-alt category-item-icon"></i>
+                                </div>
+                            </div>
+                            <div class="list-category-item tier-2 row">
+                                <div class="category-add-button col-1">
+                                    <i class="fas fa-plus category-item-icon" ></i>
+                                </div>
+                                <div class="category-item-name col-8">
+                                    Hàng lưu niệm rẻ
+                                </div>
+                                <div class="category-item-action col-3">
+                                    <i class="fas fa-edit category-item-icon"></i>
+                                    {{!-- <i class="fas fa-plus category-item-icon" ></i> --}}
+                                    <i class="fas fa-trash-alt category-item-icon"></i>
+                                </div>
+                            </div>
+                             <div class="list-category-item tier-3 row">
+                                 <div class="category-add-button col-1">
+                                    <i class="fas fa-plus category-item-icon" ></i>
+                                </div>
+                                <div class="category-item-name col-8">
+                                    Hàng lưu niệm nhập khẩu rẻ
+                                </div>
+                                <div class="category-item-action col-3">
+                                    <i class="fas fa-edit category-item-icon"></i>
+                                    {{!-- <i class="fas fa-plus category-item-icon" ></i> --}}
+                                    <i class="fas fa-trash-alt category-item-icon"></i>
+                                </div>
+                            </div>
+                            <div class="list-category-item tier-3 row">
+                                <div class="category-add-button col-1">
+                                    <i class="fas fa-plus category-item-icon" ></i>
+                                </div>
+                                <div class="category-item-name col-8">
+                                    Hàng lưu niệm nội địa rẻ
+                                </div>
+                                <div class="category-item-action col-3">
+                                    <i class="fas fa-edit category-item-icon"></i>
+                                    {{!-- <i class="fas fa-plus category-item-icon" ></i> --}}
+                                    <i class="fas fa-trash-alt category-item-icon"></i>
+                                </div>
+                            </div>
+                            <div class="list-category-item tier-3 row">
+                                <div class="category-add-button col-1">
+                                    <i class="fas fa-plus category-item-icon" ></i>
+                                </div>
+                                <input class="category-item-name input col-8">
+                                </input>
+                                <div class="category-item-action col-3">
+                                    <i class="fas fa-edit category-item-icon"></i>
+                                    {{!-- <i class="fas fa-plus category-item-icon" ></i> --}}
+                                    <i class="fas fa-trash-alt category-item-icon"></i>
+                                </div>
+                            </div>
+                            <div class="list-category-item tier-2 row">
+                                <div class="category-add-button col-1">
+                                    <i class="fas fa-plus category-item-icon" ></i>
+                                </div>
+                                <div class="category-item-name col-8">
+                                    Hàng lưu niệm đẹp
+                                </div>
+                                <div class="category-item-action col-3">
+                                    <i class="fas fa-edit category-item-icon"></i>
+                                    {{!-- <i class="fas fa-plus category-item-icon" ></i> --}}
+                                    <i class="fas fa-trash-alt category-item-icon"></i>
+                                </div>
+                            </div>
+                            <div class="list-category-item row">
+                                <div class="category-add-button col-1">
+                                    <i class="fas fa-plus category-item-icon" ></i>
+                                </div>
+                                <div class="category-item-name col-8">
+                                    Cốc sứ nghệ thuật
+                                </div>
+                                <div class="category-item-action col-3">
+                                    <i class="fas fa-edit category-item-icon"></i>
+                                    {{!-- <i class="fas fa-plus category-item-icon" ></i> --}}
+                                    <i class="fas fa-trash-alt category-item-icon"></i>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    <div class="modal-footer image-modal-footer">
+                        <button type="button" class="btn btn-secondary btn-close-modal">Close</button>
+                        {{!-- <button type="button" class="btn btn-primary">Save changes</button> --}}
+                    </div>
+                </div>
+            </div>
+        </div>
 
     </div>
 </div>
@@ -97,10 +363,10 @@
                 `
                 <tr class="product-item" style="transform: rotate(0);"> 
                     <th scope="row"><a href="/product/view-product/${result[i]._id}" class="stretched-link">${i+1}</a></th>
-                    <td>${result[i]._id}</td>
+                    <td style='text-align: center'>${result[i]._id}</td>
                     <td>${result[i].name}</td>
-                    <td>${result[i].quantity}</td>
-                    <td>${result[i].remain}</td>
+                    <td style='text-align: center'>${result[i].quantity}</td>
+                    <td style='text-align: center'>${result[i].remain}</td>
                 </tr>
                 `
             }
@@ -205,6 +471,16 @@
             changeCategoryModal();
         }
         console.log('ABC')
+    }
+
+    // Xử lý mở modal location
+    function changeLocationModal() {
+        var locationModal = document.querySelector('#locationModal');
+        console.log("locationModal", locationModal)
+        if(locationModal.classList.contains('d-none')){
+            locationModal.classList.remove('d-none');
+        }
+        else locationModal.classList.add('d-none');
     }
 
     function moveToProduct(id)
