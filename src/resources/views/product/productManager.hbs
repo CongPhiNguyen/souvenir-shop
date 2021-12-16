@@ -17,6 +17,7 @@
                         <th scope="col" class="product-row">Tên</th>
                         <th scope="col" class="product-row">Số lượng nhập</th>
                         <th scope="col" class="product-row">Còn lại</th>
+                        <th scope="col" class="product-row"></th>
                     </tr>
                 </thead>
                 <tbody id='product-manager-container'>
@@ -27,6 +28,7 @@
         <div class="divider mt-8" style='width: 100%; margin-top: 60px'>
 
         </div>
+        {{!-- Đây là phần quản lý doanh mục --}}
         <div class="row category-manager">
             <div class="category-manager-title col-8">
                 Danh sách các doanh mục
@@ -49,7 +51,9 @@
                 </tbody>
             </table>    
 
-        </div>  
+        </div>
+
+        {{!-- đây là phần quản lý địa danh   --}}
         <div class="row category-manager ">
             <div class="category-manager-title col-8">
                 Danh sách các địa danh
@@ -483,6 +487,10 @@
                     <td>${result[i].name}</td>
                     <td style='text-align: center'>${result[i].quantity}</td>
                     <td style='text-align: center'>${result[i].remain}</td>
+                    <td style='text-align: center'>
+                        <i class="fas fa-edit location-item-icon"></i>
+                        <i class="fas fa-trash-alt location-item-icon"></i>
+                    </td>
                 </tr>
                 `
             }
