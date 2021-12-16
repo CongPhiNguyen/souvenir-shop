@@ -72,3 +72,13 @@
 .list-location {
     
 }
+
+.img-location {
+    width: 100px;
+    height: 100px;
+}
+
+.location-info-cell {
+    height: 102px;
+    line-height: 102px;
+}
