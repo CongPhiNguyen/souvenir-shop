@@ -12,4 +12,14 @@ module.exports = connectDB = async() => {
     catch(error) {
         console.error(error);
     }   
+    // try {
+    //     await mongoose.connect('mongodb://localhost:27107/morri_store', {
+    //         useNewUrlParser: true,
+    //         useUnifiedTopology: true
+    //     });
+    //     console.log("Connecting to DB successfully!");
+    // }
+    // catch(err) {
+    //     console.error(err);
+    // }
 };
