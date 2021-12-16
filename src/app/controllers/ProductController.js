@@ -169,6 +169,10 @@ class ProductController {
         res.render('product/search' , {active, productSearch});
     }
 
+    async getFullProduct(req, res) {
+        
+    }
+
     async addToCart(req, res)
     {
         console.log('Chạy ở dưới add to cart', 'req.body', req.body);
