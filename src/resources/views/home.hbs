@@ -347,7 +347,7 @@
                                 <div style="margin-bottom: 30px" class='col-sm-6 col-lg-4 col-xl-3'>
                                     <div class="card card-product" style="width: 18rem;">
                                         <div style="color:rgba(255, 255, 255, 0.541); font-size: 2.5rem;" class="overlay-product">
-                                            <a href="/product/${value._id}">
+                                            <a href="/product/view-product/${value._id}">
                                                 <i class="fas fa-cart-arrow-down hover-cart-to-product">
                                                 </i>
                                             </a>
@@ -373,9 +373,9 @@
                                                 </div>
                                                 <div style="display:flex; justify-content:space-between">
                                                     <div style="color:#6f787e; font-style:italic">
-                                                        {{this.location}}
+                                                        ${value.location}    
                                                     </div>
-                                                    <div style="color:#6f787e;font-style:italic">{{this.province}}</div>
+                                                    <div style="color:#6f787e;font-style:italic">${value.province}</div>
                                                 </div>
                                             </div>
                                         </a>
