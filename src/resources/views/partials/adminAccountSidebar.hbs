@@ -1,0 +1,39 @@
+<link rel="stylesheet" href="/css/adminAccountSidebar.css">
+
+<div class="account-sidebar list-group">
+    <div class="d-flex justify-content-center align-items-end" style="height: 48px">
+        <p class="bg-dark text-white px-1 m-0">Morri Store Admin</p>
+    </div>
+    <div class="account-sidebar__user d-flex align-items-center">
+        <div class="d-flex sidebar-user_name fw-bold text-wrap align-item-center">
+            <i class="sidebar-user__icon fas fa-gifts px-4"></i>
+            <span>{{user.name}}</span>
+        </div>
+    </div>
+    <div class="account-sidebar__itemlist">
+        <a href="/account/profile" id="account_sidebar__profile" class="account-sidebar__item list-group-item list-group-item-action text-wrap">
+            <i class="sidebar-item__icon fas fa-user-alt"></i>
+            <span>Thông tin cá nhân</span>
+        </a>
+        <a href="/account/customer" id="account_sidebar__customer" class="account-sidebar__item list-group-item list-group-item-action text-wrap">
+            <i class="sidebar-item__icon fas fa-user-alt"></i>
+            <span>Danh sách khách hàng</span>
+        </a>
+        <a href="/account/receipt" id="account_sidebar__order" class="account-sidebar__item list-group-item list-group-item-action text-wrap">
+            <i class="sidebar-item__icon fas fa-receipt"></i>
+            <span class="sidebar-item__name">Danh sách đơn hàng</span>
+        </a>
+        <a href="/account/voucher" id="account_sidebar__voucher" class="account-sidebar__item list-group-item list-group-item-action text-wrap">
+            <i class="sidebar-item__icon fas fa-envelope text-wrap"></i>
+            <span class="sidebar-item__name">Voucher</span>
+        </a>
+        <a href="/account/statistic" id="account_sidebar__statistic" class="account-sidebar__item list-group-item list-group-item-action text-wrap">
+            <i class="sidebar-item__icon fas fa-boxes text-wrap"></i>
+            <span class="sidebar-item__name">Thống kê</span>
+        </a>
+        <a href="/logout" id="account_sidebar__logout" class="account-sidebar__item list-group-item list-group-item-action text-wrap">
+            <i class="sidebar-item__icon fas fa-sign-out-alt"></i>
+            <span class="sidebar-item__name">Thoát</span>
+        </a>
+    </div>
+</div>

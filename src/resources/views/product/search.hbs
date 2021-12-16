@@ -1,0 +1,137 @@
+<title>Home</title>
+<link rel="stylesheet" href="/css/home.css">
+
+<div>
+    <div class="header-home">
+        <h2 class="header-home__title">MORRI STORE</h2>
+        <h4>Mua sắm quà lưu niệm thoải mái </h4>
+        <div class="header-home__search">
+            <form action="/product/search" method="get">
+                <input name="slug" placeholder="Tìm kiếm sản phẩm tại đây" class="header-home__search-input"
+                    type="text">
+                <button type="submit" class="header-home__search-btn">
+                    <i class="fas fa-search"></i>
+                    Search
+                </button>
+            </form>
+        </div>
+        <div class="header-home__search-nearest container">
+            <div class="row justify-content-md-center gx-4">
+                <div class="col-3 ">
+                    <div class="p-2 slider-item">
+                        <a href="/product/search?slug=thanh+pho+ho+chi+minh">TP.HCM</a>
+                    </div>
+                </div>
+                <div class="col-3 ">
+                    <div class="p-2 slider-item ">
+                        <a href="/product/search?slug=vung+tau">Vũng Tàu</a>
+                    </div>
+                </div>
+                <div class="col-3 ">
+                    <div class="p-2  slider-item">
+                        <a href="/product/search?slug=an+giang">An Giang</a>
+                    </div>
+                </div>
+                <div class="col-3 ">
+                    <div class="p-2 slider-item ">
+                        <a href="/product/search?slug=lam+dong">Lâm Đồng</a>
+                    </div>
+                </div>
+                <div class="col-3 ">
+                    <div class="p-2  slider-item ">
+                        <a href="/product/search?slug=ha+noi">Hà Nội</a>
+                    </div>
+                </div>
+                <div class="col-3 ">
+                    <div class="p-2  slider-item">
+                        <a href="/product/search?slug=quang+ninh">Quảng Ninh</a>
+                    </div>
+                </div>
+                <div class="col-3 ">
+                    <div class="p-2  slider-item">
+                        <a href="/product/search?slug=khanh+hoa">Khánh Hòa</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{!-- Tỉnh thành --}}
+    <div class="grid wide container">
+        <div class="cook__heading">TÌM KIẾM SẢN PHẨM</div>
+        <div class="row">
+            {{#each productSearch}}
+            <div style="margin-bottom: 30px" class='col-sm-6 col-lg-4 col-xl-3'>
+                <div class="card card-product" style="width: 18rem;">
+                    <div style="color:rgba(255, 255, 255, 0.541); font-size: 2.5rem;" class="overlay-product">
+                        <a href="/product/view-product/{{this._id}}">
+                            <i class="fas fa-cart-arrow-down hover-cart-to-product">
+                            </i>
+                        </a>
+                    </div>
+                    <a href="#">
+                        <div style="overflow: hidden;">
+                            <img src="{{this.imgUrl}}" class="card-img-top cook__blog-card-img-product" alt="Lỗi">
+                        </div>
+                        <div class="card-body">
+                            <h5 style="margin-bottom: 10px;" class="card-title product-name">{{this.name}}</h5>
+                            <p style="margin-bottom: 10px;" class="card-text cook__blog-card-description">{{this.description}}</p>
+                            <p style="display:flex; justify-content:space-between;margin-bottom: 10px;" class="card-text">
+                                <span
+                                    style="color: #ffba00;font-weight:700;font-size: 1.2rem;">{{this.currentPrice}}đ</span>
+                                <span
+                                    style="font-size: 1.2rem;text-decoration: line-through; color:darkgrey; font-weight:400;">{{this.sellPrice}}đ</span>
+                            </p>
+                            <div style="display:flex; justify-content:space-between">
+                                <div>
+                                    {{~#if this.rating}}
+                                    <p style="margin-bottom: 10px;"><span style="padding-right: 5px;">Đánh giá:</span> {{~rating}} <i
+                                            style="color: #ffba00;" class="fas fa-star"></i></p>
+                                    {{~^~}}
+                                    <p style="margin-bottom: 10px;">Chưa có đánh giá</p>
+                                    {{~/if~}}
+                                </div>
+                                <div style="color:darkgrey ;">Còn lại: {{this.remain}}</div>
+                            </div>
+                            <div style="display:flex; justify-content:space-between">
+                                <div style="color:#6f787e; font-style:italic">
+                                    {{this.location}}
+                                </div>
+                                <div style="color:#6f787e;font-style:italic">{{this.province}}</div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            {{else}}
+            <h2 style="text-align:center; margin-bottom:30px">Không có sản phẩm cần tìm</h2>
+            {{/each}}
+        </div>
+    </div>
+
+</div>
+
+
+<script>
+    var slideIndex = 0;
+    showSlides();
+
+
+    function showSlides() {
+        var i;
+        var slides = document.getElementsByClassName("mySlides");
+        var dots = document.getElementsByClassName("dot");
+        for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+        }
+        slideIndex++;
+        if (slideIndex > slides.length) { slideIndex = 1 }
+        for (i = 0; i < dots.length; i++) {
+            dots[i].className = dots[i].className.replace(" active", "");
+        }
+        slides[slideIndex - 1].style.display = "block";
+        dots[slideIndex - 1].className += " active";
+        setTimeout(showSlides, 7000); // Change image every 2 seconds
+    }
+
+</script>

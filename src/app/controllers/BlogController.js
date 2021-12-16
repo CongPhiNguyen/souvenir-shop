@@ -62,19 +62,8 @@ module.exports.postBlog_get = (req, res) => {
 
 module.exports.postBlog_post = async (req, res) => {
     console.log('req.body: ' + req.body);
-
-/*     if (req.files == undefined) {
-        return res.send({
-          message: "You must select a file.",
-        });
-    }
-    else{
-        console.log(req.file)
-    } */
-  
     const { title, img, category, description, contentCode} = req.body;
-/*     var image = fs.readFileSync(req.file.path);
-    var encode_image = image.toString('base64'); */
+
     try {
         if(title == '') throw Error('Title is required');
         if(img == '') throw Error('Image is required');
@@ -159,6 +148,67 @@ module.exports.editBlog_post = async (req, res) => {
     }
     catch(err) {
         console.log('delete blog error');
+        console.log(err);
+    }
+}
+
+/*-----------------------------------edit detail--------------------------------------------*/
+module.exports.editDetailBlog_get = async (req, res) => {
+    console.log('blog code: ', req.params.code);
+    var objectId = mongoose.Types.ObjectId(req.params.code);
+    console.log('objectID: ', objectId);
+    try {
+        const blog = await Blog.findOne({ _id: objectId }).lean();
+        if (blog) {
+            console.log(blog);
+            res.render('editDetailBlog', { blog: blog });
+        } else {
+            console.log('blog null');
+        }
+    } catch (err) {
+        console.log('blog detail error');
+        console.log(err);
+    }
+}
+
+module.exports.editDetailBlog_post = async (req, res) => {
+
+    const { id, title, img, category, description, contentCode } = req.body;
+        
+    if(title == '') throw Error('Title is required');
+    if(img == '') throw Error('Image is required');
+    if(category == '') throw Error('Category is required');
+    if(description == '') throw Error('Description is required');
+    if(contentCode == '') throw Error('Content is required');
+    
+    var objectId = mongoose.Types.ObjectId(id);
+    const newBlog = new Blog({
+        title: title,
+        img: img,
+        category: category,
+        description: description,
+        contentCode: contentCode
+    });
+    try {
+        //const query = { _id: objectId };
+        const result = await Blog.updateOne({ _id: objectId }, {
+            title: title,
+            img: img,
+            category: category,
+            description: description,
+            contentCode: contentCode
+        });
+        if (result.modifiedCount === 1) {
+            console.log("Successfully deleted one document.");
+            blogListcache.del( "blogList" );//remove cache
+            res.status(200).json({ blog: newBlog });
+
+        } else {
+            console.log("No documents matched the query. uploaded 0 documents.");
+        }
+
+    } catch (err) {
+        console.log('update service error');
         console.log(err);
     }
 }

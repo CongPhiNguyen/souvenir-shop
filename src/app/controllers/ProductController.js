@@ -1,6 +1,10 @@
 const res = require("express/lib/response");
 const Product = require('../models/Product');
 const Cart = require('../models/cart');
+var ObjectId = require('mongodb').ObjectID;
+
+const { removeAccents } = require('../helper/removeVietnameseAccents')
+
 
 class ProductController {
     // [GET] /home
@@ -24,9 +28,24 @@ class ProductController {
         res.render('product/productManager', { title: "Product" , active: {Product: true }});
     }
 
-    viewProductCustomer(req, res) {
-        console.log("res",res);
-        res.render('product/productManager', { title: "Product" , active: {Product: true }});
+    async viewProductCustomer(req, res) {
+        var newI = await Product.findOne({'_id': new ObjectId(req.originalUrl.replace(req.baseUrl + '/', ''))});
+        // console.log(newI);
+        res.render('product/viewProductView', { title: "Product" , active: {Product: true }, 
+            dataProduct: {
+                _id: newI._id,
+                name: newI.name,
+                location: newI.location, 
+                province: newI.province, 
+                quantity: newI.quantity, 
+                remain: newI.remain,
+                originalPrice: newI.originalPrice,
+                sellPrice: newI.sellPrice,
+                currentPrice: newI.currentPrice,
+                imgUrl: newI.imgUrl,
+                description: newI.description,
+            } 
+        });
     }
 
     async addProduct(req, res) {
@@ -122,6 +141,36 @@ class ProductController {
                 }
             }
         );
+    }
+
+    async searchProduct(req, res) {
+        const active = {
+            type: 'home',
+            Home: true,
+        }
+        let productSearch;
+        let search = req.query.slug.toLowerCase().replace(/ /g, '')
+        search = removeAccents(search)
+        let listProduct = await Product.find({}).lean()
+        if(listProduct) {
+            productSearch = listProduct.filter(value => {
+                let slug = value.name.toLowerCase().replace(/ /g, '');
+                slug = removeAccents(slug);
+                let province = value.province.toLowerCase().replace(/ /g, '');
+                province = removeAccents(province);
+                let location = value.location.toLowerCase().replace(/ /g, '');
+                location = removeAccents(location);
+                let description = value.description.toLowerCase().replace(/ /g, '');
+                description = removeAccents(description);
+                return slug.includes(search) || province.includes(search) || location.includes(search) || description.includes(search)
+            })
+        }
+        console.log(productSearch)
+        res.render('product/search' , {active, productSearch});
+    }
+
+    async getFullProduct(req, res) {
+        
     }
 
     async addToCart(req, res)

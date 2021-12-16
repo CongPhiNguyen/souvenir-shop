@@ -1,11 +1,11 @@
 <title>Account</title>
-<link rel="stylesheet" href="/css/accountProfile.css">
 <link rel="stylesheet" href="/css/general.css">
+<link rel="stylesheet" href="/css/adminProfile.css">
 
 <div class="container-xl account-info-container">
     <div class="row">
         <div class="col-12 col-md-4 col-lg-3 my-3">
-            {{> customerAccountSidebar}}
+            {{> adminAccountSidebar}}
         </div>
         <div class="col-12 col-md-8 col-lg-9 my-3">
             <div class="col">
@@ -35,7 +35,7 @@
                 <div class="mb-4 row">
                     <label for="inputAddress" class="col-lg-3 col-form-label mb-1">Địa chỉ</label>
                     <div class="col-lg-7">
-                        <input type="tel" class="form-control mb-2" id="inputAddress" value="{{user.address}}">
+                        <input type="tel" class="form-control mb-2" id="inputAddress">
                         <div class="inputAddress-error text-error mb-2"></div>
                         <div class="row">
                             <div class="col-6">
@@ -159,7 +159,7 @@
                             }
                             html1 += provinceHTML;
                         }
-
+                        
                         selectProvince.innerHTML = html1;
                         selectDistrict.innerHTML = html2;
 
@@ -215,8 +215,6 @@
     }
 
     changePasswordbtn.addEventListener('click', (e) => {
-        console.log(selectProvince.value);
-        console.log(selectDistrict.value);
         if (changePasswordSection.classList.contains('d-none')) {
             changePasswordSection.classList.remove('d-none');
         }
@@ -230,8 +228,6 @@
         const newEmail = inputEmail.value;
         const newPhone = inputPhone.value;
         const newAddress = inputAddress.value;
-        const newProvince = selectProvince.value;
-        const newDistrict = selectDistrict.value;
         var oldPassword = inputPassword.value;
         var newPassword = inputNewPassword.value;
         const confirmPassword = inputConfirmPassword.value;
@@ -263,7 +259,7 @@
                     newPassword = '';
                     const res = await fetch('/account/profile', {
                         method: 'POST',
-                        body: JSON.stringify({ newName, newEmail, newPhone, newAddress, newProvince, newDistrict, oldPassword, newPassword }),
+                        body: JSON.stringify({ newName, newEmail, newPhone, newAddress, oldPassword, newPassword }),
                         headers: {'Content-Type': 'application/json'}
                     });
                     const data = await res.json();
@@ -294,7 +290,7 @@
                     else {
                         const res = await fetch('/account/profile', {
                             method: 'POST',
-                            body: JSON.stringify({ newName, newEmail, newPhone, newAddress, newProvince, newDistrict, oldPassword, newPassword }),
+                            body: JSON.stringify({ newName, newEmail, newPhone, newAddress, oldPassword, newPassword }),
                             headers: {'Content-Type': 'application/json'}
                         });
                         const data = await res.json();

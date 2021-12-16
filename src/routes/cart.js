@@ -12,6 +12,7 @@ router.post('/add-product-to-cart', CartController.addProductToCart)
 router.post('/get-cart-user', CartController.getCartUser)
 router.post('/get-coupon',CartController.getCoupon)
 router.post('/create-receipt', requireAuth ,CartController.createReceipt)
+router.post('/check-voucher', CartController.checkVoucher)
 router.get('/return-policy', CartController.getReturnPolicy)
 router.get('/' , requireAuth ,CartController.getCart);
 

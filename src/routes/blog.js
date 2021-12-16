@@ -23,6 +23,8 @@ router.get('/postBlog',requireAdmin, BlogController.postBlog_get);
 router.post('/postBlog/uploadSingle', /* upload.single('image-blog'), */ BlogController.postBlog_post);
 router.get('/editBlog',requireAdmin ,BlogController.editBlog_get);
 router.post('/editBlog', BlogController.editBlog_post);
+router.get('/editBlog/:code',requireAdmin ,BlogController.editDetailBlog_get);
+router.post('/editBlog/:code', BlogController.editDetailBlog_post);
 router.get('/', verifyCache, BlogController.blog_get);
 router.get('/:code',/* detailCache, */ BlogController.detailBlog_get);
 

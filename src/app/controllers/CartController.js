@@ -1,7 +1,9 @@
 const res = require("express/lib/response");
 const Cart = require('../models/cart');
+const coupon = require("../models/coupon");
 const Coupon = require("../models/coupon");
 const Receipt = require('../models/receipt')
+const Voucher = require('../models/voucher')
 
 class CartController {
     // [GET] /home
@@ -136,7 +138,7 @@ class CartController {
                         })
                     );
                 }
-                else{
+                else {
                     res.status(200).send(
                         JSON.stringify({
                             status: 200,
@@ -170,8 +172,9 @@ class CartController {
     }
 
     async createReceipt(req, res) {
-        let { receiptId, name, phone, userCode, mail,address, note, province, district, paymentMethod, listProduct, total, totalFinal, deliveryMoney, discount,coupon, deliveryStatus } = req.body;
-        const newReceipt = await Receipt.create({ receiptId, name, phone, userCode, mail,address, note, province, district, paymentMethod, listProduct, total, totalFinal, deliveryMoney, discount,coupon, deliveryStatus })
+        let { receiptId, name, phone, userCode, mail, address, note, province, district, paymentMethod, listProduct, total, totalFinal, deliveryMoney, discount, coupon, deliveryStatus } = req.body;
+        let voucherList = await Voucher.findOne({ voucherId: coupon.voucherId }).exec()
+        const newReceipt = await Receipt.create({ receiptId, name, phone, userCode, mail, address, note, province, district, paymentMethod, listProduct, total, totalFinal, deliveryMoney, discount, coupon, deliveryStatus })
         newReceipt.save()
             .then(result => {
                 if (result) {
@@ -185,15 +188,20 @@ class CartController {
                     //     },
                     //     { returnOriginal: false }).exec()
                     if (coupon) {
-                        Coupon.findOneAndUpdate(
-                            { 'couponCode': req.body.coupon.couponCode },
+                        let codeList = voucherList.codeList
+                        codeList.map(value => {
+                            if (value.code == coupon.code) {
+                                value.isUsed = true
+                            }
+                        })
+                        Voucher.findOneAndUpdate(
+                            { 'voucherId': coupon.voucherId },
                             {
                                 $set: {
-                                    isUsed: true
+                                    codeList: codeList
                                 }
                             },
                             { returnOriginal: false }).exec()
-
                     }
                     res.status(201).send(
                         JSON.stringify({
@@ -229,6 +237,58 @@ class CartController {
                 dataUser: req.session.user,
             })
         );
+    }
+
+
+    async checkVoucher(req, res) {
+        const { couponCode } = req.body;
+        const voucherList = await Voucher.findOne({ 'codeList.code': couponCode }).sort({ createdAt: -1 });
+
+        if (voucherList) {
+            let date = new Date()
+            if (new Date(voucherList.exp) - date >= 0) {
+                voucherList.codeList.map(value => {
+                    if (value.code == couponCode) {
+                        if (!value.isUsed) {
+                            let data = {
+                                voucherId: voucherList.voucherId,
+                                type: voucherList.type,
+                                value: voucherList.value,
+                                max: voucherList.max,
+                                code: couponCode,
+                            }
+                            res.send(
+                                JSON.stringify({
+                                    status: 201,
+                                    Coupon: data,
+                                })
+                            )
+                        } else {
+                            res.status(403).send(
+                                JSON.stringify({
+                                    status: 403,
+                                    message: "Mã giảm giá đã được sử dụng",
+                                })
+                            )
+                        }
+                    }
+                })
+            } else {
+                res.status(403).send(
+                    JSON.stringify({
+                        status: 403,
+                        message: "Voucher hết hạn sử dụng",
+                    })
+                )
+            }
+        } else {
+            res.status(403).send(
+                JSON.stringify({
+                    status: 403,
+                    message: "Mã giảm giá không tồn tại",
+                })
+            )
+        }
     }
 }
 

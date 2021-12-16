@@ -1,10 +1,10 @@
 <title>Product</title>
 <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
-<link rel="stylesheet" href="../css/product.css">
+<link rel="stylesheet" href="/css/product.css">
 
 <div class="wrapper">
     <div class="container">
-        <div class="fast-navbar">
+        <div class="fast-navbar d-none">
             <div class="fast-navbar-item" onclick="clickFastNavbar('Fire')">
                 <i class="fas fa-fire"></i>
             </div>
@@ -23,7 +23,7 @@
         </div>
         {{!-- <a class="add-product-button" href="#">Add product</a> --}}
         {{!-- Phần breadscrum --}}
-        <div class="breadscrum">
+        {{!-- <div class="breadscrum">
             <ol class='breadscrum-list'>    
                 <li class='breadscrum-item'>
                     <a href="/home">
@@ -43,55 +43,64 @@
                     </a>
                 </li>
             </ol>
-        </div>
-        {{!-- Phần của product --}}
+        </div> --}}
+        <div id="product-code" class='d-none' data-value={{dataProduct._id}}>{{dataProduct._id}}</div>
+        <div id="product-id" data-value={{dataProduct.productID}}>{{dataProduct.productID}}</div>
+        
+        {{!-- Phần của product ở đây mình kiểu chi 4 8 ra rồi tính tiếp các kiểu--}}
         <div class="product-container row">
-            <div class="product-image col-md-4">
-                <img class="product-image-1" src="/img/figure/figure1.jfif" alt="">    
+            <div class="product-image col-md-5">
+                <image class="product-image-1" src={{dataProduct.imgUrl}} alt=""></image>    
             </div>
-            <div class="product-info col-md-8">
-                <div class="product-name">Figure Makise Kurisu trong visual novel Stein;Gate</div>
-                <div class="product-place">
-                    <i class="fas fa-map-marker-alt"></i>
-                    <span class="product-location">Akihabara, Japan</span>
+            <div class="product-info col-md-6">
+
+                <div class="product-name" data-value={{dataProduct.name}}>{{dataProduct.name}}</div>
+                
+                <div class="product-rating d-flex">
+                    <div class="product-rating-average">
+                        <i class="product-rating-icon fas fa-star"></i>
+                        <i class="product-rating-icon fas fa-star"></i>
+                        <i class="product-rating-icon fas fa-star"></i>
+                        <i class="product-rating-icon fas fa-star"></i>
+                        <i class="product-rating-icon fas fa-star"></i>
+                    </div>
+                    <div class="product-rating-number">
+                        0 Đã đánh giá
+                    </div>
+
+                    <div class="product-sold d-flex">
+                        0 Đã bán
+                    </div>
                 </div>
-                <div class="product-price-sale">
-                    <div class="product-old-price">650.000vnd</div>
-                    <div class="product-price">650.000vnd</div>
-                    <div class="sale-percent">7%</div>
+                
+
+                <div class="product-place mt-1">
+                    <i class="fas fa-map-marker-alt product-place-icon"></i>
+                    <span class="product-location" data-value={{dataProduct.location}}>{{dataProduct.location}}</span>
                 </div>
-                <div class="product-description">
-                    Đây là một sản phẩm tuyệt vời dành cho fan của bộ truyện steingate và là quà lưu niệm của những người du lịch từ Akihabara
+                
+                <div class="product-description mt-2" data-value={{dataProduct.description}}>
+                    {{dataProduct.description}}
                 </div>
-                <div class="product-sold">
-                    <div class="sold-title">Đã bán</div>
-                    <div class="sold-num">12</div>
+
+                <div class="product-price-sale d-flex mt-4">
+                    <div class="product-old-price" data-value={{dataProduct.sellPrice}}>{{dataProduct.sellPrice}}VNĐ</div>
+                    <div class="product-price" data-value={{dataProduct.currentPrice}}>{{dataProduct.currentPrice}}VNĐ</div>
+                    <div class="sale-percent">
+                        {{!-- {{((parseInt(dataProduct.sellPrice) - parseInt(data.currentPrice))/(dataProduct.sellPrice))}} --}}
+                    </div>
                 </div>
-                <div class="product-rating-average">
-                    <i class="product-rating-icon fas fa-star"></i>
-                    <i class="product-rating-icon fas fa-star"></i>
-                    <i class="product-rating-icon fas fa-star"></i>
-                    <i class="product-rating-icon fas fa-star"></i>
-                    <i class="product-rating-icon fas fa-star"></i>
-                </div>
-                <div class="quantity-choose">
+ 
+                <div class="quantity-choose d-flex mt-2">
                     <div class="quantity-chose-title">Chọn số lượng</div>
-                    <div class="input-group bootstrap-touchspin">
-                        <span class="input-group-addon bootstrap-touchspin-prefix" style="display: none;"></span>
-                        <input type="number" name="qty" id="quantity_wanted" value="1" class="input-group form-control" min="1" aria-label="Quantity" style="display: block;">
-                        <span class="input-group-addon bootstrap-touchspin-postfix" style="display: none;"></span><span class="input-group-btn-vertical">
-                        <button class="btn btn-touchspin js-touchspin bootstrap-touchspin-up" type="button">
-                            <i class="material-icons touchspin-up"></i>
-                        </button><button class="btn btn-touchspin js-touchspin bootstrap-touchspin-down" type="button">
-                            <i class="material-icons touchspin-down"></i>
-                        </button></span></div>
+                    <input type="number" name="quantity" id="quantity_wanted" value="1" class="input-group form-control" min="1" aria-label="Quantity" style="display: block;">
                 </div>
-                <div class="buy-container">
+                <div class="buy-container mt-2">
                     {{!-- <button class="add-to-cart bt-add-to-cart" onclick="addToCart()">
                         Add to cart 
                     </button> --}}
-                    <button class="add-to-cart bt-add-to-cart" onclick="updateProduct()">
-                        Update product 
+                    <button class="add-to-cart bt-add-to-cart" onclick="addToCart()">
+                        Add to cart 
                     </button>
                     {{!-- <button class="buy-now">
                         Buy now
@@ -101,39 +110,302 @@
             </div>
 
         </div>  
-        <div class="product-detail-container">
+
+        <div class="divider">
+
+        </div>
+
+        <div class="product-detail-container row">
             <div class="detail-title">
-                Product Description
+                Chi tiết sản phẩm
             </div>
             <div class="bread-scrum-detail content-container">
-                <div class="title">BreadScrum</div>
+                <div class="title">Doanh mục</div>
                 <div class="content">Morri Shop >> Figure >> Stern; Gate</div>         
             </div>
             <div class="origin-detail content-container">
-                <div class="title">Source</div>
+                <div class="title">Nơi bán</div>
                 <div class="content">Akihabara, Japan</div>    
             </div>
             <div class="remain-num content-container">
-                <div class="title">Remain</div>
+                <div class="title">Còn lại</div>
                 <div class="content">4</div>    
             </div>
+            <div class="detail-title">
+                Mô tả sản phẩm
+            </div>
             <div class="detail-description">
-                From Max Factory/Good Smile Company. A rerelease?. This must also be the choice of Steins; Gate. From the sci-fi adventure series Steins; Gate comes a rerelease of the young genius, figma Kurisu Makise. Using the smooth yet posable joints of figma and the included articulated figma stand, you can act out a variety of different scenes. She comes with three expressions: a standard face, an angry face and a smirking face to show all sides of her tsundere personality. Extra arm parts are included to recreate her classic "folded arm" pose. Mirai Gadget #6: "Cyalume Saber" is also included. Plus, a total of 12 extra hand parts are included, including hands that allow her to hold important items from the game, such as her cellphone and a drink bottle.
+                Từ Max Factory / Good Smile Company. Xin vui lòng lại ?. Đây cũng phải là sự lựa chọn của Steins; Cái cổng. Từ loạt phim phiêu lưu khoa học viễn tưởng Steins; Gate là sự tái hiện của thiên tài trẻ, figma Kurisu Makise. Bằng cách sử dụng các khớp mượt mà nhưng có thể định vị của figma và chân đế figma có khớp nối đi kèm, bạn có thể diễn nhiều cảnh khác nhau. Cô ấy có ba biểu cảm: một khuôn mặt chuẩn, một khuôn mặt giận dữ và một khuôn mặt nhếch mép để thể hiện tất cả các khía cạnh của tính cách tsundere của cô. Phần cánh tay phụ được đưa vào để tạo lại tư thế "khoanh tay" cổ điển của cô. Mirai Gadget # 6: "Cyalume Sabre" cũng được bao gồm. Ngoài ra, có tổng cộng 12 bộ phận tay bổ sung được bao gồm, bao gồm cả bàn tay cho phép cô ấy cầm các vật quan trọng trong trò chơi, chẳng hạn như điện thoại di động và chai nước uống.
             </div>
         </div>
         <div class="blog-container">
-            <div class="blog-title">
-                Source place
+            <div class="blog-title detail-title">
+                Nơi sản xuất quà lưu niệm
             </div>
             <div class="blog-desc">
                 Akihabara (秋葉原), also called Akiba after a former local shrine, is a district in central Tokyo that is famous for its many electronics shops. In more recent years, Akihabara has gained recognition as the center of Japan's otaku (diehard fan) culture, and many shops and establishments devoted to anime and manga are now dispersed among the electronic stores in the district. On Sundays, Chuo Dori, the main street through the district, is closed to car traffic from 13:00 to 18:00 (until 17:00 from October through March).
                 Akihabara has been undergoing major redevelopment over the years, including the renovation and expansion of Akihabara Station and the construction of new buildings in its proximity. Among these newly opened buildings were a huge Yodobashi electronics store and the Akihabara Crossfield, a business complex with the aim of promoting Akihabara as a center for global electronics technology and trade.
             </div>
+            <a href='#'>More</a>
+        </div>
+        <div class="rating-container">
+            <div class="title">Đánh giá và nhận xét</div>
+            <div class="row">
+                <div class="review-heading row">
+                    <div class="summary-review col-4">
+                        <div class="rating-content-overview">
+                            <div class="review-rating">4.6</div>
+                            <div class="all-statistic">
+                                <div class="star-represent">
+                                    <i class="product-rating-icon fas fa-star"></i>
+                                    <i class="product-rating-icon fas fa-star"></i>
+                                    <i class="product-rating-icon fas fa-star"></i>
+                                    <i class="product-rating-icon fas fa-star"></i>
+                                    <i class="product-rating-icon fas fa-star"></i>
+                                </div>
+                                <div class="review-num">9 nhận xét</div>
+                            </div>
+                        </div>
+                        <div class="star-review-list">
+                            <div class="start-review-item">
+                                <i class="product-rating-icon fas fa-star"></i>
+                                <i class="product-rating-icon fas fa-star"></i>
+                                <i class="product-rating-icon fas fa-star"></i>
+                                <i class="product-rating-icon fas fa-star"></i>
+                                <i class="product-rating-icon fas fa-star"></i>
+                                <progress class="percent-bar" value="80" max="100"> 32% </progress>
+                                <div class="review-star-num">
+                                    9
+                                </div>
+                            </div>
+                            <div class="start-review-item">
+                                <i class="product-rating-icon fas fa-star"></i>
+                                <i class="product-rating-icon fas fa-star"></i>
+                                <i class="product-rating-icon fas fa-star"></i>
+                                <i class="product-rating-icon fas fa-star"></i>
+                                <i class="product-rating-icon far fa-star"></i>
+                                <progress class="percent-bar" value="10" max="100"> 32% </progress>
+                                <div class="review-star-num">
+                                    1
+                                </div>
+                            </div>
+                            <div class="start-review-item">
+                                <i class="product-rating-icon fas fa-star"></i>
+                                <i class="product-rating-icon fas fa-star"></i>
+                                <i class="product-rating-icon fas fa-star"></i>
+                                <i class="product-rating-icon far fa-star"></i>
+                                <i class="product-rating-icon far fa-star"></i>
+                                <progress class="percent-bar" value="10" max="100"> 32% </progress>
+                                <div class="review-star-num">
+                                    1
+                                </div>
+                            </div>
+                            <div class="start-review-item">
+                                <i class="product-rating-icon fas fa-star"></i>
+                                <i class="product-rating-icon fas fa-star"></i>
+                                <i class="product-rating-icon far fa-star"></i>
+                                <i class="product-rating-icon far fa-star"></i>
+                                <i class="product-rating-icon far fa-star"></i>
+                                <progress class="percent-bar" value="10" max="100"> 32% </progress>
+                                <div class="review-star-num">
+                                    1
+                                </div>
+                            </div>
+                            <div class="start-review-item">
+                                <i class="product-rating-icon fas fa-star"></i>
+                                <i class="product-rating-icon far fa-star"></i>
+                                <i class="product-rating-icon far fa-star"></i>
+                                <i class="product-rating-icon far fa-star"></i>
+                                <i class="product-rating-icon far fa-star"></i>
+                                <progress class="percent-bar" value="0" max="100"> 32% </progress>
+                                <div class="review-star-num">
+                                    0
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    <div class="summary-filter col-8">
+                        <div class="filter-title">Lọc xem theo:</div>
+                        <ul class="list-filter">
+                            <li class="list-filter-item">
+                                1 <i class="product-rating-icon fas fa-star"></i>
+                            </li>
+                            <li class="list-filter-item">
+                                2 <i class="product-rating-icon fas fa-star"></i>
+                            </li>
+                            <li class="list-filter-item active">
+                                3 <i class="product-rating-icon fas fa-star"></i>
+                            </li>
+                            <li class="list-filter-item">
+                                4 <i class="product-rating-icon fas fa-star"></i>
+                            </li>
+                            <li class="list-filter-item">
+                                5 <i class="product-rating-icon fas fa-star"></i>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="divider mb-2"></div>
+                <ul class="review-item-list">
+                    <li class="review-item">
+                        <div class="review-item-container row">
+                            <div class="user-information col-4">
+                                <img class="avatar" src="https://thumbs.dreamstime.com/b/default-avatar-profile-icon-vector-social-media-user-image-182145777.jpg"></img>
+                                <div class="name">Nguyễn Công Phi</div>
+                            </div>
+                            <div class="review-container col-8">
+                                <div class="rated-star">
+                                    <i class="product-rating-icon fas fa-star"></i>
+                                    <i class="product-rating-icon fas fa-star"></i>
+                                    <i class="product-rating-icon fas fa-star"></i>
+                                    <i class="product-rating-icon fas fa-star"></i>
+                                    <i class="product-rating-icon fas fa-star"></i>
+                                </div>
+                                <div class="review-content">
+                                    This is the best firgue I have had.. Kurisu is incredible beautiful.
+                                </div>
+                                <div class="review-time">
+                                    Đánh giá vào 4 tháng trước
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <div class="divider"></div>
+                    <li class="review-item">
+                        <div class="review-item-container row">
+                            <div class="user-information col-4">
+                                <img class="avatar" src="https://thumbs.dreamstime.com/b/default-avatar-profile-icon-vector-social-media-user-image-182145777.jpg"></img>
+                                <div class="name">Nguyễn Công Phi</div>
+                            </div>
+                            <div class="review-container col-8">
+                                <div class="rated-star">
+                                    <i class="product-rating-icon fas fa-star"></i>
+                                    <i class="product-rating-icon fas fa-star"></i>
+                                    <i class="product-rating-icon fas fa-star"></i>
+                                    <i class="product-rating-icon fas fa-star"></i>
+                                    <i class="product-rating-icon fas fa-star"></i>
+                                </div>
+                                <div class="review-content">
+                                    This is the best firgue I have had.. Kurisu is incredible beautiful.
+                                </div>
+                                <div class="review-time">
+                                    Đánh giá vào 4 tháng trước
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <div class="divider"></div>
+                    <li class="review-item">
+                        <div class="review-item-container row">
+                            <div class="user-information col-4">
+                                <img class="avatar" src="https://thumbs.dreamstime.com/b/default-avatar-profile-icon-vector-social-media-user-image-182145777.jpg"></img>
+                                <div class="name">Nguyễn Công Phi</div>
+                            </div>
+                            <div class="review-container col-8">
+                                <div class="rated-star">
+                                    <i class="product-rating-icon fas fa-star"></i>
+                                    <i class="product-rating-icon fas fa-star"></i>
+                                    <i class="product-rating-icon fas fa-star"></i>
+                                    <i class="product-rating-icon fas fa-star"></i>
+                                    <i class="product-rating-icon fas fa-star"></i>
+                                </div>
+                                <div class="review-content">
+                                    This is the best firgue I have had.. Kurisu is incredible beautiful.
+                                </div>
+                                <div class="review-time">
+                                    Đánh giá vào 4 tháng trước
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
 </div>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-<script>
-    
+<script> 
+
+    async function addToCart() {
+        {{!-- try { --}}
+            const data = {
+                email: localStorage.getItem('username'),
+                userCode: userCode,
+                _id: document.querySelector('#product-code').getAttribute('data-value'),
+                productID: document.querySelector('#product-id').getAttribute('data-value'), 
+                name: document.querySelector('#product-code').getAttribute('data-value'), 
+                location: document.querySelector('.product-location').getAttribute('data-value'), 
+                province: document.querySelector('.product-location').getAttribute('data-value'),     
+                originalPrice: document.querySelector('.product-old-price').getAttribute('data-value'),
+                sellPrice: document.querySelector('.product-old-price').getAttribute('data-value'),
+                currentPrice: document.querySelector('.product-price').getAttribute('data-value'),
+                imgUrl: document.querySelector('.product-image-1').src,
+                description: document.querySelector('.product-description').getAttribute('data-value'),
+                unit: 'cái',
+                rating: 0.0,
+            };
+            console.log("data", data);
+            await axios.post(`http://localhost:3000/product/add-to-cart`, data)
+            .then(res => {
+                showAlertMorriStore('alert-success', 'Thêm cart thành công !')
+            })
+            .catch(err => {
+                alert(err);
+                if(err.response.data.message)
+                {
+                    alert(err.response.data.message);
+                }
+                console.log(err);
+                isAddOK = false;
+            })
+            // Chạy các hàm refresh của bé Thiện
+            
+            var isFound = false;
+            for(var i = 0 ; i < cartUser.length; i++)
+            {
+                if(cartUser[i].product.productID == data.productID)
+                {
+                    cartUser[i].quantity++;
+                    isFound = true;
+                    break;
+                }
+            }
+            
+            if(!isFound)
+            {
+                cartUser.push(
+                    {
+                        product: {
+                            productID: data.productID, 
+                            name: data.name, 
+                            location: data.location, 
+                            province: data.province, 
+                            quantity: data.quantity, 
+                            remain: data.remain,
+                            originalPrice: data.originalPrice,
+                            sellPrice: data.sellPrice,
+                            currentPrice: data.currentPrice,
+                            imgUrl: data.imgUrl,
+                            description: data.description,
+                            unit: data.unit,
+                            rating: data.rating,
+                        },
+                        quantity: 1,
+                    }
+                )
+            }
+
+            console.log("cartUser", cartUser);
+            renderProduct()
+            renderQuantity()
+            renderQuantityTotal() 
+        {{!-- }
+        catch(e)
+        {
+            alert(e);
+            console.log(e);
+        } --}}
+    };
 </script>
 

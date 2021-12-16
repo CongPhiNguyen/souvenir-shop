@@ -13,13 +13,11 @@ html{
 /*--------------------------*/
 
 .blog-head img{
-    height: 600px;
+    height: 650px;
     margin-top: 10px;
 }
-.blog-body{
-    margin: 0 10%;
+.blog-body{}
 
-}
 .carousel-control-prev{
     margin-top: 10px !important;
 }
@@ -31,7 +29,7 @@ html{
     border: solid 1px black;
 }
 .card-body{
-    width: 80vw;
+    width: 100%;
 }
 .card-body button{
     border: 0;

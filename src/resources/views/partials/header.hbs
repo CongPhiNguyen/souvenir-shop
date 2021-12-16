@@ -10,7 +10,7 @@
 <header>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark navbar-css">
         <div class="container">
-            <a class="navbar-brand" href="/home">MORRI STORE</a>
+            <a class="navbar-brand" href="/home">MORII STORE</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -89,6 +89,7 @@
                                         <li><a class="dropdown-item dropdown-account-item" href="/account/customer">Danh sách khách hàng</a></li>
                                         <li><a class="dropdown-item dropdown-account-item" href="/account/receipt">Danh sách đơn hàng</a></li>
                                         <li><a class="dropdown-item dropdown-account-item" href="/account/voucher">Danh sách voucher</a></li>
+                                        <li><a class="dropdown-item dropdown-account-item" href="/account/statistic">Thống kê</a></li>
                                         <li><a class="dropdown-item dropdown-account-item" href="/logout">Đăng xuất</a></li>
                                     </ul>
                                 </li>
@@ -238,7 +239,6 @@
     }
 
     const showAlertMorriStore = (typeAlert, message) => {
-        console.log('fuck man, vô được cái show-alert rồi')
         AlertMorriStore.style.display = 'block';
         AlertMorriStore.classList = `alert ${typeAlert}`;
         AlertMorriStore.innerText = message;

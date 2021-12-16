@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="/css/postBlog.css">
+<link rel="stylesheet" href="/css/editDetailBlog.css">
 <title>Post</title>
 
 <div class="container px-5">
@@ -8,18 +8,13 @@
                 
                 <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
                     <li class="nav-item">
-                        <button class="nav-link align-middle px-0 btn btn-new">
-                            <i class="far fa-calendar-plus ms-2"></i> New 
-                        </button>
-                    </li>
-                    <li class="nav-item">
                         <button class="nav-link align-middle px-0 btn btn-preview"> 
                             <i class="fas fa-chalkboard-teacher ms-2"></i> Preview
                         </button>
                     </li>
                     <li class="nav-item">
                         <button class="nav-link align-middle px-0 btn btn-post" type="submit">
-                            <i class="far fa-paper-plane ms-2"></i> Post
+                            <i class="far fa-paper-plane ms-2"></i> Update
                         </button>
                     </li>
 
@@ -33,22 +28,22 @@
             <form action="/uploadSingle" method="post" enctype="multipart/form-data" class="form-post">
                 <div class="input-group input-group-sm">
                     <span class="input-group-text" id="inputGroup-sizing-sm">Title</span>
-                    <input type="text" class="form-control title-blog" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                    <input type="text" class="form-control title-blog" id="{{blog._id}}" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" value="{{blog.title}}">
                 </div>
                 <div class="title-error error-text"></div>
 
                 <div class="input-group input-group-sm mt-3">
                     {{!-- <span class="input-group-text">Image</span> --}}
                     {{!-- <input type="text" aria-label="First name" class="form-control img-blog"> --}}
-                    <input type="file" class="form-control form-control-sm  blog-img" name="blog-img" accept="image/png, image/jpeg">
+                    <input type="file" class="form-control form-control-sm  blog-img" name="{{blog.img}}" accept="image/png, image/jpeg">
                     <button class="btn btn-outline-secondary" type="button" onclick="uploadPicture()">Upload</button>
 
                     <span class="input-group-text ms-2">Category</span>
                     <select class="form-select form-select-sm category-blog" aria-label=".form-select-sm example">
-                        <option selected value="Kinh nghiệm kinh doanh">Kinh nghiệm kinh doanh</option>
-                        <option value="Cách chọn quà lưu niệm">Cách chọn quà lưu niệm</option>
-                        <option value="Ý nghĩa từng món quà">Ý nghĩa từng món quà</option>
-                        <option value="Những câu chuyện nhỏ">Những câu chuyện nhỏ</option>
+                        <option {{#ifCond blog.category '==' 'Kinh nghiệm kinh doanh'}} selected {{/ifCond}} value="Kinh nghiệm kinh doanh">Kinh nghiệm kinh doanh</option>
+                        <option {{#ifCond blog.category '==' 'Cách chọn quà lưu niệm'}} selected {{/ifCond}} value="Cách chọn quà lưu niệm">Cách chọn quà lưu niệm</option>
+                        <option {{#ifCond blog.category '==' 'Ý nghĩa từng món quà'}} selected {{/ifCond}} value="Ý nghĩa từng món quà">Ý nghĩa từng món quà</option>
+                        <option {{#ifCond blog.category '==' 'Những câu chuyện nhỏ'}} selected {{/ifCond}} value="Những câu chuyện nhỏ">Những câu chuyện nhỏ</option>
                     </select>
                 </div>
                 {{!-- --------------------------------------------- --}}
@@ -56,13 +51,16 @@
 
                 <div class="input-group input-group-sm mt-3">
                     <span class="input-group-text" id="inputGroup-sizing-sm">Description</span>
-                    <input type="text" class="form-control description-blog" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                    <input type="text" class="form-control description-blog" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" value="{{blog.description}}">
                 </div>
                 <div class="description-error error-text"></div>
 
                 <div class="row justify-content-md-center mt-3">
                     <div class="form-group">
                         <textarea id="editor"></textarea>
+                    </div>
+                    <div class="contentCode-div">
+                        <input type="text" value="{{blog.contentCode}}" id="inputContentCode">
                     </div>
                 </div>
                 <div class="content-error error-text"></div>
@@ -76,15 +74,15 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
         <div class="modal-header">
-            <h5 class="modal-title">Post blog</h5>
+            <h5 class="modal-title">Update blog</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-            <p>Post successful!</p>
+            <p>Update successful!</p>
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-closeModal" data-bs-dismiss="modal">Close</button>
-            <a class="btn btn-viewBlog" type="button" href="./../blog">View blog</a>
+            <a class="btn btn-viewBlog" type="button" href="/blog">View blog</a>
         </div>
         </div>
     </div>
@@ -100,7 +98,7 @@
             <h5 class="modal-title">Preview blog</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <div class="previewModal-body container px-5"></div>
+        <div class="previewModal-body"></div>
         <div class="modal-footer">
             <button type="button" class="btn btn-closeModal" data-bs-dismiss="modal">Close</button>
         </div>
@@ -111,13 +109,6 @@
 {{!-- -----------toast-img--------------- --}}
 
 <div class="toast align-items-center hide position-fixed top-0 end-0" role="alert" aria-live="assertive" aria-atomic="true">
-    <div class="d-flex">
-        <div class="toast-body">Image uploaded!</div>
-        <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
-    </div>
-</div>
-
-<div class="toast toast-inform align-items-center hide position-fixed top-0 end-0" role="alert" aria-live="assertive" aria-atomic="true">
     <div class="d-flex">
         <div class="toast-body">Image uploaded!</div>
         <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
@@ -138,7 +129,14 @@
     skin: 'bootstrap',
     plugins: 'lists, link, image, media',
     toolbar: 'h1 h2 bold italic strikethrough blockquote bullist numlist backcolor | link image media | removeformat help',
-    menubar: false
+    menubar: false,
+    setup: editor => {
+            editor.on('init', () => {
+                editor.setContent(document.getElementById('inputContentCode').value);
+                const divContent = document.querySelector('.contentCode-div');
+                divContent.innerHTML = ``;
+            });
+        }
   });
     
 </script>
@@ -150,7 +148,6 @@
     const imgError = document.querySelector('.img-error');
     const descriptionError = document.querySelector('.description-error');
     const contentError = document.querySelector('.content-error');
-
     async function uploadPicture() 
     {
         var fileName = document.querySelector('.blog-img').files[0];
@@ -175,28 +172,26 @@
 
 
     btnPost.addEventListener('click', async ()=> {
-        const inputTitle = document.querySelector('.title-blog').value;
-       // var inputImg = "https://lightwidget.com/wp-content/uploads/local-file-not-found.png";
+        const inputTitle = document.querySelector('.title-blog');
         const inputCategory = document.querySelector('.category-blog').value;
         const inputDescription = document.querySelector('.description-blog').value
         var myContent = tinymce.get("editor").getContent();
-        var inputImg = document.querySelector('.blog-img').name;
 
         console.log('btn-post clicked');
-
-        if(inputImg == "blog-img") inputImg = "";
-
         try {
         //--------------------------------------------------
-            const title = inputTitle;
-            const img = inputImg;
+            const id = inputTitle.id;
+            const title = inputTitle.value;
+            const img = document.querySelector('.blog-img').name;
             const category = inputCategory;
             const description = inputDescription;
             const contentCode = myContent;
 
-            const res = await fetch('/blog/postBlog/uploadSingle', {
+            const url = '/Blog/editBlog/' + id;
+
+            const res = await fetch(url , {
                 method: 'POST',
-                body: JSON.stringify({ title, img, category, description, contentCode }),
+                body: JSON.stringify({ id, title, img, category, description, contentCode }),
                 headers: {'Content-Type': 'application/json'}
             });
             const data = await res.json();
@@ -209,7 +204,7 @@
             }else if (data) {
                 var myModal = new bootstrap.Modal(document.getElementById('modal-inform'));
                 myModal.show();
-                console.log("Post Thanh Cong");
+                console.log("Update thanh Cong");
                 document.querySelector('.blog-img').name = "blog-img";
             }
         }
@@ -217,18 +212,6 @@
             console.log(err);
         }
     });
-
-
-    const btnNew = document.querySelector('.btn-new');
-    const formPost = document.querySelector('.form-post')
-    btnNew.addEventListener('click', ()=>{
-        formPost.reset();
-        document.querySelector('.title-error').textContent = "";
-        document.querySelector('.img-error').textContent = "";
-        document.querySelector('.description-error').textContent = "";
-        document.querySelector('.content-error').textContent = "";
-    })
-
 
     const btnPreview = document.querySelector('.btn-preview');
     const bodyPreview = document.querySelector('.previewModal-body');
@@ -242,7 +225,8 @@
         var today = new Date();
         today.toISOString().substring(0, 10);
         
-        var html = `    <div class="blog-header mb-5">
+        var html = `    <div class="container px-5">
+                        <div class="blog-header mb-5">
                             <div class="blog-category">
                                 <p>${inputCategory}</p>
                             </div>
@@ -263,7 +247,7 @@
                             <div class="blog-img d-flex justify-content-center mb-5">
                                 <img src="${inputImg}" alt="" height="380">
                             </div>
-                        </div>` + `${myContent}`
+                        </div>` + `${myContent}` + `</div>`
         bodyPreview.innerHTML = html;
         
 

@@ -47,7 +47,12 @@
         {{!-- Phần của product --}}
         <div class="product-container row">
             <div class="product-image col-md-4">
-                <img class="product-image-1" src="/img/figure/figure1.jfif" alt="">    
+                <label class="add-image-label" for='avatar'>
+                    <img class="product-current-upload-img" 
+                     src="http://res.cloudinary.com/phiroud321/image/upload/v1639138454/add-2935429_960_720_xc31ip.png" 
+                     alt="">  
+                </label>
+                <input type="file" id="avatar" name="avatar" accept="image/png, image/jpeg" style='display: none'>
             </div>
             <div class="product-info col-md-8">
                 <input type="text" class="product-name" name="productName"></input>
@@ -56,20 +61,16 @@
                     <input class="product-location" name="location"></input>
                 </div>
                 <div class="product-price-sale">
-                    <div class='import-price-input row' style='margin-top: 5px'>
-                        <div class='input-lable col-5'>Product import price</div>
-                        <input class="product-import-price col-4" style='margin-left: 8px'></input>
-                    </div>
-                    <div class="product-old-price">700.000vnd</div>
-                    <div class="product-price">650.000vnd</div>
-                    <div class="sale-percent">7%</div>
+                    <input class="product-import-price col-12" name="importPrice" placeholder="import price"></input>
+                    <input class="product-old-price col-12" name="sellPrice" placeholder="sell price"></input>
+                    <input class="product-price col-12" name="currentPrice" placeholder="current price"></input>
+                    {{!-- <div class="sale-percent">7%</div> --}}
                 </div>
-                <div class="product-description">
-                    Đây là một sản phẩm tuyệt vời dành cho fan của bộ truyện steingate và là quà lưu niệm của những người du lịch từ Akihabara
-                </div>
-                <div class="product-sold">
-                    <div class="sold-title">Đã bán</div>
-                    <div class="sold-num">12</div>
+                
+                <textarea type='text' class="product-description" cols="60" rows="5" name="description" placeholder="Description"></textarea>
+                <div class="product-sold"   >
+                    <div class="sold-title">Đã bán: </div>
+                    <div class="sold-num">...</div>
                 </div>
                 <div class="product-rating-average">
                     <i class="product-rating-icon fas fa-star"></i>
@@ -79,10 +80,10 @@
                     <i class="product-rating-icon fas fa-star"></i>
                 </div>
                 <div class="quantity-choose">
-                    <div class="quantity-chose-title">Chọn số lượng nhập</div>
+                    <div class="quantity-chose-title">Chọn số lượng mua</div>
                     <div class="input-group bootstrap-touchspin">
                         <span class="input-group-addon bootstrap-touchspin-prefix" style="display: none;"></span>
-                        <input type="number" name="productQuantity" value="1" class="input-group form-control" min="1" aria-label="Quantity" style="display: block;">
+                        <input type="number" name="productQuantity" class="input-group form-control" min="1" aria-label="Quantity" style="display: block;" placeholder="Import quantity">
                         <span class="input-group-addon bootstrap-touchspin-postfix" style="display: none;"></span><span class="input-group-btn-vertical">
                         
                         <button class="btn btn-touchspin js-touchspin bootstrap-touchspin-up" type="button">
@@ -139,14 +140,48 @@
 </div>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script>
+    var currentLink = '';
     //{{!-- const dropdownStatusButton = document.querySelector('.btn-dropdown-status'); --}}
     function clickFastNavbar(message) {
         alert(message);
     };
 
+    function uploadPicture() 
+    {
+        var fileName = document.getElementById('avatar').files[0];
+        console.log(fileName);
+        const formData = new FormData();
+        formData.append("file", fileName)
+        formData.append("upload_preset", "phiroud");
+        axios.post(`https://api.cloudinary.com/v1_1/phiroud321/image/upload`, formData)
+            .then(res => {
+                console.log("link", res.data.url);
+                currentLink = res.data.url;
+            })
+            .catch(err => {
+                console.log("Thất bại");
+            })
+    }
+
+    document.querySelector('#avatar').onchange = function(evt) {
+        console.log('Nhận sự kiện click add hình rồi')
+        var tgt = evt.target || window.event.srcElement,
+        files = tgt.files;
+
+        // FileReader support
+        if (FileReader && files && files.length) {
+            var fr = new FileReader();
+            fr.onload = function () {
+                document.querySelector('.product-current-upload-img').src = fr.result;
+            }
+            fr.readAsDataURL(files[0]);
+            uploadPicture();
+        }
+    }
+
     //{{!-- const addCartButton = document.querySelector('.btn-add-to-cart'); --}}
     async function addProduct() {
-        alert('Đang chạy axios')
+        {{!-- alert('Đang chạy axios') --}}
         var resultProduct;
         //GenID by last productID +1
         await axios.get(`http://localhost:3000/product/get-product`, {
@@ -168,14 +203,12 @@
                 location: document.querySelector('input[name="location"').value, 
                 province: document.querySelector('input[name="location"').value, 
                 quantity: document.querySelector('input[name="productQuantity"').value, 
-                remain: 12,
-                originalPrice: 120000,
-                sellPrice: 139000,
-                currentPrice: 130000,
-                imgUrl: "https://res.cloudinary.com/databaseimg/image/upload/v1637735182/f8dxrubo9icgb5o5iyf2.jpg",
-                description: "Đây là sản phẩm mới nhất của apple. Không thể tin được, thật không thể tin được là apple lại nhảy từ 13 về 1",
-                unit: 'phone',
-                rating: 4.3,
+                remain: document.querySelector('input[name="productQuantity"').value,
+                originalPrice:  document.querySelector('input[name="importPrice"').value,
+                sellPrice:  document.querySelector('input[name="sellPrice"').value,
+                currentPrice:  document.querySelector('input[name="currentPrice"').value,
+                imgUrl: currentLink,
+                description: document.querySelector('textarea[name="description"').value,
             };
             console.log("data", data);
             await axios.post(`http://localhost:3000/product/add-product`, data)
