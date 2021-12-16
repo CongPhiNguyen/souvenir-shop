@@ -13,3 +13,21 @@
 .detail-title.add-product {
     margin-left: -13px;
 }
+
+.template-button {
+    background: var(--primary-color);
+    border: none;
+    padding: 8px 16px;
+    color: #FFF;
+    margin-right: 10px;
+    border-radius: 4px;
+}
+
+.template-button:hover {
+    cursor: pointer;
+    opacity: 0.7;
+}
+
+.title.add-product {
+    margin-top: 10px;
+}
