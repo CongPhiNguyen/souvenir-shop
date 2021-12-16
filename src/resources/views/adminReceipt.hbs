@@ -104,7 +104,7 @@
                     </tbody>
                 </table>
             </div>
-            <div class="admin-order-detail-container d-none">
+            <div id="adminOrderDetailContainer" class="admin-order-detail-container d-none">
                 <div class="order-detail-header text-center">
                     <h2 class="text-uppercase order-detail-header__title">Thông tin đơn hàng</h2>
                     <div class="my-3">
@@ -209,6 +209,7 @@
                 </div>
                 <div class="d-flex justify-content-end">
                     <button type="button" class="btn btn-save">Lưu</button>
+                    <button type="button" class="btn btn-delete ms-4">Xóa</button>
                 </div>
             </div>
         </div>
@@ -272,8 +273,9 @@
         orderTable.rows[rowIndex].classList.add('table-active');
         currentIndex = rowIndex - 1;
         console.log(data.orderList[currentIndex]);
+        var orderCreatedAtDate = new Date(data.orderList[currentIndex].createdAt);
         orderDetailCode.textContent = data.orderList[currentIndex].receiptId;
-        orderDetailTime.textContent = ' - ' + data.orderList[currentIndex].createdAt;
+        orderDetailTime.textContent = ' - ' + orderCreatedAtDate.toDateString() + ' ' + orderCreatedAtDate.toTimeString().substring(0, 5);
         orderDetailDropdownStatus.textContent = data.orderList[currentIndex].deliveryStatus;
         orderDetailCustomerCode.textContent = data.orderList[currentIndex].userCode;
         orderDetailCustomerName.textContent = data.orderList[currentIndex].name;
@@ -297,6 +299,8 @@
         orderDetailTotalTableVoucher.textContent = data.orderList[currentIndex].discount;
         orderDetailTotalTableShip.textContent = data.orderList[currentIndex].deliveryMoney;
         orderDetailTotalTableTotal.textContent = data.orderList[currentIndex].totalFinal;
+
+        window.location.href = "#adminOrderDetailContainer";
     }
        
     btnSearch.addEventListener('click', btnSearchOnClick);
@@ -338,6 +342,7 @@
                     if (orderDetailContainer.classList.contains('d-none')) {
                         orderDetailContainer.classList.remove('d-none');
                     }
+                    window.location.href = "#";
                 }
                 else {
                     if (!orderDetailContainer.classList.contains('d-none')) {
@@ -388,4 +393,43 @@
             }
         }
     });
+
+    const btnDelete = document.querySelector('.btn-delete');
+    btnDelete.addEventListener('click', async () => {
+        const orderCode = data.orderList[currentIndex].receiptId;
+        if (confirm('Bạn có chắc muốn xóa hóa đơn ' + orderCode + '?')) {
+            try {
+                const res = await fetch('/account/admin-delete-order', {
+                    method: 'POST',
+                    body: JSON.stringify({ orderCode }),
+                    headers: {'Content-Type': 'application/json'}
+                });
+                const deletedOrderData = await res.json();
+                if (deletedOrderData) {
+                    if (deletedOrderData.deletedOrder) {
+                        console.log('save order successful');
+                        console.log('deleted order: ');
+                        console.log(deletedOrderData.deletedOrder);
+                        showAlertMorriStore('alert-success', 'Xóa hóa đơn thành công');
+                        btnSearchOnClick();
+                    }
+                    else {
+                        console.log('delete order failed');
+                        console.log('delete order failed');
+                        showAlertMorriStore('alert-danger', 'Xóa hóa đơn thất bại, vui lòng thử lại');
+                    }
+                }
+                else {
+                    console.log('delete order failed');
+                    console.log('delete order return null');
+                    showAlertMorriStore('alert-danger', 'Xóa hóa đơn thất bại, vui lòng thử lại');
+                }
+            }
+            catch(err) {
+                console.log('btn delete error');
+                console.log(err);
+                showAlertMorriStore('alert-danger', 'Xóa hóa đơn thất bại, vui lòng thử lại');
+            }
+        }
+    })
 </script>

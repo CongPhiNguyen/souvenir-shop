@@ -14,6 +14,7 @@ router.get('/receipt', requireAuth, accountController.receipt_get);
 router.get('/get-order/:code', requireAuth, accountController.receiptDetail_get);
 router.post('/admin-get-order', requireAuth, accountController.adminOrderList_post);
 router.post('/admin-update-order-status', requireAuth, accountController.adminUpdateOrderStatus_post);
+router.post('/admin-delete-order', requireAuth, accountController.adminDeleteOrder_post);
 router.get('/contact', requireAuth, accountController.contact_get);
 router.get('/voucher', requireAuth, accountController.voucher_get);
 router.post('/admin-get-voucher', requireAuth, accountController.adminVoucherList_post);
