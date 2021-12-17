@@ -1,10 +1,10 @@
 <title>Product</title>
 <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
 <link rel="stylesheet" href="../css/product.css">
-
+<link rel="stylesheet" href="../css/product/addProduct.css">
 <div class="wrapper">
     <div class="container">
-        <div class="fast-navbar">
+        <div class="fast-navbar  d-none">
             <div class="fast-navbar-item" onclick="clickFastNavbar('Fire')">
                 <i class="fas fa-fire"></i>
             </div>
@@ -23,7 +23,7 @@
         </div>
         {{!-- <a class="add-product-button" href="#">Add product</a> --}}
         {{!-- Phần breadscrum --}}
-        <div class="breadscrum">
+        {{!-- <div class="breadscrum">
             <ol class='breadscrum-list'>    
                 <li class='breadscrum-item'>
                     <a href="/home">
@@ -43,56 +43,61 @@
                     </a>
                 </li>
             </ol>
+        </div> --}}
+        <div class="screen-title">
+            Edit product
         </div>
         {{!-- Phần của product --}}
         <div class="product-container row">
             <div class="product-image col-md-4">
-                <img class="product-image-1" src="/img/figure/figure1.jfif" alt="">    
+                <label class="add-image-label" for='avatar'>
+                    <img class="product-current-upload-img" 
+                     src="http://res.cloudinary.com/phiroud321/image/upload/v1639138454/add-2935429_960_720_xc31ip.png" 
+                     alt="">  
+                </label>
+                <input type="file" id="avatar" name="avatar" accept="image/png, image/jpeg" style='display: none'>
             </div>
             <div class="product-info col-md-8">
-                <div class="product-name">Figure Makise Kurisu trong visual novel Stein;Gate</div>
+                <input type="text" class="product-name" name="productName"></input>
+                <div class="product-rating d-flex">
+                    <div class="product-rating-average">
+                        <i class="product-rating-icon fas fa-star"></i>
+                        <i class="product-rating-icon fas fa-star"></i>
+                        <i class="product-rating-icon fas fa-star"></i>
+                        <i class="product-rating-icon fas fa-star"></i>
+                        <i class="product-rating-icon fas fa-star"></i>
+                    </div>
+                    <div class="product-rating-number">
+                        0 Đã đánh giá
+                    </div>
+
+                    <div class="product-sold d-flex">
+                        0 Đã bán
+                    </div>
+                </div>
                 <div class="product-place">
                     <i class="fas fa-map-marker-alt"></i>
-                    <span class="product-location">Akihabara, Japan</span>
+                    <input class="product-location" name="location"></input>
                 </div>
+                <textarea type='text' class="product-description" cols="60" rows="5" name="description" placeholder="Description"></textarea>
                 <div class="product-price-sale">
-                    <div class="product-old-price">650.000vnd</div>
-                    <div class="product-price">650.000vnd</div>
-                    <div class="sale-percent">7%</div>
+                    <input class="product-import-price col-12" name="importPrice" placeholder="import price"></input>
+                    <input class="product-old-price col-12" name="sellPrice" placeholder="sell price"></input>
+                    <input class="product-price col-12" name="currentPrice" placeholder="current price"></input>
+                    {{!-- <div class="sale-percent">7%</div> --}}
                 </div>
-                <div class="product-description">
-                    Đây là một sản phẩm tuyệt vời dành cho fan của bộ truyện steingate và là quà lưu niệm của những người du lịch từ Akihabara
+                
+                <div class="quantity-choose add-product d-flex mt-2">
+                    <div class="quantity-chose-title add-product">Chọn số lượng mua</div>
+                    <input type="number" name="productQuantity" id="quantity_wanted" value="1" class="input-group form-control" min="1" aria-label="Quantity" style="display: block;">
                 </div>
-                <div class="product-sold">
-                    <div class="sold-title">Đã bán</div>
-                    <div class="sold-num">12</div>
-                </div>
-                <div class="product-rating-average">
-                    <i class="product-rating-icon fas fa-star"></i>
-                    <i class="product-rating-icon fas fa-star"></i>
-                    <i class="product-rating-icon fas fa-star"></i>
-                    <i class="product-rating-icon fas fa-star"></i>
-                    <i class="product-rating-icon fas fa-star"></i>
-                </div>
-                <div class="quantity-choose">
-                    <div class="quantity-chose-title">Chọn số lượng</div>
-                    <div class="input-group bootstrap-touchspin">
-                        <span class="input-group-addon bootstrap-touchspin-prefix" style="display: none;"></span>
-                        <input type="number" name="qty" id="quantity_wanted" value="1" class="input-group form-control" min="1" aria-label="Quantity" style="display: block;">
-                        <span class="input-group-addon bootstrap-touchspin-postfix" style="display: none;"></span><span class="input-group-btn-vertical">
-                        <button class="btn btn-touchspin js-touchspin bootstrap-touchspin-up" type="button">
-                            <i class="material-icons touchspin-up"></i>
-                        </button><button class="btn btn-touchspin js-touchspin bootstrap-touchspin-down" type="button">
-                            <i class="material-icons touchspin-down"></i>
-                        </button></span></div>
-                </div>
-                <div class="buy-container">
+                <div class="buy-container add-product">
                     {{!-- <button class="add-to-cart bt-add-to-cart" onclick="addToCart()">
                         Add to cart 
                     </button> --}}
-                    <button class="add-to-cart bt-add-to-cart" onclick="updateProduct()">
-                        Update product 
-                    </button>
+                    {{!-- <button class="add-to-cart bt-add-to-cart" onclick="addProduct()">
+                        Thêm hàng vào cơ sở dữ liệu
+                    </button> --}}
                     {{!-- <button class="buy-now">
                         Buy now
                     </button> --}}
@@ -101,59 +106,134 @@
             </div>
 
         </div>  
+        <div class="divider">
+
+        </div>
         <div class="product-detail-container">
-            <div class="detail-title">
-                Product Description
+            <div class="detail-title add-product">
+                Chi tiết sản phẩm
             </div>
             <div class="bread-scrum-detail content-container">
-                <div class="title">BreadScrum</div>
-                <div class="content">Morri Shop >> Figure >> Stern; Gate</div>         
+                <div class="title add-product">Doanh mục</div>
+                {{!-- <input type='text' class="content"></input> --}}
+                <button class="select-category template-button">
+                    Chọn doanh mục sản phẩm
+                </button>         
             </div>
             <div class="origin-detail content-container">
-                <div class="title">Source</div>
-                <div class="content">Akihabara, Japan</div>    
+                <div class="title add-product">Địa danh</div>
+                <button class="select-location template-button mt-2">
+                    Chọn địa danh
+                </button>    
             </div>
-            <div class="remain-num content-container">
-                <div class="title">Remain</div>
+            <div class="remain-num content-container mt-2">
+                <div class="title">Còn lại</div>
                 <div class="content">4</div>    
             </div>
-            <div class="detail-description">
-                From Max Factory/Good Smile Company. A rerelease?. This must also be the choice of Steins; Gate. From the sci-fi adventure series Steins; Gate comes a rerelease of the young genius, figma Kurisu Makise. Using the smooth yet posable joints of figma and the included articulated figma stand, you can act out a variety of different scenes. She comes with three expressions: a standard face, an angry face and a smirking face to show all sides of her tsundere personality. Extra arm parts are included to recreate her classic "folded arm" pose. Mirai Gadget #6: "Cyalume Saber" is also included. Plus, a total of 12 extra hand parts are included, including hands that allow her to hold important items from the game, such as her cellphone and a drink bottle.
+            <div class="detail-title">
+                Mô tả sản phẩm
             </div>
+            <textarea name="" id=""  style="width: 100%" rows="10"></textarea>
+            {{!-- <div class="detail-description">
+                Từ Max Factory / Good Smile Company. Xin vui lòng lại ?. Đây cũng phải là sự lựa chọn của Steins; Cái cổng. Từ loạt phim phiêu lưu khoa học viễn tưởng Steins; Gate là sự tái hiện của thiên tài trẻ, figma Kurisu Makise. Bằng cách sử dụng các khớp mượt mà nhưng có thể định vị của figma và chân đế figma có khớp nối đi kèm, bạn có thể diễn nhiều cảnh khác nhau. Cô ấy có ba biểu cảm: một khuôn mặt chuẩn, một khuôn mặt giận dữ và một khuôn mặt nhếch mép để thể hiện tất cả các khía cạnh của tính cách tsundere của cô. Phần cánh tay phụ được đưa vào để tạo lại tư thế "khoanh tay" cổ điển của cô. Mirai Gadget # 6: "Cyalume Sabre" cũng được bao gồm. Ngoài ra, có tổng cộng 12 bộ phận tay bổ sung được bao gồm, bao gồm cả bàn tay cho phép cô ấy cầm các vật quan trọng trong trò chơi, chẳng hạn như điện thoại di động và chai nước uống.
+            </div> --}}
         </div>
-        <div class="blog-container">
-            <div class="blog-title">
-                Source place
+        
+         <div class="blog-container">
+            <div class="blog-title detail-title">
+                Nơi sản xuất quà lưu niệm
             </div>
-            <div class="blog-desc">
+            <button class="select-blog template-button">
+                Chọn blog
+            </button>
+            {{!-- <div class="blog-desc">
                 Akihabara (秋葉原), also called Akiba after a former local shrine, is a district in central Tokyo that is famous for its many electronics shops. In more recent years, Akihabara has gained recognition as the center of Japan's otaku (diehard fan) culture, and many shops and establishments devoted to anime and manga are now dispersed among the electronic stores in the district. On Sundays, Chuo Dori, the main street through the district, is closed to car traffic from 13:00 to 18:00 (until 17:00 from October through March).
                 Akihabara has been undergoing major redevelopment over the years, including the renovation and expansion of Akihabara Station and the construction of new buildings in its proximity. Among these newly opened buildings were a huge Yodobashi electronics store and the Akihabara Crossfield, a business complex with the aim of promoting Akihabara as a center for global electronics technology and trade.
-            </div>
+            </div> --}}
+            {{!-- <a href='#'>More</a> --}}
         </div>
+        <div class="divider"></div>
+        <button class="bt-add-product template-button mt-4 mb-4" onclick="addProduct()">
+            Thêm hàng vào cơ sở dữ liệu
+        </button>
     </div>
+    {{!-- Các modal để chọn blog, chọn doanh mục sản phẩm và địa danh ở đây --}}
+
 </div>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script>
-    async function updateProduct() {
-        alert('Đang chạy axios')
+    var currentLink = '';
+    //{{!-- const dropdownStatusButton = document.querySelector('.btn-dropdown-status'); --}}
+    function clickFastNavbar(message) {
+        alert(message);
+    };
+
+    function uploadPicture() 
+    {
+        var fileName = document.getElementById('avatar').files[0];
+        console.log(fileName);
+        const formData = new FormData();
+        formData.append("file", fileName)
+        formData.append("upload_preset", "phiroud");
+        axios.post(`https://api.cloudinary.com/v1_1/phiroud321/image/upload`, formData)
+            .then(res => {
+                console.log("link", res.data.url);
+                currentLink = res.data.url;
+            })
+            .catch(err => {
+                console.log("Thất bại");
+            })
+    }
+
+    document.querySelector('#avatar').onchange = function(evt) {
+        console.log('Nhận sự kiện click add hình rồi')
+        var tgt = evt.target || window.event.srcElement,
+        files = tgt.files;
+
+        // FileReader support
+        if (FileReader && files && files.length) {
+            var fr = new FileReader();
+            fr.onload = function () {
+                document.querySelector('.product-current-upload-img').src = fr.result;
+            }
+            fr.readAsDataURL(files[0]);
+            uploadPicture();
+        }
+    }
+
+    //{{!-- const addCartButton = document.querySelector('.btn-add-to-cart'); --}}
+    async function addProduct() {
+        {{!-- alert('Đang chạy axios') --}}
+        var resultProduct;
+        //GenID by last productID +1
+        await axios.get(`http://localhost:3000/product/get-product`, {
+            params: {filter:{}}
+        })
+        .then(res => {
+            resultProduct = res.data.data;
+        })
+        .catch(err => {
+            alert(err)
+            console.log(err)
+            return;
+        })
+        var productIDGen = parseInt(resultProduct[resultProduct.length - 1].productID) + 1;
         try{
             const data = { 
-                productID: '1', 
-                name: 'Iphone 1999 promax', 
-                location: 'Hawai', 
-                province: 'Akihabara, Tokyo', 
-                quantity: 123, 
-                remain: 12,
-                originalPrice: 120000,
-                sellPrice: 139000,
-                currentPrice: 130000,
-                imgUrl: "https://res.cloudinary.com/databaseimg/image/upload/v1637735182/f8dxrubo9icgb5o5iyf2.jpg",
-                description: "Đây là sản phẩm mới nhất của apple. Không thể tin được, thật không thể tin được là apple lại nhảy từ 13 về 1",
-                unit: 'phone',
-                rating: 4.3,
+                productID: productIDGen, 
+                name: document.querySelector('input[name="productName"').value, 
+                location: document.querySelector('input[name="location"').value, 
+                province: document.querySelector('input[name="location"').value, 
+                quantity: document.querySelector('input[name="productQuantity"').value, 
+                remain: document.querySelector('input[name="productQuantity"').value,
+                originalPrice:  document.querySelector('input[name="importPrice"').value,
+                sellPrice:  document.querySelector('input[name="sellPrice"').value,
+                currentPrice:  document.querySelector('input[name="currentPrice"').value,
+                imgUrl: currentLink,
+                description: document.querySelector('textarea[name="description"').value,
             };
             console.log("data", data);
-            await axios.post(`http://localhost:3000/product/update-product`, data)
+            await axios.post(`http://localhost:3000/product/add-product`, data)
             .then(res => {
                 console.log("Save success");
                 alert("Lưu thành công")
@@ -165,6 +245,7 @@
                     alert(err.response.data.message);
                 }
                 console.log(err);
+                isAddOK = false;
             })
         }
         catch(e)

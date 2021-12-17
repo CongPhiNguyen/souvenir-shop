@@ -436,6 +436,20 @@ input[name="quantity"] {
     cursor: pointer;    
 }
 
+.add-product-button.product-screen {
+    background: var(--primary-color);
+    border: none;
+    padding: 8px 16px;
+    color: #FFF;
+    margin-right: 10px;
+    border-radius: 4px;
+    margin-bottom: 20px;
+}
+
+.add-product-button.product-screen:hover {
+    cursor: pointer;
+    opacity: 0.7;
+}
 
 
 /* Reposive fix */
@@ -443,4 +457,59 @@ input[name="quantity"] {
     .product-image {
         width: 400px;
     }
+}
+
+/* Display product in product screen */
+.product-name{
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal;
+    -webkit-line-clamp: 1;
+    line-height: 1.6rem;
+  }
+  .card-product a {
+    text-decoration: none;
+    color: black;
+  }
+  
+  .card-product{
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .overlay-product{
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    z-index: 30;
+    transform: translateY(-100%);
+    background-color: rgba(0, 0, 0, 0.4);
+    transition: transform ease-in-out 0.15s;
+    animation-timing-function: cubic-bezier(0.645, 0.045, 0.355, 1);
+  }
+  
+  .card-product:hover .overlay-product{
+    transform: translateX(0);
+  }
+  
+  .hover-cart-to-product{
+    color: rgba(255, 255, 255, 0.425);
+  }
+  
+  .hover-cart-to-product:hover{
+    color: white;
+  }
+
+  .cook__blog-card-img-product {
+    overflow: hidden;
+    height: 250px;
+    width: 100%;
+    transform: scale(1);
+    transition: transform ease-in 0.2s;
+    object-fit: cover;
 }

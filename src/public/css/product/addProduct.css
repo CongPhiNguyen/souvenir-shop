@@ -31,3 +31,9 @@
 .title.add-product {
     margin-top: 10px;
 }
+
+.screen-title {
+    font-size: 32px;
+    margin-top: 10px;
+    margin-bottom: -10px;
+}
