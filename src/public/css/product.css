@@ -443,7 +443,7 @@ input[name="quantity"] {
     color: #FFF;
     margin-right: 10px;
     border-radius: 4px;
-    margin-bottom: 20px;
+    margin-bottom: -10px;
 }
 
 .add-product-button.product-screen:hover {
@@ -513,3 +513,25 @@ input[name="quantity"] {
     transition: transform ease-in 0.2s;
     object-fit: cover;
 }
+
+.cook__blog-card-description {
+    display: -webkit-box;
+    height: 3.2rem;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal;
+    -webkit-line-clamp: 2;
+    line-height: 1.6rem;
+}
+
+.cook__heading {
+    font-family: 'Quicksand', sans-serif;
+    font-size: 2rem;
+    font-weight: 700;
+    margin-top: 50px;
+    margin-bottom: 30px;
+    justify-content: center;
+    align-content: center;
+}
+

@@ -278,9 +278,18 @@
                 </div>
             </div>
         </div>
-
+    
         {{!-- Đây là nơi hiển thị list các product   --}}
+        <div class="cook__heading">Quà lưu niệm được mua nhiều nhất</div>
         <div class="row render-product-home-screen">
+
+        </div>
+        <div class="cook__heading">Quà lưu niệm được giảm giá</div>
+        <div class="row render-product-home-screen-2">
+
+        </div>
+        <div class="cook__heading">Quà lưu niệm được đánh giá cao nhất</div>
+        <div class="row render-product-home-screen-1">
 
         </div>
     </div>
@@ -472,6 +481,9 @@
             `
         }
     }
+    function randomInRange(start,end){
+       return Math.floor(Math.random() * (end - start + 1) + start);
+    }
     renderProductHomeScreen = async () => {
         try {
             await axios.get('http://localhost:3000/product/get-product')
@@ -480,6 +492,7 @@
                     let html = ''
                     
                     res.data.data.map((value) => {
+                            if(randomInRange(0,1)==0)
                             html += `
                                 <div style="margin-bottom: 30px" class='col-sm-6 col-lg-4 col-xl-3'>
                                     <div class="card card-product" style="width: 18rem;">
@@ -531,7 +544,124 @@
             console.log(e)
         }
     }
+    renderProductHomeScreen1 = async () => {
+        try {
+            await axios.get('http://localhost:3000/product/get-product')
+                .then(res => {
+                    console.log('res', res)
+                    let html = ''
+                    
+                    res.data.data.map((value) => {
+                            if(randomInRange(0,1)==0)
+                            html += `
+                                <div style="margin-bottom: 30px" class='col-sm-6 col-lg-4 col-xl-3'>
+                                    <div class="card card-product" style="width: 18rem;">
+                                        <div style="color:rgba(255, 255, 255, 0.541); font-size: 2.5rem;" class="overlay-product">
+                                            <a href="/product/view-product/${value._id}">
+                                                <i class="fas fa-cart-arrow-down hover-cart-to-product">
+                                                </i>
+                                            </a>
+                                        </div>
+                                        <a href="#">
+                                            <div style="overflow: hidden;">
+                                                <img src="${value.imgUrl}" class="card-img-top cook__blog-card-img-product" alt="Lỗi">
+                                            </div>
+                                            <div class="card-body">
+                                                <h5 style="margin-bottom: 10px;" class="card-title product-name">${value.name}</h5>
+                                                <p style="margin-bottom: 10px;" class="card-text cook__blog-card-description">${value.description}</p>
+                                                <p style="display:flex; justify-content:space-between;margin-bottom: 10px;" class="card-text">
+                                                    <span
+                                                        style="color: #ffba00;font-weight:700;font-size: 1.2rem;">${value.currentPrice}đ</span>
+                                                    <span
+                                                        style="font-size: 1.2rem;text-decoration: line-through; color:darkgrey; font-weight:400;">${value.sellPrice}đ</span>
+                                                </p>
+                                                <div style="display:flex; justify-content:space-between">
+                                                    <div>
+                                                        ${renderDanhGia(value.rating)}
+                                                    </div>
+                                                    <div style="color:darkgrey ;">Còn lại: {{this.remain}}</div>
+                                                </div>
+                                                <div style="display:flex; justify-content:space-between">
+                                                    <div style="color:#6f787e; font-style:italic">
+                                                        ${value.location}    
+                                                    </div>
+                                                    <div style="color:#6f787e;font-style:italic">${value.province}</div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                                `
+                    })
+                    document.querySelector('.render-product-home-screen-1').innerHTML = html;
+                })
+                .catch(err => {
+                    console.log(err)
+                })
+        } catch (e) {
+            console.log(e)
+        }
+    }
+    renderProductHomeScreen2 = async () => {
+        try {
+            await axios.get('http://localhost:3000/product/get-product')
+                .then(res => {
+                    console.log('res', res)
+                    let html = ''
+                    
+                    res.data.data.map((value) => {
+                            if(randomInRange(0,1)==0)
+                            html += `
+                                <div style="margin-bottom: 30px" class='col-sm-6 col-lg-4 col-xl-3'>
+                                    <div class="card card-product" style="width: 18rem;">
+                                        <div style="color:rgba(255, 255, 255, 0.541); font-size: 2.5rem;" class="overlay-product">
+                                            <a href="/product/view-product/${value._id}">
+                                                <i class="fas fa-cart-arrow-down hover-cart-to-product">
+                                                </i>
+                                            </a>
+                                        </div>
+                                        <a href="#">
+                                            <div style="overflow: hidden;">
+                                                <img src="${value.imgUrl}" class="card-img-top cook__blog-card-img-product" alt="Lỗi">
+                                            </div>
+                                            <div class="card-body">
+                                                <h5 style="margin-bottom: 10px;" class="card-title product-name">${value.name}</h5>
+                                                <p style="margin-bottom: 10px;" class="card-text cook__blog-card-description">${value.description}</p>
+                                                <p style="display:flex; justify-content:space-between;margin-bottom: 10px;" class="card-text">
+                                                    <span
+                                                        style="color: #ffba00;font-weight:700;font-size: 1.2rem;">${value.currentPrice}đ</span>
+                                                    <span
+                                                        style="font-size: 1.2rem;text-decoration: line-through; color:darkgrey; font-weight:400;">${value.sellPrice}đ</span>
+                                                </p>
+                                                <div style="display:flex; justify-content:space-between">
+                                                    <div>
+                                                        ${renderDanhGia(value.rating)}
+                                                    </div>
+                                                    <div style="color:darkgrey ;">Còn lại: {{this.remain}}</div>
+                                                </div>
+                                                <div style="display:flex; justify-content:space-between">
+                                                    <div style="color:#6f787e; font-style:italic">
+                                                        ${value.location}    
+                                                    </div>
+                                                    <div style="color:#6f787e;font-style:italic">${value.province}</div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                                `
+                    })
+                    document.querySelector('.render-product-home-screen-2').innerHTML = html;
+                })
+                .catch(err => {
+                    console.log(err)
+                })
+        } catch (e) {
+            console.log(e)
+        }
+    }
     renderProductHomeScreen()   
-
+    renderProductHomeScreen1()   
+    renderProductHomeScreen2()   
 </script>
 
