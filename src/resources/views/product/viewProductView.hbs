@@ -1,7 +1,7 @@
 <title>Product</title>
 <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
 <link rel="stylesheet" href="/css/product.css">
-
+<link rel="stylesheet" href="/css/product/viewProduct.css">
 <div class="wrapper">
     <div class="container">
         <div class="fast-navbar d-none">
@@ -23,27 +23,31 @@
         </div>
         {{!-- <a class="add-product-button" href="#">Add product</a> --}}
         {{!-- Phần breadscrum --}}
-        {{!-- <div class="breadscrum">
+        <div class="breadscrum">
             <ol class='breadscrum-list'>    
                 <li class='breadscrum-item'>
                     <a href="/home">
                         <span>Home</span>
                     </a>
                 </li>
-                >>
+                <div class="bread-scrum-arrow">
+                    >>>
+                </div>
                 <li class='breadscrum-item'>
                     <a href="/home/figure">
                         <span>Figure</span>
                     </a>
                 </li>
-                >>
+                <div class="bread-scrum-arrow">
+                    >>>
+                </div>
                 <li class='breadscrum-item'>
                     <a href="/home/figure/Stein;Gate">
                         <span>Stein;Gate</span>
                     </a>
                 </li>
             </ol>
-        </div> --}}
+        </div>
         <div id="product-code" class='d-none' data-value={{dataProduct._id}}>{{dataProduct._id}}</div>
         <div id="product-id" data-value={{dataProduct.productID}}>{{dataProduct.productID}}</div>
         
@@ -272,7 +276,7 @@
                         </div>
                     </li>
                     <div class="divider"></div>
-                    <li class="review-item">
+                    <li class="review-item d-none">
                         <div class="review-item-container row">
                             <div class="user-information col-4">
                                 <img class="avatar" src="https://thumbs.dreamstime.com/b/default-avatar-profile-icon-vector-social-media-user-image-182145777.jpg"></img>
@@ -295,8 +299,8 @@
                             </div>
                         </div>
                     </li>
-                    <div class="divider"></div>
-                    <li class="review-item">
+                    <div class="divider d-none"></div>
+                    <li class="review-item d-none">
                         <div class="review-item-container row">
                             <div class="user-information col-4">
                                 <img class="avatar" src="https://thumbs.dreamstime.com/b/default-avatar-profile-icon-vector-social-media-user-image-182145777.jpg"></img>
@@ -316,6 +320,32 @@
                                 <div class="review-time">
                                     Đánh giá vào 4 tháng trước
                                 </div>
+                            </div>
+                        </div>
+                    </li>
+                     <li class="review-item">
+                        <div class="review-item-container row">
+                            <div class="user-information col-4">
+                                <img class="avatar" src="https://thumbs.dreamstime.com/b/default-avatar-profile-icon-vector-social-media-user-image-182145777.jpg"></img>
+                                <div class="name">Nguyễn Công Phi</div>
+                            </div>
+                            <div class="review-container col-8">
+                                <div class="rated-star">
+                                    <i class="product-rating-icon fas fa-star"></i>
+                                    <i class="product-rating-icon fas fa-star"></i>
+                                    <i class="product-rating-icon fas fa-star"></i>
+                                    <i class="product-rating-icon fas fa-star"></i>
+                                    <i class="product-rating-icon far fa-star"></i>
+                                </div>
+                                <textarea class="review-content-input" style='width: 100%'>
+                                    
+                                </textarea>
+                                <div class="review-time ">
+                                    
+                                </div>
+                                <button class="template-button">
+                                    Thêm đánh giá
+                                </button>
                             </div>
                         </div>
                     </li>

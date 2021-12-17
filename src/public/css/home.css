@@ -378,6 +378,7 @@ h1 {
   width: 100%;
   transform: scale(1);
   transition: transform ease-in 0.2s;
+  object-fit: cover;
 }
 
 .card-product:hover .cook__blog-card-img-product{

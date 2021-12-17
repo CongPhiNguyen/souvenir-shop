@@ -39,13 +39,29 @@ h1 {
 
 .container .breadscrum .breadscrum-list {
     display: flex;
+    display: flex;
+    margin-top: 20px;
+    margin-bottom: -30px;
+    margin-left: -28px;
+    font-size: 20px;
+    color: #aaa;
 }
 
 .container .breadscrum .breadscrum-list .breadscrum-item{
     list-style: none;
+    font-size: 20px;
+    color: #ddd;
 }
 
+.bread-scrum-arrow {
+    padding: 0px 8px;
+}
 
+.container .breadscrum .breadscrum-list .breadscrum-item a{
+    text-decoration: none;
+    color: var(--primary-color);
+    font-size: 20px;
+}
 
 /* Ở đây là phần chứa các cái product */
 .product-container {
@@ -100,6 +116,7 @@ h1 {
 .product-info .product-name {
     width: 100%;
     font-size: 32px;
+    margin-bottom: 4px;
 }
 
 .product-info .product-place {
