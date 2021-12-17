@@ -157,6 +157,86 @@
         <button class="bt-add-product template-button mt-4 mb-4" onclick="addProduct()">
             Thêm hàng vào cơ sở dữ liệu
         </button>
+            
+
+        {{!-- Modal add category --}}
+        <div class="category-modal d-none" id="addCategoryModal">
+            <div class="category-modal-dialog">
+                <div class="modal-content category-modal-container">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Chọn doanh mục</h5>
+                        <button type="button" class="btn-close" aria-label="Close"></button>
+                    </div>
+                    <div class="category-modal-body">
+                        <div class="list-category col-12">
+                            <div class="list-category-item row">
+                                <div class="category-add-button col-1">
+                                    <i class="fas fa-plus category-item-icon" ></i>
+                                </div>
+                                <div class="category-item-name col-8">
+                                    Morri Store
+                                </div>
+                            </div>
+                            <div class="list-category-item tier-2 row">
+                                <div class="category-add-button col-1">
+                                    <i class="fas fa-plus category-item-icon" ></i>
+                                </div>
+                                <div class="category-item-name col-8">
+                                    Hàng lưu niệm rẻ
+                                </div>
+                            </div>
+                             <div class="list-category-item tier-3 row">
+                                 <div class="category-add-button col-1">
+                                    <i class="fas fa-plus category-item-icon" ></i>
+                                </div>
+                                <div class="category-item-name col-8">
+                                    Hàng lưu niệm nhập khẩu rẻ
+                                </div>
+                            </div>
+                            <div class="list-category-item tier-3 row">
+                                <div class="category-add-button col-1">
+                                    <i class="fas fa-plus category-item-icon" ></i>
+                                </div>
+                                <div class="category-item-name col-8">
+                                    Hàng lưu niệm nội địa rẻ
+                                </div>
+                            </div>
+                            {{!-- <div class="list-category-item tier-3 row">
+                                <div class="category-add-button col-1">
+                                    <i class="fas fa-plus category-item-icon" ></i>
+                                </div>
+                                <input class="category-item-name input col-8">
+                                </input>
+                            </div> --}}
+                            <div class="list-category-item tier-2 row">
+                                <div class="category-add-button col-1">
+                                    <i class="fas fa-plus category-item-icon" ></i>
+                                </div>
+                                <div class="category-item-name col-8">
+                                    Hàng lưu niệm đẹp
+                                </div>
+                            </div>
+                            <div class="list-category-item row">
+                                <div class="category-add-button col-1">
+                                    <i class="fas fa-plus category-item-icon" ></i>
+                                </div>
+                                <div class="category-item-name col-8">
+                                    Cốc sứ nghệ thuật
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    <div class="modal-footer image-modal-footer">
+                        <button type="button" class="btn btn-secondary btn-close-modal">Close</button>
+                        {{!-- <button type="button" class="btn btn-primary">Save changes</button> --}}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {{!-- Modal chọn địa danh --}}
+        
     </div>
     {{!-- Các modal để chọn blog, chọn doanh mục sản phẩm và địa danh ở đây --}}
 

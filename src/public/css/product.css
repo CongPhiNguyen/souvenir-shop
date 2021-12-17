@@ -552,3 +552,21 @@ input[name="quantity"] {
     align-content: center;
 }
 
+.bt-add-product-manager {
+    background: #ffba00;;
+    border: none;
+    padding: 8px 16px;
+    color: #FFF;
+    margin-right: 10px;
+    border-radius: 12px;
+    height: 38px;
+    margin-top: 24px;
+    margin-left: 28px;
+}
+
+.bt-add-product-manager a{
+
+    color: #FFF;
+    text-decoration: none;
+}
+
