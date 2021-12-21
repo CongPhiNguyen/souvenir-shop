@@ -14,6 +14,7 @@ router.post('/get-coupon',CartController.getCoupon)
 router.post('/create-receipt', requireAuth ,CartController.createReceipt)
 router.post('/check-voucher', CartController.checkVoucher)
 router.get('/return-policy', CartController.getReturnPolicy)
+router.get('/:id', CartController.get404)
 router.get('/' , requireAuth ,CartController.getCart);
 
 module.exports = router;

@@ -240,6 +240,10 @@ h1 {
   transform: scale(1.02);
 }
 
+.cook__blog-card:hover{
+  background-color: #75757515;
+}
+
 .cook__blog-card-address{
   margin-top: 10px;
   /* height: 30px; */
