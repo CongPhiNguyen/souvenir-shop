@@ -46,7 +46,7 @@
         </div> --}}
         {{!-- Phần của product --}}
         <div class="screen-title">
-            Add product
+            Thêm sản phẩm
         </div>
         
         <div class="product-container row">
@@ -80,11 +80,11 @@
                     <i class="fas fa-map-marker-alt"></i>
                     <input class="product-location" name="location"></input>
                 </div>
-                <textarea type='text' class="product-description" cols="60" rows="5" name="description" placeholder="Description"></textarea>
+                <textarea type='text' class="product-description" cols="60" rows="5" name="description" placeholder="Mô tả sản phẩm"></textarea>
                 <div class="product-price-sale">
-                    <input class="product-import-price col-12" name="importPrice" placeholder="import price"></input>
-                    <input class="product-old-price col-12" name="sellPrice" placeholder="sell price"></input>
-                    <input class="product-price col-12" name="currentPrice" placeholder="current price"></input>
+                    <input type='number' class="product-import-price col-12" name="importPrice" placeholder="Giá nhập"></input>
+                    <input type='number' class="product-old-price col-12" name="sellPrice" placeholder="Giá bán"></input>
+                    <input type='number' class="product-price col-12" name="currentPrice" placeholder="Giá hiện tại"></input>
                     {{!-- <div class="sale-percent">7%</div> --}}
                 </div>
                 
@@ -249,10 +249,12 @@
         alert(message);
     };
 
+    var isUploaded = true;
     function uploadPicture() 
     {
         var fileName = document.getElementById('avatar').files[0];
         console.log(fileName);
+        isUploaded = false;
         const formData = new FormData();
         formData.append("file", fileName)
         formData.append("upload_preset", "phiroud");
@@ -260,6 +262,7 @@
             .then(res => {
                 console.log("link", res.data.url);
                 currentLink = res.data.url;
+                isUploaded = true;
             })
             .catch(err => {
                 console.log("Thất bại");
@@ -282,6 +285,45 @@
         }
     }
 
+    function checkConstraint()
+    {
+        var name = document.querySelector('input[name="productName"').value;
+        if(name.length == 0) {
+            showAlertMorriStore('alert-danger', 'Tên sản phẩm không được trống');
+            return false;
+        }
+        var location= document.querySelector('input[name="location"').value;
+        if(location.length == 0) {
+            showAlertMorriStore('alert-danger', 'Địa danh của sản phẩm không được trống');
+            return false;
+        }
+        var quantity = document.querySelector('input[name="productQuantity"').value;
+        if(quantity.length == 0) {
+            showAlertMorriStore('alert-danger', 'Số lượng nhập của sản phẩm không được trống');
+            return false;
+        }
+        var originalPrice = document.querySelector('input[name="importPrice"').value;
+        if(originalPrice.length == 0) {
+            showAlertMorriStore('alert-danger', 'Giá nhập của sản phẩm không được trống');
+            return false;
+        }
+        var sellPrice = document.querySelector('input[name="sellPrice"').value;
+        if(sellPrice.length == 0) {
+            showAlertMorriStore('alert-danger', 'Giá bán của sản phẩm không được trống');
+            return false;
+        }
+        var currentPrice = document.querySelector('input[name="currentPrice"').value;
+        if(currentPrice.length == 0) {
+            showAlertMorriStore('alert-danger', 'Giá hiện tại của sản phẩm không được trống');
+            return false;
+        }
+        // Check xem thử ảnh đã tải lên xong chưa
+        if(currentLink.length == 0) {
+            showAlertMorriStore('alert-danger', 'Bạn chưa thêm ảnh cho sản phẩm hoặc ảnh chưa kịp tải lên');
+            return false;
+        }
+        return true;
+    }
     //{{!-- const addCartButton = document.querySelector('.btn-add-to-cart'); --}}
     async function addProduct() {
         {{!-- alert('Đang chạy axios') --}}
@@ -298,6 +340,11 @@
             console.log(err)
             return;
         })
+        if(!checkConstraint())
+        {
+            return;
+        }
+
         var productIDGen = parseInt(resultProduct[resultProduct.length - 1].productID) + 1;
         try{
             const data = { 
@@ -317,7 +364,8 @@
             await axios.post(`http://localhost:3000/product/add-product`, data)
             .then(res => {
                 console.log("Save success");
-                alert("Lưu thành công")
+                {{!-- alert("Lưu thành công") --}}
+                showAlertMorriStore('alert-success', "Lưu thành công");
             })
             .catch(err => {
                 alert(err);
@@ -327,11 +375,13 @@
                 }
                 console.log(err);
                 isAddOK = false;
+                showAlertMorriStore('alert-danger', 'Đã có lỗi xảy ra');
             })
         }
         catch(e)
         {
-            alert(e);
+            showAlertMorriStore('alert-danger', 'Đã có lỗi xảy ra');
+            return false;
         }
     };
 </script>
