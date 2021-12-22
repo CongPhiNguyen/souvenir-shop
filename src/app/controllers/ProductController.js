@@ -2,7 +2,7 @@ const res = require("express/lib/response");
 const Product = require('../models/Product');
 const Cart = require('../models/cart');
 var ObjectId = require('mongodb').ObjectID;
-
+var Location = require('../models/location');
 const { removeAccents } = require('../helper/removeVietnameseAccents')
 
 
@@ -79,8 +79,6 @@ class ProductController {
             rating: req.body.rating,
         });
         productInfo.save().then(result => {
-            // console.log('Add success');
-            // console.log(productInfo);
             res.status(200).json({ productInfo: productInfo });
         });
     }
@@ -159,7 +157,20 @@ class ProductController {
 
     async addLocation(req, res){
         console.log(req.body,'Đang chạy việc thêm địa danh');
-        res.status(200).send({});
+        // res.status(200).send({});
+        try {
+            var locationInfo = new Location({
+                locationID : req.body.locationID,
+                name: req.body.name, 
+                imgUrl: req.body.imgUrl
+            })
+            locationInfo.save().then(result => {
+                res.status(200).json({ locationInfo: locationInfo });
+            });
+        }
+        catch(err) {
+            res.status(404).send(err);
+        }
     }
 
     async searchProduct(req, res) {
