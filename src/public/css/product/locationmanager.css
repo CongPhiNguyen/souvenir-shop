@@ -101,6 +101,16 @@
     margin-top: -3px;
 }
 
+.bt-add-location-js:hover {
+    opacity: 0.7;
+    cursor: pointer;
+}
+
+.location-img:hover {
+    opacity: 0.5;
+    cursor: pointer;
+}
+
 .location-item-action {
     display: flex;
 }

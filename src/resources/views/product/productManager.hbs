@@ -297,100 +297,17 @@
                                     <td scope="col" style='text-align: center'>Hà Nội</td>
                                     <td scope="col" style='text-align: center'>
                                         <div class="location-item-action col-3">
-                                            <i class="fas fa-edit location-item-icon"></i>
+                                            <i class="fas fa-edit location-item-icon" onclick="changeEditLocationModal()"></i>
                                             <i class="fas fa-trash-alt location-item-icon"></i>
                                         </div>
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td scope="col" style='text-align: center'>2</td>
-                                    
-                                    <td scope="col" style='text-align: center'>2</td>
-                                    <td scope="col" style='text-align: center'>TP HCM</td>
-                                    <td scope="col" style='text-align: center'>
-                                        <div class="location-item-action col-3">
-                                            <i class="fas fa-edit location-item-icon"></i>
-                                            <i class="fas fa-trash-alt location-item-icon"></i>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td scope="col" style='text-align: center'>3</td>
-                                    
-                                    <td scope="col" style='text-align: center'>3</td>
-                                    <td scope="col" style='text-align: center'>Đà Nẵng</td>
-                                    <td scope="col" style='text-align: center'>
-                                        <div class="location-item-action col-3">
-                                            <i class="fas fa-edit location-item-icon"></i>
-                                            <i class="fas fa-trash-alt location-item-icon"></i>
-                                        </div>
-                                    </td>
-                                </tr>
-                                 <tr>
-                                    <td scope="col" style='text-align: center'>4</td>
-                                    
-                                    <td scope="col" style='text-align: center'>4</td>
-                                    <td scope="col" style='text-align: center'>Cần Thơ</td>
-                                    <td scope="col" style='text-align: center'>
-                                        <div class="location-item-action col-3">
-                                            <i class="fas fa-edit location-item-icon"></i>
-                                            <i class="fas fa-trash-alt location-item-icon"></i>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td scope="col" style='text-align: center'>5</td>
-                                   
-                                    <td scope="col" style='text-align: center'>5</td>
-                                    <td scope="col" style='text-align: center'>Huế</td>
-                                    <td scope="col" style='text-align: center'>
-                                        <div class="location-item-action col-3">
-                                            <i class="fas fa-edit location-item-icon"></i>
-                                            <i class="fas fa-trash-alt location-item-icon"></i>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td scope="col" style='text-align: center'>6</td>
-                                    
-                                    <td scope="col" style='text-align: center'>6</td>
-                                    <td scope="col" style='text-align: center'>An Giang</th>
-                                    <td scope="col" style='text-align: center'>
-                                        <div class="location-item-action col-3">
-                                            <i class="fas fa-edit location-item-icon"></i>
-                                            <i class="fas fa-trash-alt location-item-icon"></i>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td scope="col" style='text-align: center'>7</td>
-                                    
-                                    <td scope="col"  style='text-align: center'>7</td>
-                                    <td scope="col"  style='text-align: center'>Lâm Đồng</td>
-                                    <td scope="col" style='text-align: center'>
-                                        <div class="location-item-action col-3">
-                                            <i class="fas fa-edit location-item-icon"></i>
-                                            <i class="fas fa-trash-alt location-item-icon"></i>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td scope="col"  style='text-align: center'>8</td>
-                                    
-                                    <td scope="col"  style='text-align: center'>8</td>
-                                    <td scope="col"  style='text-align: center'>Bình Định</td>
-                                    <td scope="col" style='text-align: center'>
-                                        <div class="location-item-action col-3">
-                                            <i class="fas fa-edit location-item-icon"></i>
-                                            <i class="fas fa-trash-alt location-item-icon"></i>
-                                        </div>
-                                    </td>
-                                </tr>
+                                
                             </tbody>
                         </table>
                         </div>
                         
-                        <button class='bt-add-location'>
+                        <button class='bt-add-location' onclick="changeAddLocationModal()">
                             Thêm địa danh
                         </button>
                     </div>
@@ -403,7 +320,7 @@
         </div>
 
         {{!-- Modal change location --}}
-        <div class="add-location-modal d-none" id="addlocationModal">
+        <div class="add-location-modal d-none" id="addLocationModal" style='z-index: 10000'>
             <div class="add-location-modal-dialog">
                 <div class="modal-content add-location-modal-container">
                     <div class="modal-header">
@@ -411,10 +328,13 @@
                         <button type="button" class="btn-close" aria-label="Close"></button>
                     </div>
                     <div class="add-location-modal-body" style='display: flex'>
-                        <img class="location-img" 
-                            src="http://res.cloudinary.com/phiroud321/image/upload/v1639138454/add-2935429_960_720_xc31ip.png" 
-                            alt=""
-                        > 
+                        <label for="location-avatar">
+                            <img class="location-img" 
+                                src="http://res.cloudinary.com/phiroud321/image/upload/v1639138454/add-2935429_960_720_xc31ip.png" 
+                                alt=""
+                            > 
+                        </label>
+                        <input type="file" id="location-avatar" name="avatar" accept="image/png, image/jpeg" style='display: none'>
                         <div class='input-location-container'>
                             <label for="" class="location-name-label">
                                 Tên địa danh
@@ -435,8 +355,8 @@
         </div>
 
         {{!-- Modal edit location --}}
-        <div class="edit-location-modal d-none" id="editlocationModal">
-            <div class="add-location-modal-dialog">
+        <div class="edit-location-modal d-none" id="editLocationModal" style='z-index: 10000'>
+            <div class="edit-location-modal-dialog">
                 <div class="modal-content add-location-modal-container">
                     <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLabel">Chỉnh sửa địa danh</h5>
@@ -623,6 +543,98 @@
         }
         console.log('ABC')
     }
+
+
+
+
+
+    // Mở modal chính sửa location
+    function changeEditLocationModal() {
+        var addLocationModal = document.querySelector('#editLocationModal');
+        {{!-- console.log("locationModal", locationModal) --}}
+        if(addLocationModal.classList.contains('d-none')){
+            addLocationModal.classList.remove('d-none');
+        }
+        else addlocationModal.classList.add('d-none');
+    }
+
+    // Thêm các nút tắt
+    document.querySelector('.edit-location-modal-dialog').onclick = (e) => {
+        e.preventDefault();
+        console.log(e.target);
+        if(e.target.classList.contains('btn-close-modal') || e.target.classList.contains('btn-close'))
+        {
+            changeLocationModal();
+        }
+        console.log('ABC')
+    }
+
+
+
+
+    // Biến để load hình ảnh lên
+    var imgLocationUrl = '';
+    // Mở modal thêm location
+    function changeAddLocationModal() {
+        var addLocationModal = document.querySelector('#addLocationModal');
+        if(addLocationModal.classList.contains('d-none')){
+            addLocationModal.classList.remove('d-none');
+        }
+        else addLocationModal.classList.add('d-none');
+    }
+
+    async function uploadLocationImage() {
+        var fileName = document.getElementById('location-avatar').files[0];
+        console.log(fileName);
+        isUploaded = false;
+        const formData = new FormData();
+        formData.append("file", fileName)
+        formData.append("upload_preset", "phiroud");
+        axios.post(`https://api.cloudinary.com/v1_1/phiroud321/image/upload`, formData)
+            .then(res => {
+                console.log("link", res.data.url);
+                imgLocationUrl = res.data.url;
+            })
+            .catch(err => {
+                console.log("Thất bại");
+            })
+    }
+
+    document.querySelector('#location-avatar').onchange = function(evt) {
+        console.log('Nhận sự kiện click add hình rồi')
+        var tgt = evt.target || window.event.srcElement,
+        files = tgt.files;
+
+        // FileReader support
+        if (FileReader && files && files.length) {
+            var fr = new FileReader();
+            fr.onload = function () {
+                document.querySelector('.location-img').src = fr.result;
+            }
+            fr.readAsDataURL(files[0]);
+            uploadLocationImage();
+        }
+    }
+
+    
+
+    // Thêm các nút tắt
+    document.querySelector('.add-location-modal-dialog').onclick = (e) => {
+        e.preventDefault();
+        console.log(e.target);
+        if(e.target.classList.contains('btn-close-modal') || e.target.classList.contains('btn-close'))
+        {
+            changeAddLocationModal();
+        }
+        console.log('ABC');
+    }
+
+    // thêm sự kiện thêm địa danh ở đây
+    document.querySelector('.bt-add-location-js').onclick = () => {
+        console.log('Thêm vào csdl');
+        changeAddLocationModal();
+    }
+
 
     function moveToProduct(id)
     {
