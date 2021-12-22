@@ -157,6 +157,11 @@ class ProductController {
         );
     }
 
+    async addLocation(req, res){
+        console.log(req.body,'Đang chạy việc thêm địa danh');
+        res.status(200).send({});
+    }
+
     async searchProduct(req, res) {
         const active = {
             type: 'home',

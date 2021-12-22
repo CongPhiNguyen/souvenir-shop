@@ -13,6 +13,7 @@ router.use('/update-product-view/', productController.editProductView)
 router.use('/update-product-view', productController.editProductView)
 router.use('/manager-view', productController.viewProductView)
 router.use('/view-product/', productController.viewProductCustomer)
+router.post('/location', productController.addLocation);
 router.use('/', productController.index);
 
 module.exports = router;

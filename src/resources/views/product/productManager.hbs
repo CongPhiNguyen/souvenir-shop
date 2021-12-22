@@ -582,7 +582,6 @@
         }
         else addLocationModal.classList.add('d-none');
     }
-
     async function uploadLocationImage() {
         var fileName = document.getElementById('location-avatar').files[0];
         console.log(fileName);
@@ -616,12 +615,8 @@
         }
     }
 
-    
-
-    // Thêm các nút tắt
+    // Thêm các nút tắt để đóng mở việc thêm địa danh
     document.querySelector('.add-location-modal-dialog').onclick = (e) => {
-        e.preventDefault();
-        console.log(e.target);
         if(e.target.classList.contains('btn-close-modal') || e.target.classList.contains('btn-close'))
         {
             changeAddLocationModal();
@@ -630,8 +625,27 @@
     }
 
     // thêm sự kiện thêm địa danh ở đây
-    document.querySelector('.bt-add-location-js').onclick = () => {
+    document.querySelector('.bt-add-location-js').onclick = async () => {
         console.log('Thêm vào csdl');
+        // Thêm địa danh vào cơ sở dữ liệu
+        const data = { 
+            abc: 'acb'
+        };
+        await axios.post(`http://localhost:3000/product/location`, data)
+            .then(res => {
+                console.log("Save success");
+                showAlertMorriStore('alert-success', "Lưu thành công");
+            })
+            .catch(err => {
+                {{!-- alert(err);
+                if(err.response.data.message)
+                {
+                    alert(err.response.data.message);
+                }
+                console.log(err);
+                isAddOK = false; --}}
+                showAlertMorriStore('alert-danger', 'Đã có lỗi xảy ra');
+            })
         changeAddLocationModal();
     }
 
