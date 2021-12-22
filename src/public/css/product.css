@@ -575,3 +575,26 @@ input[name="quantity"] {
     text-decoration: none;
 }
 
+.stretched-link {
+    right: 40px;
+}
+
+.product-activity {
+    margin-top: 4px;
+    font-size: 20px;
+}
+
+.product-activity {
+    margin-top: 4px;
+    font-size: 20px;
+}
+
+.product-icon {
+    color: var(--primary-color);
+    margin-right: 4px;
+}
+
+.product-icon:hover {
+    opacity: 0.7;
+    cursor: pointer;
+}

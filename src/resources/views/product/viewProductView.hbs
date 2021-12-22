@@ -57,8 +57,15 @@
                 <image class="product-image-1" src={{dataProduct.imgUrl}} alt=""></image>    
             </div>
             <div class="product-info col-md-6">
-
-                <div class="product-name" data-value={{dataProduct.name}}>{{dataProduct.name}}</div>
+                <div class="d-flex">
+                    <div class="product-name" data-value={{dataProduct.name}}>
+                        {{dataProduct.name}}     
+                    </div>
+                    <div class='d-flex product-activity' style='text-align: center'>
+                        <i style='z-index: 40' class="fas fa-edit product-icon edit-js"></i>
+                        <i style='z-index: 40' class="fas fa-trash-alt product-icon"></i>
+                    </div>
+                </div>
                 
                 <div class="product-rating d-flex">
                     <div class="product-rating-average">
@@ -353,13 +360,21 @@
             </div>
         </div>
     </div>
-
+    <a class='edit-product-link d-none' href="/product/update-product-view/{{dataProduct._id}}"></a>
 </div>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script> 
 
+    var editButton = document.querySelector('.edit-js');
+    var linkToEdit = document.querySelector('.edit-product-link');
+    editButton.onclick = () =>{
+        linkToEdit.click();
+        alert(linkToEdit.href);
+        console.log(linkToEdit.href);
+    }
+
     async function addToCart() {
-        {{!-- try { --}}
+        try {
             const data = {
                 email: localStorage.getItem('username'),
                 userCode: userCode,
@@ -431,12 +446,12 @@
             renderProduct()
             renderQuantity()
             renderQuantityTotal() 
-        {{!-- }
+        }
         catch(e)
         {
             alert(e);
             console.log(e);
-        } --}}
+        }
     };
 </script>
 

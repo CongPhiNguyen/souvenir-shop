@@ -15,10 +15,23 @@ class ProductController {
 
     addProductView(req, res){
         // console.log('Đang chạy ở trên Index', 'req.body', req.body)
-        res.render('product/addProductView', { title: "Product" , active: {Product: true }});
+        res.render('product/addProductView', { tistle: "Product" , active: {Product: true }});
     }
 
-    editProductView(req, res){
+    async editProductView(req, res){
+        // console.log('Vào đc link rồi')
+        // console.log(req.originalUrl,req.baseUrl);
+        // if(req.originalUrl == req.baseUrl) {
+        //     res.render('product/editProductView', { title: "Product" , active: {Product: true }});
+        // }
+        // else 
+        // {
+        //     // var object = new ObjectId(req.originalUrl.replace(req.baseUrl + '/', ''));
+        //     // console.log('object', object)
+        //     //  var newI = await Product.findOne({'_id': });
+        //     // console.log("newI", newI);
+        // }
+        
         // console.log('Đang chạy ở trên Index', 'req.body', req.body)
         res.render('product/editProductView', { title: "Product" , active: {Product: true }});
     }
@@ -89,6 +102,7 @@ class ProductController {
     }
 
     async updateProduct(req, res) {
+        
         console.log('Chạy update product', 'req.body', req.body);
         // get các cái cart thử xem sao
         // var newI = await Product.findOne({productID: req.body.productID,});

@@ -44,10 +44,11 @@
                 </li>
             </ol>
         </div> --}}
-        <div class="screen-title">
-            Edit product
-        </div>
         {{!-- Phần của product --}}
+        <div class="screen-title">
+            Chỉnh sửa sản phẩm
+        </div>
+        
         <div class="product-container row">
             <div class="product-image col-md-4">
                 <label class="add-image-label" for='avatar'>
@@ -79,11 +80,11 @@
                     <i class="fas fa-map-marker-alt"></i>
                     <input class="product-location" name="location"></input>
                 </div>
-                <textarea type='text' class="product-description" cols="60" rows="5" name="description" placeholder="Description"></textarea>
+                <textarea type='text' class="product-description" cols="60" rows="5" name="description" placeholder="Mô tả sản phẩm"></textarea>
                 <div class="product-price-sale">
-                    <input class="product-import-price col-12" name="importPrice" placeholder="import price"></input>
-                    <input class="product-old-price col-12" name="sellPrice" placeholder="sell price"></input>
-                    <input class="product-price col-12" name="currentPrice" placeholder="current price"></input>
+                    <input type='number' class="product-import-price col-12" name="importPrice" placeholder="Giá nhập"></input>
+                    <input type='number' class="product-old-price col-12" name="sellPrice" placeholder="Giá bán"></input>
+                    <input type='number' class="product-price col-12" name="currentPrice" placeholder="Giá hiện tại"></input>
                     {{!-- <div class="sale-percent">7%</div> --}}
                 </div>
                 
@@ -156,6 +157,86 @@
         <button class="bt-add-product template-button mt-4 mb-4" onclick="addProduct()">
             Thêm hàng vào cơ sở dữ liệu
         </button>
+            
+
+        {{!-- Modal add category --}}
+        <div class="category-modal d-none" id="addCategoryModal">
+            <div class="category-modal-dialog">
+                <div class="modal-content category-modal-container">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Chọn doanh mục</h5>
+                        <button type="button" class="btn-close" aria-label="Close"></button>
+                    </div>
+                    <div class="category-modal-body">
+                        <div class="list-category col-12">
+                            <div class="list-category-item row">
+                                <div class="category-add-button col-1">
+                                    <i class="fas fa-plus category-item-icon" ></i>
+                                </div>
+                                <div class="category-item-name col-8">
+                                    Morri Store
+                                </div>
+                            </div>
+                            <div class="list-category-item tier-2 row">
+                                <div class="category-add-button col-1">
+                                    <i class="fas fa-plus category-item-icon" ></i>
+                                </div>
+                                <div class="category-item-name col-8">
+                                    Hàng lưu niệm rẻ
+                                </div>
+                            </div>
+                             <div class="list-category-item tier-3 row">
+                                 <div class="category-add-button col-1">
+                                    <i class="fas fa-plus category-item-icon" ></i>
+                                </div>
+                                <div class="category-item-name col-8">
+                                    Hàng lưu niệm nhập khẩu rẻ
+                                </div>
+                            </div>
+                            <div class="list-category-item tier-3 row">
+                                <div class="category-add-button col-1">
+                                    <i class="fas fa-plus category-item-icon" ></i>
+                                </div>
+                                <div class="category-item-name col-8">
+                                    Hàng lưu niệm nội địa rẻ
+                                </div>
+                            </div>
+                            {{!-- <div class="list-category-item tier-3 row">
+                                <div class="category-add-button col-1">
+                                    <i class="fas fa-plus category-item-icon" ></i>
+                                </div>
+                                <input class="category-item-name input col-8">
+                                </input>
+                            </div> --}}
+                            <div class="list-category-item tier-2 row">
+                                <div class="category-add-button col-1">
+                                    <i class="fas fa-plus category-item-icon" ></i>
+                                </div>
+                                <div class="category-item-name col-8">
+                                    Hàng lưu niệm đẹp
+                                </div>
+                            </div>
+                            <div class="list-category-item row">
+                                <div class="category-add-button col-1">
+                                    <i class="fas fa-plus category-item-icon" ></i>
+                                </div>
+                                <div class="category-item-name col-8">
+                                    Cốc sứ nghệ thuật
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    <div class="modal-footer image-modal-footer">
+                        <button type="button" class="btn btn-secondary btn-close-modal">Close</button>
+                        {{!-- <button type="button" class="btn btn-primary">Save changes</button> --}}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {{!-- Modal chọn địa danh --}}
+        
     </div>
     {{!-- Các modal để chọn blog, chọn doanh mục sản phẩm và địa danh ở đây --}}
 
@@ -168,10 +249,12 @@
         alert(message);
     };
 
+    var isUploaded = true;
     function uploadPicture() 
     {
         var fileName = document.getElementById('avatar').files[0];
         console.log(fileName);
+        isUploaded = false;
         const formData = new FormData();
         formData.append("file", fileName)
         formData.append("upload_preset", "phiroud");
@@ -179,6 +262,7 @@
             .then(res => {
                 console.log("link", res.data.url);
                 currentLink = res.data.url;
+                isUploaded = true;
             })
             .catch(err => {
                 console.log("Thất bại");
@@ -201,6 +285,45 @@
         }
     }
 
+    function checkConstraint()
+    {
+        var name = document.querySelector('input[name="productName"').value;
+        if(name.length == 0) {
+            showAlertMorriStore('alert-danger', 'Tên sản phẩm không được trống');
+            return false;
+        }
+        var location= document.querySelector('input[name="location"').value;
+        if(location.length == 0) {
+            showAlertMorriStore('alert-danger', 'Địa danh của sản phẩm không được trống');
+            return false;
+        }
+        var quantity = document.querySelector('input[name="productQuantity"').value;
+        if(quantity.length == 0) {
+            showAlertMorriStore('alert-danger', 'Số lượng nhập của sản phẩm không được trống');
+            return false;
+        }
+        var originalPrice = document.querySelector('input[name="importPrice"').value;
+        if(originalPrice.length == 0) {
+            showAlertMorriStore('alert-danger', 'Giá nhập của sản phẩm không được trống');
+            return false;
+        }
+        var sellPrice = document.querySelector('input[name="sellPrice"').value;
+        if(sellPrice.length == 0) {
+            showAlertMorriStore('alert-danger', 'Giá bán của sản phẩm không được trống');
+            return false;
+        }
+        var currentPrice = document.querySelector('input[name="currentPrice"').value;
+        if(currentPrice.length == 0) {
+            showAlertMorriStore('alert-danger', 'Giá hiện tại của sản phẩm không được trống');
+            return false;
+        }
+        // Check xem thử ảnh đã tải lên xong chưa
+        if(currentLink.length == 0) {
+            showAlertMorriStore('alert-danger', 'Bạn chưa thêm ảnh cho sản phẩm hoặc ảnh chưa kịp tải lên');
+            return false;
+        }
+        return true;
+    }
     //{{!-- const addCartButton = document.querySelector('.btn-add-to-cart'); --}}
     async function addProduct() {
         {{!-- alert('Đang chạy axios') --}}
@@ -217,6 +340,11 @@
             console.log(err)
             return;
         })
+        if(!checkConstraint())
+        {
+            return;
+        }
+
         var productIDGen = parseInt(resultProduct[resultProduct.length - 1].productID) + 1;
         try{
             const data = { 
@@ -236,7 +364,8 @@
             await axios.post(`http://localhost:3000/product/add-product`, data)
             .then(res => {
                 console.log("Save success");
-                alert("Lưu thành công")
+                {{!-- alert("Lưu thành công") --}}
+                showAlertMorriStore('alert-success', "Lưu thành công");
             })
             .catch(err => {
                 alert(err);
@@ -246,11 +375,13 @@
                 }
                 console.log(err);
                 isAddOK = false;
+                showAlertMorriStore('alert-danger', 'Đã có lỗi xảy ra');
             })
         }
         catch(e)
         {
-            alert(e);
+            showAlertMorriStore('alert-danger', 'Đã có lỗi xảy ra');
+            return false;
         }
     };
 </script>
