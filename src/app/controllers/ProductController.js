@@ -3,8 +3,18 @@ const Product = require('../models/Product');
 const Cart = require('../models/cart');
 var ObjectId = require('mongodb').ObjectID;
 var Location = require('../models/location');
+const Review = require('../models/review');
 const { removeAccents } = require('../helper/removeVietnameseAccents')
 
+function generateID(length) {
+    var result           = '';
+    var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    var charactersLength = characters.length;
+    for ( var i = 0; i < length; i++ ) {
+        result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    return result;
+}
 
 class ProductController {
     // [GET] /home
@@ -44,6 +54,8 @@ class ProductController {
 
     async viewProductCustomer(req, res) {
         var newI = await Product.findOne({'_id': new ObjectId(req.originalUrl.replace(req.baseUrl + '/', ''))});
+        const reviews = await Review.find({ productId: (req.originalUrl.replace(req.baseUrl + '/', '')) }).lean();
+        console.log(reviews);
         // console.log(newI);
         res.render('product/viewProductView', { title: "Product" , active: {Product: true }, 
             dataProduct: {
@@ -58,7 +70,8 @@ class ProductController {
                 currentPrice: newI.currentPrice,
                 imgUrl: newI.imgUrl,
                 description: newI.description,
-            } 
+            },
+            reviews, 
         });
     }
 
@@ -351,6 +364,50 @@ class ProductController {
             );
         }
     }
+
+    async addReview_post(req, res) {
+        if (req.session.user) {
+            try {
+                const { productId, star, comment } = req.body;
+                const newCode = generateID(8);
+                const review = new Review({
+                    reviewCode: newCode,
+                    userCode: req.session.user.userCode,
+                    name: req.session.user.name,
+                    productId: productId,
+                    star: star,
+                    comment: comment,
+                });
+                await review.save().then(result => {
+                    console.log('post review successful');
+                    console.log(result);
+                    res.status(200).json({ review: { name: review.name, star, comment, createdAt: review.createdAt } });
+                });
+            }
+            catch(err) {
+                console.log('post review error');
+                console.log(err);
+                res.status(400).json({ error: err });
+            }
+        }
+        else {
+            res.status(400).json({ error: 'user not log in' });
+        }
+    }
+
+    async reviewList_get(req, res) {
+        try {
+            const { productId } = req.body;
+            
+        }
+        catch(err) {
+            console.log('get review list error');
+            console.log(err);
+            res.status(400).json({ error: err });
+        }
+    }
+    
 }
 
 module.exports = new ProductController;
+

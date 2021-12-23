@@ -104,6 +104,12 @@ hbs.handlebars.registerHelper('toDateTimeString', function (datetime) {
     return datetimeString;
 });
 
+hbs.handlebars.registerHelper('toDateTimeString2', function (datetime) {
+    var date = new Date(datetime);
+    var datetimeString = (date.getDate() < 10 ? ('0' + date.getDate().toString()) : date.getDate().toString()) + '/' + (date.getMonth() < 9 ? ('0' + (date.getMonth() + 1).toString()) : (date.getMonth() + 1).toString()) + '/' + date.getFullYear().toString() + ' ' + date.toTimeString().substring(0, 5);
+    return datetimeString;
+});
+
 
 //route init
 route(app);

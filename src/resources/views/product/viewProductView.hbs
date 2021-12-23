@@ -159,7 +159,7 @@
             </div>
             <a href='#'>More</a>
         </div>
-        <div class="rating-container">
+        <div class="rating-container" style="padding-bottom: 100px;">
             <div class="title">Đánh giá và nhận xét</div>
             <div class="row">
                 <div class="review-heading row">
@@ -259,30 +259,85 @@
                 </div>
                 <div class="divider mb-2"></div>
                 <ul class="review-item-list">
-                    <li class="review-item">
-                        <div class="review-item-container row">
-                            <div class="user-information col-4">
-                                <img class="avatar" src="https://thumbs.dreamstime.com/b/default-avatar-profile-icon-vector-social-media-user-image-182145777.jpg"></img>
-                                <div class="name">Nguyễn Công Phi</div>
+                    <div class="item-list">
+                        <li class="review-item">
+                            <div class="review-item-container row">
+                                <div class="user-information col-4">
+                                    <img class="avatar" src="https://thumbs.dreamstime.com/b/default-avatar-profile-icon-vector-social-media-user-image-182145777.jpg"></img>
+                                    <div class="name">Nguyễn Công Phi</div>
+                                </div>
+                                <div class="review-container col-8">
+                                    <div class="rated-star">
+                                        <i class="product-rating-icon fas fa-star"></i>
+                                        <i class="product-rating-icon fas fa-star"></i>
+                                        <i class="product-rating-icon fas fa-star"></i>
+                                        <i class="product-rating-icon fas fa-star"></i>
+                                        <i class="product-rating-icon fas fa-star"></i>
+                                    </div>
+                                    <div class="review-content my-2">
+                                        This is the best figure I have had.. Kurisu is incredibly beautiful.
+                                    </div>
+                                    <div class="review-time">
+                                        02/12/2021 10:00
+                                    </div>
+                                </div>
                             </div>
-                            <div class="review-container col-8">
-                                <div class="rated-star">
-                                    <i class="product-rating-icon fas fa-star"></i>
-                                    <i class="product-rating-icon fas fa-star"></i>
-                                    <i class="product-rating-icon fas fa-star"></i>
-                                    <i class="product-rating-icon fas fa-star"></i>
-                                    <i class="product-rating-icon fas fa-star"></i>
+                        </li>
+                        <div class="divider"></div>
+
+                        {{#each reviews}}
+                            <li class="review-item">
+                                <div class="review-item-container row">
+                                    <div class="user-information col-4">
+                                        <img class="avatar" src="https://thumbs.dreamstime.com/b/default-avatar-profile-icon-vector-social-media-user-image-182145777.jpg"></img>
+                                        <div class="name">{{this.name}}</div>
+                                    </div>
+                                    <div class="review-container col-8">
+                                        <div class="rated-star">
+                                            {{#ifCond this.star '>' 0}}
+                                                <i class="product-rating-icon fas fa-star"></i>
+                                                {{else}}
+                                                <i class="product-rating-icon far fa-star"></i>
+                                            {{/ifCond}}
+                                            {{#ifCond this.star '>' 1}}
+                                                <i class="product-rating-icon fas fa-star"></i>
+                                                {{else}}
+                                                <i class="product-rating-icon far fa-star"></i>
+                                            {{/ifCond}}
+                                            {{#ifCond this.star '>' 2}}
+                                                <i class="product-rating-icon fas fa-star"></i>
+                                                {{else}}
+                                                <i class="product-rating-icon far fa-star"></i>
+                                            {{/ifCond}}
+                                            {{#ifCond this.star '>' 3}}
+                                                <i class="product-rating-icon fas fa-star"></i>
+                                                {{else}}
+                                                <i class="product-rating-icon far fa-star"></i>
+                                            {{/ifCond}}
+                                            {{#ifCond this.star '>' 4}}
+                                                <i class="product-rating-icon fas fa-star"></i>
+                                                {{else}}
+                                                <i class="product-rating-icon far fa-star"></i>
+                                            {{/ifCond}}
+
+                                        </div>
+                                        <div class="review-content my-2">
+                                            {{this.comment}}
+                                        </div>
+                                        <div class="review-time">
+                                            {{toDateTimeString2 this.createdAt}}
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="review-content">
-                                    This is the best firgue I have had.. Kurisu is incredible beautiful.
-                                </div>
-                                <div class="review-time">
-                                    Đánh giá vào 4 tháng trước
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <div class="divider"></div>
+                            </li>
+                            <div class="divider"></div>
+                        {{/each}}
+
+
+
+                    </div>
+                    
+                    {{!-- <div class="divider"></div>
                     <li class="review-item d-none">
                         <div class="review-item-container row">
                             <div class="user-information col-4">
@@ -297,7 +352,7 @@
                                     <i class="product-rating-icon fas fa-star"></i>
                                     <i class="product-rating-icon fas fa-star"></i>
                                 </div>
-                                <div class="review-content">
+                                <div class="review-content my-2">
                                     This is the best firgue I have had.. Kurisu is incredible beautiful.
                                 </div>
                                 <div class="review-time">
@@ -321,7 +376,7 @@
                                     <i class="product-rating-icon fas fa-star"></i>
                                     <i class="product-rating-icon fas fa-star"></i>
                                 </div>
-                                <div class="review-content">
+                                <div class="review-content my-2">
                                     This is the best firgue I have had.. Kurisu is incredible beautiful.
                                 </div>
                                 <div class="review-time">
@@ -329,39 +384,46 @@
                                 </div>
                             </div>
                         </div>
-                    </li>
-                     <li class="review-item">
+                    </li> --}}
+                    {{#if user}}
+                    <li class="review-item">
                         <div class="review-item-container row">
                             <div class="user-information col-4">
                                 <img class="avatar" src="https://thumbs.dreamstime.com/b/default-avatar-profile-icon-vector-social-media-user-image-182145777.jpg"></img>
-                                <div class="name">Nguyễn Công Phi</div>
+                                <div class="name">{{user.name}}</div>
                             </div>
                             <div class="review-container col-8">
                                 <div class="rated-star">
-                                    <i class="product-rating-icon fas fa-star"></i>
-                                    <i class="product-rating-icon fas fa-star"></i>
-                                    <i class="product-rating-icon fas fa-star"></i>
-                                    <i class="product-rating-icon fas fa-star"></i>
-                                    <i class="product-rating-icon far fa-star"></i>
+                                    <i class="product-rating-icon far fa-star rating-star-1" onclick="iconStarOnclick(1)"></i>
+                                    <i class="product-rating-icon far fa-star rating-star-2"  onclick="iconStarOnclick(2)"></i>
+                                    <i class="product-rating-icon far fa-star rating-star-3"  onclick="iconStarOnclick(3)"></i>
+                                    <i class="product-rating-icon far fa-star rating-star-4"  onclick="iconStarOnclick(4)"></i>
+                                    <i class="product-rating-icon far fa-star rating-star-5"  onclick="iconStarOnclick(5)"></i>
                                 </div>
-                                <textarea class="review-content-input" style='width: 100%'>
+                                <div class="text-error reviewStarInputError"></div>
+                                {{!-- <textarea class="review-content-input" style="width: 100%;" placeholder="Đánh giá của bạn...">
                                     
-                                </textarea>
+                                </textarea> --}}
+                                <div class="form-floating">
+                                    <textarea class="form-control review-content-input" style="height: 100px; margin: 12px 0;"></textarea>
+                                    <label for="floatingTextarea" style="color: grey;">Đánh giá của bạn</label>
+                                </div>
                                 <div class="review-time ">
                                     
                                 </div>
-                                <button class="template-button">
+                                <button class="template-button btn-add-review">
                                     Thêm đánh giá
                                 </button>
                             </div>
                         </div>
                     </li>
+                    {{/if}}
                 </ul>
             </div>
         </div>
     </div>
     <a class='edit-product-link d-none' href="/product/update-product-view/{{dataProduct._id}}"></a>
-    <a class='back-to-manager d-none' href="/product/">
+    <a class='back-to-manager d-none' href="/product/"></a>
 </div>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script> 
@@ -458,5 +520,152 @@
             console.log(e);
         }
     };
+
+
+    const reviewItemList = document.querySelector('.item-list');
+    const reviewStarInputError = document.querySelector('.reviewStarInputError');
+    const reviewCommentInput = document.querySelector('.review-content-input');
+    var reviewStarInputValue = 0;
+
+    function iconStarOnclick(starIndex) {
+        const star1 = document.querySelector('.rating-star-1');
+        const star2 = document.querySelector('.rating-star-2');
+        const star3 = document.querySelector('.rating-star-3');
+        const star4 = document.querySelector('.rating-star-4');
+        const star5 = document.querySelector('.rating-star-5');
+
+        star1.classList.remove('fas');
+        star2.classList.remove('fas');
+        star3.classList.remove('fas');
+        star4.classList.remove('fas');
+        star5.classList.remove('fas');
+
+        if (starIndex > 0) {
+            star1.classList.add('fas');
+            reviewStarInputValue = 1;
+        }
+        if (starIndex > 1) {
+            star2.classList.add('fas');
+            reviewStarInputValue = 2;
+        }
+        if (starIndex > 2) {
+            star3.classList.add('fas');
+            reviewStarInputValue = 3;
+        }
+        if (starIndex > 3) {
+            star4.classList.add('fas');
+            reviewStarInputValue = 4;
+        }
+        if (starIndex > 4) {
+            star5.classList.add('fas');
+            reviewStarInputValue = 5;
+        }
+        console.log(reviewStarInputValue);
+    };
+
+    const btnAddReview = document.querySelector('.btn-add-review');
+    btnAddReview.addEventListener('click', async () => {
+        try {
+            reviewStarInputError.textContent = '';
+            if (reviewStarInputValue < 1 || reviewStarInputValue > 5) {
+                console.log('invalid review star input');
+                reviewStarInputError.textContent = 'Vui lòng đánh giá sản phẩm';
+            }
+            else {
+                const productId = document.querySelector('#product-code').getAttribute('data-value');
+                star = reviewStarInputValue;
+                comment = reviewCommentInput.value;
+
+                console.log(productId);
+                console.log(star);
+                console.log(comment);
+
+                const res = await fetch('/product/add-review', {
+                    method: 'POST',
+                    body: JSON.stringify({ productId, star, comment }),
+                    headers: {'Content-Type': 'application/json'}
+                });
+                postedReviewData = await res.json();
+                if (postedReviewData) {
+                    if (postedReviewData.review) {
+                        console.log('post review successful');
+                        console.log(postedReviewData.review);
+                        showAlertMorriStore('alert-success', 'Gửi bài đánh giá thành công!');
+
+                        const date = new Date(postedReviewData.review.createdAt);
+                        var dateString = (date.getDate() < 10 ? ('0' + date.getDate().toString()) : date.getDate().toString()) + '/' + (date.getMonth() < 9 ? ('0' + (date.getMonth() + 1).toString()) : (date.getMonth() + 1).toString()) + '/' + date.getFullYear().toString() + ' ' + date.toTimeString().substring(0, 5);
+                        var reviewHTML = `<li class="review-item">
+                                                <div class="review-item-container row">
+                                                    <div class="user-information col-4">
+                                                        <img class="avatar" src="https://thumbs.dreamstime.com/b/default-avatar-profile-icon-vector-social-media-user-image-182145777.jpg"></img>
+                                                        <div class="name">${postedReviewData.review.name}}</div>
+                                                    </div>
+                                                    <div class="review-container col-8">
+                                                        <div class="rated-star">`;
+
+                        for (i = 0; i < 5; i++) {
+                            if (i < postedReviewData.review.star) {
+                                reviewHTML += `<i class="product-rating-icon fas fa-star"></i>`;
+                            }
+                            else {
+                                reviewHTML += `<i class="product-rating-icon far fa-star"></i>`;
+                            }
+                        }
+
+                        reviewHTML += `</div>
+                                        <div class="review-content my-2">
+                                            ${postedReviewData.review.comment}
+                                        </div>
+                                        <div class="review-time">
+                                            ${dateString}
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>`;
+
+                        reviewItemList.innerHTML += reviewHTML;
+
+                        iconStarOnclick(0);
+                        reviewCommentInput.value = '';
+                    }
+                    else if (postedReviewData.error) {
+                        console.log('btn post review error');
+                        console.log(postedReviewData.error);
+                        showAlertMorriStore('alert-danger', 'Gửi đánh giá thất bại, vui lòng thử lại');
+                    }
+                    else {
+                        console.log('btn post review error');
+                        console.log(postedReviewData);
+                        showAlertMorriStore('alert-danger', 'Gửi đánh giá thất bại, vui lòng thử lại');
+                    }
+                }
+                else {
+                    console.log('btn post review error');
+                    showAlertMorriStore('alert-danger', 'Gửi đánh giá thất bại, vui lòng thử lại');
+                }
+
+
+            
+
+
+
+            }
+        }
+        catch(err) {
+            console.log(err);
+        }
+
+
+        
+
+
+
+
+    });
+
+
+
+
+
 </script>
 
