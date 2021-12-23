@@ -10,7 +10,7 @@ router.post('/update-product', productController.updateProduct)
 router.post('/add-to-cart', productController.addToCart)
 router.use('/add-product-view', productController.addProductView)
 router.use('/update-product-view/', productController.editProductView)
-router.use('/update-product-view', productController.editProductView)
+router.use('/edit-product-view/', productController.editProductView)
 router.use('/manager-view', productController.viewProductView)
 router.use('/view-product/', productController.viewProductCustomer)
 router.post('/location', productController.addLocation);

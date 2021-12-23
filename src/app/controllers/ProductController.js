@@ -31,9 +31,10 @@ class ProductController {
         //     //  var newI = await Product.findOne({'_id': });
         //     // console.log("newI", newI);
         // }
-        
+        console.log('Trả về đúng phần sửa sản phẩm', req.originalUrl)
         // console.log('Đang chạy ở trên Index', 'req.body', req.body)
         res.render('product/editProductView', { title: "Product" , active: {Product: true }});
+        
     }
 
     viewProductView(req, res){
