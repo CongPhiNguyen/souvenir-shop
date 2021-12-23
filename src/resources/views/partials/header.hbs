@@ -144,7 +144,7 @@
         
         await axios.get(`http://localhost:3000/cart/get-data-user`)
             .then(res => {
-                {{!-- console.log('res.data', res.data.dataUser.userCode) --}}
+                
                 userCode = res.data.dataUser.userCode
             })
             .catch(err => {
