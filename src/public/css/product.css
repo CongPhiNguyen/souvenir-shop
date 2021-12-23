@@ -118,6 +118,8 @@ h1 {
     width: 100%;
     font-size: 32px;
     margin-bottom: 4px;
+    height: 40px;
+    line-height: 40px;
 }
 
 .product-info .product-place {

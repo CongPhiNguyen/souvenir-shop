@@ -49,7 +49,7 @@
             </ol>
         </div>
         <div id="product-code" class='d-none' data-value="{{dataProduct._id}}">{{dataProduct._id}}</div>
-        <div id="product-id" data-value="{{dataProduct.productID}}">{{dataProduct.productID}}</div>
+        <div id="product-id" class='d-none' data-value="{{dataProduct.productID}}">{{dataProduct.productID}}</div>
         
         {{!-- Phần của product ở đây mình kiểu chi 4 8 ra rồi tính tiếp các kiểu--}}
         <div class="product-container row">
@@ -104,7 +104,7 @@
  
                 <div class="quantity-choose d-flex mt-2">
                     <div class="quantity-chose-title">Chọn số lượng</div>
-                    <input type="number" name="quantity" id="quantity_wanted" value="1" class="input-group form-control" min="1" aria-label="Quantity" style="display: block;">
+                    <input type="number" name="quantity" id="quantity_wanted" value="1" class="input-group form-control" min="1" max="{{dataProduct.remain}}" aria-label="Quantity" style="display: block;">
                 </div>
                 <div class="buy-container mt-2">
                     {{!-- <button class="add-to-cart bt-add-to-cart" onclick="addToCart()">

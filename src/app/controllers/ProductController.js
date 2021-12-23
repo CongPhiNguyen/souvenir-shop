@@ -35,6 +35,7 @@ class ProductController {
                     currentPrice: newI.currentPrice,
                     imgUrl: newI.imgUrl,
                     description: newI.description,
+                    productID: newI.productID,  
                 }
             }
         );
@@ -109,8 +110,8 @@ class ProductController {
         
         console.log('Chạy update product', 'req.body', req.body);
         // get các cái cart thử xem sao
-        // var newI = await Product.findOne({productID: req.body.productID,});
-        // console.log("newI", newI);
+        var newI = await Product.findOne({productID: req.body.productID,});
+        console.log("newI", newI);
         Product.findOneAndUpdate(
             {productID: req.body.productID,},
             {
