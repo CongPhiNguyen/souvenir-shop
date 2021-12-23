@@ -4,7 +4,7 @@
 
 <div class="wrapper">
     <div class="container">
-        <div class="fast-navbar">
+        <div class="fast-navbar d-none">
             <div class="fast-navbar-item" onclick="clickFastNavbar('Fire')">
                 <i class="fas fa-fire"></i>
             </div>
@@ -21,11 +21,11 @@
                 <i class="fas fa-bars"></i>    
             </div>
         </div>
-        <a class="add-product-button" href="product/add-product-view">Add product</a>
+        {{!-- <a class="add-product-button" href="product/add-product-view">Add product</a>
         <a class="add-product-button" href="product/update-product-view">
             Edit Product 
-        </a>
-        <a class="add-product-button" href="product/manager-view">
+        </a> --}}
+        <a class="add-product-button product-screen" href="product/manager-view">
             Product Manager 
         </a>
         {{!-- Phần breadscrum --}}
@@ -54,8 +54,8 @@
         <button onclick="uploadPicture()">
             Send picture
         </button> --}}
-        {{!-- Phần của product --}}
-        <div class="product-container row">
+        {{!-- !-- Phần của product   --}}
+        <div class="product-container d-none row">
             <div class="product-image col-md-4" onclick="changePictureModal()">
                 <img class="product-current-img" src="/img/figure/figure1.jfif" alt="">
                 {{!-- <img class="product-image-1" src="/img/figure/figure1.jfif" alt="">     --}}  
@@ -112,7 +112,7 @@
             </div>
 
         </div>  
-        <div class="product-detail-container">
+        <div class="product-detail-container d-none">
             <div class="detail-title">
                 Product Description
             </div>
@@ -132,7 +132,7 @@
                 From Max Factory/Good Smile Company. A rerelease?. This must also be the choice of Steins; Gate. From the sci-fi adventure series Steins; Gate comes a rerelease of the young genius, figma Kurisu Makise. Using the smooth yet posable joints of figma and the included articulated figma stand, you can act out a variety of different scenes. She comes with three expressions: a standard face, an angry face and a smirking face to show all sides of her tsundere personality. Extra arm parts are included to recreate her classic "folded arm" pose. Mirai Gadget #6: "Cyalume Saber" is also included. Plus, a total of 12 extra hand parts are included, including hands that allow her to hold important items from the game, such as her cellphone and a drink bottle.
             </div>
         </div>
-        <div class="blog-container">
+        <div class="blog-container d-none">
             <div class="blog-title">
                 Source place
             </div>
@@ -141,7 +141,7 @@
                 Akihabara has been undergoing major redevelopment over the years, including the renovation and expansion of Akihabara Station and the construction of new buildings in its proximity. Among these newly opened buildings were a huge Yodobashi electronics store and the Akihabara Crossfield, a business complex with the aim of promoting Akihabara as a center for global electronics technology and trade.
             </div>
         </div>
-        <div class="rating-container">
+        <div class="rating-container d-none">
             <div class="title">Rating and review</div>
             <div class="row">
                 <div class="review-heading">
@@ -278,6 +278,20 @@
                 </div>
             </div>
         </div>
+    
+        {{!-- Đây là nơi hiển thị list các product   --}}
+        <div class="cook__heading">Quà lưu niệm được mua nhiều nhất</div>
+        <div class="row render-product-home-screen">
+
+        </div>
+        <div class="cook__heading">Quà lưu niệm được giảm giá</div>
+        <div class="row render-product-home-screen-2">
+
+        </div>
+        <div class="cook__heading">Quà lưu niệm được đánh giá cao nhất</div>
+        <div class="row render-product-home-screen-1">
+
+        </div>
     </div>
 </div>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
@@ -301,7 +315,7 @@
         else pictureModal.classList.add('d-none');
     }
 
-    document.getElementById('avatar').onchange = function(evt) {
+    {{!-- document.getElementById('avatar').onchange = function(evt) {
         var tgt = evt.target || window.event.srcElement,
         files = tgt.files;
 
@@ -313,7 +327,7 @@
             }
             fr.readAsDataURL(files[0]);
         }
-    }
+    } --}}
 
 
     async function addProduct() {
@@ -454,6 +468,200 @@
             console.log(e);
         }
     };
-
+        
+    renderDanhGia = (rating) => {
+        if (rating) {
+            return `
+            <p style="margin-bottom: 10px;"><span style="padding-right: 5px;">Đánh giá:</span> {{~rating}} <i
+                                                    style="color: #ffba00;" class="fas fa-star"></i></p>
+            `
+        } else {
+            return `
+            <p style="margin-bottom: 10px;">Chưa có đánh giá</p>
+            `
+        }
+    }
+    function randomInRange(start,end){
+       return Math.floor(Math.random() * (end - start + 1) + start);
+    }
+    renderProductHomeScreen = async () => {
+        try {
+            await axios.get('http://localhost:3000/product/get-product')
+                .then(res => {
+                    console.log('res', res)
+                    let html = ''
+                    
+                    res.data.data.map((value) => {
+                            if(randomInRange(0,1)==0)
+                            html += `
+                                <div style="margin-bottom: 30px" class='col-sm-6 col-lg-4 col-xl-3'>
+                                    <div class="card card-product" style="width: 18rem;">
+                                        <div style="color:rgba(255, 255, 255, 0.541); font-size: 2.5rem;" class="overlay-product">
+                                            <a href="/product/view-product/${value._id}">
+                                                <i class="fas fa-cart-arrow-down hover-cart-to-product">
+                                                </i>
+                                            </a>
+                                        </div>
+                                        <a href="#">
+                                            <div style="overflow: hidden;">
+                                                <img src="${value.imgUrl}" class="card-img-top cook__blog-card-img-product" alt="Lỗi">
+                                            </div>
+                                            <div class="card-body">
+                                                <h5 style="margin-bottom: 10px;" class="card-title product-name">${value.name}</h5>
+                                                <p style="margin-bottom: 10px;" class="card-text cook__blog-card-description">${value.description}</p>
+                                                <p style="display:flex; justify-content:space-between;margin-bottom: 10px;" class="card-text">
+                                                    <span
+                                                        style="color: #ffba00;font-weight:700;font-size: 1.2rem;">${value.currentPrice}đ</span>
+                                                    <span
+                                                        style="font-size: 1.2rem;text-decoration: line-through; color:darkgrey; font-weight:400;">${value.sellPrice}đ</span>
+                                                </p>
+                                                <div style="display:flex; justify-content:space-between">
+                                                    <div>
+                                                        ${renderDanhGia(value.rating)}
+                                                    </div>
+                                                    <div style="color:darkgrey ;">Còn lại: {{this.remain}}</div>
+                                                </div>
+                                                <div style="display:flex; justify-content:space-between">
+                                                    <div style="color:#6f787e; font-style:italic">
+                                                        ${value.location}    
+                                                    </div>
+                                                    <div style="color:#6f787e;font-style:italic">${value.province}</div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                                `
+                    })
+                    console.log(document.querySelector('.render-product-home-screen'));
+                    console.log('html', html)
+                    document.querySelector('.render-product-home-screen').innerHTML = html;
+                })
+                .catch(err => {
+                    console.log(err)
+                })
+        } catch (e) {
+            console.log(e)
+        }
+    }
+    renderProductHomeScreen1 = async () => {
+        try {
+            await axios.get('http://localhost:3000/product/get-product')
+                .then(res => {
+                    console.log('res', res)
+                    let html = ''
+                    
+                    res.data.data.map((value) => {
+                            if(randomInRange(0,1)==0)
+                            html += `
+                                <div style="margin-bottom: 30px" class='col-sm-6 col-lg-4 col-xl-3'>
+                                    <div class="card card-product" style="width: 18rem;">
+                                        <div style="color:rgba(255, 255, 255, 0.541); font-size: 2.5rem;" class="overlay-product">
+                                            <a href="/product/view-product/${value._id}">
+                                                <i class="fas fa-cart-arrow-down hover-cart-to-product">
+                                                </i>
+                                            </a>
+                                        </div>
+                                        <a href="#">
+                                            <div style="overflow: hidden;">
+                                                <img src="${value.imgUrl}" class="card-img-top cook__blog-card-img-product" alt="Lỗi">
+                                            </div>
+                                            <div class="card-body">
+                                                <h5 style="margin-bottom: 10px;" class="card-title product-name">${value.name}</h5>
+                                                <p style="margin-bottom: 10px;" class="card-text cook__blog-card-description">${value.description}</p>
+                                                <p style="display:flex; justify-content:space-between;margin-bottom: 10px;" class="card-text">
+                                                    <span
+                                                        style="color: #ffba00;font-weight:700;font-size: 1.2rem;">${value.currentPrice}đ</span>
+                                                    <span
+                                                        style="font-size: 1.2rem;text-decoration: line-through; color:darkgrey; font-weight:400;">${value.sellPrice}đ</span>
+                                                </p>
+                                                <div style="display:flex; justify-content:space-between">
+                                                    <div>
+                                                        ${renderDanhGia(value.rating)}
+                                                    </div>
+                                                    <div style="color:darkgrey ;">Còn lại: {{this.remain}}</div>
+                                                </div>
+                                                <div style="display:flex; justify-content:space-between">
+                                                    <div style="color:#6f787e; font-style:italic">
+                                                        ${value.location}    
+                                                    </div>
+                                                    <div style="color:#6f787e;font-style:italic">${value.province}</div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                                `
+                    })
+                    document.querySelector('.render-product-home-screen-1').innerHTML = html;
+                })
+                .catch(err => {
+                    console.log(err)
+                })
+        } catch (e) {
+            console.log(e)
+        }
+    }
+    renderProductHomeScreen2 = async () => {
+        try {
+            await axios.get('http://localhost:3000/product/get-product')
+                .then(res => {
+                    console.log('res', res)
+                    let html = ''
+                    
+                    res.data.data.map((value) => {
+                            if(randomInRange(0,1)==0)
+                            html += `
+                                <div style="margin-bottom: 30px" class='col-sm-6 col-lg-4 col-xl-3'>
+                                    <div class="card card-product" style="width: 18rem;">
+                                        <div style="color:rgba(255, 255, 255, 0.541); font-size: 2.5rem;" class="overlay-product">
+                                            <a href="/product/view-product/${value._id}">
+                                                <i class="fas fa-cart-arrow-down hover-cart-to-product">
+                                                </i>
+                                            </a>
+                                        </div>
+                                        <a href="#">
+                                            <div style="overflow: hidden;">
+                                                <img src="${value.imgUrl}" class="card-img-top cook__blog-card-img-product" alt="Lỗi">
+                                            </div>
+                                            <div class="card-body">
+                                                <h5 style="margin-bottom: 10px;" class="card-title product-name">${value.name}</h5>
+                                                <p style="margin-bottom: 10px;" class="card-text cook__blog-card-description">${value.description}</p>
+                                                <p style="display:flex; justify-content:space-between;margin-bottom: 10px;" class="card-text">
+                                                    <span
+                                                        style="color: #ffba00;font-weight:700;font-size: 1.2rem;">${value.currentPrice}đ</span>
+                                                    <span
+                                                        style="font-size: 1.2rem;text-decoration: line-through; color:darkgrey; font-weight:400;">${value.sellPrice}đ</span>
+                                                </p>
+                                                <div style="display:flex; justify-content:space-between">
+                                                    <div>
+                                                        ${renderDanhGia(value.rating)}
+                                                    </div>
+                                                    <div style="color:darkgrey ;">Còn lại: {{this.remain}}</div>
+                                                </div>
+                                                <div style="display:flex; justify-content:space-between">
+                                                    <div style="color:#6f787e; font-style:italic">
+                                                        ${value.location}    
+                                                    </div>
+                                                    <div style="color:#6f787e;font-style:italic">${value.province}</div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                                `
+                    })
+                    document.querySelector('.render-product-home-screen-2').innerHTML = html;
+                })
+                .catch(err => {
+                    console.log(err)
+                })
+        } catch (e) {
+            console.log(e)
+        }
+    }
+    renderProductHomeScreen()   
+    renderProductHomeScreen1()   
+    renderProductHomeScreen2()   
 </script>
 

@@ -1,213 +1,716 @@
-<title>Product</title>
-<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
-<link rel="stylesheet" href="/css/product.css">
-
-<div class="wrapper">
-    <div class="container ">
-        <div class="row product-manager">
-            <div class="product-manager-title col-12">
-                Quản lý hàng hoá
-            </div>
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th scope="col" class="product-row">STT</th>
-                        <th scope="col" class="product-row">ID</th>
-                        <th scope="col" class="product-row">Tên</th>
-                        <th scope="col" class="product-row">Số lượng nhập</th>
-                        <th scope="col" class="product-row">Còn lại</th>
-                    </tr>
-                </thead>
-                <tbody id='product-manager-container'>
-                    
-                </tbody>
-            </table>
-        </div>    
-        <div class="divider mt-8" style='width: 100%; margin-top: 60px'>
-
-        </div>
-        <div class="row category-manager">
-            <div class="category-manager-title col-8">
-                Quản lý doanh mục
-            </div>
-            <div class="category-manager-feature col-4">
-                <button class="bt-add-category">
-                    Thêm doanh mục
-                </button>
-            </div>
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th scope="col" style='text-align: center'>STT</th>
-                        <th scope="col" style='text-align: right'>ID</th>
-                        <th scope="col">Tên doanh mục</th>
-                    </tr>
-                </thead>
-                <tbody id='category-manager-container'>
-                    
-                </tbody>
-            </table>    
-
-        </div>  
-        {{!-- Modal add category --}}
-        <div class="category-modal d-none" id="addCategoryModal">
-            <div class="category-modal-dialog">
-                <div class="modal-content category-modal-container">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Product Category viewer</h5>
-                        <button type="button" class="btn-close" aria-label="Close"></button>
+    <title>Product</title>
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="/css/product.css">
+    <link rel="stylesheet" href="/css/product/categorymodal.css">
+    <link rel="stylesheet" href="/css/product/locationmanager.css">
+    <div class="wrapper">
+        <div class="container ">
+            <div class="row product-manager">
+                <div class="col-12" style='display: flex; align-content: space-around;justify-content: space-between;'>
+                    <div class="product-manager-title">
+                        Quản lý hàng hoá
                     </div>
-                    <div class="modal-body row">
-                        <div class="product-image col-8 modal-image">
-                            <img class="product-current-img" src="/img/figure/figure1.jfif" alt="">
-                            {{!-- <img class="product-image-1" src="/img/figure/figure1.jfif" alt="">     --}}  
+                    <button class="bt-add-product-manager">
+                        <a href="add-product-view">Thêm hàng hoá</a>
+                    </button>
+                </div>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col" class="product-row">STT</th>
+                            <th scope="col" class="product-row">ID</th>
+                            <th scope="col" class="product-row">Tên</th>
+                            <th scope="col" class="product-row">Số lượng nhập</th>
+                            <th scope="col" class="product-row">Còn lại</th>
+                            <th scope="col" class="product-row"></th>
+                        </tr>
+                    </thead>
+                    <tbody id='product-manager-container'>
+                        
+                    </tbody>
+                </table>
+            </div>    
+            <div class="divider mt-8" style='width: 100%; margin-top: 60px'>
+
+            </div>
+            {{!-- Đây là phần quản lý doanh mục --}}
+            <div class="row category-manager">
+                <div class="category-manager-title col-8">
+                    Danh sách các doanh mục
+                </div>
+                <div class="category-manager-feature col-4">
+                    <button class="bt-add-category">
+                        Chỉnh sửa doanh mục
+                    </button>
+                </div>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col" style='text-align: center; width:80px'>STT</th>
+                            <th scope="col" style='text-align: right'>ID</th>
+                            <th scope="col">Tên doanh mục</th>
+                        </tr>
+                    </thead>
+                    <tbody id='category-manager-container'>
+                        
+                    </tbody>
+                </table>    
+
+            </div>
+
+            {{!-- đây là phần quản lý địa danh   --}}
+            <div class="row category-manager ">
+                <div class="category-manager-title col-8">
+                    Danh sách các địa danh
+                </div>
+                <div class="category-manager-feature col-4">
+                    <button class="bt-add-location">
+                        Chỉnh sửa địa danh
+                    </button>
+                </div>
+                <div class="location-manager-list">
+                    <table class="table ">
+                        <thead>
+                            <tr>
+                                <th scope="col" style='text-align: center;width:80px'>STT</th>
+                                <th scope="col" style='text-align: center'>Hình ảnh</th>
+                                <th scope="col" style='text-align: center'>ID</th>
+                                <th scope="col" style='text-align: center'>Địa danh</th>
+                            </tr>
+                        </thead>
+                        <tbody id='location-manager-container'>
+                        </tbody>
+                    </table>
+                </div>    
+            </div>  
+            {{!-- Modal add category --}}
+            <div class="category-modal d-none" id="addCategoryModal">
+                <div class="category-modal-dialog">
+                    <div class="modal-content category-modal-container">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Quản lý các doanh mục</h5>
+                            <button type="button" class="btn-close" aria-label="Close"></button>
+                        </div>
+                        <div class="category-modal-body">
+                            <div class="list-category col-12">
+                                <div class="list-category-item row">
+                                    <div class="category-add-button col-1">
+                                        <i class="fas fa-plus category-item-icon" ></i>
+                                    </div>
+                                    <div class="category-item-name col-8">
+                                        Morri Store
+                                    </div>
+                                    <div class="category-item-action col-3">
+                                        <i class="fas fa-edit category-item-icon"></i>
+                                        {{!-- <i class="fas fa-plus category-item-icon" ></i> --}}
+                                        <i class="fas fa-trash-alt category-item-icon"></i>
+                                    </div>
+                                </div>
+                                <div class="list-category-item tier-2 row">
+                                    <div class="category-add-button col-1">
+                                        <i class="fas fa-plus category-item-icon" ></i>
+                                    </div>
+                                    <div class="category-item-name col-8">
+                                        Hàng lưu niệm rẻ
+                                    </div>
+                                    <div class="category-item-action col-3">
+                                        <i class="fas fa-edit category-item-icon"></i>
+                                        {{!-- <i class="fas fa-plus category-item-icon" ></i> --}}
+                                        <i class="fas fa-trash-alt category-item-icon"></i>
+                                    </div>
+                                </div>
+                                <div class="list-category-item tier-3 row">
+                                    <div class="category-add-button col-1">
+                                        <i class="fas fa-plus category-item-icon" ></i>
+                                    </div>
+                                    <div class="category-item-name col-8">
+                                        Hàng lưu niệm nhập khẩu rẻ
+                                    </div>
+                                    <div class="category-item-action col-3">
+                                        <i class="fas fa-edit category-item-icon"></i>
+                                        {{!-- <i class="fas fa-plus category-item-icon" ></i> --}}
+                                        <i class="fas fa-trash-alt category-item-icon"></i>
+                                    </div>
+                                </div>
+                                <div class="list-category-item tier-3 row">
+                                    <div class="category-add-button col-1">
+                                        <i class="fas fa-plus category-item-icon" ></i>
+                                    </div>
+                                    <div class="category-item-name col-8">
+                                        Hàng lưu niệm nội địa rẻ
+                                    </div>
+                                    <div class="category-item-action col-3">
+                                        <i class="fas fa-edit category-item-icon"></i>
+                                        {{!-- <i class="fas fa-plus category-item-icon" ></i> --}}
+                                        <i class="fas fa-trash-alt category-item-icon"></i>
+                                    </div>
+                                </div>
+                                <div class="list-category-item tier-3 row">
+                                    <div class="category-add-button col-1">
+                                        <i class="fas fa-plus category-item-icon" ></i>
+                                    </div>
+                                    <input class="category-item-name input col-8">
+                                    </input>
+                                    <div class="category-item-action col-3">
+                                        <i class="fas fa-edit category-item-icon"></i>
+                                        {{!-- <i class="fas fa-plus category-item-icon" ></i> --}}
+                                        <i class="fas fa-trash-alt category-item-icon"></i>
+                                    </div>
+                                </div>
+                                <div class="list-category-item tier-2 row">
+                                    <div class="category-add-button col-1">
+                                        <i class="fas fa-plus category-item-icon" ></i>
+                                    </div>
+                                    <div class="category-item-name col-8">
+                                        Hàng lưu niệm đẹp
+                                    </div>
+                                    <div class="category-item-action col-3">
+                                        <i class="fas fa-edit category-item-icon"></i>
+                                        {{!-- <i class="fas fa-plus category-item-icon" ></i> --}}
+                                        <i class="fas fa-trash-alt category-item-icon"></i>
+                                    </div>
+                                </div>
+                                <div class="list-category-item row">
+                                    <div class="category-add-button col-1">
+                                        <i class="fas fa-plus category-item-icon" ></i>
+                                    </div>
+                                    <div class="category-item-name col-8">
+                                        Cốc sứ nghệ thuật
+                                    </div>
+                                    <div class="category-item-action col-3">
+                                        <i class="fas fa-edit category-item-icon"></i>
+                                        {{!-- <i class="fas fa-plus category-item-icon" ></i> --}}
+                                        <i class="fas fa-trash-alt category-item-icon"></i>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>
+                        <div class="modal-footer image-modal-footer">
+                            <button type="button" class="btn btn-secondary btn-close-modal">Close</button>
+                            {{!-- <button type="button" class="btn btn-primary">Save changes</button> --}}
                         </div>
                     </div>
-                    <div class="modal-footer image-modal-footer">
-                        <button type="button" class="btn btn-secondary btn-close-modal">Close</button>
-                        {{!-- <button type="button" class="btn btn-primary">Save changes</button> --}}
+                </div>
+            </div>
+
+
+            {{!-- Modal manager location --}}
+            <div class="location-modal d-none" id="locationModal">
+                <div class="location-modal-dialog">
+                    <div class="modal-content location-modal-container">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Quản lý các địa danh</h5>
+                            <button type="button" class="btn-close" aria-label="Close"></button>
+                        </div>
+                        <div class="location-modal-body" >
+                            {{!-- Ở đây mình sẽ hiển thị một cái bảng location --}}
+                            <div style="overflow-y: auto;height: 350px">
+                                <table class="table" style="overflow-y: auto;height: 300px">
+                                <thead>
+                                    <tr>
+                                        <th scope="col" style='text-align: center;width:80px'>STT</th>
+                                        <th scope="col" style='text-align: center'>ID</th>
+                                        <th scope="col" style='text-align: center'>Địa danh</th>
+                                        <th scope="col" style='text-align: center;width:100px'>
+
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody id='location-manager-container-in-modal'>
+                                    
+                                    
+                                </tbody>
+                            </table>
+                            </div>
+                            
+                            <button class='bt-add-location' onclick="changeAddLocationModal()">
+                                Thêm địa danh
+                            </button>
+                        </div>
+                        <div class="modal-footer image-modal-footer">
+                            <button type="button" class="btn btn-secondary btn-close-modal">Close</button>
+                            {{!-- <button type="button" class="btn btn-primary">Save changes</button> --}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {{!-- thêm các địa danh --}}
+            <div class="add-location-modal d-none" id="addLocationModal" style='z-index: 10000'>
+                <div class="add-location-modal-dialog">
+                    <div class="modal-content add-location-modal-container">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Thêm địa danh</h5>
+                            <button type="button" class="btn-close" aria-label="Close"></button>
+                        </div>
+                        <div class="add-location-modal-body" style='display: flex'>
+                            <label for="location-avatar">
+                                <img class="location-img" 
+                                    src="http://res.cloudinary.com/phiroud321/image/upload/v1639138454/add-2935429_960_720_xc31ip.png" 
+                                    alt=""
+                                > 
+                            </label>
+                            <input type="file" id="location-avatar" name="avatar" accept="image/png, image/jpeg" style='display: none'>
+                            <div class='input-location-container'>
+                                <label for="" class="location-name-label">
+                                    Tên địa danh
+                                </label>
+                                <input type="text" style='width: 80%' name='locationName'>
+                            </div>
+                            
+                        </div>
+                        <div class="modal-footer image-modal-footer">
+                            <button class='bt-add-location bt-add-location-js'>
+                                Thêm địa danh
+                            </button>
+                            <button type="button" class="btn btn-secondary btn-close-modal">Close</button>
+                            {{!-- <button type="button" class="btn btn-primary">Save changes</button> --}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {{!-- Modal edit location --}}
+            <div class="edit-location-modal d-none" id="editLocationModal" style='z-index: 10000'>
+                <div class="edit-location-modal-dialog">
+                    <div class="modal-content add-location-modal-container">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Chỉnh sửa địa danh</h5>
+                            <button type="button" class="btn-close" aria-label="Close"></button>
+                        </div>
+                        <div class="add-location-modal-body" style='display: flex'>
+                            <label for="edit-location-avatar" >
+                                <img class="edit-location-img location-img" 
+                                    src="http://res.cloudinary.com/phiroud321/image/upload/v1639138454/add-2935429_960_720_xc31ip.png" 
+                                    alt=""
+                                > 
+                                <input type="file" id="edit-location-avatar" name="edit-location-avatar" accept="image/png, image/jpeg" style='display: none'>
+                            </label>
+                            <div class='input-location-container'>
+                                <label for="" class="location-name-label">
+                                    Tên địa danh
+                                </label>
+                                <input type="text" style='width: 80%' name='editLocationInput'>
+                            </div>
+                            
+                        </div>
+                        <div class="modal-footer image-modal-footer">
+                            <button class='bt-add-location bt-add-location-js' onclick='editLocation()'>
+                                Chỉnh sửa địa danh
+                            </button>
+                            <button type="button" class="btn btn-secondary btn-close-modal">Đóng</button>
+                            {{!-- <button type="button" class="btn btn-primary">Save changes</button> --}}
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-
-
     </div>
-</div>
-<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-<script>
-    // Get các sản phẩm từ database 
-    var productContainer = document.querySelector('#product-manager-container')
-    const data = {
-        filter: {}   
-    }
-    axios.get(`http://localhost:3000/product/get-product`, {
-        params: {...data}
-    })
-        .then(res => {
-            result = res.data.data;
-            console.log("result", result)
-            // Thêm các sản phẩm vào innerHTMl
-            var htmlForProduct = '';
-            for(var i = 0 ; i < result.length;i++)
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+        // Get các sản phẩm từ database 
+        var productContainer = document.querySelector('#product-manager-container')
+        const data = {
+            filter: {}   
+        }
+        axios.get(`http://localhost:3000/product/get-product`, {
+            params: {...data}
+        })
+            .then(res => {
+                result = res.data.data;
+                console.log("result", result)
+                // Thêm các sản phẩm vào innerHTMl
+                var htmlForProduct = '';
+                for(var i = 0 ; i < result.length;i++)
+                {
+                    htmlForProduct += 
+                    `
+                    <tr class="product-item" style="transform: rotate(0);"> 
+                        <th scope="row"><a href="/product/view-product/${result[i]._id}" class="stretched-link">${i+1}</a></th>
+                        <td style='text-align: center'>${result[i]._id}</td>
+                        <td>${result[i].name}</td>
+                        <td style='text-align: center'>${result[i].quantity}</td>
+                        <td style='text-align: center'>${result[i].remain}</td>
+
+                    </tr>
+                    `
+                }
+                {{!-- console.log("htmlProduct", htmlForProduct) --}}
+                productContainer.innerHTML = htmlForProduct;    
+            })
+            .catch(err => {
+                alert(err)
+                console.log(err)
+            })
+
+        // Render các cái doanh mục theo mẫu 
+        //(này là mình get từ server xuống và xử lý thì mới được ntn) 
+        var listCategory = [
             {
-                htmlForProduct += 
-                `
-                <tr class="product-item" style="transform: rotate(0);"> 
-                    <th scope="row"><a href="/product/view-product/${result[i]._id}" class="stretched-link">${i+1}</a></th>
-                    <td>${result[i]._id}</td>
-                    <td>${result[i].name}</td>
-                    <td>${result[i].quantity}</td>
-                    <td>${result[i].remain}</td>
+                id: '1',
+                name: 'Morri store',
+                child: [
+                    {
+                        id: '1.1',
+                        name: 'Hàng lưu niệm rẻ',
+                        child: [
+                            {
+                                id: '1.1.1',
+                                name: 'Hàng lưu niệm nội địa rẻ',
+                                child: [],
+                            },
+                            {
+                                id: '1.1.2',
+                                name: 'Hàng lưu niệm nhập khẩu rẻ',
+                                child: [],
+                            }
+                        ]
+                    },
+                    {
+                        id: '1.2',
+                        name: 'Hàng lưu niệm đẹp',
+                        child: [],
+                    }
+                ]
+            },
+            {
+                id: '2',
+                name: 'Cốc sứ nghệ thuật',
+                child: []
+            }
+        ];
+        var countCategory = 0;
+
+        function renderPartialCategory(smallcategory) {
+            var htmlForSmallCategory = 
+                        `<tr class="category-row">
+                            <td scope="col" style='text-align: center'>${countCategory}</td>
+                            <td scope="col" class="category-cell">${smallcategory.id}</td>
+                            <td scope="col">${smallcategory.name}</td>
+                        </tr>`;
+            countCategory++;
+            console.log("smallcategory", smallcategory);
+            console.log("smallcategory.child",smallcategory.child);
+            if(smallcategory.child.length   ==0) return htmlForSmallCategory;
+            else {
+                for(var i= 0; i < smallcategory.child.length; i++)
+                {
+                    htmlForSmallCategory += renderPartialCategory(smallcategory.child[i]);
+                }
+                return htmlForSmallCategory;
+            }
+            
+        }
+        // Hiển thị các doanh mục sản phẩm
+        function renderCategory()
+        {
+            var htmlForCategory = ``;
+            for(var i = 0 ; i < listCategory.length ; i++)
+            {
+                htmlForCategory += renderPartialCategory(listCategory[i]);
+            }
+            var categoryContainer = document.querySelector('#category-manager-container');
+            categoryContainer.innerHTML = htmlForCategory;
+        }
+        renderCategory();
+
+
+        function changeCategoryModal(){
+            var CategoryModal = document.querySelector('#addCategoryModal');
+            if(CategoryModal.classList.contains('d-none')){
+                    CategoryModal.classList.remove('d-none');
+            }
+            else CategoryModal.classList.add('d-none');
+        }
+        // Thêm sự kiện add cho cái category
+        document.querySelector('.bt-add-category').onclick = (e) => {
+            changeCategoryModal();
+            console.log('ABC')
+        }
+        // Thêm các nút tắt
+        document.querySelector('.category-modal-dialog').onclick = (e) => {
+            e.preventDefault();
+            console.log(e.target);
+            if(e.target.classList.contains('btn-close-modal') || e.target.classList.contains('btn-close'))
+            {
+                changeCategoryModal();
+            }
+            console.log('ABC')
+        }
+
+        // Xử lý mở modal location
+        function changeLocationModal() {
+            var locationModal = document.querySelector('#locationModal');
+            console.log("locationModal", locationModal)
+            if(locationModal.classList.contains('d-none')){
+                locationModal.classList.remove('d-none');
+            }
+            else locationModal.classList.add('d-none');
+        }
+        // Xử lý các sự kiện click để đóng mở cái location modal
+        document.querySelector('.bt-add-location').onclick = (e) => {
+            changeLocationModal();
+            console.log('ABC')
+        }
+        // Thêm các nút tắt
+        document.querySelector('.location-modal-dialog').onclick = (e) => {
+            e.preventDefault();
+            console.log(e.target);
+            if(e.target.classList.contains('btn-close-modal') || e.target.classList.contains('btn-close'))
+            {
+                changeLocationModal();
+            }
+            console.log('ABC')
+        }
+
+
+// Get các địa danh
+        async function getLocation(){
+            var resultLocation = [];
+            await axios.get(`http://localhost:3000/product/location`, {
+                params: {filter:{}}
+            })
+            .then(res => {
+                resultLocation = res.data.data;
+                allLocations = resultLocation;
+                console.log("resultLocation", resultLocation)
+            })
+            .catch(err => {
+                console.log(err)
+                return;
+            })
+            // Set vào cái modal và vào cái show ban đầu
+            var locationInMain = document.querySelector('#location-manager-container');
+            var htmlForLocationMain = '';
+            for(var i = 0 ; i < resultLocation.length ; i++)
+            {
+                htmlForLocationMain += 
+                    `<tr>
+                        <td scope="col" class='location-info-cell' style='text-align: center'>${i+1}</td>
+                        <td scope="col"style='text-align: center'>
+                            <image class="img-location" src="${resultLocation[i].imgUrl}">
+                            </image>
+                        </td>
+                        <td scope="col" class='location-info-cell' style='text-align: center'>${resultLocation[i].locationID}</td>
+                        <td scope="col" class='location-info-cell' style='text-align: center'>${resultLocation[i].name}</td>
+                    </tr>`
+            }
+            locationInMain.innerHTML = htmlForLocationMain;
+            // Load vô trong cái modal chỉnh sửa
+            var locationInModal = document.querySelector('#location-manager-container-in-modal');
+            var htmlForLocationModal = '';
+            for(var i = 0 ; i < resultLocation.length ; i++)
+            {
+                htmlForLocationModal += 
+                `<tr>
+                    <td scope="col" style='text-align: center'>${i+1}</td>
+                    
+                    <td scope="col" style='text-align: center'>${resultLocation[i].locationID}</td>
+                    <td scope="col" style='text-align: center'>${resultLocation[i].name}</td>
+                    <td scope="col" style='text-align: center'>
+                        <div class="location-item-action col-3">
+                            <i class="fas fa-edit location-item-icon" onclick="editLocationOpen(${i})"></i>
+                            <i class="fas fa-trash-alt location-item-icon"></i>
+                        </div>
+                    </td>
                 </tr>
                 `
             }
-            {{!-- console.log("htmlProduct", htmlForProduct) --}}
-            productContainer.innerHTML = htmlForProduct;    
-        })
-        .catch(err => {
-            alert(err)
-            console.log(err)
-        })
-
-    // Render các cái doanh mục theo mẫu 
-    //(này là mình get từ server xuống và xử lý thì mới được ntn) 
-    var listCategory = [
-        {
-            id: '1',
-            name: 'Morri store',
-            child: [
-                {
-                    id: '1.1',
-                    name: 'Hàng lưu niệm rẻ',
-                    child: [
-                        {
-                            id: '1.1.1',
-                            name: 'Hàng lưu niệm nội địa rẻ',
-                            child: [],
-                        },
-                        {
-                            id: '1.1.2',
-                            name: 'Hàng lưu niệm nhập khẩu rẻ',
-                            child: [],
-                        }
-                    ]
-                },
-                {
-                    id: '1.2',
-                    name: 'Hàng lưu niệm đẹp',
-                    child: [],
-                }
-            ]
-        },
-        {
-            id: '2',
-            name: 'Cốc sứ nghệ thuật',
-            child: []
+            locationInModal.innerHTML = htmlForLocationModal;
         }
-    ];
-    var countCategory = 0;
+        getLocation();
 
-    function renderPartialCategory(smallcategory) {
-        var htmlForSmallCategory = 
-                    `<tr class="category-row">
-                        <td scope="col" style='text-align: center'>${countCategory}</td>
-                        <td scope="col" class="category-cell">${smallcategory.id}</td>
-                        <td scope="col">${smallcategory.name}</td>
-                    </tr>`;
-        countCategory++;
-        console.log("smallcategory", smallcategory);
-        console.log("smallcategory.child",smallcategory.child);
-        if(smallcategory.child.length   ==0) return htmlForSmallCategory;
-        else {
-            for(var i= 0; i < smallcategory.child.length; i++)
-            {
-                htmlForSmallCategory += renderPartialCategory(smallcategory.child[i]);
+
+        // PHẦN EDIT LOCATION Ở ĐÂY
+        var allLocations= [];
+        var imgEditLocationUrl = '';
+        // Mở modal chính sửa location
+        function changeEditLocationModal() {
+            var addLocationModal = document.querySelector('#editLocationModal');
+            if(addLocationModal.classList.contains('d-none')){
+                addLocationModal.classList.remove('d-none');
             }
-            return htmlForSmallCategory;
+            else addLocationModal.classList.add('d-none');
         }
+        // Thêm các nút tắt
+        document.querySelector('.edit-location-modal-dialog').onclick = (e) => {
+            if(e.target.classList.contains('btn-close-modal') || e.target.classList.contains('btn-close'))
+            {
+                changeEditLocationModal();
+            }
+        }
+        // loac hình ảnh và tên vào cái chỉnh sửa blog
+        // Các phần xử lý hình ảnh ở chỉnh sửa blog
+        var currentLocation;
+        var isChangeImage = false;
+        function loadImageAndNameLocation(locationIndex)
+        {
+            currentLocation = allLocations[locationIndex];
+            document.querySelector('input[name="editLocationInput"').value = currentLocation.name;
+            document.querySelector('.edit-location-img.location-img').src = currentLocation.imgUrl;
+        }
+
+        function editLocationOpen(indexLocation) {
+            loadImageAndNameLocation(indexLocation);
+            changeEditLocationModal();
+        }
+
+        function checkContraintEditLocation() {
+            if(isChangeImg == true && imgEditLocationUrl == ''){
+                showAlertMorriStore('alert-danger', 'Ảnh chưa được tải lên');
+                return false;
+            }
+            var locationName = document.querySelector('input[name="editLocationInput"').value;
+            if(locationName == '') {
+                showAlertMorriStore('alert-danger', 'Không thể để trống tên địa danh');
+                return false;
+            }
+            // THÊM: tên địa danh không được trùng
+            return true;
+        }
+        // Up ảnh lên cái chỉnh sửa địa danh
+        async function uploadEditLocationImage() {
+            isChangeImage = true;
+            var fileName = document.getElementById('edit-location-avatar').files[0];
+            isUploaded = false;
+            const formData = new FormData();
+            formData.append("file", fileName)
+            formData.append("upload_preset", "phiroud");
+            axios.post(`https://api.cloudinary.com/v1_1/phiroud321/image/upload`, formData)
+                .then(res => {
+                    {{!-- console.log("link", res.data.url); --}}
+                    imgEditLocationUrl = res.data.url;
+                })
+                .catch(err => {
+                    console.log("Thất bại");
+                })
+        }
+        document.querySelector('#edit-location-avatar').onchange = function(evt) {
+            var tgt = evt.target || window.event.srcElement,
+            files = tgt.files;
+            // FileReader support
+            if (FileReader && files && files.length) {
+                var fr = new FileReader();
+                fr.onload = function () {
+                    document.querySelector('.edit-location-img').src = fr.result;
+                }
+                fr.readAsDataURL(files[0]);
+                uploadEditLocationImage();
+            }
+        }
+        async function editLocation()
+        {
+            console.log("currentLocation",currentLocation);
+            const dataUpdate = {
+                locationID: currentLocation.locationID,
+                name: document.querySelector('input[name="editLocationInput"').value,
+                imgUrl: !isChangeImage ? currentLocation.imgUrl : imgEditLocationUrl,
+            }
+            await axios.put(`http://localhost:3000/product/location`, dataUpdate)
+            .then(res => {
+                console.log("cập nhật thành công");
+            })
+            .catch(err => {
+                console.log(err)
+                return;
+            })
+            changeEditLocationModal();
+            getLocation()
+        }
+
+
+
         
-    }
-    // Hiển thị các doanh mục sản phẩm
-    function renderCategory()
-    {
-        var htmlForCategory = ``;
-        for(var i = 0 ; i < listCategory.length ; i++)
+            
+
+        // Phần của THÊM LOCATION
+        // Biến để load hình ảnh lên
+        var imgLocationUrl = '';
+        // Mở modal thêm location
+        function changeAddLocationModal() {
+            var addLocationModal = document.querySelector('#addLocationModal');
+            if(addLocationModal.classList.contains('d-none')){
+                addLocationModal.classList.remove('d-none');
+            }
+            else addLocationModal.classList.add('d-none');
+        }
+        async function uploadLocationImage() {
+            var fileName = document.getElementById('location-avatar').files[0];
+            console.log(fileName);
+            isUploaded = false;
+            const formData = new FormData();
+            formData.append("file", fileName)
+            formData.append("upload_preset", "phiroud");
+            axios.post(`https://api.cloudinary.com/v1_1/phiroud321/image/upload`, formData)
+                .then(res => {
+                    console.log("link", res.data.url);
+                    imgLocationUrl = res.data.url;
+                })
+                .catch(err => {
+                    console.log("Thất bại");
+                })
+        }
+        document.querySelector('#location-avatar').onchange = function(evt) {
+            console.log('Nhận sự kiện click add hình rồi')
+            var tgt = evt.target || window.event.srcElement,
+            files = tgt.files;
+            // FileReader support
+            if (FileReader && files && files.length) {
+                var fr = new FileReader();
+                fr.onload = function () {
+                    document.querySelector('.location-img').src = fr.result;
+                }
+                fr.readAsDataURL(files[0]);
+                uploadLocationImage();
+            }
+        }
+        // Thêm các nút tắt để đóng mở việc thêm địa danh
+        document.querySelector('.add-location-modal-dialog').onclick = (e) => {
+            if(e.target.classList.contains('btn-close-modal') || e.target.classList.contains('btn-close'))
+            {
+                changeAddLocationModal();
+            }
+        }
+        function checkContraintAddLocation() {
+            if(imgLocationUrl == ''){
+                showAlertMorriStore('alert-danger', 'Ảnh chưa được tải lên');
+                return false;
+            }
+            var locationName = document.querySelector('input[name="locationName"').value;
+            console.log("locationName", locationName);
+            if(locationName == '') {
+                showAlertMorriStore('alert-danger', 'Không thể để trống tên địa danh');
+                return false;
+            }
+            // THÊM: tên địa danh không được trùng
+            return true;
+        }
+        // thêm sự kiện thêm địa danh ở đây
+        document.querySelector('.bt-add-location-js').onclick = async () => {
+            if(!checkContraintAddLocation()) return;
+            // Thêm địa danh vào cơ sở dữ liệu
+            const data = { 
+                locationID: '1',
+                name: document.querySelector('input[name="locationName"').value,
+                imgUrl: imgLocationUrl,
+            };
+            await axios.post(`http://localhost:3000/product/location`, data)
+                .then(res => {
+                    console.log("Save success");
+                    showAlertMorriStore('alert-success', "Lưu thành công");
+                })
+                .catch(err => {
+                    showAlertMorriStore('alert-danger', 'Đã có lỗi xảy ra');
+                })
+            changeAddLocationModal();
+            getLocation();
+        }
+
+
+        function moveToProduct(id)
         {
-            htmlForCategory += renderPartialCategory(listCategory[i]);
+            {{!-- alert("Chuyển đến trang "+ id); --}}
+            window.location = ''
         }
-        var categoryContainer = document.querySelector('#category-manager-container');
-        categoryContainer.innerHTML = htmlForCategory;
-    }
-    renderCategory();
-
-
-    function changeCategoryModal(){
-        var CategoryModal = document.querySelector('#addCategoryModal');
-        if(CategoryModal.classList.contains('d-none')){
-                CategoryModal.classList.remove('d-none');
-        }
-        else CategoryModal.classList.add('d-none');
-    }
-    // Thêm sự kiện add cho cái category
-    document.querySelector('.bt-add-category').onclick = (e) => {
-        changeCategoryModal();
-        console.log('ABC')
-    }
-    // Thêm các nút tắt
-    document.querySelector('.category-modal-dialog').onclick = (e) => {
-        e.preventDefault();
-        console.log(e.target);
-        if(e.target.classList.contains('btn-close-modal') || e.target.classList.contains('btn-close'))
-        {
-            changeCategoryModal();
-        }
-        console.log('ABC')
-    }
-
-    function moveToProduct(id)
-    {
-        {{!-- alert("Chuyển đến trang "+ id); --}}
-        window.location = ''
-    }
-</script>
+    </script>

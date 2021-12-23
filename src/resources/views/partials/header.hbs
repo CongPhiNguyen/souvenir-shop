@@ -3,7 +3,7 @@
 
 
 {{!-- Alert --}}
-<div style="cursor: pointer;" id="display-alert-css" class="alert" role="alert">
+<div style="cursor: pointer;" id="display-alert-css" class="alert" role="alert" style='z-index: 1000000'>
     A simple secondary alert—check it out!
 </div>
 
@@ -60,12 +60,12 @@
                             </div>
                         </div>
                     </li>
-                    <li class="nav-item">
+                    {{!-- <li class="nav-item">
                         <a class="nav-link {{#if active.Notification}}active{{/if}}" href="#">
                             <i class="fas fa-bell"></i>
                             Thông báo
                         </a>
-                    </li>
+                    </li> --}}
                     {{!-- <li class="nav-item">
                         <a class="nav-link" href="/signin">
                             <i class="fas fa-user"></i>

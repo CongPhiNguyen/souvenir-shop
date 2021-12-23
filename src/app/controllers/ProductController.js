@@ -2,7 +2,7 @@ const res = require("express/lib/response");
 const Product = require('../models/Product');
 const Cart = require('../models/cart');
 var ObjectId = require('mongodb').ObjectID;
-
+var Location = require('../models/location');
 const { removeAccents } = require('../helper/removeVietnameseAccents')
 
 
@@ -15,12 +15,26 @@ class ProductController {
 
     addProductView(req, res){
         // console.log('Đang chạy ở trên Index', 'req.body', req.body)
-        res.render('product/addProductView', { title: "Product" , active: {Product: true }});
+        res.render('product/addProductView', { tistle: "Product" , active: {Product: true }});
     }
 
-    editProductView(req, res){
+    async editProductView(req, res){
+        // console.log('Vào đc link rồi')
+        // console.log(req.originalUrl,req.baseUrl);
+        // if(req.originalUrl == req.baseUrl) {
+        //     res.render('product/editProductView', { title: "Product" , active: {Product: true }});
+        // }
+        // else 
+        // {
+        //     // var object = new ObjectId(req.originalUrl.replace(req.baseUrl + '/', ''));
+        //     // console.log('object', object)
+        //     //  var newI = await Product.findOne({'_id': });
+        //     // console.log("newI", newI);
+        // }
+        console.log('Trả về đúng phần sửa sản phẩm', req.originalUrl)
         // console.log('Đang chạy ở trên Index', 'req.body', req.body)
         res.render('product/editProductView', { title: "Product" , active: {Product: true }});
+        
     }
 
     viewProductView(req, res){
@@ -66,8 +80,6 @@ class ProductController {
             rating: req.body.rating,
         });
         productInfo.save().then(result => {
-            // console.log('Add success');
-            // console.log(productInfo);
             res.status(200).json({ productInfo: productInfo });
         });
     }
@@ -89,6 +101,7 @@ class ProductController {
     }
 
     async updateProduct(req, res) {
+        
         console.log('Chạy update product', 'req.body', req.body);
         // get các cái cart thử xem sao
         // var newI = await Product.findOne({productID: req.body.productID,});
@@ -135,6 +148,70 @@ class ProductController {
                                 description: req.body.description,
                                 unit: req.body.unit,
                                 rating: req.body.rating,
+                            },
+                        })
+                    );
+                }
+            }
+        );
+    }
+
+    async addLocation(req, res){
+        console.log(req.body,'Đang chạy việc thêm địa danh');
+        // res.status(200).send({});
+        try {
+            var locationInfo = new Location({
+                locationID : req.body.locationID,
+                name: req.body.name, 
+                imgUrl: req.body.imgUrl
+            })
+            locationInfo.save().then(result => {
+                res.status(200).json({ locationInfo: locationInfo });
+            });
+        }
+        catch(err) {
+            res.status(404).send(err);
+        }
+    }
+
+    async getLocation(req, res) {
+        Location.find({})
+            .exec()
+            .then((data) => {
+                res.status(200).send(
+                    JSON.stringify({
+                        data,
+                    })
+                );
+            })
+            .catch((err) => {
+                res.status(404).send(err);
+            });
+    }
+
+    async updateLocation(req, res) {
+        Location.findOneAndUpdate(
+            {locationID: req.body.locationID,},
+            {
+                $set: {
+                    locationID: req.body.locationID, 
+                    name: req.body.name, 
+                    imgUrl: req.body.imgUrl,
+                },
+            },
+            {
+                returnOriginal: false,
+            },
+            function (err, doc) {
+                if (err) {
+                    res.status(404).send(err);
+                } else {
+                    res.status(200).send(
+                        JSON.stringify({
+                            product : {
+                                locationID: req.body.locationID, 
+                                name: req.body.name, 
+                                imgUrl: req.body.imgUrl, 
                             },
                         })
                     );

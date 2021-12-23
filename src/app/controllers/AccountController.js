@@ -100,6 +100,7 @@ module.exports.profile_post = async (req, res) => {
         catch (err) {
             console.log('account post profile error');
             console.log(err);
+            res.json({error: 'account profile post error'});
         }
     }
     else {
@@ -158,19 +159,23 @@ module.exports.adminCustomerList_post = async (req, res) => {
                 }
                 else {
                     console.log('admin customerList null');
+                    res.json({ error: 'admin customer list null' });
                 }
             }
             catch(err) {
                 console.log('admin customer list post error');
                 console.log(err);
+                res.status(400).json({ error: 'admin customer list post error' });
             }
         }
         else {
             console.log('customerList post not authorized');
+            res.status(400).json({ error: 'customer list post not authorized' });
         }
     }
     else {
         console.log('user not log in');
+        res.status(400).json({ error: 'user not log in' });
     }
 }
 
@@ -222,11 +227,13 @@ module.exports.receipt_get = async (req, res) => {
                 }
                 else {
                     console.log('account receiptList null');
+                    res.render('404NotFound');
                 }
             }
             catch (err) {
                 console.log('account get receipt error');
                 console.log(err);
+                res.render('404NotFound');
             }
         }
     }
@@ -546,11 +553,13 @@ module.exports.receiptDetail_get = async (req, res) => {
         }
         else {
             console.log('account receipt detail null');
+            res.render('404NotFound');
         }
     }
     catch (err) {
         console.log('account receipt detail error');
         console.log(err);
+        res.render('404NotFound');
     }
 }
 
@@ -767,6 +776,7 @@ module.exports.adminStatistic_get = async (req, res) => {
             catch (err) {
                 console.log('account receipt detail error');
                 console.log(err);
+                res.render('404NotFound');
             }
         }
         else {

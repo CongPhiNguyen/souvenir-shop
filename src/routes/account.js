@@ -23,5 +23,8 @@ router.post('/admin-delete-voucher', requireAuth, accountController.adminDeleteV
 router.get('/statistic', requireAuth, accountController.adminStatistic_get);
 router.get('/get-all-receipt', requireAuth, accountController.getAllReceipt_get);
 router.get('/', requireAuth, accountController.profile_get);
+router.use('/', (req, res) => {
+    res.render('404NotFound');
+})
 
 module.exports = router;

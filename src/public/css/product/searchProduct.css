@@ -1,0 +1,8 @@
+.label-location {
+    display: inline-block;
+}
+
+.label-location.slider-item {
+    display: inline-block;
+    color: white;
+}

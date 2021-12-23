@@ -202,7 +202,7 @@ body{
     position: fixed;
     right: 2%;
     top: 2%;
-    z-index: 100;
+    z-index: 100000000;
     animation: showAlertAnimation ease-in-out 1s;
     animation-timing-function: cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
