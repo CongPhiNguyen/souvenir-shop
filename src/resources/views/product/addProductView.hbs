@@ -337,6 +337,13 @@
         })
         .then(res => {
             resultProduct = res.data.data;
+            var deleteOutOfNumber = [];
+            for(var i = 0; i < resultProduct.length ;i++)
+            {
+                if(resultProduct[i].remain > 0)
+                deleteOutOfNumber.push(resultProduct[i]);
+            }
+            resultProduct = deleteOutOfNumber;
         })
         .catch(err => {
             alert(err)

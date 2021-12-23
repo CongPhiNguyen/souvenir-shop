@@ -61,10 +61,12 @@
                     <div class="product-name" data-value="{{dataProduct.name}}">
                         {{dataProduct.name}}     
                     </div>
+                    {{#ifCond user.role '==' 'admin' }}
                     <div class='d-flex product-activity' style='text-align: center'>
                         <i style='z-index: 40' class="fas fa-edit product-icon edit-js"></i>
                         <i style='z-index: 40' class="fas fa-trash-alt product-icon delete-js"></i>
                     </div>
+                    {{/ifCond}}
                 </div>
                 
                 <div class="product-rating d-flex">
