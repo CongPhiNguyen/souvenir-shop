@@ -1,4 +1,4 @@
-<title>Cart</title>
+<title>Giỏ hàng</title>
 <link rel="stylesheet" href="/css/cart.css">
 <div>
     <div class="row">
@@ -651,6 +651,8 @@
                         renderQuantityTotal()
                         renderListCart()
                         renderTotalMoney()
+                        // Trừ đi số lượng sản phẩm đã mua
+
                         showAlertMorriStore('alert-success', 'Mua hàng thành công !')
                     })
                     .catch(err => {
