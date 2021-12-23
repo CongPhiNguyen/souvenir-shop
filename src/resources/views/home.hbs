@@ -22,31 +22,31 @@
                 <!-- Full-width images with number and caption text -->
                 <div class="mySlides fade">
                     <div class="numbertext">1 / 5</div>
-                    <img src="/img/home-header/gift_1.png" style="width:100%">
+                    <img src="/img/home-header/gift1.png" style="width:100%">
                     <div class="text">MORRI STORE</div>
                 </div>
 
                 <div class="mySlides fade">
                     <div class="numbertext">2 / 5</div>
-                    <img src="/img/home-header/gift_2.png" style="width:100%">
+                    <img src="/img/home-header/gift2.png" style="width:100%">
                     <div class="text">MORRI STORE</div>
                 </div>
 
                 <div class="mySlides fade">
                     <div class="numbertext">3 / 5</div>
-                    <img src="/img/home-header/gift_3.png" style="width:100%">
+                    <img src="/img/home-header/gift3.png" style="width:100%">
                     <div class="text">MORRI STORE</div>
                 </div>
 
                 <div class="mySlides fade">
                     <div class="numbertext">4 / 5</div>
-                    <img src="/img/home-header/gift_4.png" style="width:100%">
+                    <img src="/img/home-header/gift4.png" style="width:100%">
                     <div class="text">MORRI STORE</div>
                 </div>
 
                 <div class="mySlides fade">
                     <div class="numbertext">5 / 5</div>
-                    <img src="/img/home-header/gift_5.png" style="width:100%">
+                    <img src="/img/home-header/gift5.png" style="width:100%">
                     <div class="text">MORRI STORE</div>
                 </div>
             </div>
@@ -169,12 +169,12 @@
         <div class="cook__heading">BLOG - cẩm nang du lịch</div>
         <div class="row">
             <div class="col-lg-3 col-sm-6 col-12">
-                <div class="cook__blog-card">
+                <div style="cursor: pointer;" class="cook__blog-card">
                     <img class="cook__blog-card-img"
                         src="https://cdn.tgdd.vn/Files/2021/10/20/1392184/top-qua-luu-niem-y-nghia-cho-nhieu-doi-tuong-kh-17.png"
                         alt="">
                     <div class="cook__blog-card-address">
-                        <a href="/blog/61ad8940ab0179831428c956">Quà lưu niệm đặc trưng của Việt Nam</a>
+                        <a class="link-blog" href="/blog/61ad8940ab0179831428c956">Quà lưu niệm đặc trưng của Việt Nam</a>
                     </div>
                     <p class="cook__blog-card-date">28 Tháng Ba, 2020</p>
                     <p class="cook__blog-card-border"></p>
@@ -184,11 +184,11 @@
                 </div>
             </div>
             <div class="col-lg-3 col-sm-6 col-12">
-                <div class="cook__blog-card">
+                <div style="cursor: pointer;" class="cook__blog-card">
                     <img class="cook__blog-card-img" src="https://donghothuysy.vn/upload_images/images/dsc00135.jpg"
                         alt="">
                     <div class="cook__blog-card-address">
-                        <a href="/blog/61ad8da30b0c0b55f6822588">Ý nghĩa tặng đồng hồ đeo tay cho người yêu</a>
+                        <a class="link-blog" href="/blog/61ad8da30b0c0b55f6822588">Ý nghĩa tặng đồng hồ đeo tay cho người yêu</a>
                     </div>
                     <p class="cook__blog-card-date">28 Tháng Tư, 2020</p>
                     <p class="cook__blog-card-border"></p>
@@ -204,11 +204,11 @@
                 </div>
             </div>
             <div class="col-lg-3 col-sm-6 col-12">
-                <div class="cook__blog-card">
+                <div style="cursor: pointer;" class="cook__blog-card">
                     <img class="cook__blog-card-img"
                         src="https://momoshop.com.vn/wp-content/uploads/2019/12/qua-tang-nguoi-yeu.jpg" alt="">
                     <div class="cook__blog-card-address">
-                        <a href="/blog/61ad8eea0b0c0b55f6822594">Quà tặng cho người yêu nữ – chỉ dành cho nam giới</a>
+                        <a class="link-blog" href="/blog/61ad8eea0b0c0b55f6822594">Quà tặng cho người yêu nữ – chỉ dành cho nam giới</a>
                     </div>
                     <p class="cook__blog-card-date">28 Tháng Ba, 2021</p>
                     <p class="cook__blog-card-border"></p>
@@ -221,11 +221,11 @@
                 </div>
             </div>
             <div class="col-lg-3 col-sm-6 col-12">
-                <div class="cook__blog-card">
+                <div style="cursor: pointer;" class="cook__blog-card">
                     <img class="cook__blog-card-img"
                         src="https://blog.quatructuyen.com/wp-content/uploads/2018/01/cau-chuyen-cuoc-doi.jpg" alt="">
                     <div class="cook__blog-card-address">
-                        <a href="/blog/61ad938c0b0c0b55f68225ba">Giai đoạn đẹp nhất của cuộc đời
+                        <a class="link-blog" href="/blog/61ad938c0b0c0b55f68225ba">Giai đoạn đẹp nhất của cuộc đời
                         </a>
                     </div>
                     <p class="cook__blog-card-date">2 Tháng Mười, 2020</p>
@@ -312,7 +312,7 @@
                     let binhthuan = 0
 
                     let html = ''
-                    
+
                     res.data.data.map((value, key) => {
                         switch (value.province) {
                             case 'Hà Nội':
@@ -385,7 +385,7 @@
                         }
                     })
                     renderProductHomeScreenElement.innerHTML = html;
-                    
+
                     elementHaNoi.innerText = hanoi + ' sản phẩm'
                     elementTphcm.innerText = tphcm + ' sản phẩm'
                     elementDaNang.innerText = danang + ' sản phẩm'
@@ -404,5 +404,13 @@
     }
 
     renderProductHomeScreen()
+
+    let arrBlog = document.querySelectorAll('.cook__blog-card')
+    arrBlog.forEach(value => {
+        value.onclick = () => {
+            let link = value.querySelector('.link-blog');
+            link.click()
+        }
+    })
 
 </script>

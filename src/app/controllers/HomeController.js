@@ -10,7 +10,9 @@ class Home1Controller {
         res.render('home' , {active});
     }
 
-    
+    get404(req, res) {
+        res.render('404NotFound')
+    }    
 
     renderHome(req, res) {
         const active = {

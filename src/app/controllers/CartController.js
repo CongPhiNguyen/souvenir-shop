@@ -239,6 +239,9 @@ class CartController {
         );
     }
 
+    async get404(req, res) {
+        res.render('404NotFound')
+    }
 
     async checkVoucher(req, res) {
         const { couponCode } = req.body;

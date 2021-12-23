@@ -23,5 +23,8 @@ function route(app) {
     app.use('/account', accountRouter);
     app.use('/blog', blogRouter);
     app.use('/', authRouter);
+    app.get('/:id', (req, res) => {
+        res.render('404NotFound')
+    })
 }
 module.exports = route;
