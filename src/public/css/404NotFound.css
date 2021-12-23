@@ -3,7 +3,7 @@
 }
 
 .notFound-content {
-    padding: 200px 0;
+    padding: 100px 0 300px 0;
 }
 
 .btn-back-to-home {
@@ -11,12 +11,12 @@
     font-weight: 600;
     padding: 16px 32px;
     border-radius: 24px;
-    background-color: rgb(255, 101, 80);
+    background-color: rgb(255, 186, 0);
     color: white;
 }
 
 .btn-back-to-home:hover {
     color: white;
-    background-color: rgba(255, 101, 80, 75%);
+    background-color: rgba(255, 186, 0, 75%);
     
 }
