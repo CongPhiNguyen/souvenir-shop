@@ -188,6 +188,37 @@ class ProductController {
             });
     }
 
+    async updateLocation(req, res) {
+        Location.findOneAndUpdate(
+            {locationID: req.body.locationID,},
+            {
+                $set: {
+                    locationID: req.body.locationID, 
+                    name: req.body.name, 
+                    imgUrl: req.body.imgUrl,
+                },
+            },
+            {
+                returnOriginal: false,
+            },
+            function (err, doc) {
+                if (err) {
+                    res.status(404).send(err);
+                } else {
+                    res.status(200).send(
+                        JSON.stringify({
+                            product : {
+                                locationID: req.body.locationID, 
+                                name: req.body.name, 
+                                imgUrl: req.body.imgUrl, 
+                            },
+                        })
+                    );
+                }
+            }
+        );
+    }
+
     async searchProduct(req, res) {
         const active = {
             type: 'home',

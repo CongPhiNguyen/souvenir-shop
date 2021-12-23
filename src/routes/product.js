@@ -15,6 +15,7 @@ router.use('/manager-view', productController.viewProductView)
 router.use('/view-product/', productController.viewProductCustomer)
 router.post('/location', productController.addLocation);
 router.get('/location', productController.getLocation);
+router.put('/location', productController.updateLocation);
 router.use('/', productController.index);
 
 module.exports = router;
