@@ -78,6 +78,18 @@ class ProductController {
         var newI = await Product.findOne({'_id': id});
         console.log("newI", newI);
         const reviews = await Review.find({ productId: (req.originalUrl.replace(req.baseUrl + '/', '')) }).lean();
+
+        // Tính toán rating của sản phẩm
+        // console.log("reviews",reviews)
+        var star = 0;
+        for(var i = 0 ; i < reviews.length ;i++)
+        {
+            star += reviews[i].star;
+        }
+        if(reviews.length > 0)
+            star /= reviews.length;
+        // console.log("star", star)
+
         if(newI != null)
         {
             res.render('product/viewProductView', { title: "Product" , active: {Product: true }, 
@@ -95,6 +107,8 @@ class ProductController {
                     description: newI.description,
                     productID: newI.productID,
                     soldProduct: newI.quantity - newI.remain,
+                    star: star,
+                    reviewNum: reviews.length,
                 },
                 reviews, 
             });
