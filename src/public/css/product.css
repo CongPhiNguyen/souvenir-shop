@@ -582,14 +582,10 @@ input[name="quantity"] {
 }
 
 .product-activity {
-    margin-top: 4px;
+    margin-top: 13px;
     font-size: 20px;
 }
 
-.product-activity {
-    margin-top: 4px;
-    font-size: 20px;
-}
 
 .product-icon {
     color: var(--primary-color);

@@ -19,10 +19,60 @@ class ProductController {
     }
 
     async editProductView(req, res){
-        var object = new ObjectId(req.originalUrl.replace(req.baseUrl + '/', ''));
-        var newI = await Product.findOne({'_id': object});
+        if(req.originalUrl.replace(req.baseUrl + '/', '').length !=24)
+        {
+            res.render('404NotFound');
+        }
+        else 
+        {
+            var object = new ObjectId(req.originalUrl.replace(req.baseUrl + '/', ''));
+            var newI = await Product.findOne({'_id': object});
+            console.log("newI", newI);
+            if(newI !=  null) {
+                    res.render('product/editProductView', { title: "Product" , active: {Product: true }, 
+                        dataProduct: {
+                            _id: newI._id,
+                            name: newI.name,
+                            location: newI.location, 
+                            province: newI.province, 
+                            quantity: newI.quantity, 
+                            remain: newI.remain,
+                            originalPrice: newI.originalPrice,
+                            sellPrice: newI.sellPrice,
+                            currentPrice: newI.currentPrice,
+                            imgUrl: newI.imgUrl,
+                            description: newI.description,
+                            productID: newI.productID,  
+                        }
+                    }
+                );
+            }
+            else {
+                res.render('404NotFound');
+            }
+        }
+        
+        
+        
+    }
+
+    viewProductView(req, res){
+        // console.log('Đang chạy ở trên Index', 'req.body', req.body)
+        res.render('product/productManager', { title: "Product" , active: {Product: true }});
+    }
+
+    async viewProductCustomer(req, res) {
+        console.log(req.originalUrl, req.baseUrl);
+        if(req.originalUrl.replace(req.baseUrl + '/', '').length!=24){
+            res.render('404NotFound');
+        }
+        var id = new ObjectId(req.originalUrl.replace(req.baseUrl + '/', ''));
+        
+        var newI = await Product.findOne({'_id': id});
         console.log("newI", newI);
-        res.render('product/editProductView', { title: "Product" , active: {Product: true }, 
+        if(newI != null)
+        {
+            res.render('product/viewProductView', { title: "Product" , active: {Product: true }, 
                 dataProduct: {
                     _id: newI._id,
                     name: newI.name,
@@ -35,37 +85,13 @@ class ProductController {
                     currentPrice: newI.currentPrice,
                     imgUrl: newI.imgUrl,
                     description: newI.description,
-                    productID: newI.productID,  
-                }
-            }
-        );
-        
-    }
-
-    viewProductView(req, res){
-        // console.log('Đang chạy ở trên Index', 'req.body', req.body)
-        res.render('product/productManager', { title: "Product" , active: {Product: true }});
-    }
-
-    async viewProductCustomer(req, res) {
-        var newI = await Product.findOne({'_id': new ObjectId(req.originalUrl.replace(req.baseUrl + '/', ''))});
-        // console.log(newI);
-        res.render('product/viewProductView', { title: "Product" , active: {Product: true }, 
-            dataProduct: {
-                _id: newI._id,
-                name: newI.name,
-                location: newI.location, 
-                province: newI.province, 
-                quantity: newI.quantity, 
-                remain: newI.remain,
-                originalPrice: newI.originalPrice,
-                sellPrice: newI.sellPrice,
-                currentPrice: newI.currentPrice,
-                imgUrl: newI.imgUrl,
-                description: newI.description,
-                productID: newI.productID
-            } 
-        });
+                    productID: newI.productID
+                } 
+            });
+        }
+        else {
+            res.render('404NotFound');
+        }
     }
 
     async addProduct(req, res) {

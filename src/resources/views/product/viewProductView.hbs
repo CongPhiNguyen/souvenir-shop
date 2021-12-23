@@ -23,7 +23,7 @@
         </div>
         {{!-- <a class="add-product-button" href="#">Add product</a> --}}
         {{!-- Phần breadscrum --}}
-        <div class="breadscrum">
+        <div class="breadscrum d-none">
             <ol class='breadscrum-list'>    
                 <li class='breadscrum-item'>
                     <a href="/home">
@@ -52,7 +52,7 @@
         <div id="product-id" class='d-none' data-value="{{dataProduct.productID}}">{{dataProduct.productID}}</div>
         
         {{!-- Phần của product ở đây mình kiểu chi 4 8 ra rồi tính tiếp các kiểu--}}
-        <div class="product-container row">
+        <div class="product-container row" style='margin-top: 110px'>
             <div class="product-image col-md-5">
                 <image class="product-image-1" src="{{dataProduct.imgUrl}}" alt=""></image>    
             </div>
@@ -111,7 +111,7 @@
                         Add to cart 
                     </button> --}}
                     <button class="add-to-cart bt-add-to-cart" onclick="addToCart()">
-                        Add to cart 
+                        Thêm vào giỏ hàng
                     </button>
                     {{!-- <button class="buy-now">
                         Buy now
