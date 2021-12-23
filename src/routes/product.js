@@ -20,6 +20,7 @@ router.get('/location', productController.getLocation);
 router.put('/location', productController.updateLocation);
 router.delete('/location', productController.deleteLocation);
 router.post('/add-review', requireAuth, productController.addReview_post);
+router.delete('/delete-review', productController.deleteReview);
 router.use('/', productController.index);
 
 module.exports = router;

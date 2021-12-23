@@ -263,6 +263,7 @@
 
                         {{#each reviews}}
                             <li class="review-item">
+                                <div class='d-none' data-value="{{this.userCode}}">{{this.userCode}}</div>
                                 <div class="review-item-container row">
                                     <div class="user-information col-4">
                                         <img class="avatar" src="https://thumbs.dreamstime.com/b/default-avatar-profile-icon-vector-social-media-user-image-182145777.jpg"></img>
@@ -300,9 +301,13 @@
                                         <div class="review-content my-2">
                                             {{this.comment}}
                                         </div>
-                                        <div class="review-time">
+                                        <span class="review-time">
                                             {{toDateTimeString2 this.createdAt}}
-                                        </div>
+                                        </span>
+                                        <span class='delete-review' onclick='deleteReview("{{this.reviewCode}}", "{{this.createdAt}}")'>
+                                            Xoá
+                                        </span>
+                                        
                                     </div>
                                 </div>
                             </li>
@@ -312,55 +317,6 @@
 
 
                     </div>
-                    
-                    {{!-- <div class="divider"></div>
-                    <li class="review-item d-none">
-                        <div class="review-item-container row">
-                            <div class="user-information col-4">
-                                <img class="avatar" src="https://thumbs.dreamstime.com/b/default-avatar-profile-icon-vector-social-media-user-image-182145777.jpg"></img>
-                                <div class="name">Nguyễn Công Phi</div>
-                            </div>
-                            <div class="review-container col-8">
-                                <div class="rated-star">
-                                    <i class="product-rating-icon fas fa-star"></i>
-                                    <i class="product-rating-icon fas fa-star"></i>
-                                    <i class="product-rating-icon fas fa-star"></i>
-                                    <i class="product-rating-icon fas fa-star"></i>
-                                    <i class="product-rating-icon fas fa-star"></i>
-                                </div>
-                                <div class="review-content my-2">
-                                    This is the best firgue I have had.. Kurisu is incredible beautiful.
-                                </div>
-                                <div class="review-time">
-                                    Đánh giá vào 4 tháng trước
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <div class="divider d-none"></div>
-                    <li class="review-item d-none">
-                        <div class="review-item-container row">
-                            <div class="user-information col-4">
-                                <img class="avatar" src="https://thumbs.dreamstime.com/b/default-avatar-profile-icon-vector-social-media-user-image-182145777.jpg"></img>
-                                <div class="name">Nguyễn Công Phi</div>
-                            </div>
-                            <div class="review-container col-8">
-                                <div class="rated-star">
-                                    <i class="product-rating-icon fas fa-star"></i>
-                                    <i class="product-rating-icon fas fa-star"></i>
-                                    <i class="product-rating-icon fas fa-star"></i>
-                                    <i class="product-rating-icon fas fa-star"></i>
-                                    <i class="product-rating-icon fas fa-star"></i>
-                                </div>
-                                <div class="review-content my-2">
-                                    This is the best firgue I have had.. Kurisu is incredible beautiful.
-                                </div>
-                                <div class="review-time">
-                                    Đánh giá vào 4 tháng trước
-                                </div>
-                            </div>
-                        </div>
-                    </li> --}}
                     {{#if user}}
                     <li class="review-item">
                         <div class="review-item-container row">
@@ -403,6 +359,53 @@
 </div>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script> 
+    
+
+    function deleteReview(a, time)
+    {
+        console.log("reviewCode", a);
+        console.log('userCode', userCode);
+        var data = {
+            userCode : userCode,
+            reviewCode : a,
+            createAt: time,
+        }
+        axios.delete(`http://localhost:3000/product/delete-review`,{data: data})
+            .then(res => {
+                showAlertMorriStore('alert-success', "Xoá review thành công")  
+                location.reload();  
+            })
+            .catch(err => {
+            
+            })
+    }
+
+    async function hideDeleteIfNotUser() {
+        var listComments = document.querySelectorAll('.item-list .review-item');
+        //getUserCode
+        var newUserCode;
+        await axios.get('http://localhost:3000/cart/get-data-user')
+            .then(res => {
+                
+                newUserCode = res.data.dataUser.userCode
+            })
+            .catch(err => {
+                console.log(err)
+            })
+
+        console.log(listComments);
+        for(var i = 0; i < listComments.length ; i++)
+        {
+            var userCodecmt = listComments[i].children[0].getAttribute('data-value');
+            console.log(userCodecmt, newUserCode)
+            if(userCodecmt != newUserCode)
+            {
+                listComments[i].children[1].children[1].children[3].hidden = true;
+            }
+            {{!-- console.log("listComment", i, listComments[i].children[1].children[1].children[3]); --}}
+        }
+    }
+    hideDeleteIfNotUser();
 
     var editButton = document.querySelector('.edit-js');
     var linkToEdit = document.querySelector('.edit-product-link');
@@ -513,10 +516,10 @@
 
     function renderStar()
     {
-        var stars = parseInt(document.querySelector('.starNum').getAttribute('dataValue'));
+        var stars = parseFloat(document.querySelector('.starNum').getAttribute('dataValue')).toFixed(1);
         // Lấy innerHTML cho cái này
         var container = document.querySelector('.product-rating-average');
-        var htmlForContainer = ``;
+        var htmlForContainer = `${stars}`;
         for(var i = 0; i < 5; i++)
         {
             if(i <= (stars-1)) 
