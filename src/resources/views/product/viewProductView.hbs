@@ -68,14 +68,9 @@
                     </div>
                     
                 </div>
-                
+                <div class="starNum" dataValue="{{dataProduct.star}}"></div>
                 <div class="product-rating d-flex">
                     <div class="product-rating-average">
-                        <i class="product-rating-icon fas fa-star"></i>
-                        <i class="product-rating-icon fas fa-star"></i>
-                        <i class="product-rating-icon fas fa-star"></i>
-                        <i class="product-rating-icon fas fa-star"></i>
-                        <i class="product-rating-icon fas fa-star"></i>
                     </div>
                     <div class="product-rating-number">
                         {{dataProduct.reviewNum}} Đã đánh giá
@@ -516,6 +511,23 @@
         }
     };
 
+    function renderStar()
+    {
+        var stars = parseInt(document.querySelector('.starNum').getAttribute('dataValue'));
+        // Lấy innerHTML cho cái này
+        var container = document.querySelector('.product-rating-average');
+        var htmlForContainer = ``;
+        for(var i = 0; i < 5; i++)
+        {
+            if(i <= (stars-1)) 
+            {
+                htmlForContainer += `<i class="product-rating-icon fas fa-star"></i>`;
+            }
+            else htmlForContainer += `<i class="product-rating-icon far fa-star"></i>`;
+        }
+        container.innerHTML = htmlForContainer;
+    }
+    renderStar();
 
     const reviewItemList = document.querySelector('.item-list');
     const reviewStarInputError = document.querySelector('.reviewStarInputError');
@@ -559,7 +571,9 @@
     };
 
     const btnAddReview = document.querySelector('.btn-add-review');
-    btnAddReview.addEventListener('click', async () => {
+    if(btnAddReview!=null)
+    {
+        btnAddReview.addEventListener('click', async () => {
         try {
             reviewStarInputError.textContent = '';
             if (reviewStarInputValue < 1 || reviewStarInputValue > 5) {
@@ -638,26 +652,12 @@
                     console.log('btn post review error');
                     showAlertMorriStore('alert-danger', 'Gửi đánh giá thất bại, vui lòng thử lại');
                 }
-
-
-            
-
-
-
             }
         }
         catch(err) {
             console.log(err);
-        }
-
-
-        
-
-
-
-
-    });
-
+        }});
+    }
 
 
 
