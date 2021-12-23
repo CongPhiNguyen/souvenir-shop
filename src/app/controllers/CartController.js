@@ -178,15 +178,15 @@ class CartController {
         newReceipt.save()
             .then(result => {
                 if (result) {
-                    // Cart.findOneAndUpdate({
-                    //     'userCode': userCode
-                    // },
-                    //     {
-                    //         $set: {
-                    //             listProduct: []
-                    //         }
-                    //     },
-                    //     { returnOriginal: false }).exec()
+                    Cart.findOneAndUpdate({
+                        'userCode': userCode
+                    },
+                        {
+                            $set: {
+                                listProduct: []
+                            }
+                        },
+                        { returnOriginal: false }).exec()
                     if (coupon) {
                         let codeList = voucherList.codeList
                         codeList.map(value => {
