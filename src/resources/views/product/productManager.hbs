@@ -236,7 +236,7 @@
             </div>
         </div>
 
-        {{!-- Modal change location --}}
+        {{!-- thêm các địa danh --}}
         <div class="add-location-modal d-none" id="addLocationModal" style='z-index: 10000'>
             <div class="add-location-modal-dialog">
                 <div class="modal-content add-location-modal-container">
@@ -280,15 +280,18 @@
                         <button type="button" class="btn-close" aria-label="Close"></button>
                     </div>
                     <div class="add-location-modal-body" style='display: flex'>
-                        <img class="location-img" 
-                            src="http://res.cloudinary.com/phiroud321/image/upload/v1639138454/add-2935429_960_720_xc31ip.png" 
-                            alt=""
-                        > 
+                        <label for="edit-location-avatar" >
+                            <img class="edit-location-img location-img" 
+                                src="http://res.cloudinary.com/phiroud321/image/upload/v1639138454/add-2935429_960_720_xc31ip.png" 
+                                alt=""
+                            > 
+                            <input type="file" id="edit-location-avatar" name="edit-location-avatar" accept="image/png, image/jpeg" style='display: none'>
+                        </label>
                         <div class='input-location-container'>
                             <label for="" class="location-name-label">
                                 Tên địa danh
                             </label>
-                            <input type="text" style='width: 80%'>
+                            <input type="text" style='width: 80%' name='editLocationInput'>
                         </div>
                         
                     </div>
@@ -296,7 +299,7 @@
                         <button class='bt-add-location bt-add-location-js'>
                             Chỉnh sửa địa danh
                         </button>
-                        <button type="button" class="btn btn-secondary btn-close-modal">Close</button>
+                        <button type="button" class="btn btn-secondary btn-close-modal">Đóng</button>
                         {{!-- <button type="button" class="btn btn-primary">Save changes</button> --}}
                     </div>
                 </div>
@@ -463,7 +466,7 @@
 
 
 
-
+    var allLocations= [];
     var imgEditLocationUrl = '';
     // Mở modal chính sửa location
     function changeEditLocationModal() {
@@ -475,13 +478,72 @@
     }
     // Thêm các nút tắt
     document.querySelector('.edit-location-modal-dialog').onclick = (e) => {
-        e.preventDefault();
         console.log(e.target);
         if(e.target.classList.contains('btn-close-modal') || e.target.classList.contains('btn-close'))
         {
             changeEditLocationModal();
         }
     }
+    // loac hình ảnh và tên vào cái chỉnh sửa blog
+    // Các phần xử lý hình ảnh ở chỉnh sửa blog
+    var currentLocation;
+    function loadImageAndNameLocation(locationIndex)
+    {
+        currentLocation = allLocations[locationIndex];
+        document.querySelector('input[name="editLocationInput"').value = currentLocation.name;
+        document.querySelector('.edit-location-img.location-img').src = currentLocation.imgUrl;
+    }
+
+    function editLocationOpen(indexLocation) {
+        loadImageAndNameLocation(indexLocation);
+        changeEditLocationModal()
+    }
+
+    function checkContraintEditLocation() {
+        if(imgEditLocationUrl == ''){
+            showAlertMorriStore('alert-danger', 'Ảnh chưa được tải lên');
+            return false;
+        }
+        var locationName = document.querySelector('input[name="editLocationInput"').value;
+        console.log("locationName", locationName);
+        if(locationName == '') {
+            showAlertMorriStore('alert-danger', 'Không thể để trống tên địa danh');
+            return false;
+        }
+        // THÊM: tên địa danh không được trùng
+        return true;
+    }
+    // Up ảnh lên cái chỉnh sửa địa danh
+    async function uploadEditLocationImage() {
+        var fileName = document.getElementById('edit-location-avatar').files[0];
+        console.log(fileName);
+        isUploaded = false;
+        const formData = new FormData();
+        formData.append("file", fileName)
+        formData.append("upload_preset", "phiroud");
+        axios.post(`https://api.cloudinary.com/v1_1/phiroud321/image/upload`, formData)
+            .then(res => {
+                console.log("link", res.data.url);
+                imgEditLocationUrl = res.data.url;
+            })
+            .catch(err => {
+                console.log("Thất bại");
+            })
+    }
+    document.querySelector('#edit-location-avatar').onchange = function(evt) {
+        var tgt = evt.target || window.event.srcElement,
+        files = tgt.files;
+        // FileReader support
+        if (FileReader && files && files.length) {
+            var fr = new FileReader();
+            fr.onload = function () {
+                document.querySelector('.edit-location-img').src = fr.result;
+            }
+            fr.readAsDataURL(files[0]);
+            uploadEditLocationImage();
+        }
+    }
+
 
     // Get các địa danh
     async function getLocation(){
@@ -491,6 +553,7 @@
         })
         .then(res => {
             resultLocation = res.data.data;
+            allLocations = resultLocation;
             console.log("resultLocation", resultLocation)
         })
         .catch(err => {
@@ -528,7 +591,7 @@
                 <td scope="col" style='text-align: center'>${resultLocation[i].name}</td>
                 <td scope="col" style='text-align: center'>
                     <div class="location-item-action col-3">
-                        <i class="fas fa-edit location-item-icon" onclick="changeEditLocationModal()"></i>
+                        <i class="fas fa-edit location-item-icon" onclick="editLocationOpen(${i})"></i>
                         <i class="fas fa-trash-alt location-item-icon"></i>
                     </div>
                 </td>
@@ -599,6 +662,7 @@
             showAlertMorriStore('alert-danger', 'Không thể để trống tên địa danh');
             return false;
         }
+        // THÊM: tên địa danh không được trùng
         return true;
     }
     // thêm sự kiện thêm địa danh ở đây
