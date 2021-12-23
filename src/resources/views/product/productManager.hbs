@@ -361,13 +361,6 @@
             .then(res => {
                 result = res.data.data;
                 console.log("result", result)
-                var deleteOutOfNumber = [];
-                for(var i = 0; i < result.length ;i++)
-                {
-                    if(result[i].remain > 0)
-                    deleteOutOfNumber.push(result[i]);
-                }
-                result = deleteOutOfNumber;
                 // Thêm các sản phẩm vào innerHTMl
                 var htmlForProduct = '';
                 for(var i = 0 ; i < result.length;i++)
@@ -384,7 +377,6 @@
                     </tr>
                     `
                 }
-                {{!-- console.log("htmlProduct", htmlForProduct) --}}
                 productContainer.innerHTML = htmlForProduct;    
             })
             .catch(err => {
