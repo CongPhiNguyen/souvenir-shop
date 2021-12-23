@@ -340,6 +340,7 @@
             params: {filter:{}}
         })
         .then(res => {
+            resultProduct = res.data.data;
             var deleteOutOfNumber = [];
             for(var i = 0; i < resultProduct.length ;i++)
             {

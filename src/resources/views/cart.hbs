@@ -427,7 +427,6 @@
         } else {
             elementRenderListProduct.innerHTML = html123.join('');
         }
-        console.log("html123", html123)
     }
 
     renderListCart();
@@ -642,6 +641,25 @@
                     coupon: discountUser ? discountUser : null,
                     deliveryStatus: 'Chờ xác nhận',
                 }
+                // Trừ đi số lượng sản phẩm đã mua
+                console.log("cartUser", cartUser);
+                for(var i = 0; i < cartUser.length ;i++ )
+                {
+                    // Chạy qua list các sản phẩm
+                    for(var j =0 ; j < listAllProduct.length ; j++)
+                    {
+                        if(listAllProduct[j].productID == cartUser[i].product.productID) {
+                            //console.log('name', listAllProduct[j].name);
+                            const data = {  
+                                productID: listAllProduct[j].productID,
+                                remain: listAllProduct[j].remain - cartUser[i].quantity,
+                            };
+                            console.log('data', data)
+                        }
+                    }
+                }
+
+                return;
                 await axios.post(`http://localhost:3000/cart/create-receipt`, { ...data })
                     .then(res => {
                         cartUser = []
@@ -651,8 +669,8 @@
                         renderQuantityTotal()
                         renderListCart()
                         renderTotalMoney()
-                        // Trừ đi số lượng sản phẩm đã mua
-
+                        
+                        
                         showAlertMorriStore('alert-success', 'Mua hàng thành công !')
                     })
                     .catch(err => {
