@@ -173,6 +173,21 @@ class ProductController {
         }
     }
 
+    async getLocation(req, res) {
+        Location.find({})
+            .exec()
+            .then((data) => {
+                res.status(200).send(
+                    JSON.stringify({
+                        data,
+                    })
+                );
+            })
+            .catch((err) => {
+                res.status(404).send(err);
+            });
+    }
+
     async searchProduct(req, res) {
         const active = {
             type: 'home',

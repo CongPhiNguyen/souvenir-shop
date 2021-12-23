@@ -171,6 +171,10 @@
 }
 
 
+.location-item-icon:hover {
+    opacity: 0.7;
+    cursor: pointer;
+}
 /* Đây là phần modal của cái edit location */
 
 .edit-location-modal {

@@ -79,78 +79,6 @@
                         </tr>
                     </thead>
                     <tbody id='location-manager-container'>
-                        <tr>
-                            <td scope="col" class='location-info-cell' style='text-align: center'>1</td>
-                            <td scope="col"style='text-align: center'>
-                                <image class="img-location" src="/img/dia-diem/hanoi.jpg">
-                                </image>
-                            </td>
-                            <td scope="col" class='location-info-cell' style='text-align: center'>1</td>
-                            <td scope="col" class='location-info-cell' style='text-align: center'>Hà Nội</td>
-                        </tr>
-                        <tr>
-                            <td scope="col" class='location-info-cell' style='text-align: center'>2</td>
-                            <td scope="col"style='text-align: center'>
-                                <image class="img-location" src="/img/dia-diem/hcm.jpg">
-                                </image>
-                            </td>
-                            <td scope="col" class='location-info-cell' style='text-align: center'>2</td>
-                            <td scope="col" class='location-info-cell' style='text-align: center'>TP HCM</td>
-                        </tr>
-                        <tr>
-                            <td scope="col" class='location-info-cell' style='text-align: center'>3</td>
-                            <td scope="col"style='text-align: center'>
-                                <image class="img-location" src="/img/dia-diem/danang.jpg">
-                                </image>
-                            </td>
-                            <td scope="col" class='location-info-cell' style='text-align: center'>3</td>
-                            <td scope="col" class='location-info-cell' style='text-align: center'>Đà Nẵng</td>
-                        </tr>
-                        <tr>
-                            <td scope="col" class='location-info-cell' style='text-align: center'>4</td>
-                            <td scope="col"style='text-align: center'>
-                                <image class="img-location" src="/img/dia-diem/cantho.jpg">
-                                </image>
-                            </td>
-                            <td scope="col" class='location-info-cell' style='text-align: center'>4</td>
-                            <td scope="col" class='location-info-cell' style='text-align: center'>Cần Thơ</td>
-                        </tr>
-                        <tr>
-                            <td scope="col" class='location-info-cell' style='text-align: center'>5</td>
-                            <td scope="col"style='text-align: center'>
-                                <image class="img-location" src="/img/dia-diem/thonhiky.jpg">
-                                </image>
-                            </td>
-                            <td scope="col" class='location-info-cell' style='text-align: center'>5</td>
-                            <td scope="col" class='location-info-cell' style='text-align: center'>Huế</td>
-                        </tr>
-                        <tr>
-                            <td scope="col" class='location-info-cell' style='text-align: center'>6</td>
-                            <td scope="col"style='text-align: center'>
-                                <image class="img-location" src="/img/dia-diem/phap.jpg">
-                                </image>
-                            </td>
-                            <td scope="col" class='location-info-cell' style='text-align: center'>6</td>
-                            <td scope="col" class='location-info-cell' style='text-align: center'>An Giang</th>
-                        </tr>
-                        <tr>
-                            <td scope="col" class='location-info-cell' style='text-align: center'>7</td>
-                            <td scope="col"style='text-align: center'>
-                                <image class="img-location" src="/img/dia-diem/anh.jpg">
-                                </image>
-                            </td>
-                            <td scope="col" class='location-info-cell'  style='text-align: center'>7</td>
-                            <td scope="col" class='location-info-cell'  style='text-align: center'>Lâm Đồng</td>
-                        </tr>
-                        <tr>
-                            <td scope="col" class='location-info-cell'  style='text-align: center'>8</td>
-                            <td scope="col"style='text-align: center'>
-                                <image class="img-location" src="/img/dia-diem/y.jpg">
-                                </image>
-                            </td>
-                            <td scope="col" class='location-info-cell'  style='text-align: center'>8</td>
-                            <td scope="col" class='location-info-cell'  style='text-align: center'>Bình Định</td>
-                        </tr>
                     </tbody>
                 </table>
             </div>    
@@ -289,19 +217,8 @@
                                     </th>
                                 </tr>
                             </thead>
-                            <tbody id='location-manager-container'>
-                                <tr>
-                                    <td scope="col" style='text-align: center'>1</td>
-                                    
-                                    <td scope="col" style='text-align: center'>1</td>
-                                    <td scope="col" style='text-align: center'>Hà Nội</td>
-                                    <td scope="col" style='text-align: center'>
-                                        <div class="location-item-action col-3">
-                                            <i class="fas fa-edit location-item-icon" onclick="changeEditLocationModal()"></i>
-                                            <i class="fas fa-trash-alt location-item-icon"></i>
-                                        </div>
-                                    </td>
-                                </tr>
+                            <tbody id='location-manager-container-in-modal'>
+                                
                                 
                             </tbody>
                         </table>
@@ -547,30 +464,81 @@
 
 
 
-
+    var imgEditLocationUrl = '';
     // Mở modal chính sửa location
     function changeEditLocationModal() {
         var addLocationModal = document.querySelector('#editLocationModal');
-        {{!-- console.log("locationModal", locationModal) --}}
         if(addLocationModal.classList.contains('d-none')){
             addLocationModal.classList.remove('d-none');
         }
-        else addlocationModal.classList.add('d-none');
+        else addLocationModal.classList.add('d-none');
     }
-
     // Thêm các nút tắt
     document.querySelector('.edit-location-modal-dialog').onclick = (e) => {
         e.preventDefault();
         console.log(e.target);
         if(e.target.classList.contains('btn-close-modal') || e.target.classList.contains('btn-close'))
         {
-            changeLocationModal();
+            changeEditLocationModal();
         }
-        console.log('ABC')
     }
 
     // Get các địa danh
-
+    async function getLocation(){
+        var resultLocation = [];
+        await axios.get(`http://localhost:3000/product/location`, {
+            params: {filter:{}}
+        })
+        .then(res => {
+            resultLocation = res.data.data;
+            console.log("resultLocation", resultLocation)
+        })
+        .catch(err => {
+            console.log(err)
+            return;
+        })
+        {{!-- showAlertMorriStore("","Get hết các địa danh rồi") --}}
+        // Set vào cái modal và vào cái show ban đầu
+        var locationInMain = document.querySelector('#location-manager-container');
+        var htmlForLocationMain = '';
+        for(var i = 0 ; i < resultLocation.length ; i++)
+        {
+            htmlForLocationMain += 
+                `<tr>
+                    <td scope="col" class='location-info-cell' style='text-align: center'>${i+1}</td>
+                    <td scope="col"style='text-align: center'>
+                        <image class="img-location" src="${resultLocation[i].imgUrl}">
+                        </image>
+                    </td>
+                    <td scope="col" class='location-info-cell' style='text-align: center'>${resultLocation[i].locationID}</td>
+                    <td scope="col" class='location-info-cell' style='text-align: center'>${resultLocation[i].name}</td>
+                </tr>`
+        }
+        locationInMain.innerHTML = htmlForLocationMain;
+        // Load vô trong cái modal chỉnh sửa
+        var locationInModal = document.querySelector('#location-manager-container-in-modal');
+        var htmlForLocationModal = '';
+        for(var i = 0 ; i < resultLocation.length ; i++)
+        {
+            htmlForLocationModal += 
+            `<tr>
+                <td scope="col" style='text-align: center'>${i+1}</td>
+                
+                <td scope="col" style='text-align: center'>${resultLocation[i].locationID}</td>
+                <td scope="col" style='text-align: center'>${resultLocation[i].name}</td>
+                <td scope="col" style='text-align: center'>
+                    <div class="location-item-action col-3">
+                        <i class="fas fa-edit location-item-icon" onclick="changeEditLocationModal()"></i>
+                        <i class="fas fa-trash-alt location-item-icon"></i>
+                    </div>
+                </td>
+            </tr>
+            `
+        }
+        locationInModal.innerHTML = htmlForLocationModal;
+    }
+    getLocation();
+        
 
 
     // Biến để load hình ảnh lên
@@ -599,12 +567,10 @@
                 console.log("Thất bại");
             })
     }
-
     document.querySelector('#location-avatar').onchange = function(evt) {
         console.log('Nhận sự kiện click add hình rồi')
         var tgt = evt.target || window.event.srcElement,
         files = tgt.files;
-
         // FileReader support
         if (FileReader && files && files.length) {
             var fr = new FileReader();
@@ -615,7 +581,6 @@
             uploadLocationImage();
         }
     }
-
     // Thêm các nút tắt để đóng mở việc thêm địa danh
     document.querySelector('.add-location-modal-dialog').onclick = (e) => {
         if(e.target.classList.contains('btn-close-modal') || e.target.classList.contains('btn-close'))
@@ -623,7 +588,6 @@
             changeAddLocationModal();
         }
     }
-
     function checkContraintAddLocation() {
         if(imgLocationUrl == ''){
             showAlertMorriStore('alert-danger', 'Ảnh chưa được tải lên');
