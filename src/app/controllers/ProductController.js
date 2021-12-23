@@ -93,7 +93,8 @@ class ProductController {
                     currentPrice: newI.currentPrice,
                     imgUrl: newI.imgUrl,
                     description: newI.description,
-                    productID: newI.productID
+                    productID: newI.productID,
+                    soldProduct: newI.quantity - newI.remain,
                 },
                 reviews, 
             });
