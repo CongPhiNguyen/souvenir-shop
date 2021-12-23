@@ -48,17 +48,17 @@
                 </li>
             </ol>
         </div>
-        <div id="product-code" class='d-none' data-value={{dataProduct._id}}>{{dataProduct._id}}</div>
-        <div id="product-id" data-value={{dataProduct.productID}}>{{dataProduct.productID}}</div>
+        <div id="product-code" class='d-none' data-value="{{dataProduct._id}}">{{dataProduct._id}}</div>
+        <div id="product-id" data-value="{{dataProduct.productID}}">{{dataProduct.productID}}</div>
         
         {{!-- Phần của product ở đây mình kiểu chi 4 8 ra rồi tính tiếp các kiểu--}}
         <div class="product-container row">
             <div class="product-image col-md-5">
-                <image class="product-image-1" src={{dataProduct.imgUrl}} alt=""></image>    
+                <image class="product-image-1" src="{{dataProduct.imgUrl}}" alt=""></image>    
             </div>
             <div class="product-info col-md-6">
                 <div class="d-flex">
-                    <div class="product-name" data-value={{dataProduct.name}}>
+                    <div class="product-name" data-value="{{dataProduct.name}}">
                         {{dataProduct.name}}     
                     </div>
                     <div class='d-flex product-activity' style='text-align: center'>
@@ -87,16 +87,16 @@
 
                 <div class="product-place mt-1">
                     <i class="fas fa-map-marker-alt product-place-icon"></i>
-                    <span class="product-location" data-value={{dataProduct.location}}>{{dataProduct.location}}</span>
+                    <span class="product-location" data-value="{{dataProduct.location}}">{{dataProduct.location}}</span>
                 </div>
                 
-                <div class="product-description mt-2" data-value={{dataProduct.description}}>
+                <div class="product-description mt-2" data-value="{{dataProduct.description}}">
                     {{dataProduct.description}}
                 </div>
 
                 <div class="product-price-sale d-flex mt-4">
-                    <div class="product-old-price" data-value={{dataProduct.sellPrice}}>{{dataProduct.sellPrice}}VNĐ</div>
-                    <div class="product-price" data-value={{dataProduct.currentPrice}}>{{dataProduct.currentPrice}}VNĐ</div>
+                    <div class="product-old-price" data-value="{{dataProduct.sellPrice}}">{{dataProduct.sellPrice}}VNĐ</div>
+                    <div class="product-price" data-value="{{dataProduct.currentPrice}}">{{dataProduct.currentPrice}}VNĐ</div>
                     <div class="sale-percent">
                         {{!-- {{((parseInt(dataProduct.sellPrice) - parseInt(data.currentPrice))/(dataProduct.sellPrice))}} --}}
                     </div>
@@ -380,6 +380,7 @@
 
     async function addToCart() {
         try {
+            console.log('product-id', document.querySelector('#product-id'));
             const data = {
                 email: localStorage.getItem('username'),
                 userCode: userCode,

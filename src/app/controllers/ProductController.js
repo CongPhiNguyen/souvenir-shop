@@ -19,21 +19,25 @@ class ProductController {
     }
 
     async editProductView(req, res){
-        // console.log('Vào đc link rồi')
-        // console.log(req.originalUrl,req.baseUrl);
-        // if(req.originalUrl == req.baseUrl) {
-        //     res.render('product/editProductView', { title: "Product" , active: {Product: true }});
-        // }
-        // else 
-        // {
-        //     // var object = new ObjectId(req.originalUrl.replace(req.baseUrl + '/', ''));
-        //     // console.log('object', object)
-        //     //  var newI = await Product.findOne({'_id': });
-        //     // console.log("newI", newI);
-        // }
-        console.log('Trả về đúng phần sửa sản phẩm', req.originalUrl)
-        // console.log('Đang chạy ở trên Index', 'req.body', req.body)
-        res.render('product/editProductView', { title: "Product" , active: {Product: true }});
+        var object = new ObjectId(req.originalUrl.replace(req.baseUrl + '/', ''));
+        var newI = await Product.findOne({'_id': object});
+        console.log("newI", newI);
+        res.render('product/editProductView', { title: "Product" , active: {Product: true }, 
+                dataProduct: {
+                    _id: newI._id,
+                    name: newI.name,
+                    location: newI.location, 
+                    province: newI.province, 
+                    quantity: newI.quantity, 
+                    remain: newI.remain,
+                    originalPrice: newI.originalPrice,
+                    sellPrice: newI.sellPrice,
+                    currentPrice: newI.currentPrice,
+                    imgUrl: newI.imgUrl,
+                    description: newI.description,
+                }
+            }
+        );
         
     }
 
@@ -58,6 +62,7 @@ class ProductController {
                 currentPrice: newI.currentPrice,
                 imgUrl: newI.imgUrl,
                 description: newI.description,
+                productID: newI.productID
             } 
         });
     }
