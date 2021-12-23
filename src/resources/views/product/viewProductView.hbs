@@ -61,12 +61,12 @@
                     <div class="product-name" data-value="{{dataProduct.name}}">
                         {{dataProduct.name}}     
                     </div>
-                    {{#ifCond user.role '==' 'admin' }}
-                    <div class='d-flex product-activity' style='text-align: center'>
+                    
+                    <div class='d-none product-activity' style= '{{#ifCond user.role '==' 'admin' }}display: flex!important{{/ifCond}}' style='text-align: center'>
                         <i style='z-index: 40' class="fas fa-edit product-icon edit-js"></i>
                         <i style='z-index: 40' class="fas fa-trash-alt product-icon delete-js"></i>
                     </div>
-                    {{/ifCond}}
+                    
                 </div>
                 
                 <div class="product-rating d-flex">
@@ -432,14 +432,14 @@
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script> 
 
-    {{!-- var editButton = document.querySelector('.edit-js');
+    var editButton = document.querySelector('.edit-js');
     var linkToEdit = document.querySelector('.edit-product-link');
     editButton.onclick = () =>{
         linkToEdit.click(); 
         console.log(linkToEdit.href);
-    } --}}
+    }
 
-    {{!-- var deleteButton = document.querySelector('.delete-js');
+    var deleteButton = document.querySelector('.delete-js');
     var linkToDelete = document.querySelector('.back-to-manager');
     deleteButton.onclick = () => {
         var productID = document.querySelector('#product-id').getAttribute('data-value');
@@ -454,7 +454,7 @@
         .catch(err => {
         
         })
-    } --}}
+    }
 
 
     async function addToCart() {

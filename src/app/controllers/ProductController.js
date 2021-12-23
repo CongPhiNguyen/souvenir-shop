@@ -94,7 +94,7 @@ class ProductController {
                     imgUrl: newI.imgUrl,
                     description: newI.description,
                     productID: newI.productID
-                } ,
+                },
                 reviews, 
             });
         }

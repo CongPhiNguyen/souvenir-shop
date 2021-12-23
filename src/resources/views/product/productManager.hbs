@@ -22,7 +22,7 @@
                             <th scope="col" class="product-row">Tên</th>
                             <th scope="col" class="product-row">Số lượng nhập</th>
                             <th scope="col" class="product-row">Còn lại</th>
-                            <th scope="col" class="product-row"></th>
+                            <th scope="col" class="product-row">Giá bán</th>
                         </tr>
                     </thead>
                     <tbody id='product-manager-container'>
@@ -31,30 +31,6 @@
                 </table>
             </div>    
             <div class="divider mt-8 d-none" style='width: 100%; margin-top: 60px'>
-
-            </div>
-            {{!-- Đây là phần quản lý doanh mục --}}
-            <div class="row category-manager d-none">
-                <div class="category-manager-title col-8">
-                    Danh sách các doanh mục
-                </div>
-                <div class="category-manager-feature col-4">
-                    <button class="bt-add-category">
-                        Chỉnh sửa doanh mục
-                    </button>
-                </div>
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th scope="col" style='text-align: center; width:80px'>STT</th>
-                            <th scope="col" style='text-align: right'>ID</th>
-                            <th scope="col">Tên doanh mục</th>
-                        </tr>
-                    </thead>
-                    <tbody id='category-manager-container'>
-                        
-                    </tbody>
-                </table>    
 
             </div>
 
@@ -264,7 +240,7 @@
                             <button class='bt-add-location bt-add-location-js'>
                                 Thêm địa danh
                             </button>
-                            <button type="button" class="btn btn-secondary btn-close-modal">Close</button>
+                            <button type="button" class="btn btn-secondary btn-close-modal">Đóng</button>
                             {{!-- <button type="button" class="btn btn-primary">Save changes</button> --}}
                         </div>
                     </div>
@@ -368,12 +344,12 @@
                     htmlForProduct += 
                     `
                     <tr class="product-item" style="transform: rotate(0);"> 
-                        <th scope="row"><a href="/product/view-product/${result[i]._id}" class="stretched-link">${i+1}</a></th>
-                        <td style='text-align: center'>${result[i].name}</td>
-                        <td>${result[i].description}</td>
-                        <td style='text-align: center'>${result[i].quantity}</td>
-                        <td style='text-align: center'>${result[i].remain}</td>
-
+                        <th style='text-align: center' scope="row"><a style='text-decoration: none'href="/product/view-product/${result[i]._id}" class="stretched-link">${i+1}</a></th>
+                        <td style='text-align: center'>${result[i].productID}</td>
+                        <td>${result[i].name}</td>
+                        <td style='text-align: right'>${result[i].quantity}</td>
+                        <td style='text-align: right'>${result[i].remain}</td>
+                        <td style='text-align: right'>${result[i].currentPrice}</td>
                     </tr>
                     `
                 }
