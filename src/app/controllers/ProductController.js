@@ -156,6 +156,8 @@ class ProductController {
         );
     }
 
+    // Xoá sản phẩm
+
     async addLocation(req, res){
         console.log(req.body,'Đang chạy việc thêm địa danh');
         // res.status(200).send({});
@@ -219,6 +221,20 @@ class ProductController {
             }
         );
     }
+
+    async deleteLocation(req,res) {
+        Location.findOneAndDelete({locationID: req.body.locationID,})
+        .then((data) => {
+            res.status(200).send(
+                JSON.stringify({
+                    message: "delete OK"
+                })
+            );
+        })
+        .catch((err) => {
+            res.status(404).send(err);
+        });
+    }   
 
     async searchProduct(req, res) {
         const active = {

@@ -305,8 +305,49 @@
                     </div>
                 </div>
             </div>
+
+
+            {{!-- Phần xác nhận xoá địa danh --}}
+            <div class="confirm-delete-location-modal d-none" id="editLocationModal" style='z-index: 10000'>
+                <div class="confirm-delete-location-modal-dialog">
+                    <div class="modal-content confirm-delete-location-modal-container">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Chỉnh sửa địa danh</h5>
+                            <button type="button" class="btn-close" aria-label="Close"></button>
+                        </div>
+                        <div class="confirm-delete-location-modal-body" style='display: flex'>
+                            <label for="edit-location-avatar" >
+                                <img class="edit-location-img location-img" 
+                                    src="http://res.cloudinary.com/phiroud321/image/upload/v1639138454/add-2935429_960_720_xc31ip.png" 
+                                    alt=""
+                                > 
+                                <input type="file" id="edit-location-avatar" name="edit-location-avatar" accept="image/png, image/jpeg" style='display: none'>
+                            </label>
+                            <div class='input-location-container'>
+                                <label for="" class="location-name-label">
+                                    Tên địa danh
+                                </label>
+                                <input type="text" style='width: 80%' name='editLocationInput'>
+                            </div>
+                            
+                        </div>
+                        <div class="modal-footer image-modal-footer">
+                            <button class='bt-add-location bt-add-location-js' onclick='editLocation()'>
+                                Chỉnh sửa địa danh
+                            </button>
+                            <button type="button" class="btn btn-secondary btn-close-modal">Đóng</button>
+                            {{!-- <button type="button" class="btn btn-primary">Save changes</button> --}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
+
+
+
+
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script>
         // Get các sản phẩm từ database 
@@ -464,8 +505,9 @@
             console.log('ABC')
         }
 
+        var autoGenLocationID = 0;
 
-// Get các địa danh
+        // Get các địa danh
         async function getLocation(){
             var resultLocation = [];
             await axios.get(`http://localhost:3000/product/location`, {
@@ -480,6 +522,12 @@
                 console.log(err)
                 return;
             })
+            if(resultLocation.length != 0)
+            {
+                autoGenLocationID = parseInt(resultLocation[resultLocation.length - 1].locationID) + 1;
+            }
+             
+
             // Set vào cái modal và vào cái show ban đầu
             var locationInMain = document.querySelector('#location-manager-container');
             var htmlForLocationMain = '';
@@ -503,15 +551,14 @@
             for(var i = 0 ; i < resultLocation.length ; i++)
             {
                 htmlForLocationModal += 
-                `<tr>
-                    <td scope="col" style='text-align: center'>${i+1}</td>
-                    
-                    <td scope="col" style='text-align: center'>${resultLocation[i].locationID}</td>
-                    <td scope="col" style='text-align: center'>${resultLocation[i].name}</td>
-                    <td scope="col" style='text-align: center'>
+                `<tr  style='height: 20px'>
+                    <td style='text-align: center'>${i+1}</td>
+                    <td style='text-align: center'>${resultLocation[i].locationID}</td>
+                    <td style='text-align: center'>${resultLocation[i].name}</td>
+                    <td style='text-align: center'>
                         <div class="location-item-action col-3">
                             <i class="fas fa-edit location-item-icon" onclick="editLocationOpen(${i})"></i>
-                            <i class="fas fa-trash-alt location-item-icon"></i>
+                            <i class="fas fa-trash-alt location-item-icon" onclick="deleteLocation(${i})"></i>
                         </div>
                     </td>
                 </tr>
@@ -557,7 +604,7 @@
         }
 
         function checkContraintEditLocation() {
-            if(isChangeImg == true && imgEditLocationUrl == ''){
+            if(isChangeImage == true && imgEditLocationUrl == ''){
                 showAlertMorriStore('alert-danger', 'Ảnh chưa được tải lên');
                 return false;
             }
@@ -579,7 +626,6 @@
             formData.append("upload_preset", "phiroud");
             axios.post(`https://api.cloudinary.com/v1_1/phiroud321/image/upload`, formData)
                 .then(res => {
-                    {{!-- console.log("link", res.data.url); --}}
                     imgEditLocationUrl = res.data.url;
                 })
                 .catch(err => {
@@ -601,6 +647,7 @@
         }
         async function editLocation()
         {
+            if(!checkContraintEditLocation()) return;
             console.log("currentLocation",currentLocation);
             const dataUpdate = {
                 locationID: currentLocation.locationID,
@@ -691,7 +738,7 @@
             if(!checkContraintAddLocation()) return;
             // Thêm địa danh vào cơ sở dữ liệu
             const data = { 
-                locationID: '1',
+                locationID: autoGenLocationID,
                 name: document.querySelector('input[name="locationName"').value,
                 imgUrl: imgLocationUrl,
             };
@@ -707,6 +754,23 @@
             getLocation();
         }
 
+
+        // Phần xoá location
+        function deleteLocation(index)
+        {
+            var currentDeleteLocation = allLocations[index];
+            console.log("Địa danh cần xoá", currentDeleteLocation )
+            const data = {
+                locationID: currentDeleteLocation.locationID,
+            }
+            axios.delete(`http://localhost:3000/product/location`,{data: data})
+            .then(res => {
+                showAlertMorriStore('alert-success', "Xoá địa danh thành công")    
+            })
+            .catch(err => {
+            
+            })
+        }
 
         function moveToProduct(id)
         {
