@@ -370,14 +370,14 @@
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script> 
 
-    var editButton = document.querySelector('.edit-js');
+    {{!-- var editButton = document.querySelector('.edit-js');
     var linkToEdit = document.querySelector('.edit-product-link');
     editButton.onclick = () =>{
         linkToEdit.click(); 
         console.log(linkToEdit.href);
-    }
+    } --}}
 
-    var deleteButton = document.querySelector('.delete-js');
+    {{!-- var deleteButton = document.querySelector('.delete-js');
     var linkToDelete = document.querySelector('.back-to-manager');
     deleteButton.onclick = () => {
         var productID = document.querySelector('#product-id').getAttribute('data-value');
@@ -392,7 +392,7 @@
         .catch(err => {
         
         })
-    }
+    } --}}
 
 
     async function addToCart() {
