@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const { requireAuth } = require('../app/middleware/AuthMiddleware');
 
 const productController = require('../app/controllers/ProductController');
 
@@ -18,6 +19,7 @@ router.post('/location', productController.addLocation);
 router.get('/location', productController.getLocation);
 router.put('/location', productController.updateLocation);
 router.delete('/location', productController.deleteLocation);
+router.post('/add-review', requireAuth, productController.addReview_post);
 router.use('/', productController.index);
 
 module.exports = router;
