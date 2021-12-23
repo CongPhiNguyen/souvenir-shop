@@ -361,7 +361,7 @@
         </div>
     </div>
     <a class='edit-product-link d-none' href="/product/update-product-view/{{dataProduct._id}}"></a>
-    <a class='back-to-manager d-none' href="/product/">
+    <a class='back-to-manager d-none' href="/product/manager-view">
 </div>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script> 
@@ -373,9 +373,22 @@
         console.log(linkToEdit.href);
     }
 
-    var editButton = document.querySelector('.delete-js');
+    var deleteButton = document.querySelector('.delete-js');
     var linkToDelete = document.querySelector('.back-to-manager');
-    {{!-- linkTo --}}
+    deleteButton.onclick = () => {
+        var productID = document.querySelector('#product-id').getAttribute('data-value');
+        const data = {
+            productID: productID,
+        }
+        axios.delete(`http://localhost:3000/product/delete-product`,{data: data})
+        .then(res => {
+            showAlertMorriStore('alert-success', "Xoá sản phẩm thành công")    
+            linkToDelete.click()
+        })
+        .catch(err => {
+        
+        })
+    }
 
 
     async function addToCart() {

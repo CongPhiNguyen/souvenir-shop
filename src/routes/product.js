@@ -7,6 +7,7 @@ router.get('/search', productController.searchProduct);
 router.post('/add-product', productController.addProduct)
 router.get('/get-product', productController.getProduct)
 router.put('/update-product', productController.updateProduct)
+router.delete('/delete-product', productController.deleteProduct);
 router.post('/add-to-cart', productController.addToCart)
 router.use('/add-product-view', productController.addProductView)
 router.use('/update-product-view/', productController.editProductView)

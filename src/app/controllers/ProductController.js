@@ -163,6 +163,21 @@ class ProductController {
     }
 
     // Xoá sản phẩm
+    async deleteProduct(req,res) {
+        Product.findOneAndDelete({productID: req.body.productID,})
+        .then((data) => {
+            res.status(200).send(
+                JSON.stringify({
+                    message: "delete OK"
+                })
+            );
+        })
+        .catch((err) => {
+            res.status(404).send(err);
+        });
+    }   
+
+
 
     async addLocation(req, res){
         console.log(req.body,'Đang chạy việc thêm địa danh');
