@@ -174,38 +174,46 @@
             });
             data = await res.json();
             if (data) {
-                console.log('Search successful');
-                console.log(data);
+                if (data.customerList) {
+                    console.log('Search successful');
+                    console.log(data);
 
-                var tableBody = '';
-                for (i = 0; i < data.customerList.length; i++) {
-                    var row = '<tr class="" onclick="customerTableRowClick(' + (i + 1) + ')">'
-                                + '<th scope="row">' + (i + 1) + '</th>'
-                                + '<td>' + data.customerList[i].userCode + '</td>'
-                                + '<td>' + data.customerList[i].name + '</td>'
-                                + '<td>' + data.customerList[i].phone + '</td>'
-                                + '<td>' + data.customerList[i].mail + '</td>'
-                            + '</tr>';
-                    tableBody += row;
-                }
-                customerTableBody.innerHTML = tableBody;
-                if (data.customerList.length > 0) {
-                    customerTableRowClick(1);
-                    if (customerDetailContainer.classList.contains('d-none')) {
-                        customerDetailContainer.classList.remove('d-none');
+                    var tableBody = '';
+                    for (i = 0; i < data.customerList.length; i++) {
+                        var row = '<tr class="" onclick="customerTableRowClick(' + (i + 1) + ')">'
+                                    + '<th scope="row">' + (i + 1) + '</th>'
+                                    + '<td>' + data.customerList[i].userCode + '</td>'
+                                    + '<td>' + data.customerList[i].name + '</td>'
+                                    + '<td>' + data.customerList[i].phone + '</td>'
+                                    + '<td>' + data.customerList[i].mail + '</td>'
+                                + '</tr>';
+                        tableBody += row;
+                    }
+                    customerTableBody.innerHTML = tableBody;
+                    if (data.customerList.length > 0) {
+                        customerTableRowClick(1);
+                        if (customerDetailContainer.classList.contains('d-none')) {
+                            customerDetailContainer.classList.remove('d-none');
+                        }
+                    }
+                    else {
+                        if (!customerDetailContainer.classList.contains('d-none')) {
+                            customerDetailContainer.classList.add('d-none');
+                        }
                     }
                 }
-                else {
-                    if (!customerDetailContainer.classList.contains('d-none')) {
-                        customerDetailContainer.classList.add('d-none');
-                    }
+                else if (data.error) {
+                    console.log('Search failed');
+                    console.log(data.error);
+                    showAlertMorriStore('alert-danger', 'Tìm kiếm khách hàng thất bại, vui lòng thử lại');
                 }
 
             }
         }
         catch(err) {
-            console.log('Search failed');
+            console.log('Search error');
             console.log(err);
+            showAlertMorriStore('alert-danger', 'Tìm kiếm khách hàng thất bại, vui lòng thử lại');
         }
     }
 
