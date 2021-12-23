@@ -374,7 +374,7 @@
                                                 </i>
                                             </a>
                                         </div>
-                                        <a href="#">
+                                        <a href="">
                                             <div style="overflow: hidden;">
                                                 <img src="${value.imgUrl}" class="card-img-top cook__blog-card-img-product" alt="Lỗi">
                                             </div>
@@ -391,7 +391,7 @@
                                                     <div>
                                                         ${renderDanhGia(value.rating)}
                                                     </div>
-                                                    <div style="color:darkgrey ;">Còn lại: {{this.remain}}</div>
+                                                    <div style="color:darkgrey ;">Còn lại: ${value.remain}</div>
                                                 </div>
                                                 <div style="display:flex; justify-content:space-between">
                                                     <div style="color:#6f787e; font-style:italic">
@@ -426,13 +426,20 @@
     }
 
     renderProductHomeScreen()
-
+    
     let arrBlog = document.querySelectorAll('.cook__blog-card')
     arrBlog.forEach(value => {
         value.onclick = () => {
             let link = value.querySelector('.link-blog');
             link.click()
         }
+    })
+
+    let arrProduct = document.querySelectorAll('.product')
+    arrProduct.forEach(value => {
+        value.onclick = () => {
+            console.log('hello')
+        }   
     })
 
 </script>

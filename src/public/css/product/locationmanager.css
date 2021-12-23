@@ -14,8 +14,8 @@
 }
 
 .location-manager-list {
-    height: 500px;
-    overflow-y: scroll;
+    max-height: 500px;
+    overflow-y: auto;
 }
 
 .location-modal {

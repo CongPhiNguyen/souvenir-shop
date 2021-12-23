@@ -1,6 +1,5 @@
 const res = require("express/lib/response");
 const Cart = require('../models/cart');
-const coupon = require("../models/coupon");
 const Coupon = require("../models/coupon");
 const Receipt = require('../models/receipt')
 const Voucher = require('../models/voucher')
@@ -27,7 +26,8 @@ class CartController {
 
     async updateCartUser(req, res) {
         try {
-            const { userCode, listProduct } = req.body
+            const { userCode, listProduct} = req.body
+
             Cart.findOneAndUpdate({
                 userCode
             },
@@ -173,7 +173,9 @@ class CartController {
 
     async createReceipt(req, res) {
         let { receiptId, name, phone, userCode, mail, address, note, province, district, paymentMethod, listProduct, total, totalFinal, deliveryMoney, discount, coupon, deliveryStatus } = req.body;
-        let voucherList = await Voucher.findOne({ voucherId: coupon.voucherId }).exec()
+        if(coupon) {
+            var voucherList = await Voucher.findOne({ voucherId: coupon.voucherId }).exec()
+        }
         const newReceipt = await Receipt.create({ receiptId, name, phone, userCode, mail, address, note, province, district, paymentMethod, listProduct, total, totalFinal, deliveryMoney, discount, coupon, deliveryStatus })
         newReceipt.save()
             .then(result => {
