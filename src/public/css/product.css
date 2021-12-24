@@ -118,6 +118,8 @@ h1 {
     width: 100%;
     font-size: 32px;
     margin-bottom: 4px;
+    height: 40px;
+    line-height: 40px;
 }
 
 .product-info .product-place {
@@ -328,6 +330,10 @@ input[name="quantity"] {
 
 .product-rating-icon {
     color: var(--primary-color);
+}
+
+.product-rating-icon:hover {
+    cursor: pointer;
 }
 
 .rating-container .summary-review .star-review-list {
@@ -580,14 +586,10 @@ input[name="quantity"] {
 }
 
 .product-activity {
-    margin-top: 4px;
+    margin-top: 13px;
     font-size: 20px;
 }
 
-.product-activity {
-    margin-top: 4px;
-    font-size: 20px;
-}
 
 .product-icon {
     color: var(--primary-color);

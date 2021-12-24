@@ -1,4 +1,4 @@
-<title>Product</title>
+<title>{{dataProduct.name}}</title>
 <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
 <link rel="stylesheet" href="/css/product.css">
 <link rel="stylesheet" href="/css/product/viewProduct.css">
@@ -23,7 +23,7 @@
         </div>
         {{!-- <a class="add-product-button" href="#">Add product</a> --}}
         {{!-- Phần breadscrum --}}
-        <div class="breadscrum">
+        <div class="breadscrum d-none">
             <ol class='breadscrum-list'>    
                 <li class='breadscrum-item'>
                     <a href="/home">
@@ -49,10 +49,10 @@
             </ol>
         </div>
         <div id="product-code" class='d-none' data-value="{{dataProduct._id}}">{{dataProduct._id}}</div>
-        <div id="product-id" data-value="{{dataProduct.productID}}">{{dataProduct.productID}}</div>
+        <div id="product-id" class='d-none' data-value="{{dataProduct.productID}}">{{dataProduct.productID}}</div>
         
         {{!-- Phần của product ở đây mình kiểu chi 4 8 ra rồi tính tiếp các kiểu--}}
-        <div class="product-container row">
+        <div class="product-container row" style='margin-top: 110px'>
             <div class="product-image col-md-5">
                 <image class="product-image-1" src="{{dataProduct.imgUrl}}" alt=""></image>    
             </div>
@@ -61,26 +61,23 @@
                     <div class="product-name" data-value="{{dataProduct.name}}">
                         {{dataProduct.name}}     
                     </div>
-                    <div class='d-flex product-activity' style='text-align: center'>
+                    
+                    <div class='d-none product-activity' style= '{{#ifCond user.role '==' 'admin' }}display: flex!important{{/ifCond}}' style='text-align: center'>
                         <i style='z-index: 40' class="fas fa-edit product-icon edit-js"></i>
                         <i style='z-index: 40' class="fas fa-trash-alt product-icon delete-js"></i>
                     </div>
+                    
                 </div>
-                
+                <div class="starNum" dataValue="{{dataProduct.star}}"></div>
                 <div class="product-rating d-flex">
                     <div class="product-rating-average">
-                        <i class="product-rating-icon fas fa-star"></i>
-                        <i class="product-rating-icon fas fa-star"></i>
-                        <i class="product-rating-icon fas fa-star"></i>
-                        <i class="product-rating-icon fas fa-star"></i>
-                        <i class="product-rating-icon fas fa-star"></i>
                     </div>
                     <div class="product-rating-number">
-                        0 Đã đánh giá
+                        {{dataProduct.reviewNum}} Đã đánh giá
                     </div>
 
                     <div class="product-sold d-flex">
-                        0 Đã bán
+                        {{dataProduct.soldProduct}} Đã bán
                     </div>
                 </div>
                 
@@ -104,15 +101,17 @@
  
                 <div class="quantity-choose d-flex mt-2">
                     <div class="quantity-chose-title">Chọn số lượng</div>
-                    <input type="number" name="quantity" id="quantity_wanted" value="1" class="input-group form-control" min="1" aria-label="Quantity" style="display: block;">
+                    <input type="number" name="quantity" id="quantity_wanted" value="1" class="input-group form-control" min="1" max="{{dataProduct.remain}}" aria-label="Quantity" style="display: block;">
                 </div>
                 <div class="buy-container mt-2">
                     {{!-- <button class="add-to-cart bt-add-to-cart" onclick="addToCart()">
                         Add to cart 
                     </button> --}}
+                    {{#if user}}
                     <button class="add-to-cart bt-add-to-cart" onclick="addToCart()">
-                        Add to cart 
+                        Thêm vào giỏ hàng
                     </button>
+                    {{/if}}
                     {{!-- <button class="buy-now">
                         Buy now
                     </button> --}}
@@ -122,11 +121,11 @@
 
         </div>  
 
-        <div class="divider">
+        {{!-- <div class="divider">
 
-        </div>
+        </div> --}}
 
-        <div class="product-detail-container row">
+        <div class="product-detail-container row d-none">
             <div class="detail-title">
                 Chi tiết sản phẩm
             </div>
@@ -149,7 +148,7 @@
                 Từ Max Factory / Good Smile Company. Xin vui lòng lại ?. Đây cũng phải là sự lựa chọn của Steins; Cái cổng. Từ loạt phim phiêu lưu khoa học viễn tưởng Steins; Gate là sự tái hiện của thiên tài trẻ, figma Kurisu Makise. Bằng cách sử dụng các khớp mượt mà nhưng có thể định vị của figma và chân đế figma có khớp nối đi kèm, bạn có thể diễn nhiều cảnh khác nhau. Cô ấy có ba biểu cảm: một khuôn mặt chuẩn, một khuôn mặt giận dữ và một khuôn mặt nhếch mép để thể hiện tất cả các khía cạnh của tính cách tsundere của cô. Phần cánh tay phụ được đưa vào để tạo lại tư thế "khoanh tay" cổ điển của cô. Mirai Gadget # 6: "Cyalume Sabre" cũng được bao gồm. Ngoài ra, có tổng cộng 12 bộ phận tay bổ sung được bao gồm, bao gồm cả bàn tay cho phép cô ấy cầm các vật quan trọng trong trò chơi, chẳng hạn như điện thoại di động và chai nước uống.
             </div>
         </div>
-        <div class="blog-container">
+        <div class="blog-container  d-none" >
             <div class="blog-title detail-title">
                 Nơi sản xuất quà lưu niệm
             </div>
@@ -158,11 +157,12 @@
                 Akihabara has been undergoing major redevelopment over the years, including the renovation and expansion of Akihabara Station and the construction of new buildings in its proximity. Among these newly opened buildings were a huge Yodobashi electronics store and the Akihabara Crossfield, a business complex with the aim of promoting Akihabara as a center for global electronics technology and trade.
             </div>
             <a href='#'>More</a>
-        </div>
-        <div class="rating-container">
+        </div>          
+        {{!-- <div class="divider mb-2"></div>       --}}
+        <div class="rating-container" style="padding-bottom: 100px;">
             <div class="title">Đánh giá và nhận xét</div>
             <div class="row">
-                <div class="review-heading row">
+                <div class="review-heading row d-none">
                     <div class="summary-review col-4">
                         <div class="rating-content-overview">
                             <div class="review-rating">4.6</div>
@@ -259,112 +259,153 @@
                 </div>
                 <div class="divider mb-2"></div>
                 <ul class="review-item-list">
+                    <div class="item-list">
+
+                        {{#each reviews}}
+                            <li class="review-item">
+                                <div class='d-none' data-value="{{this.userCode}}">{{this.userCode}}</div>
+                                <div class="review-item-container row">
+                                    <div class="user-information col-4">
+                                        <img class="avatar" src="https://thumbs.dreamstime.com/b/default-avatar-profile-icon-vector-social-media-user-image-182145777.jpg"></img>
+                                        <div class="name">{{this.name}}</div>
+                                    </div>
+                                    <div class="review-container col-8">
+                                        <div class="rated-star">
+                                            {{#ifCond this.star '>' 0}}
+                                                <i class="product-rating-icon fas fa-star"></i>
+                                                {{else}}
+                                                <i class="product-rating-icon far fa-star"></i>
+                                            {{/ifCond}}
+                                            {{#ifCond this.star '>' 1}}
+                                                <i class="product-rating-icon fas fa-star"></i>
+                                                {{else}}
+                                                <i class="product-rating-icon far fa-star"></i>
+                                            {{/ifCond}}
+                                            {{#ifCond this.star '>' 2}}
+                                                <i class="product-rating-icon fas fa-star"></i>
+                                                {{else}}
+                                                <i class="product-rating-icon far fa-star"></i>
+                                            {{/ifCond}}
+                                            {{#ifCond this.star '>' 3}}
+                                                <i class="product-rating-icon fas fa-star"></i>
+                                                {{else}}
+                                                <i class="product-rating-icon far fa-star"></i>
+                                            {{/ifCond}}
+                                            {{#ifCond this.star '>' 4}}
+                                                <i class="product-rating-icon fas fa-star"></i>
+                                                {{else}}
+                                                <i class="product-rating-icon far fa-star"></i>
+                                            {{/ifCond}}
+
+                                        </div>
+                                        <div class="review-content my-2">
+                                            {{this.comment}}
+                                        </div>
+                                        <span class="review-time">
+                                            {{toDateTimeString2 this.createdAt}}
+                                        </span>
+                                        <span class='delete-review' onclick='deleteReview("{{this.reviewCode}}", "{{this.createdAt}}")'>
+                                            Xoá
+                                        </span>
+                                        
+                                    </div>
+                                </div>
+                            </li>
+                            <div class="divider"></div>
+                        {{/each}}
+
+
+
+                    </div>
+                    {{#if user}}
                     <li class="review-item">
                         <div class="review-item-container row">
                             <div class="user-information col-4">
                                 <img class="avatar" src="https://thumbs.dreamstime.com/b/default-avatar-profile-icon-vector-social-media-user-image-182145777.jpg"></img>
-                                <div class="name">Nguyễn Công Phi</div>
+                                <div class="name">{{user.name}}</div>
                             </div>
                             <div class="review-container col-8">
                                 <div class="rated-star">
-                                    <i class="product-rating-icon fas fa-star"></i>
-                                    <i class="product-rating-icon fas fa-star"></i>
-                                    <i class="product-rating-icon fas fa-star"></i>
-                                    <i class="product-rating-icon fas fa-star"></i>
-                                    <i class="product-rating-icon fas fa-star"></i>
+                                    <i class="product-rating-icon far fa-star rating-star-1" onclick="iconStarOnclick(1)"></i>
+                                    <i class="product-rating-icon far fa-star rating-star-2"  onclick="iconStarOnclick(2)"></i>
+                                    <i class="product-rating-icon far fa-star rating-star-3"  onclick="iconStarOnclick(3)"></i>
+                                    <i class="product-rating-icon far fa-star rating-star-4"  onclick="iconStarOnclick(4)"></i>
+                                    <i class="product-rating-icon far fa-star rating-star-5"  onclick="iconStarOnclick(5)"></i>
                                 </div>
-                                <div class="review-content">
-                                    This is the best firgue I have had.. Kurisu is incredible beautiful.
-                                </div>
-                                <div class="review-time">
-                                    Đánh giá vào 4 tháng trước
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <div class="divider"></div>
-                    <li class="review-item d-none">
-                        <div class="review-item-container row">
-                            <div class="user-information col-4">
-                                <img class="avatar" src="https://thumbs.dreamstime.com/b/default-avatar-profile-icon-vector-social-media-user-image-182145777.jpg"></img>
-                                <div class="name">Nguyễn Công Phi</div>
-                            </div>
-                            <div class="review-container col-8">
-                                <div class="rated-star">
-                                    <i class="product-rating-icon fas fa-star"></i>
-                                    <i class="product-rating-icon fas fa-star"></i>
-                                    <i class="product-rating-icon fas fa-star"></i>
-                                    <i class="product-rating-icon fas fa-star"></i>
-                                    <i class="product-rating-icon fas fa-star"></i>
-                                </div>
-                                <div class="review-content">
-                                    This is the best firgue I have had.. Kurisu is incredible beautiful.
-                                </div>
-                                <div class="review-time">
-                                    Đánh giá vào 4 tháng trước
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <div class="divider d-none"></div>
-                    <li class="review-item d-none">
-                        <div class="review-item-container row">
-                            <div class="user-information col-4">
-                                <img class="avatar" src="https://thumbs.dreamstime.com/b/default-avatar-profile-icon-vector-social-media-user-image-182145777.jpg"></img>
-                                <div class="name">Nguyễn Công Phi</div>
-                            </div>
-                            <div class="review-container col-8">
-                                <div class="rated-star">
-                                    <i class="product-rating-icon fas fa-star"></i>
-                                    <i class="product-rating-icon fas fa-star"></i>
-                                    <i class="product-rating-icon fas fa-star"></i>
-                                    <i class="product-rating-icon fas fa-star"></i>
-                                    <i class="product-rating-icon fas fa-star"></i>
-                                </div>
-                                <div class="review-content">
-                                    This is the best firgue I have had.. Kurisu is incredible beautiful.
-                                </div>
-                                <div class="review-time">
-                                    Đánh giá vào 4 tháng trước
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                     <li class="review-item">
-                        <div class="review-item-container row">
-                            <div class="user-information col-4">
-                                <img class="avatar" src="https://thumbs.dreamstime.com/b/default-avatar-profile-icon-vector-social-media-user-image-182145777.jpg"></img>
-                                <div class="name">Nguyễn Công Phi</div>
-                            </div>
-                            <div class="review-container col-8">
-                                <div class="rated-star">
-                                    <i class="product-rating-icon fas fa-star"></i>
-                                    <i class="product-rating-icon fas fa-star"></i>
-                                    <i class="product-rating-icon fas fa-star"></i>
-                                    <i class="product-rating-icon fas fa-star"></i>
-                                    <i class="product-rating-icon far fa-star"></i>
-                                </div>
-                                <textarea class="review-content-input" style='width: 100%'>
+                                <div class="text-error reviewStarInputError"></div>
+                                {{!-- <textarea class="review-content-input" style="width: 100%;" placeholder="Đánh giá của bạn...">
                                     
-                                </textarea>
+                                </textarea> --}}
+                                <div class="form-floating">
+                                    <textarea class="form-control review-content-input" style="height: 100px; margin: 12px 0;"></textarea>
+                                    <label for="floatingTextarea" style="color: grey;">Đánh giá của bạn</label>
+                                </div>
                                 <div class="review-time ">
                                     
                                 </div>
-                                <button class="template-button">
+                                <button class="template-button btn-add-review">
                                     Thêm đánh giá
                                 </button>
                             </div>
                         </div>
                     </li>
+                    {{/if}}
                 </ul>
             </div>
         </div>
     </div>
     <a class='edit-product-link d-none' href="/product/update-product-view/{{dataProduct._id}}"></a>
-    <a class='back-to-manager d-none' href="/product/">
+    <a class='back-to-manager d-none' href="/product/manager-view">
 </div>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script> 
+    
+
+    function deleteReview(a, time)
+    {
+        console.log("reviewCode", a);
+        console.log('userCode', userCode);
+        var data = {
+            userCode : userCode,
+            reviewCode : a,
+            createAt: time,
+        }
+        axios.delete(`http://localhost:3000/product/delete-review`,{data: data})
+            .then(res => {
+                showAlertMorriStore('alert-success', "Xoá review thành công")  
+                location.reload();  
+            })
+            .catch(err => {
+            
+            })
+    }
+
+    async function hideDeleteIfNotUser() {
+        var listComments = document.querySelectorAll('.item-list .review-item');
+        //getUserCode
+        var newUserCode;
+        await axios.get('http://localhost:3000/cart/get-data-user')
+            .then(res => {
+                
+                newUserCode = res.data.dataUser.userCode
+            })
+            .catch(err => {
+                console.log(err)
+            })
+
+        console.log(listComments);
+        for(var i = 0; i < listComments.length ; i++)
+        {
+            var userCodecmt = listComments[i].children[0].getAttribute('data-value');
+            console.log(userCodecmt, newUserCode)
+            if(userCodecmt != newUserCode)
+            {
+                listComments[i].children[1].children[1].children[3].hidden = true;
+            }
+            {{!-- console.log("listComment", i, listComments[i].children[1].children[1].children[3]); --}}
+        }
+    }
+    hideDeleteIfNotUser();
 
     var editButton = document.querySelector('.edit-js');
     var linkToEdit = document.querySelector('.edit-product-link');
@@ -373,9 +414,22 @@
         console.log(linkToEdit.href);
     }
 
-    var editButton = document.querySelector('.delete-js');
+    var deleteButton = document.querySelector('.delete-js');
     var linkToDelete = document.querySelector('.back-to-manager');
-    {{!-- linkTo --}}
+    deleteButton.onclick = () => {
+        var productID = document.querySelector('#product-id').getAttribute('data-value');
+        const data = {
+            productID: productID,
+        }
+        axios.delete(`http://localhost:3000/product/delete-product`,{data: data})
+        .then(res => {
+            showAlertMorriStore('alert-success', "Xoá sản phẩm thành công")    
+            linkToDelete.click()
+        })
+        .catch(err => {
+        
+        })
+    }
 
 
     async function addToCart() {
@@ -396,6 +450,7 @@
                 description: document.querySelector('.product-description').getAttribute('data-value'),
                 unit: 'cái',
                 rating: 0.0,
+                productQuantity: document.querySelector('input[name="quantity"').value
             };
             console.log("data", data);
             await axios.post(`http://localhost:3000/product/add-to-cart`, data)
@@ -418,7 +473,7 @@
             {
                 if(cartUser[i].product.productID == data.productID)
                 {
-                    cartUser[i].quantity++;
+                    cartUser[i].quantity += data.productQuantity;
                     isFound = true;
                     break;
                 }
@@ -443,7 +498,7 @@
                             unit: data.unit,
                             rating: data.rating,
                         },
-                        quantity: 1,
+                        quantity: data.productQuantity,
                     }
                 )
             }
@@ -459,5 +514,157 @@
             console.log(e);
         }
     };
+
+    function renderStar()
+    {
+        var stars = parseFloat(document.querySelector('.starNum').getAttribute('dataValue')).toFixed(1);
+        // Lấy innerHTML cho cái này
+        var container = document.querySelector('.product-rating-average');
+        var htmlForContainer = `${stars}`;
+        for(var i = 0; i < 5; i++)
+        {
+            if(i <= (stars-1)) 
+            {
+                htmlForContainer += `<i class="product-rating-icon fas fa-star"></i>`;
+            }
+            else htmlForContainer += `<i class="product-rating-icon far fa-star"></i>`;
+        }
+        container.innerHTML = htmlForContainer;
+    }
+    renderStar();
+
+    const reviewItemList = document.querySelector('.item-list');
+    const reviewStarInputError = document.querySelector('.reviewStarInputError');
+    const reviewCommentInput = document.querySelector('.review-content-input');
+    var reviewStarInputValue = 0;
+
+    function iconStarOnclick(starIndex) {
+        const star1 = document.querySelector('.rating-star-1');
+        const star2 = document.querySelector('.rating-star-2');
+        const star3 = document.querySelector('.rating-star-3');
+        const star4 = document.querySelector('.rating-star-4');
+        const star5 = document.querySelector('.rating-star-5');
+
+        star1.classList.remove('fas');
+        star2.classList.remove('fas');
+        star3.classList.remove('fas');
+        star4.classList.remove('fas');
+        star5.classList.remove('fas');
+
+        if (starIndex > 0) {
+            star1.classList.add('fas');
+            reviewStarInputValue = 1;
+        }
+        if (starIndex > 1) {
+            star2.classList.add('fas');
+            reviewStarInputValue = 2;
+        }
+        if (starIndex > 2) {
+            star3.classList.add('fas');
+            reviewStarInputValue = 3;
+        }
+        if (starIndex > 3) {
+            star4.classList.add('fas');
+            reviewStarInputValue = 4;
+        }
+        if (starIndex > 4) {
+            star5.classList.add('fas');
+            reviewStarInputValue = 5;
+        }
+        console.log(reviewStarInputValue);
+    };
+
+    const btnAddReview = document.querySelector('.btn-add-review');
+    if(btnAddReview!=null)
+    {
+        btnAddReview.addEventListener('click', async () => {
+        try {
+            reviewStarInputError.textContent = '';
+            if (reviewStarInputValue < 1 || reviewStarInputValue > 5) {
+                console.log('invalid review star input');
+                reviewStarInputError.textContent = 'Vui lòng đánh giá sản phẩm';
+            }
+            else {
+                const productId = document.querySelector('#product-code').getAttribute('data-value');
+                star = reviewStarInputValue;
+                comment = reviewCommentInput.value;
+
+                console.log(productId);
+                console.log(star);
+                console.log(comment);
+
+                const res = await fetch('/product/add-review', {
+                    method: 'POST',
+                    body: JSON.stringify({ productId, star, comment }),
+                    headers: {'Content-Type': 'application/json'}
+                });
+                postedReviewData = await res.json();
+                if (postedReviewData) {
+                    if (postedReviewData.review) {
+                        console.log('post review successful');
+                        console.log(postedReviewData.review);
+                        showAlertMorriStore('alert-success', 'Gửi bài đánh giá thành công!');
+
+                        const date = new Date(postedReviewData.review.createdAt);
+                        var dateString = (date.getDate() < 10 ? ('0' + date.getDate().toString()) : date.getDate().toString()) + '/' + (date.getMonth() < 9 ? ('0' + (date.getMonth() + 1).toString()) : (date.getMonth() + 1).toString()) + '/' + date.getFullYear().toString() + ' ' + date.toTimeString().substring(0, 5);
+                        var reviewHTML = `<li class="review-item">
+                                                <div class="review-item-container row">
+                                                    <div class="user-information col-4">
+                                                        <img class="avatar" src="https://thumbs.dreamstime.com/b/default-avatar-profile-icon-vector-social-media-user-image-182145777.jpg"></img>
+                                                        <div class="name">${postedReviewData.review.name}}</div>
+                                                    </div>
+                                                    <div class="review-container col-8">
+                                                        <div class="rated-star">`;
+
+                        for (i = 0; i < 5; i++) {
+                            if (i < postedReviewData.review.star) {
+                                reviewHTML += `<i class="product-rating-icon fas fa-star"></i>`;
+                            }
+                            else {
+                                reviewHTML += `<i class="product-rating-icon far fa-star"></i>`;
+                            }
+                        }
+
+                        reviewHTML += `</div>
+                                        <div class="review-content my-2">
+                                            ${postedReviewData.review.comment}
+                                        </div>
+                                        <div class="review-time">
+                                            ${dateString}
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>`;
+
+                        reviewItemList.innerHTML += reviewHTML;
+
+                        iconStarOnclick(0);
+                        reviewCommentInput.value = '';
+                    }
+                    else if (postedReviewData.error) {
+                        console.log('btn post review error');
+                        console.log(postedReviewData.error);
+                        showAlertMorriStore('alert-danger', 'Gửi đánh giá thất bại, vui lòng thử lại');
+                    }
+                    else {
+                        console.log('btn post review error');
+                        console.log(postedReviewData);
+                        showAlertMorriStore('alert-danger', 'Gửi đánh giá thất bại, vui lòng thử lại');
+                    }
+                }
+                else {
+                    console.log('btn post review error');
+                    showAlertMorriStore('alert-danger', 'Gửi đánh giá thất bại, vui lòng thử lại');
+                }
+            }
+        }
+        catch(err) {
+            console.log(err);
+        }});
+    }
+
+
+
+
 </script>
 

@@ -3,8 +3,18 @@ const Product = require('../models/Product');
 const Cart = require('../models/cart');
 var ObjectId = require('mongodb').ObjectID;
 var Location = require('../models/location');
+const Review = require('../models/review');
 const { removeAccents } = require('../helper/removeVietnameseAccents')
 
+function generateID(length) {
+    var result           = '';
+    var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    var charactersLength = characters.length;
+    for ( var i = 0; i < length; i++ ) {
+        result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    return result;
+}
 
 class ProductController {
     // [GET] /home
@@ -19,10 +29,70 @@ class ProductController {
     }
 
     async editProductView(req, res){
-        var object = new ObjectId(req.originalUrl.replace(req.baseUrl + '/', ''));
-        var newI = await Product.findOne({'_id': object});
+        if(req.originalUrl.replace(req.baseUrl + '/', '').length !=24)
+        {
+            res.render('404NotFound');
+        }
+        else 
+        {
+            var object = new ObjectId(req.originalUrl.replace(req.baseUrl + '/', ''));
+            var newI = await Product.findOne({'_id': object});
+            console.log("newI", newI);
+            if(newI !=  null) {
+                    res.render('product/editProductView', { title: "Product" , active: {Product: true }, 
+                        dataProduct: {
+                            _id: newI._id,
+                            name: newI.name,
+                            location: newI.location, 
+                            province: newI.province, 
+                            quantity: newI.quantity, 
+                            remain: newI.remain,
+                            originalPrice: newI.originalPrice,
+                            sellPrice: newI.sellPrice,
+                            currentPrice: newI.currentPrice,
+                            imgUrl: newI.imgUrl,
+                            description: newI.description,
+                            productID: newI.productID,  
+                        }
+                    }
+                );
+            }
+            else {
+                res.render('404NotFound');
+            }
+        }      
+    }
+
+    viewProductView(req, res){
+        // console.log('Đang chạy ở trên Index', 'req.body', req.body)
+        res.render('product/productManager', { title: "Product" , active: {Product: true }});
+    }
+
+    async viewProductCustomer(req, res) {
+        console.log(req.originalUrl, req.baseUrl);
+        if(req.originalUrl.replace(req.baseUrl + '/', '').length!=24){
+            res.render('404NotFound');
+        }
+        var id = new ObjectId(req.originalUrl.replace(req.baseUrl + '/', ''));
+        
+        var newI = await Product.findOne({'_id': id});
         console.log("newI", newI);
-        res.render('product/editProductView', { title: "Product" , active: {Product: true }, 
+        const reviews = await Review.find({ productId: (req.originalUrl.replace(req.baseUrl + '/', '')) }).lean();
+
+        // Tính toán rating của sản phẩm
+        // console.log("reviews",reviews)
+        var star = 0;
+        for(var i = 0 ; i < reviews.length ;i++)
+        {
+            star += reviews[i].star;
+        }
+        if(reviews.length > 0)
+            star /= reviews.length;
+        // console.log("star", star)
+
+        if(newI != null)
+        {
+            res.render('product/viewProductView', { title: "Product" , active: {Product: true }, 
                 dataProduct: {
                     _id: newI._id,
                     name: newI.name,
@@ -35,36 +105,17 @@ class ProductController {
                     currentPrice: newI.currentPrice,
                     imgUrl: newI.imgUrl,
                     description: newI.description,
-                }
-            }
-        );
-        
-    }
-
-    viewProductView(req, res){
-        // console.log('Đang chạy ở trên Index', 'req.body', req.body)
-        res.render('product/productManager', { title: "Product" , active: {Product: true }});
-    }
-
-    async viewProductCustomer(req, res) {
-        var newI = await Product.findOne({'_id': new ObjectId(req.originalUrl.replace(req.baseUrl + '/', ''))});
-        // console.log(newI);
-        res.render('product/viewProductView', { title: "Product" , active: {Product: true }, 
-            dataProduct: {
-                _id: newI._id,
-                name: newI.name,
-                location: newI.location, 
-                province: newI.province, 
-                quantity: newI.quantity, 
-                remain: newI.remain,
-                originalPrice: newI.originalPrice,
-                sellPrice: newI.sellPrice,
-                currentPrice: newI.currentPrice,
-                imgUrl: newI.imgUrl,
-                description: newI.description,
-                productID: newI.productID
-            } 
-        });
+                    productID: newI.productID,
+                    soldProduct: newI.quantity - newI.remain,
+                    star: star,
+                    reviewNum: reviews.length,
+                },
+                reviews, 
+            });
+        }
+        else {
+            res.render('404NotFound');
+        }
     }
 
     async addProduct(req, res) {
@@ -109,8 +160,8 @@ class ProductController {
         
         console.log('Chạy update product', 'req.body', req.body);
         // get các cái cart thử xem sao
-        // var newI = await Product.findOne({productID: req.body.productID,});
-        // console.log("newI", newI);
+        var newI = await Product.findOne({productID: req.body.productID,});
+        console.log("newI", newI);
         Product.findOneAndUpdate(
             {productID: req.body.productID,},
             {
@@ -162,6 +213,33 @@ class ProductController {
     }
 
     // Xoá sản phẩm
+    async deleteProduct(req,res) {
+        Product.findOneAndDelete({productID: req.body.productID,})
+        .then((data) => {
+            res.status(200).send(
+                JSON.stringify({
+                    message: "delete OK"
+                })
+            );
+        })
+        .catch((err) => {
+            res.status(404).send(err);
+        });
+    }   
+
+    async deleteReview(req,res) {
+        Review.findOneAndDelete({reviewCode: req.body.reviewCode, userCode: req.body.userCode})
+        .then((data) => {
+            res.status(200).send(
+                JSON.stringify({
+                    message: "delete OK"
+                })
+            );
+        })
+        .catch((err) => {
+            res.status(404).send(err);
+        });
+    }
 
     async addLocation(req, res){
         console.log(req.body,'Đang chạy việc thêm địa danh');
@@ -299,7 +377,7 @@ class ProductController {
                             unit: req.body.unit,
                             rating: req.body.rating,
                         },
-                        quantity: 1,
+                        quantity: req.body.productQuantity,
                     }
                 ]
             });
@@ -320,7 +398,7 @@ class ProductController {
             {   
                 if(req.body.productID == currentListProduct[i].product.productID)
                 {
-                    currentListProduct[i].quantity++;
+                    currentListProduct[i].quantity += req.body.productQuantity;
                     isFound = true;
                     break;
                 }
@@ -344,7 +422,7 @@ class ProductController {
                             unit: req.body.unit,
                             rating: req.body.rating,
                         },
-                        quantity: 1,
+                        quantity: req.body.productQuantity,
                     }
                 )
             }
@@ -372,6 +450,50 @@ class ProductController {
             );
         }
     }
+
+    async addReview_post(req, res) {
+        if (req.session.user) {
+            try {
+                const { productId, star, comment } = req.body;
+                const newCode = generateID(8);
+                const review = new Review({
+                    reviewCode: newCode,
+                    userCode: req.session.user.userCode,
+                    name: req.session.user.name,
+                    productId: productId,
+                    star: star,
+                    comment: comment,
+                });
+                await review.save().then(result => {
+                    console.log('post review successful');
+                    console.log(result);
+                    res.status(200).json({ review: { name: review.name, star, comment, createdAt: review.createdAt } });
+                });
+            }
+            catch(err) {
+                console.log('post review error');
+                console.log(err);
+                res.status(400).json({ error: err });
+            }
+        }
+        else {
+            res.status(400).json({ error: 'user not log in' });
+        }
+    }
+
+    async reviewList_get(req, res) {
+        try {
+            const { productId } = req.body;
+            
+        }
+        catch(err) {
+            console.log('get review list error');
+            console.log(err);
+            res.status(400).json({ error: err });
+        }
+    }
+    
 }
 
 module.exports = new ProductController;
+

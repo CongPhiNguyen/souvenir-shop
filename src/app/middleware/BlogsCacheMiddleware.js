@@ -17,24 +17,5 @@ const verifyCache = (req, res, next) => {
       throw new Error(err);
     }
   };
-
   
-/* const detailCache = (req, res, next) => {
-    try {
-
-        if (blogListcache.has("blogList")) {
-
-            var objectId = mongoose.Types.ObjectId(req.params.code);
-            const blog = blogListcache.get("blogList").find(({ _id }) => _id === objectId);
-
-            if(blog){
-                console.log("have blog");
-                return  res.render('detailBlog', { blog: blog });
-            }
-        }
-      return next();
-    } catch (err) {
-      throw new Error(err);
-    }
-  }; */
-module.exports = { verifyCache, blogListcache/* , detailCache  */};
+module.exports = { verifyCache, blogListcache};

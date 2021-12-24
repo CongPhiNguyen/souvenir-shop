@@ -1,4 +1,4 @@
-    <title>Product</title>
+    <title>Chỉnh sửa sản phẩm</title>
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
     <link rel="stylesheet" href="/css/product.css">
     <link rel="stylesheet" href="/css/product/categorymodal.css">
@@ -14,52 +14,33 @@
                         <a href="add-product-view">Thêm hàng hoá</a>
                     </button>
                 </div>
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th scope="col" class="product-row">STT</th>
-                            <th scope="col" class="product-row">ID</th>
-                            <th scope="col" class="product-row">Tên</th>
-                            <th scope="col" class="product-row">Số lượng nhập</th>
-                            <th scope="col" class="product-row">Còn lại</th>
-                            <th scope="col" class="product-row"></th>
-                        </tr>
-                    </thead>
-                    <tbody id='product-manager-container'>
-                        
+                <div  style='max-height: 400px; overflow-y:auto'>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col" class="product-row" style='text-align: center'>STT</th>
+                                <th scope="col" class="product-row">ID</th>
+                                <th scope="col" class="product-row" style='text-align: left'>Tên</th>
+                                <th scope="col" class="product-row" style='text-align: right'>Số lượng nhập</th>
+                                <th scope="col" class="product-row" style='text-align: right'>Còn lại</th>
+                                <th scope="col" class="product-row" style='text-align: right'>Giá nhập</th>
+                                <th scope="col" class="product-row" style='text-align: right'>Giá bán</th>
+                            </tr>
+                        </thead>
+                        <tbody id='product-manager-container'>
+                            
                     </tbody>
-                </table>
+                    </table>
+                </div>
+                
             </div>    
-            <div class="divider mt-8" style='width: 100%; margin-top: 60px'>
-
-            </div>
-            {{!-- Đây là phần quản lý doanh mục --}}
-            <div class="row category-manager">
-                <div class="category-manager-title col-8">
-                    Danh sách các doanh mục
-                </div>
-                <div class="category-manager-feature col-4">
-                    <button class="bt-add-category">
-                        Chỉnh sửa doanh mục
-                    </button>
-                </div>
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th scope="col" style='text-align: center; width:80px'>STT</th>
-                            <th scope="col" style='text-align: right'>ID</th>
-                            <th scope="col">Tên doanh mục</th>
-                        </tr>
-                    </thead>
-                    <tbody id='category-manager-container'>
-                        
-                    </tbody>
-                </table>    
+            <div class="div mb-8" style="height: 100px"></div>
+            <div class="divider mt-8 d-none" style='width: 100%; margin-top: 60px'>
 
             </div>
 
             {{!-- đây là phần quản lý địa danh   --}}
-            <div class="row category-manager ">
+            <div class="row category-manager d-none">
                 <div class="category-manager-title col-8">
                     Danh sách các địa danh
                 </div>
@@ -83,118 +64,6 @@
                     </table>
                 </div>    
             </div>  
-            {{!-- Modal add category --}}
-            <div class="category-modal d-none" id="addCategoryModal">
-                <div class="category-modal-dialog">
-                    <div class="modal-content category-modal-container">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Quản lý các doanh mục</h5>
-                            <button type="button" class="btn-close" aria-label="Close"></button>
-                        </div>
-                        <div class="category-modal-body">
-                            <div class="list-category col-12">
-                                <div class="list-category-item row">
-                                    <div class="category-add-button col-1">
-                                        <i class="fas fa-plus category-item-icon" ></i>
-                                    </div>
-                                    <div class="category-item-name col-8">
-                                        Morri Store
-                                    </div>
-                                    <div class="category-item-action col-3">
-                                        <i class="fas fa-edit category-item-icon"></i>
-                                        {{!-- <i class="fas fa-plus category-item-icon" ></i> --}}
-                                        <i class="fas fa-trash-alt category-item-icon"></i>
-                                    </div>
-                                </div>
-                                <div class="list-category-item tier-2 row">
-                                    <div class="category-add-button col-1">
-                                        <i class="fas fa-plus category-item-icon" ></i>
-                                    </div>
-                                    <div class="category-item-name col-8">
-                                        Hàng lưu niệm rẻ
-                                    </div>
-                                    <div class="category-item-action col-3">
-                                        <i class="fas fa-edit category-item-icon"></i>
-                                        {{!-- <i class="fas fa-plus category-item-icon" ></i> --}}
-                                        <i class="fas fa-trash-alt category-item-icon"></i>
-                                    </div>
-                                </div>
-                                <div class="list-category-item tier-3 row">
-                                    <div class="category-add-button col-1">
-                                        <i class="fas fa-plus category-item-icon" ></i>
-                                    </div>
-                                    <div class="category-item-name col-8">
-                                        Hàng lưu niệm nhập khẩu rẻ
-                                    </div>
-                                    <div class="category-item-action col-3">
-                                        <i class="fas fa-edit category-item-icon"></i>
-                                        {{!-- <i class="fas fa-plus category-item-icon" ></i> --}}
-                                        <i class="fas fa-trash-alt category-item-icon"></i>
-                                    </div>
-                                </div>
-                                <div class="list-category-item tier-3 row">
-                                    <div class="category-add-button col-1">
-                                        <i class="fas fa-plus category-item-icon" ></i>
-                                    </div>
-                                    <div class="category-item-name col-8">
-                                        Hàng lưu niệm nội địa rẻ
-                                    </div>
-                                    <div class="category-item-action col-3">
-                                        <i class="fas fa-edit category-item-icon"></i>
-                                        {{!-- <i class="fas fa-plus category-item-icon" ></i> --}}
-                                        <i class="fas fa-trash-alt category-item-icon"></i>
-                                    </div>
-                                </div>
-                                <div class="list-category-item tier-3 row">
-                                    <div class="category-add-button col-1">
-                                        <i class="fas fa-plus category-item-icon" ></i>
-                                    </div>
-                                    <input class="category-item-name input col-8">
-                                    </input>
-                                    <div class="category-item-action col-3">
-                                        <i class="fas fa-edit category-item-icon"></i>
-                                        {{!-- <i class="fas fa-plus category-item-icon" ></i> --}}
-                                        <i class="fas fa-trash-alt category-item-icon"></i>
-                                    </div>
-                                </div>
-                                <div class="list-category-item tier-2 row">
-                                    <div class="category-add-button col-1">
-                                        <i class="fas fa-plus category-item-icon" ></i>
-                                    </div>
-                                    <div class="category-item-name col-8">
-                                        Hàng lưu niệm đẹp
-                                    </div>
-                                    <div class="category-item-action col-3">
-                                        <i class="fas fa-edit category-item-icon"></i>
-                                        {{!-- <i class="fas fa-plus category-item-icon" ></i> --}}
-                                        <i class="fas fa-trash-alt category-item-icon"></i>
-                                    </div>
-                                </div>
-                                <div class="list-category-item row">
-                                    <div class="category-add-button col-1">
-                                        <i class="fas fa-plus category-item-icon" ></i>
-                                    </div>
-                                    <div class="category-item-name col-8">
-                                        Cốc sứ nghệ thuật
-                                    </div>
-                                    <div class="category-item-action col-3">
-                                        <i class="fas fa-edit category-item-icon"></i>
-                                        {{!-- <i class="fas fa-plus category-item-icon" ></i> --}}
-                                        <i class="fas fa-trash-alt category-item-icon"></i>
-                                    </div>
-                                </div>
-                                
-                            </div>
-                        </div>
-                        <div class="modal-footer image-modal-footer">
-                            <button type="button" class="btn btn-secondary btn-close-modal">Close</button>
-                            {{!-- <button type="button" class="btn btn-primary">Save changes</button> --}}
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-
             {{!-- Modal manager location --}}
             <div class="location-modal d-none" id="locationModal">
                 <div class="location-modal-dialog">
@@ -264,7 +133,7 @@
                             <button class='bt-add-location bt-add-location-js'>
                                 Thêm địa danh
                             </button>
-                            <button type="button" class="btn btn-secondary btn-close-modal">Close</button>
+                            <button type="button" class="btn btn-secondary btn-close-modal">Đóng</button>
                             {{!-- <button type="button" class="btn btn-primary">Save changes</button> --}}
                         </div>
                     </div>
@@ -368,117 +237,22 @@
                     htmlForProduct += 
                     `
                     <tr class="product-item" style="transform: rotate(0);"> 
-                        <th scope="row"><a href="/product/view-product/${result[i]._id}" class="stretched-link">${i+1}</a></th>
-                        <td style='text-align: center'>${result[i]._id}</td>
+                        <th style='text-align: center' scope="row"><a style='text-decoration: none'href="/product/view-product/${result[i]._id}" class="stretched-link">${i+1}</a></th>
+                        <td style='text-align: center'>${result[i].productID}</td>
                         <td>${result[i].name}</td>
-                        <td style='text-align: center'>${result[i].quantity}</td>
-                        <td style='text-align: center'>${result[i].remain}</td>
-
+                        <td style='text-align: right'>${result[i].quantity}</td>
+                        <td style='text-align: right'>${result[i].remain}</td>
+                        <td style='text-align: right'>${result[i].originalPrice}</td>
+                        <td style='text-align: right'>${result[i].currentPrice}</td>
                     </tr>
                     `
                 }
-                {{!-- console.log("htmlProduct", htmlForProduct) --}}
                 productContainer.innerHTML = htmlForProduct;    
             })
             .catch(err => {
                 alert(err)
                 console.log(err)
             })
-
-        // Render các cái doanh mục theo mẫu 
-        //(này là mình get từ server xuống và xử lý thì mới được ntn) 
-        var listCategory = [
-            {
-                id: '1',
-                name: 'Morri store',
-                child: [
-                    {
-                        id: '1.1',
-                        name: 'Hàng lưu niệm rẻ',
-                        child: [
-                            {
-                                id: '1.1.1',
-                                name: 'Hàng lưu niệm nội địa rẻ',
-                                child: [],
-                            },
-                            {
-                                id: '1.1.2',
-                                name: 'Hàng lưu niệm nhập khẩu rẻ',
-                                child: [],
-                            }
-                        ]
-                    },
-                    {
-                        id: '1.2',
-                        name: 'Hàng lưu niệm đẹp',
-                        child: [],
-                    }
-                ]
-            },
-            {
-                id: '2',
-                name: 'Cốc sứ nghệ thuật',
-                child: []
-            }
-        ];
-        var countCategory = 0;
-
-        function renderPartialCategory(smallcategory) {
-            var htmlForSmallCategory = 
-                        `<tr class="category-row">
-                            <td scope="col" style='text-align: center'>${countCategory}</td>
-                            <td scope="col" class="category-cell">${smallcategory.id}</td>
-                            <td scope="col">${smallcategory.name}</td>
-                        </tr>`;
-            countCategory++;
-            console.log("smallcategory", smallcategory);
-            console.log("smallcategory.child",smallcategory.child);
-            if(smallcategory.child.length   ==0) return htmlForSmallCategory;
-            else {
-                for(var i= 0; i < smallcategory.child.length; i++)
-                {
-                    htmlForSmallCategory += renderPartialCategory(smallcategory.child[i]);
-                }
-                return htmlForSmallCategory;
-            }
-            
-        }
-        // Hiển thị các doanh mục sản phẩm
-        function renderCategory()
-        {
-            var htmlForCategory = ``;
-            for(var i = 0 ; i < listCategory.length ; i++)
-            {
-                htmlForCategory += renderPartialCategory(listCategory[i]);
-            }
-            var categoryContainer = document.querySelector('#category-manager-container');
-            categoryContainer.innerHTML = htmlForCategory;
-        }
-        renderCategory();
-
-
-        function changeCategoryModal(){
-            var CategoryModal = document.querySelector('#addCategoryModal');
-            if(CategoryModal.classList.contains('d-none')){
-                    CategoryModal.classList.remove('d-none');
-            }
-            else CategoryModal.classList.add('d-none');
-        }
-        // Thêm sự kiện add cho cái category
-        document.querySelector('.bt-add-category').onclick = (e) => {
-            changeCategoryModal();
-            console.log('ABC')
-        }
-        // Thêm các nút tắt
-        document.querySelector('.category-modal-dialog').onclick = (e) => {
-            e.preventDefault();
-            console.log(e.target);
-            if(e.target.classList.contains('btn-close-modal') || e.target.classList.contains('btn-close'))
-            {
-                changeCategoryModal();
-            }
-            console.log('ABC')
-        }
 
         // Xử lý mở modal location
         function changeLocationModal() {

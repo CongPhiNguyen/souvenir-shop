@@ -15,8 +15,6 @@ html{
 .blog-head img{
     height: 650px;
 }
-.blog-body{}
-
 .carousel-control-prev{
     margin-top: 10px !important;
 }
@@ -24,9 +22,6 @@ html{
     margin-top: 10px !important;
 }
 /*-----------------------------*/
-.btn-collapse{
-    border: solid 1px black;
-}
 .card-body{
     width: 100%;
 }
@@ -73,23 +68,28 @@ html{
     }
 }
 /*---------------------------------------------------*/
-.btn-allCatagory{
-    border: solid 1px black;
+.btn-allCategory{
+    border: solid 1px gray;
 }
-.btn-allCatagory:hover{
+.btn-allCategory:hover{
     color: #ffba00;
     border: solid 1px #ffba00;
 }
 .btn-createBlog{
-    border: solid 1px black;
+    border: solid 1px gray;
     text-decoration: none;
-    margin-right: 10px;
 }
 .btn-createBlog:hover{
     color: #ffba00;
     border: solid 1px #ffba00;
 }
-
+.btn-search{
+    border: solid 1px gray;
+}
+.btn-search:hover{
+    border: solid 1px #ffba00;
+    color: #ffba00;
+}
 /*-------------------------------------*/
 .content{
     width: 100%;
@@ -133,16 +133,3 @@ html{
     opacity: 0.8;
     color: black;
 }
-/* .content .card-body .btn-adjust{
-    border: solid 1px transparent;
-}
-.content .card-body .btn-adjust:hover{
-    border: solid 1px black;
-}
-
-.content .card-body .btn-delete{
-    border: solid 1px transparent;
-}
-.content .card-body .btn-delete:hover{
-    border: solid 1px black;
-} */

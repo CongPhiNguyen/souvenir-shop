@@ -1,4 +1,4 @@
-<title>Product</title>
+<title>Thêm sản phẩm</title>
 <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
 <link rel="stylesheet" href="/css/product.css">
 <link rel="stylesheet" href="/css/product/addProduct.css">
@@ -89,7 +89,7 @@
                 </div>
                 
                 <div class="quantity-choose add-product d-flex mt-2">
-                    <div class="quantity-chose-title add-product">Chọn số lượng mua</div>
+                    <div class="quantity-chose-title add-product">Chọn số lượng thêm</div>
                     <input type="number" name="productQuantity" id="quantity_wanted" value="1" class="input-group form-control" min="1" aria-label="Quantity" style="display: block;">
                 </div>
                 <div class="buy-container add-product">
@@ -107,10 +107,10 @@
             </div>
 
         </div>  
-        <div class="divider">
+        <div class="divider d-none">
 
         </div>
-        <div class="product-detail-container">
+        <div class="product-detail-container d-none">
             <div class="detail-title add-product">
                 Chi tiết sản phẩm
             </div>
@@ -140,7 +140,7 @@
             </div> --}}
         </div>
         
-         <div class="blog-container">
+         <div class="blog-container d-none">
             <div class="blog-title detail-title">
                 Nơi sản xuất quà lưu niệm
             </div>
@@ -240,6 +240,10 @@
     </div>
     {{!-- Các modal để chọn blog, chọn doanh mục sản phẩm và địa danh ở đây --}}
 
+    {{!-- Ở đây mình kiếm cách chuyển về trang chủ --}}
+    <a class='link-to-manager d-none' href="/product/manager-view"></a>
+
+
 </div>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script>
@@ -284,7 +288,6 @@
             uploadPicture();
         }
     }
-
     function checkConstraint()
     {
         var name = document.querySelector('input[name="productName"').value;
@@ -334,6 +337,13 @@
         })
         .then(res => {
             resultProduct = res.data.data;
+            var deleteOutOfNumber = [];
+            for(var i = 0; i < resultProduct.length ;i++)
+            {
+                if(resultProduct[i].remain > 0)
+                deleteOutOfNumber.push(resultProduct[i]);
+            }
+            resultProduct = deleteOutOfNumber;
         })
         .catch(err => {
             alert(err)
@@ -344,8 +354,11 @@
         {
             return;
         }
-
-        var productIDGen = parseInt(resultProduct[resultProduct.length - 1].productID) + 1;
+        var productIDGen = 0;
+        if(resultProduct.length > 0)
+            productIDGen = parseInt(resultProduct[resultProduct.length - 1].productID) + 1;
+        
+        var isContinue = false;
         try{
             const data = { 
                 productID: productIDGen, 
@@ -358,14 +371,14 @@
                 sellPrice:  document.querySelector('input[name="sellPrice"').value,
                 currentPrice:  document.querySelector('input[name="currentPrice"').value,
                 imgUrl: currentLink,
-                description: document.querySelector('textarea[name="description"').value,
+                description: document.querySelector('textarea[name="description"').value.trim(),
             };
             console.log("data", data);
             await axios.post(`http://localhost:3000/product/add-product`, data)
             .then(res => {
                 console.log("Save success");
-                {{!-- alert("Lưu thành công") --}}
                 showAlertMorriStore('alert-success', "Lưu thành công");
+                document.querySelector('.link-to-manager').click();
             })
             .catch(err => {
                 alert(err);
@@ -376,6 +389,7 @@
                 console.log(err);
                 isAddOK = false;
                 showAlertMorriStore('alert-danger', 'Đã có lỗi xảy ra');
+                
             })
         }
         catch(e)
@@ -383,6 +397,7 @@
             showAlertMorriStore('alert-danger', 'Đã có lỗi xảy ra');
             return false;
         }
+            
     };
 </script>
 

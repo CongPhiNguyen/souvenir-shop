@@ -1,12 +1,14 @@
 const express = require('express');
 const router = express.Router();
+const { requireAuth } = require('../app/middleware/AuthMiddleware');
 
 const productController = require('../app/controllers/ProductController');
 
 router.get('/search', productController.searchProduct);
 router.post('/add-product', productController.addProduct)
 router.get('/get-product', productController.getProduct)
-router.post('/update-product', productController.updateProduct)
+router.put('/update-product', productController.updateProduct)
+router.delete('/delete-product', productController.deleteProduct);
 router.post('/add-to-cart', productController.addToCart)
 router.use('/add-product-view', productController.addProductView)
 router.use('/update-product-view/', productController.editProductView)
@@ -17,6 +19,8 @@ router.post('/location', productController.addLocation);
 router.get('/location', productController.getLocation);
 router.put('/location', productController.updateLocation);
 router.delete('/location', productController.deleteLocation);
+router.post('/add-review', requireAuth, productController.addReview_post);
+router.delete('/delete-review', productController.deleteReview);
 router.use('/', productController.index);
 
 module.exports = router;

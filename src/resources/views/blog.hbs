@@ -5,45 +5,42 @@
 {{!---------------------------------------------------- blog-head ----------------------------------------------------}}
 
 <div id="carouselExampleCaptions" class="carousel slide blog-head" data-bs-ride="carousel">
-    <div class="carousel-indicators">
-        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"
-            aria-current="true" aria-label="Slide 1"></button>
-        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1"
-            aria-label="Slide 2"></button>
-        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2"
-            aria-label="Slide 3"></button>
-    </div>
-    <div class="carousel-inner">
-        <a href="#body" class="carousel-item active">
-            <img src="./../img/blog/OurBlog.jpg" class="d-block w-100" alt="...">
-            <div class="carousel-caption d-none d-md-block">
-                <h5>Blog</h5>
-                <p>Some representative placeholder content for the first slide.</p>
-            </div>
-        </a>
-        <a href="/blog/{{blogs.0._id}}" class="carousel-item">
-            <img src="{{blogs.0.img}}" class="d-block w-100" alt="...">
-            <div class="carousel-caption d-none d-md-block">
-                <h5>{{blogs.0.title}}</h5>
-                <p>{{blogs.0.description}}</p>
-            </div>
-        </a>
-        <a href="/blog/{{blogs.1._id}}" class="carousel-item">
-            <img src="{{blogs.1.img}}" class="d-block w-100" alt="...">
-            <div class="carousel-caption d-none d-md-block">
-                <h5>{{blogs.1.title}}</h5>
-                <p>{{blogs.1.description}}</p>
-            </div>
-        </a>
-    </div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-    </button>
+  <div class="carousel-indicators">
+    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+  </div>
+  <div class="carousel-inner">
+    <a href="#body" class="carousel-item active">
+      <img src="/img/blog/OurBlog.jpg" class="d-block w-100" alt="...">
+      <div class="carousel-caption d-none d-md-block">
+        <h5>Blog</h5>
+        <p>Some representative placeholder content for the first slide.</p>
+      </div>
+    </a>
+    <a href="/blog/{{blogs.0._id}}" class="carousel-item">
+      <img src="{{blogs.0.img}}" class="d-block w-100" alt="...">
+      <div class="carousel-caption d-none d-md-block">
+        <h5>{{blogs.0.title}}</h5>
+        <p>{{blogs.0.description}}</p>
+      </div>
+    </a>
+    <a href="/blog/{{blogs.1._id}}" class="carousel-item">
+      <img src="{{blogs.1.img}}" class="d-block w-100" alt="...">
+      <div class="carousel-caption d-none d-md-block">
+        <h5>{{blogs.1.title}}</h5>
+        <p>{{blogs.1.description}}</p>
+      </div>
+    </a>
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
 </div>
 
 {{!---------------------------------------------------- blog-body ----------------------------------------------------}}
@@ -57,34 +54,34 @@
             </button>
         </p>
         <div class="collap-content">
-            <div class="collapse" id="collapseWidthExample">
-                <div class="card card-body">
+            <div class="collapse show" id="collapseWidthExample">
+                <div class="card card-body" >
                     <div class="row d-flex px-0 mx-0">
 
                         <div class="box col mx-3 blog-item4">
-                            <button class="p-3 btn-dog-breed">
-                                <img src="./img/blog/kinhnghiem.png" width="60" height="60">
+                            <button class="p-3 btn-dog-breed" href="/blog/Kinh nghiệm kinh doanh">
+                                <img src="/img/blog/kinhnghiem.png" width="60" height="60">
                                 <h5 class="mt-2">Kinh nghiệm kinh doanh</h5>
                             </button>
                         </div>
 
                         <div class="box col mx-3 blog-item4">
                             <button class="p-3 btn-cat-breed">
-                                <img src="./img/blog/gift.png" width="60" height="60">
+                                <img src="/img/blog/gift.png" width="60" height="60">
                                 <h5 class="mt-2">Cách chọn quà lưu niệm</h5>
                             </button>
                         </div>
 
                         <div class="box col mx-3 blog-item4">
                             <button class="p-3 btn-takecare-dog">
-                                <img src="./img/blog/ynghia.png" width="60" height="60">
+                                <img src="/img/blog/ynghia.png" width="60" height="60">
                                 <h5 class="mt-2">Ý nghĩa từng món<br> quà</h5>
                             </button>
                         </div>
 
                         <div class="box col mx-3 blog-item4">
                             <button class="p-3 btn-takecare-cat">
-                                <img src="./img/blog/heart.png" width="60" height="60">
+                                <img src="/img/blog/heart.png" width="60" height="60">
                                 <h5 class="mt-2">Những câu chuyện<br> nhỏ</h5>
                             </button>
                         </div>
@@ -94,25 +91,32 @@
             </div>
         </div>
     </div>
-    <hr>
-    <div class="d-flex justify-content-end">
-        {{#ifCond user.role '==' 'admin'}}
-        <a href="/blog/editBlog" class="btn p-2 btn-createBlog"><i class="far fa-edit"></i></a>
-        <a href="/blog/postBlog" class="btn p-2 btn-createBlog"><i class="fas fa-upload"></i></a>
-        {{/ifCond}}
-        <button class="btn p-2 btn-allCatagory">All blog</button>
+    
+    <div class="row my-5">
+        <div class="col-2"></div>
+        <div class="col-8">
+            <div class="input-group">
+                <input type="text" name="slug" class="form-control inp-search" placeholder="Tìm kiếm" aria-label="Recipient's username" aria-describedby="button-addon2">
+                <button class="btn btn-search" type="submit" id="button-addon2"><i class="fas fa-search mx-2"></i></button>
+            </div>
+        </div>
+        <div class="col-2 d-flex justify-content-end"> 
+            {{#ifCond user.role '==' 'admin'}}
+            <a href="/blog/editBlog" class="btn p-2 btn-createBlog me-2"><i class="fas fa-user-edit"></i></a>
+            {{/ifCond}}
+            <a class="btn p-2 btn-allCategory" href="/blog/1/#content">Tất cả</a>
+        </div>
     </div>
+
     <div class="content row mx-0 mt-4" id="content">
         {{#each blogs }}
-        <div class="card col-md-4 mb-4" data-bs-toggle="popover" data-bs-trigger="hover focus" title="{{this.title}}">
+            <div class="card col-md-4 mb-4 card-blog" data-bs-toggle="popover" data-bs-trigger="hover focus" title="{{this.title}}">
             <img src="{{this.img}}" class="card-img-top" alt="" height="250">
             <div class="card-body">
                 <h5 class="card-title">{{this.title}}</h5>
                 <p class="card-text">{{this.description}}</p>
-                <div class="row">
-                    <a href="/blog/{{this._id}}" class="btn btn-read col-3 ms-3">Read</a>
-                    {{!-- <button class="btn btn-adjust mx-2 col">Adjust</button>
-                    <button class="btn btn-delete mx-2 col">Delete</button> --}}
+                <div class="row"> 
+                    <a href="/blog/detail/{{this._id}}" class="btn btn-read col-3 ms-3">Đọc</a>  
                 </div>
             </div>
         </div>
@@ -121,114 +125,189 @@
 
     {{!------------------------------------------------- page navigation --------------------------------}}
 
-    <div class="d-flex justify-content-center">
-        <nav aria-label="Page navigation example">
-            <ul class="pagination">
-                <li class="page-item">
-                    <a class="page-link" href="#" aria-label="Previous">
-                        <span aria-hidden="true">&laquo;</span>
-                    </a>
-                </li>
-                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item">
-                    <a class="page-link" href="#" aria-label="Next">
-                        <span aria-hidden="true">&raquo;</span>
-                    </a>
-                </li>
-            </ul>
-        </nav>
-    </div>
-
+<div class="d-flex justify-content-center">
+    <nav aria-label="Page navigation example">
+        <ul class="pagination" id = "{{currentPage}}">
+            <li class="page-item">
+            <a class="page-link pre-btn" href="#" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+            </a>
+            </li>
+            <li class="page-item"><a class="page-link" href="/blog/1">1</a></li>
+            <li class="page-item"><a class="page-link" href="/blog/2">2</a></li>
+            <li class="page-item"><a class="page-link" href="/blog/3">3</a></li>
+            <li class="page-item">
+            <a class="page-link next-btn" href="#" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+            </a>
+            </li>
+        </ul>
+    </nav>
+</div>
+    
 </div>
 
 {{!-- ---------------------------------------------------------------------------------------- --}}
 <script>
+    const currentPage = document.querySelector('.pagination').id;
     const blogContent = document.querySelector('.content');
     const btnDogBreed = document.querySelector('.btn-dog-breed')
-    btnDogBreed.addEventListener('click', () => {
-        var html = `{{#each blogs }}
-                    {{#ifCond this.category '==' 'Kinh nghiệm kinh doanh'}}
-                        <div class="card col-md-4 mb-4" data-bs-toggle="popover" data-bs-trigger="hover focus" title="{{this.title}}">
-                        <img src="{{this.img}}" class="card-img-top" alt="" height="250">
-                        <div class="card-body">
-                            <h5 class="card-title">{{this.title}}</h5>
-                            <p class="card-text">{{this.description}}</p>
-                            <a href="/blog/{{this._id}}" class="btn btn-read">Read</a>      
-                        </div>
-                        </div>
-                    {{/ifCond}}
-                    {{/each}}`;
-        blogContent.innerHTML = html;
+    btnDogBreed.addEventListener('click', async()=>{
+        try {
+            const category = 'Kinh nghiệm kinh doanh'
+            const res = await fetch('/blog/' + currentPage, {
+                method: 'POST',
+                body: JSON.stringify({category}),
+                headers: {'Content-Type': 'application/json'}
+            });
+            const data = await res.json();
+            if (data) {
+                var html  = '<div></div>';
+                for(var i =0; i< data.blogs.length; i++){
+                  var  html1 = '<div class="card col-md-4 mb-4" data-bs-toggle="popover" data-bs-trigger="hover focus" title="'+ data.blogs[i].title + '">'+
+                        '<img src="'+ data.blogs[i].img + '" class="card-img-top" alt="" height="250">'+
+                        '<div class="card-body">'+
+                            '<h5 class="card-title">'+ data.blogs[i].title +'</h5>'+
+                            '<p class="card-text">'+ data.blogs[i].description + '</p>'+
+                            '<a href="/blog/detail/'+ data.blogs[i]._id+ '" class="btn btn-read">Đọc</a></div></div>';
+                        html += html1;
+                }
+                blogContent.innerHTML = html;
+            }
+        }
+        catch (err) {
+            console.log(err);
+        }
     });
 
 
     const btnCatBreed = document.querySelector('.btn-cat-breed')
-    btnCatBreed.addEventListener('click', () => {
-        var html = `{{#each blogs }}
-                    {{#ifCond this.category '==' 'Cách chọn quà lưu niệm'}}
-                        <div class="card col-md-4 mb-4" data-bs-toggle="popover" data-bs-trigger="hover focus" title="{{this.title}}">
-                        <img src="{{this.img}}" class="card-img-top" alt="" height="250">
-                        <div class="card-body">
-                            <h5 class="card-title">{{this.title}}</h5>
-                            <p class="card-text">{{this.description}}</p>
-                            <a href="/blog/{{this._id}}" class="btn btn-read">Read</a>
-                        </div>
-                        </div>
-                    {{/ifCond}}
-                    {{/each}}`;
-        blogContent.innerHTML = html;
+    btnCatBreed.addEventListener('click', async()=>{
+        try {
+            const category = 'Cách chọn quà lưu niệm'
+            const res = await fetch('/blog/' + currentPage, {
+                method: 'POST',
+                body: JSON.stringify({category}),
+                headers: {'Content-Type': 'application/json'}
+            });
+            const data = await res.json();
+            if (data) {
+                var html  = '<div></div>';
+                for(var i =0; i< data.blogs.length; i++){
+                  var  html1 = '<div class="card col-md-4 mb-4" data-bs-toggle="popover" data-bs-trigger="hover focus" title="'+ data.blogs[i].title + '">'+
+                        '<img src="'+ data.blogs[i].img + '" class="card-img-top" alt="" height="250">'+
+                        '<div class="card-body">'+
+                            '<h5 class="card-title">'+ data.blogs[i].title +'</h5>'+
+                            '<p class="card-text">'+ data.blogs[i].description + '</p>'+
+                            '<a href="/blog/detail/'+ data.blogs[i]._id+ '" class="btn btn-read">Đọc</a></div></div>';
+                        html += html1;
+                }
+                blogContent.innerHTML = html;
+            }
+        }
+        catch (err) {
+            console.log(err);
+        }
     });
 
 
     const btnTakeCareDog = document.querySelector('.btn-takecare-dog')
-    btnTakeCareDog.addEventListener('click', () => {
-        var html = `{{#each blogs }}
-                    {{#ifCond this.category '==' 'Ý nghĩa từng món quà'}}
-                        <div class="card col-md-4 mb-4" data-bs-toggle="popover" data-bs-trigger="hover focus" title="{{this.title}}">
-                        <img src="{{this.img}}" class="card-img-top" alt="" height="250">
-                        <div class="card-body">
-                            <h5 class="card-title">{{this.title}}</h5>
-                            <p class="card-text">{{this.description}}</p>
-                            <a href="/blog/{{this._id}}" class="btn btn-read">Read</a>
-                        </div>
-                        </div>
-                    {{/ifCond}}
-                    {{/each}}`;
-        blogContent.innerHTML = html;
+    btnTakeCareDog.addEventListener('click',  async()=>{
+        try {
+            const category = 'Ý nghĩa từng món quà'
+            const res = await fetch('/blog/' + currentPage, {
+                method: 'POST',
+                body: JSON.stringify({category}),
+                headers: {'Content-Type': 'application/json'}
+            });
+            const data = await res.json();
+            if (data) {
+                var html  = '<div></div>';
+                for(var i =0; i< data.blogs.length; i++){
+                  var  html1 = '<div class="card col-md-4 mb-4" data-bs-toggle="popover" data-bs-trigger="hover focus" title="'+ data.blogs[i].title + '">'+
+                        '<img src="'+ data.blogs[i].img + '" class="card-img-top" alt="" height="250">'+
+                        '<div class="card-body">'+
+                            '<h5 class="card-title">'+ data.blogs[i].title +'</h5>'+
+                            '<p class="card-text">'+ data.blogs[i].description + '</p>'+
+                            '<a href="/blog/detail/'+ data.blogs[i]._id+ '" class="btn btn-read">Đọc</a></div></div>';
+                        html += html1;
+                }
+                blogContent.innerHTML = html;
+            }
+        }
+        catch (err) {
+            console.log(err);
+        }
     });
 
 
     const btnTakeCareCat = document.querySelector('.btn-takecare-cat')
-    btnTakeCareCat.addEventListener('click', () => {
-        var html = `{{#each blogs }}
-                    {{#ifCond this.category '==' 'Những câu chuyện nhỏ'}}
-                        <div class="card col-md-4 mb-4" data-bs-toggle="popover" data-bs-trigger="hover focus" title="{{this.title}}">
-                        <img src="{{this.img}}" class="card-img-top" alt="" height="250">
-                        <div class="card-body">
-                            <h5 class="card-title">{{this.title}}</h5>
-                            <p class="card-text">{{this.description}}</p>
-                            <a href="/blog/{{this._id}}" class="btn btn-read">Read</a>
-                        </div>
-                        </div>
-                    {{/ifCond}}
-                    {{/each}}`;
-        blogContent.innerHTML = html;
+    btnTakeCareCat.addEventListener('click', async()=>{
+        try {
+            const category = 'Những câu chuyện nhỏ'
+            const res = await fetch('/blog/' + currentPage, {
+                method: 'POST',
+                body: JSON.stringify({category}),
+                headers: {'Content-Type': 'application/json'}
+            });
+            const data = await res.json();
+            if (data) {
+                var html  = '<div></div>';
+                for(var i =0; i< data.blogs.length; i++){
+                  var  html1 = '<div class="card col-md-4 mb-4" data-bs-toggle="popover" data-bs-trigger="hover focus" title="'+ data.blogs[i].title + '">'+
+                        '<img src="'+ data.blogs[i].img + '" class="card-img-top" alt="" height="250">'+
+                        '<div class="card-body">'+
+                            '<h5 class="card-title">'+ data.blogs[i].title +'</h5>'+
+                            '<p class="card-text">'+ data.blogs[i].description + '</p>'+
+                            '<a href="/blog/detail/'+ data.blogs[i]._id+ '" class="btn btn-read">Đọc</a></div></div>';
+                        html += html1;
+                }
+                blogContent.innerHTML = html;
+            }
+        }
+        catch (err) {
+            console.log(err);
+        }
     });
+/*-------------------------------*/
+    const btnSearch = document.querySelector('.btn-search');
+    btnSearch.addEventListener('click', async ()=>{
+        const inpSearch = document.querySelector('.inp-search').value;
+        try {
+            const res = await fetch('/blog/search/' + currentPage, {
+                method: 'POST',
+                body: JSON.stringify({inpSearch}),
+                headers: {'Content-Type': 'application/json'}
+            });
+            const data = await res.json();
+            if (data) {
+                var html  = '<div></div>';
+                for(var i =0; i< data.blogs.length; i++){
+                  var  html1 = '<div class="card col-md-4 mb-4" data-bs-toggle="popover" data-bs-trigger="hover focus" title="'+ data.blogs[i].title + '">'+
+                        '<img src="'+ data.blogs[i].img + '" class="card-img-top" alt="" height="250">'+
+                        '<div class="card-body">'+
+                            '<h5 class="card-title">'+ data.blogs[i].title +'</h5>'+
+                            '<p class="card-text">'+ data.blogs[i].description + '</p>'+
+                            '<a href="/blog/detail/'+ data.blogs[i]._id+ '" class="btn btn-read">Đọc</a></div></div>';
+                        html += html1;
+                }
+                blogContent.innerHTML = html;
+            }
+        }
+        catch (err) {
+            console.log(err);
+        }
+    });
+    /*-------------------------*/
+    var prePage = parseInt(currentPage);
+    if(parseInt(currentPage) > 1) prePage = parseInt(currentPage) - 1;
+    var nextPage = parseInt(currentPage);
+    if(parseInt(currentPage) < 3) nextPage = parseInt(currentPage) + 1;
 
-    const btnAllBlog = document.querySelector('.btn-allCatagory');
-    btnAllBlog.addEventListener('click', () => {
-        var html = `{{#each blogs }}
-                        <div class="card col-md-4 mb-4" data-bs-toggle="popover" data-bs-trigger="hover focus" title="{{this.title}}">
-                        <img src="{{this.img}}" class="card-img-top" alt="" height="250">
-                        <div class="card-body">
-                            <h5 class="card-title">{{this.title}}</h5>
-                            <p class="card-text">{{this.description}}</p>
-                            <a href="/blog/{{this._id}}" class="btn btn-read">Read</a>
-                        </div>
-                        </div>
-                    {{/each}}`;
-        blogContent.innerHTML = html;
-    });
+    var prebtn = document.querySelector('.pre-btn');
+    var nextbtn = document.querySelector('.next-btn');
+
+    prebtn.href = '/blog/' + prePage.toString();
+    nextbtn.href = '/blog/' + nextPage.toString();
+
 </script>

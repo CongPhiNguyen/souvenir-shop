@@ -6,6 +6,19 @@
     margin-right: 10px;
     border-radius: 4px;
 }
-.review-content-input {
+
+.text-error {
+    color: red;
+}
+
+.delete-review {
+    color: var(--primary-color);
+    margin-left: 20px;
+}
+
+.delete-review:hover {
+    opacity: 0.7;
+    cursor: pointer;
+    color: #b80f0a;
     
 }

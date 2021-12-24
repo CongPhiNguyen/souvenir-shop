@@ -1,4 +1,4 @@
-<title>Product</title>
+<title>Chỉnh sửa sản phẩm</title>
 <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
 <link rel="stylesheet" href="/css/product.css">
 <link rel="stylesheet" href="/css/product/addProduct.css">
@@ -21,6 +21,8 @@
                 <i class="fas fa-bars"></i>    
             </div>
         </div>
+        <div id="product-code" class='d-none' data-value="{{dataProduct._id}}">{{dataProduct._id}}</div>
+        <div id="product-id" class='d-none' data-value="{{dataProduct.productID}}">{{dataProduct.productID}}</div>
         {{!-- <a class="add-product-button" href="#">Add product</a> --}}
         {{!-- Phần breadscrum --}}
         {{!-- <div class="breadscrum">
@@ -53,13 +55,15 @@
             <div class="product-image col-md-4">
                 <label class="add-image-label" for='avatar'>
                     <img class="product-current-upload-img" 
-                     src="http://res.cloudinary.com/phiroud321/image/upload/v1639138454/add-2935429_960_720_xc31ip.png" 
+                     {{!-- src="http://res.cloudinary.com/phiroud321/image/upload/v1639138454/add-2935429_960_720_xc31ip.png"  --}}
+                     src="{{dataProduct.imgUrl}}"
                      alt="">  
                 </label>
-                <input type="file" id="avatar" name="avatar" accept="image/png, image/jpeg" style='display: none'>
+                <input type="file" id="avatar" name="avatar" accept="image/png, image/jpeg" style='display: none'
+                >
             </div>
             <div class="product-info col-md-8">
-                <input type="text" class="product-name" name="productName"></input>
+                <input type="text" class="product-name" name="productName" value="{{dataProduct.name}}"></input>
                 <div class="product-rating d-flex">
                     <div class="product-rating-average">
                         <i class="product-rating-icon fas fa-star"></i>
@@ -78,19 +82,23 @@
                 </div>
                 <div class="product-place">
                     <i class="fas fa-map-marker-alt"></i>
-                    <input class="product-location" name="location"></input>
+                    <input class="product-location" name="location" value="{{dataProduct.location}}"></input>
                 </div>
-                <textarea type='text' class="product-description" cols="60" rows="5" name="description" placeholder="Mô tả sản phẩm"></textarea>
+                <textarea type='text' class="product-description" cols="60" rows="5" name="description" placeholder="Mô tả sản phẩm" >{{dataProduct.description}}
+                </textarea>
                 <div class="product-price-sale">
-                    <input type='number' class="product-import-price col-12" name="importPrice" placeholder="Giá nhập"></input>
-                    <input type='number' class="product-old-price col-12" name="sellPrice" placeholder="Giá bán"></input>
-                    <input type='number' class="product-price col-12" name="currentPrice" placeholder="Giá hiện tại"></input>
+                    <input type='number' class="product-import-price col-12" name="importPrice" placeholder="Giá nhập" value="{{dataProduct.originalPrice}}"></input>
+                    <input type='number' class="product-old-price col-12" name="sellPrice" placeholder="Giá bán" value="{{dataProduct.sellPrice}}"></input>
+                    <input type='number' class="product-price col-12" name="currentPrice" placeholder="Giá hiện tại" value="{{dataProduct.currentPrice}}"></input>
                     {{!-- <div class="sale-percent">7%</div> --}}
                 </div>
                 
                 <div class="quantity-choose add-product d-flex mt-2">
-                    <div class="quantity-chose-title add-product">Chọn số lượng mua</div>
-                    <input type="number" name="productQuantity" id="quantity_wanted" value="1" class="input-group form-control" min="1" aria-label="Quantity" style="display: block;">
+                    <div class="quantity-chose-title add-product">Chọn số lượng nhập</div>
+                    <input type="number" name="productQuantity" id="quantity_wanted" class="input-group form-control" min="1" aria-label="Quantity" style="display: block;" 
+                        value={{dataProduct.quantity}}
+                    >
+
                 </div>
                 <div class="buy-container add-product">
                     {{!-- <button class="add-to-cart bt-add-to-cart" onclick="addToCart()">
@@ -107,10 +115,10 @@
             </div>
 
         </div>  
-        <div class="divider">
+        <div class="divider d-none  ">
 
         </div>
-        <div class="product-detail-container">
+        <div class="product-detail-container d-none">
             <div class="detail-title add-product">
                 Chi tiết sản phẩm
             </div>
@@ -140,7 +148,7 @@
             </div> --}}
         </div>
         
-         <div class="blog-container">
+         <div class="blog-container d-none">
             <div class="blog-title detail-title">
                 Nơi sản xuất quà lưu niệm
             </div>
@@ -154,8 +162,8 @@
             {{!-- <a href='#'>More</a> --}}
         </div>
         <div class="divider"></div>
-        <button class="bt-add-product template-button mt-4 mb-4" onclick="addProduct()">
-            Thêm hàng vào cơ sở dữ liệu
+        <button class="bt-add-product template-button mt-4 mb-4" onclick="editProduct()">
+            Chỉnh sửa hàng
         </button>
             
 
@@ -239,17 +247,19 @@
         
     </div>
     {{!-- Các modal để chọn blog, chọn doanh mục sản phẩm và địa danh ở đây --}}
-
+    {{!-- Ở đây mình kiếm cách chuyển về trang chủ --}}
+    <a class='link-to-manager d-none' href="/product/manager-view"></a>
 </div>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script>
-    var currentLink = '';
+    var currentLink = document.querySelector('.product-current-upload-img').src;
     //{{!-- const dropdownStatusButton = document.querySelector('.btn-dropdown-status'); --}}
     function clickFastNavbar(message) {
         alert(message);
     };
 
     var isUploaded = true;
+    var isChanged = false;
     function uploadPicture() 
     {
         var fileName = document.getElementById('avatar').files[0];
@@ -263,6 +273,7 @@
                 console.log("link", res.data.url);
                 currentLink = res.data.url;
                 isUploaded = true;
+                isChanged = true;
             })
             .catch(err => {
                 console.log("Thất bại");
@@ -318,15 +329,14 @@
             return false;
         }
         // Check xem thử ảnh đã tải lên xong chưa
-        if(currentLink.length == 0) {
+        if(isChanged && !isUploaded) {
             showAlertMorriStore('alert-danger', 'Bạn chưa thêm ảnh cho sản phẩm hoặc ảnh chưa kịp tải lên');
             return false;
         }
         return true;
     }
     //{{!-- const addCartButton = document.querySelector('.btn-add-to-cart'); --}}
-    async function addProduct() {
-        {{!-- alert('Đang chạy axios') --}}
+    async function editProduct() {
         var resultProduct;
         //GenID by last productID +1
         await axios.get(`http://localhost:3000/product/get-product`, {
@@ -334,6 +344,13 @@
         })
         .then(res => {
             resultProduct = res.data.data;
+            var deleteOutOfNumber = [];
+            for(var i = 0; i < resultProduct.length ;i++)
+            {
+                if(resultProduct[i].remain > 0)
+                deleteOutOfNumber.push(resultProduct[i]);
+            }
+            resultProduct = deleteOutOfNumber;
         })
         .catch(err => {
             alert(err)
@@ -344,11 +361,10 @@
         {
             return;
         }
-
-        var productIDGen = parseInt(resultProduct[resultProduct.length - 1].productID) + 1;
         try{
             const data = { 
-                productID: productIDGen, 
+                _id: document.querySelector('#product-code').getAttribute('data-value'),
+                productID: document.querySelector('#product-id').getAttribute('data-value'), 
                 name: document.querySelector('input[name="productName"').value, 
                 location: document.querySelector('input[name="location"').value, 
                 province: document.querySelector('input[name="location"').value, 
@@ -358,14 +374,14 @@
                 sellPrice:  document.querySelector('input[name="sellPrice"').value,
                 currentPrice:  document.querySelector('input[name="currentPrice"').value,
                 imgUrl: currentLink,
-                description: document.querySelector('textarea[name="description"').value,
+                description: document.querySelector('textarea[name="description"').value.trim(),
             };
             console.log("data", data);
-            await axios.post(`http://localhost:3000/product/add-product`, data)
+            await axios.put(`http://localhost:3000/product/update-product`, data)
             .then(res => {
                 console.log("Save success");
-                {{!-- alert("Lưu thành công") --}}
-                showAlertMorriStore('alert-success', "Lưu thành công");
+                showAlertMorriStore('alert-success', "Chỉnh sửa thành công");
+                document.querySelector('.link-to-manager').click();
             })
             .catch(err => {
                 alert(err);
