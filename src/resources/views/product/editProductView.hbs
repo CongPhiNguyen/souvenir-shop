@@ -95,7 +95,10 @@
                 
                 <div class="quantity-choose add-product d-flex mt-2">
                     <div class="quantity-chose-title add-product">Chọn số lượng nhập</div>
-                    <input type="number" name="productQuantity" id="quantity_wanted" value="1" class="input-group form-control" min="1" aria-label="Quantity" style="display: block;">
+                    <input type="number" name="productQuantity" id="quantity_wanted" value="1" class="input-group form-control" min="1" aria-label="Quantity" style="display: block;" 
+                        {{!-- value={{dataProduct.quantity}} --}}
+                    >
+
                 </div>
                 <div class="buy-container add-product">
                     {{!-- <button class="add-to-cart bt-add-to-cart" onclick="addToCart()">
