@@ -14,6 +14,6 @@ router.post('/editBlog/:code', BlogController.editDetailBlog_post);
 router.get('/:page', /* verifyCache, */ BlogController.blog_get);
 router.post('/:page', /* verifyCache, */ BlogController.blogCategory_post);
 router.post('/search/:page', /* verifyCache, */ BlogController.blogSearch_post);
-router.get('/:code', BlogController.detailBlog_get);
+router.get('/detail/:code', BlogController.detailBlog_get);
 
 module.exports = router;
