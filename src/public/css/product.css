@@ -332,6 +332,10 @@ input[name="quantity"] {
     color: var(--primary-color);
 }
 
+.product-rating-icon:hover {
+    cursor: pointer;
+}
+
 .rating-container .summary-review .star-review-list {
     margin-left: 16px;
     margin-top: 4px;
