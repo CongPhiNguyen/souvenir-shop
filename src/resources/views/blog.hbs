@@ -116,7 +116,7 @@
                 <h5 class="card-title">{{this.title}}</h5>
                 <p class="card-text">{{this.description}}</p>
                 <div class="row"> 
-                    <a href="/blog/{{this._id}}" class="btn btn-read col-3 ms-3">Đọc</a>  
+                    <a href="/blog/detail/{{this._id}}" class="btn btn-read col-3 ms-3">Đọc</a>  
                 </div>
             </div>
         </div>
@@ -169,7 +169,7 @@
                         '<div class="card-body">'+
                             '<h5 class="card-title">'+ data.blogs[i].title +'</h5>'+
                             '<p class="card-text">'+ data.blogs[i].description + '</p>'+
-                            '<a href="/blog/'+ data.blogs[i]._id+ '" class="btn btn-read">Đọc</a></div></div>';
+                            '<a href="/blog/detail/'+ data.blogs[i]._id+ '" class="btn btn-read">Đọc</a></div></div>';
                         html += html1;
                 }
                 blogContent.innerHTML = html;
@@ -199,7 +199,7 @@
                         '<div class="card-body">'+
                             '<h5 class="card-title">'+ data.blogs[i].title +'</h5>'+
                             '<p class="card-text">'+ data.blogs[i].description + '</p>'+
-                            '<a href="/blog/'+ data.blogs[i]._id+ '" class="btn btn-read">Đọc</a></div></div>';
+                            '<a href="/blog/detail/'+ data.blogs[i]._id+ '" class="btn btn-read">Đọc</a></div></div>';
                         html += html1;
                 }
                 blogContent.innerHTML = html;
@@ -229,7 +229,7 @@
                         '<div class="card-body">'+
                             '<h5 class="card-title">'+ data.blogs[i].title +'</h5>'+
                             '<p class="card-text">'+ data.blogs[i].description + '</p>'+
-                            '<a href="/blog/'+ data.blogs[i]._id+ '" class="btn btn-read">Đọc</a></div></div>';
+                            '<a href="/blog/detail/'+ data.blogs[i]._id+ '" class="btn btn-read">Đọc</a></div></div>';
                         html += html1;
                 }
                 blogContent.innerHTML = html;
@@ -259,7 +259,7 @@
                         '<div class="card-body">'+
                             '<h5 class="card-title">'+ data.blogs[i].title +'</h5>'+
                             '<p class="card-text">'+ data.blogs[i].description + '</p>'+
-                            '<a href="/blog/'+ data.blogs[i]._id+ '" class="btn btn-read">Đọc</a></div></div>';
+                            '<a href="/blog/detail/'+ data.blogs[i]._id+ '" class="btn btn-read">Đọc</a></div></div>';
                         html += html1;
                 }
                 blogContent.innerHTML = html;
@@ -288,7 +288,7 @@
                         '<div class="card-body">'+
                             '<h5 class="card-title">'+ data.blogs[i].title +'</h5>'+
                             '<p class="card-text">'+ data.blogs[i].description + '</p>'+
-                            '<a href="/blog/'+ data.blogs[i]._id+ '" class="btn btn-read">Đọc</a></div></div>';
+                            '<a href="/blog/detail/'+ data.blogs[i]._id+ '" class="btn btn-read">Đọc</a></div></div>';
                         html += html1;
                 }
                 blogContent.innerHTML = html;
