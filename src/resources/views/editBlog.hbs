@@ -4,12 +4,14 @@
 <div class="container px-5">
     <div class="d-flex align-items-start content">
         <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-            <button class="nav-link active" id="v-pills-all-tab" data-bs-toggle="pill" data-bs-target="#v-pills-all" type="button" role="tab" aria-controls="v-pills-all" aria-selected="true">All</button>
-            <button class="nav-link" id="v-pills-dog-tab" data-bs-toggle="pill" data-bs-target="#v-pills-dog" type="button" role="tab" aria-controls="v-pills-dog" aria-selected="false">Kinh nghiệm kinh doanh</button>
-            <button class="nav-link" id="v-pills-cat-tab" data-bs-toggle="pill" data-bs-target="#v-pills-cat" type="button" role="tab" aria-controls="v-pills-cat" aria-selected="false">Cách chọn quà lưu niệm</button>
-            <button class="nav-link" id="v-pills-takeCareDog-tab" data-bs-toggle="pill" data-bs-target="#v-pills-takeCareDog" type="button" role="tab" aria-controls="v-pills-takeCareDog" aria-selected="false">Ý nghĩa từng món quà</button>
-            <button class="nav-link" id="v-pills-takeCareCat-tab" data-bs-toggle="pill" data-bs-target="#v-pills-takeCareCat" type="button" role="tab" aria-controls="v-pills-takeCareCat" aria-selected="false">Những câu chuyện nhỏ</button>
+                <button class="nav-link active" id="v-pills-all-tab" data-bs-toggle="pill" data-bs-target="#v-pills-all" type="button" role="tab" aria-controls="v-pills-all" aria-selected="true">Tất cả</button>
+                <button class="nav-link" id="v-pills-dog-tab" data-bs-toggle="pill" data-bs-target="#v-pills-dog" type="button" role="tab" aria-controls="v-pills-dog" aria-selected="false">Kinh nghiệm kinh doanh</button>
+                <button class="nav-link" id="v-pills-cat-tab" data-bs-toggle="pill" data-bs-target="#v-pills-cat" type="button" role="tab" aria-controls="v-pills-cat" aria-selected="false">Cách chọn quà lưu niệm</button>
+                <button class="nav-link" id="v-pills-takeCareDog-tab" data-bs-toggle="pill" data-bs-target="#v-pills-takeCareDog" type="button" role="tab" aria-controls="v-pills-takeCareDog" aria-selected="false">Ý nghĩa từng món quà</button>
+                <button class="nav-link" id="v-pills-takeCareCat-tab" data-bs-toggle="pill" data-bs-target="#v-pills-takeCareCat" type="button" role="tab" aria-controls="v-pills-takeCareCat" aria-selected="false">Những câu chuyện nhỏ</button>
+            <a class="nav-link d-flex justify-content-center btn-postBlog" type="button" href="/blog/postBlog"><i class="fas fa-file-upload fa-lg me-3 d-flex align-items-center"></i>Đăng bài</a>
         </div>
+
         <div class="tab-content overflow-auto" id="v-pills-tabContent">
             <div class="tab-pane fade show active" id="v-pills-all" role="tabpanel" aria-labelledby="v-pills-all-tab">
 
@@ -294,15 +296,15 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="staticBackdropLabel">Delete</h5>
+                    <h5 class="modal-title" id="staticBackdropLabel">Xóa</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    Deleted successful!
+                    Xóa thành công!
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-closeModal" data-bs-dismiss="modal" onClick="closeModal_click()">Close</button>
-                    <a class="btn btn-viewBlog" type="button" href="./../blog">View blog</a>
+                    <a class="btn btn-viewBlog" type="button" href="/blog/1">Đi tới blog</a>
                 </div>
                 </div>
             </div>
@@ -312,15 +314,15 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="staticBackdropLabel">Delete</h5>
+                    <h5 class="modal-title" id="staticBackdropLabel">Xóa</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    Do you want to delete?
+                    Bạn có muốn xóa bài blog này?
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-closeModal" data-bs-dismiss="modal">Close</button>
-                    <button class="btn btn-delete" type="button" data-bs-dismiss="modal" onClick="delete_click()">Delete</button>
+                    <button type="button" class="btn btn-closeModal" data-bs-dismiss="modal">Đóng</button>
+                    <button class="btn btn-delete" type="button" data-bs-dismiss="modal" onClick="delete_click()">Xóa</button>
                 </div>
                 </div>
             </div>

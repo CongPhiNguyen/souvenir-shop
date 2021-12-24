@@ -8,13 +8,18 @@
                 
                 <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
                     <li class="nav-item">
+                        <a class="nav-link align-middle px-0 btn btn-back" href="/blog/editBlog">
+                           <i class="far fa-hand-point-left ms-2"></i> Quay lại 
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <button class="nav-link align-middle px-0 btn btn-preview"> 
-                            <i class="fas fa-chalkboard-teacher ms-2"></i> Preview
+                            <i class="fas fa-chalkboard-teacher ms-2"></i> Xem trước
                         </button>
                     </li>
                     <li class="nav-item">
                         <button class="nav-link align-middle px-0 btn btn-post" type="submit">
-                            <i class="far fa-paper-plane ms-2"></i> Update
+                            <i class="far fa-paper-plane ms-2"></i> Cập nhật
                         </button>
                     </li>
 
@@ -27,7 +32,7 @@
         <div class="col py-3 post-content">
             <form action="/uploadSingle" method="post" enctype="multipart/form-data" class="form-post">
                 <div class="input-group input-group-sm">
-                    <span class="input-group-text" id="inputGroup-sizing-sm">Title</span>
+                    <span class="input-group-text" id="inputGroup-sizing-sm">Tiêu đề</span>
                     <input type="text" class="form-control title-blog" id="{{blog._id}}" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" value="{{blog.title}}">
                 </div>
                 <div class="title-error error-text"></div>
@@ -36,9 +41,9 @@
                     {{!-- <span class="input-group-text">Image</span> --}}
                     {{!-- <input type="text" aria-label="First name" class="form-control img-blog"> --}}
                     <input type="file" class="form-control form-control-sm  blog-img" name="{{blog.img}}" accept="image/png, image/jpeg">
-                    <button class="btn btn-outline-secondary" type="button" onclick="uploadPicture()">Upload</button>
+                    <button class="btn btn-outline-secondary" type="button" onclick="uploadPicture()">Tải ảnh lên</button>
 
-                    <span class="input-group-text ms-2">Category</span>
+                    <span class="input-group-text ms-2">Loại blog</span>
                     <select class="form-select form-select-sm category-blog" aria-label=".form-select-sm example">
                         <option {{#ifCond blog.category '==' 'Kinh nghiệm kinh doanh'}} selected {{/ifCond}} value="Kinh nghiệm kinh doanh">Kinh nghiệm kinh doanh</option>
                         <option {{#ifCond blog.category '==' 'Cách chọn quà lưu niệm'}} selected {{/ifCond}} value="Cách chọn quà lưu niệm">Cách chọn quà lưu niệm</option>
@@ -50,7 +55,7 @@
                 <div class="img-error error-text"></div>
 
                 <div class="input-group input-group-sm mt-3">
-                    <span class="input-group-text" id="inputGroup-sizing-sm">Description</span>
+                    <span class="input-group-text" id="inputGroup-sizing-sm">Mô tả</span>
                     <input type="text" class="form-control description-blog" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" value="{{blog.description}}">
                 </div>
                 <div class="description-error error-text"></div>
@@ -74,15 +79,15 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
         <div class="modal-header">
-            <h5 class="modal-title">Update blog</h5>
+            <h5 class="modal-title">Cập nhật blog</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-            <p>Update successful!</p>
+            <p>Cập nhật thành công!</p>
         </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-closeModal" data-bs-dismiss="modal">Close</button>
-            <a class="btn btn-viewBlog" type="button" href="/blog">View blog</a>
+            <button type="button" class="btn btn-closeModal" data-bs-dismiss="modal">Đóng</button>
+            <a class="btn btn-viewBlog" type="button" href="/blog/1">Đi tới blog</a>
         </div>
         </div>
     </div>
@@ -95,12 +100,12 @@
     <div class="modal-dialog modal-fullscreen">
         <div class="modal-content">
         <div class="modal-header">
-            <h5 class="modal-title">Preview blog</h5>
+            <h5 class="modal-title">Xem trước blog</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="previewModal-body"></div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-closeModal" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-closeModal" data-bs-dismiss="modal">Đóng</button>
         </div>
         </div>
     </div>
@@ -110,7 +115,7 @@
 
 <div class="toast align-items-center hide position-fixed top-0 end-0" role="alert" aria-live="assertive" aria-atomic="true">
     <div class="d-flex">
-        <div class="toast-body">Image uploaded!</div>
+        <div class="toast-body"> Đã tải ảnh lên!</div>
         <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
     </div>
 </div>

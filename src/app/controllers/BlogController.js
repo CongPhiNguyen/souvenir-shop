@@ -4,6 +4,9 @@ const User = require('../models/user');
 const mongoose = require ('mongoose');
 const { blogListcache } = require("../middleware/BlogsCacheMiddleware");
 const { render } = require("express/lib/response");
+const { search } = require("../../routes/blog");
+const { removeAccents } = require('../helper/removeVietnameseAccents')
+
 
 /* const path = require('path') */
 /* var fs = require('fs'); */
@@ -37,14 +40,59 @@ const handleErrors = (err) => {
 
 module.exports.blog_get = async (req, res) => {
     try {
-        const blogList = await Blog.find({}).sort({ createdAt: -1 }).lean();
+        let perPage = 12; // số lượng sản phẩm xuất hiện trên 1 page
+        let page = req.params.page || 1;
+
+        const blogList = await Blog.find({}).sort({ createdAt: -1 }).skip((perPage * page) - perPage).limit(perPage).lean();
         if (blogList) {
-           // console.log(blogList);
-            blogListcache.set("blogList", blogList);
-            res.render('blog', { blogs: blogList , active: {Blog: true}});
+            //blogListcache.set("blogList", blogList);
+            res.render('blog', { blogs: blogList, currentPage: page , active: {Blog: true}});
+        }
+        else {
+            res.render('blog', { blogs: blogList, currentPage: page , active: {Blog: true}});
+            console.log('blogList Null');
+        }
+    }
+    catch(err) {
+        console.log('get blog error');
+        console.log(err);
+    }
+}
+module.exports.blogCategory_post = async (req, res) => {
+    try {
+        const {category} = req.body;
+        //console.log(category);
+        const blogList = await Blog.find({category: category}).sort({ createdAt: -1 }).lean();
+        if (blogList) {
+            res.status(200).json({ blogs: blogList });
+            //console.log(blogList);
         }
         else {
             console.log('blogList Null');
+        }
+    }
+    catch(err) {
+        console.log('get blog error');
+        console.log(err);
+    }
+}
+module.exports.blogSearch_post = async (req, res) => {
+    try {
+        const {inpSearch} = req.body;
+        var search = inpSearch.toLowerCase().replace(/ /g, '')
+        search = removeAccents(search);
+        console.log(search);
+        var blogSearch;
+        const blogList = await Blog.find({}).lean();
+        if(blogList) {
+            blogSearch = blogList.filter(value => {
+                let title = value.title.toLowerCase().replace(/ /g, '');
+                title = removeAccents(title);
+                let category = value.category.toLowerCase().replace(/ /g, '');
+                category = removeAccents(category);
+                return title.includes(search) || category.includes(search);
+            })
+            res.status(200).json({ blogs: blogSearch });
         }
     }
     catch(err) {
@@ -80,7 +128,7 @@ module.exports.postBlog_post = async (req, res) => {
         });
         newBlog.save().then(result => {
             console.log('posting successful');
-            blogListcache.del( "blogList" );//remove cache
+            //blogListcache.del( "blogList" );//remove cache
             console.log(newBlog);
             res.status(200).json({ blog: newBlog });
         });
@@ -139,7 +187,7 @@ module.exports.editBlog_post = async (req, res) => {
             const result = await Blog.deleteOne(query);
             if (result.deletedCount === 1) {
                 console.log("Successfully deleted one document.");
-                blogListcache.del( "blogList" );//remove cache
+                //blogListcache.del( "blogList" );//remove cache
                 res.status(200).json({ status: "deleted" });
             } else {
                 console.log("No documents matched the query. Deleted 0 documents.");
@@ -200,7 +248,7 @@ module.exports.editDetailBlog_post = async (req, res) => {
         });
         if (result.modifiedCount === 1) {
             console.log("Successfully deleted one document.");
-            blogListcache.del( "blogList" );//remove cache
+            //blogListcache.del( "blogList" );//remove cache
             res.status(200).json({ blog: newBlog });
 
         } else {
