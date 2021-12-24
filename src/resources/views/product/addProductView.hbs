@@ -354,8 +354,9 @@
         {
             return;
         }
-
-        var productIDGen = parseInt(resultProduct[resultProduct.length - 1].productID) + 1;
+        var productIDGen = 0;
+        if(resultProduct.length > 0)
+            parseInt(resultProduct[resultProduct.length - 1].productID) + 1;
         var isContinue = false;
         try{
             const data = { 
