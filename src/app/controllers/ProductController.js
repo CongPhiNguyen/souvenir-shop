@@ -377,7 +377,7 @@ class ProductController {
                             unit: req.body.unit,
                             rating: req.body.rating,
                         },
-                        quantity: 1,
+                        quantity: req.body.productQuantity,
                     }
                 ]
             });
@@ -398,7 +398,7 @@ class ProductController {
             {   
                 if(req.body.productID == currentListProduct[i].product.productID)
                 {
-                    currentListProduct[i].quantity++;
+                    currentListProduct[i].quantity += req.body.productQuantity;
                     isFound = true;
                     break;
                 }
@@ -422,7 +422,7 @@ class ProductController {
                             unit: req.body.unit,
                             rating: req.body.rating,
                         },
-                        quantity: 1,
+                        quantity: req.body.productQuantity,
                     }
                 )
             }

@@ -450,6 +450,7 @@
                 description: document.querySelector('.product-description').getAttribute('data-value'),
                 unit: 'cái',
                 rating: 0.0,
+                productQuantity: document.querySelector('input[name="quantity"').value
             };
             console.log("data", data);
             await axios.post(`http://localhost:3000/product/add-to-cart`, data)
@@ -472,7 +473,7 @@
             {
                 if(cartUser[i].product.productID == data.productID)
                 {
-                    cartUser[i].quantity++;
+                    cartUser[i].quantity += data.productQuantity;
                     isFound = true;
                     break;
                 }
@@ -497,7 +498,7 @@
                             unit: data.unit,
                             rating: data.rating,
                         },
-                        quantity: 1,
+                        quantity: data.productQuantity,
                     }
                 )
             }
